@@ -1,0 +1,21 @@
+__pycache__/
+*.pyc
+*.pyo
+.DS_Store
+.venv/
+venv/
+.env
+
+# Local-only runtime
+logs/
+*.log
+
+# Internal notes — never push
+CLAUDE.md
+
+# Local-only dashboard view + benchmark data — never push
+local/
+
+# iCloud placeholders
+.icloud
+*.icloud

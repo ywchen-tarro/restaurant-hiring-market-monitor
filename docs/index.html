@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Restaurant Hiring Market Monitor</title>
+<meta name="description" content="Tracking US restaurant job posting volume across major Chinese-language job boards.">
+<link rel="stylesheet" href="./assets/styles.css">
+</head>
+<body>
+<div class="app">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="logo">
+      <span class="logo-mark">MARKET</span>
+      <span class="logo-title">餐馆招聘信号监控</span>
+    </div>
+    <div class="header-meta">
+      <div class="status-dot"></div>
+      <span class="status-text" id="lastRunText">尚未运行</span>
+    </div>
+  </div>
+
+  <!-- ALERT BANNER -->
+  <div class="alert-banner" id="alertBanner">
+    <span class="alert-icon">⚠</span>
+    <span class="alert-text" id="alertText"></span>
+  </div>
+
+  <!-- SCHEDULE BAR -->
+  <div class="schedule-bar">
+    <div class="schedule-info">
+      自动调度：每 <span>周一 09:00</span> 和 <span>周四 09:00</span> 本地运行
+    </div>
+    <div class="next-run" id="nextRunText">数据窗口：—</div>
+  </div>
+
+  <!-- SUMMARY CARDS -->
+  <div class="summary-row">
+    <div class="card">
+      <div class="card-label">本期总帖数</div>
+      <div class="card-value" id="kpiTotal">—</div>
+      <div class="card-sub" id="kpiTotalSub">—</div>
+    </div>
+    <div class="card">
+      <div class="card-label">覆盖窗口</div>
+      <div class="card-value" id="kpiWindow">—</div>
+      <div class="card-sub" id="kpiWindowSub">—</div>
+    </div>
+    <div class="card">
+      <div class="card-label">最活跃平台</div>
+      <div class="card-value" style="font-size:16px; margin-top:4px;" id="kpiTopPlatform">—</div>
+      <div class="card-sub" id="kpiTopPlatformSub">—</div>
+    </div>
+    <div class="card">
+      <div class="card-label">最缺人地区</div>
+      <div class="card-value" style="font-size:16px; margin-top:4px;" id="kpiTopRegion">—</div>
+      <div class="card-sub" id="kpiTopRegionSub">—</div>
+    </div>
+    <div class="card">
+      <div class="card-label">上升预警</div>
+      <div class="card-value" id="kpiAlerts" style="color:var(--warn)">—</div>
+      <div class="card-sub">较上次 +20% 以上的平台</div>
+    </div>
+  </div>
+
+  <!-- TABS -->
+  <div class="tabs">
+    <div class="tab active" data-tab="overview">概览</div>
+    <div class="tab" data-tab="trend">趋势</div>
+    <div class="tab" data-tab="region">地区分布</div>
+    <div class="tab" data-tab="posts">帖子详情</div>
+  </div>
+
+  <!-- TAB: OVERVIEW -->
+  <div class="tab-content active" id="tab-overview">
+    <div class="main-grid">
+      <div class="panel">
+        <div class="panel-header">
+          <span class="panel-title">各平台帖量</span>
+        </div>
+        <div class="platform-list" id="platformList">
+          <div class="empty-state">尚无数据</div>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="panel-header"><span class="panel-title">平台占比</span></div>
+        <canvas id="pieChart"></canvas>
+        <div id="pieLegend" style="margin-top: 12px; display: flex; flex-direction: column; gap: 6px;"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB: TREND -->
+  <div class="tab-content" id="tab-trend">
+    <div class="panel">
+      <div class="panel-header">
+        <span class="panel-title">各平台周帖量趋势</span>
+        <div class="panel-controls">
+          <select id="trendRange">
+            <option value="8">最近 8 次</option>
+            <option value="12">最近 12 次</option>
+            <option value="-1">全部</option>
+          </select>
+        </div>
+      </div>
+      <canvas id="trendChart"></canvas>
+      <div class="notice" id="trendNotice" style="display:none;"></div>
+    </div>
+  </div>
+
+  <!-- TAB: REGION -->
+  <div class="tab-content" id="tab-region">
+    <div class="panel">
+      <div class="panel-header">
+        <span class="panel-title">地区招聘热度</span>
+        <div class="panel-controls">
+          <select id="regionPlatform">
+            <option value="all">全平台合计</option>
+          </select>
+        </div>
+      </div>
+      <div class="region-grid" id="regionGrid">
+        <div class="empty-state" style="grid-column: 1/-1;">尚无地区数据</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB: POSTS -->
+  <div class="tab-content" id="tab-posts">
+    <div class="panel">
+      <div class="panel-header"><span class="panel-title">最新餐馆招聘帖</span></div>
+      <div class="filter-row">
+        <input type="text" id="postSearch" placeholder="搜索标题…">
+        <select id="postPlatform">
+          <option value="">全部平台</option>
+        </select>
+        <select id="postRegion">
+          <option value="">全部地区</option>
+          <option value="东部">东部</option>
+          <option value="南部">南部</option>
+          <option value="中部">中部</option>
+          <option value="西部">西部</option>
+        </select>
+      </div>
+      <div class="filter-row" id="kwFilter"></div>
+      <div class="posts-feed" id="postsFeed">
+        <div class="empty-state">尚无帖子</div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    Generated by the restaurant hiring market monitor. Source data refreshed twice weekly.
+  </footer>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="./assets/dashboard.js"></script>
+</body>
+</html>

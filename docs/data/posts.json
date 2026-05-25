@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_updated": "2026-05-25T15:28:40-07:00",
+    "last_updated": "2026-05-25T15:45:58-07:00",
     "scrape_days_back": 7,
     "date_from": "2026-05-18",
     "date_to": "2026-05-25",
@@ -23,9 +23,9 @@
         "pages_fetched": 14,
         "rows_parsed": 673,
         "dropped_unparseable_date": 1,
-        "dropped_out_of_window": 23,
+        "dropped_out_of_window": 22,
         "dropped_not_restaurant": 531,
-        "dropped_duplicate": 0,
+        "dropped_duplicate": 1,
         "fetch_failures": 0
       }
     }
@@ -113,11 +113,11 @@
       "run_date": "2026-05-25",
       "period": "2026-05-18 ~ 2026-05-25",
       "by_platform": {
-        "500work": 0,
-        "uscanyin": 0,
         "usahuarenjie": 32,
-        "niuyuegongzuo": 217,
-        "168worker": 0
+        "uscanyin": 0,
+        "168worker": 0,
+        "500work": 0,
+        "niuyuegongzuo": 217
       },
       "total": 249
     }

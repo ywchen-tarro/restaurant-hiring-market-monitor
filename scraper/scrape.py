@@ -44,6 +44,7 @@ def main() -> int:
     )
 
     all_posts: List[Post] = []
+    diagnostics = {}   # platform_id -> diag dict
     summary_lines = []
 
     enabled = [p for p in config.PLATFORMS if p.get("enabled", False)]
@@ -58,20 +59,26 @@ def main() -> int:
         if not ScraperCls:
             log.warning("Skipping %s (no scraper class)", pid)
             summary_lines.append(f"  {pid:<16} SKIPPED (not implemented)")
+            diagnostics[pid] = {"status": "not_implemented"}
             continue
         try:
             scraper = ScraperCls()
             posts = scraper.run(days_back=config.SCRAPE_DAYS_BACK)
             all_posts.extend(posts)
+            diagnostics[pid] = {
+                "status": "ok",
+                **getattr(scraper, "last_diagnostics", {}),
+            }
             summary_lines.append(f"  {pid:<16} {len(posts):>4} posts")
         except Exception as exc:  # noqa: BLE001 — keep one platform's failure isolated
             log.exception("Platform %s failed: %s", pid, exc)
             summary_lines.append(f"  {pid:<16} ERROR ({exc.__class__.__name__})")
+            diagnostics[pid] = {"status": "error", "exception": exc.__class__.__name__}
 
     if not all_posts:
         log.warning("No posts collected from any platform.")
 
-    out_path = write_posts_json(all_posts, config.SCRAPE_DAYS_BACK)
+    out_path = write_posts_json(all_posts, config.SCRAPE_DAYS_BACK, diagnostics=diagnostics)
 
     print()
     print("=" * 60)

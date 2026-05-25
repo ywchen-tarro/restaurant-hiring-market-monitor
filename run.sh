@@ -15,6 +15,15 @@ export PATH="/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:$PATH"
 
 echo "[$(date '+%Y-%m-%d %H:%M:%S')] === scrape start ==="
 
+# Defense in depth: bail if .gitignore has been broken and our internal-only
+# files would otherwise become trackable.
+for f in CLAUDE.md local; do
+    if [ -e "$f" ] && ! git check-ignore -q "$f" 2>/dev/null; then
+        echo "[FATAL] .gitignore no longer covers '$f' — refusing to run." >&2
+        exit 1
+    fi
+done
+
 python3 -m scraper.scrape
 
 # Only commit if posts.json actually changed

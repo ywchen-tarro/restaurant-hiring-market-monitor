@@ -82,54 +82,60 @@ class Scraper(BasePlatformScraper):
         soup = BeautifulSoup(html, "html.parser")
         posts: List[Post] = []
 
-        # Each post is wrapped by div.hover (which contains span.ltitle and span.ltime).
         for wrapper in soup.select("div.hover"):
-            h3 = wrapper.find("h3")
-            if not h3:
+            try:
+                p = self._parse_row(wrapper)
+            except Exception as exc:  # noqa: BLE001
+                log.warning("[%s] row parse error: %s", self.id, exc)
                 continue
-            title = h3.get_text(strip=True)
-            if not title:
-                continue
-
-            a = h3.find("a", href=True) or wrapper.find(
-                "a", href=lambda h: h and "information-id-" in h
-            )
-            if not a:
-                continue
-            href = a["href"]
-            m = ID_FROM_URL.search(href)
-            if not m:
-                continue
-            native_id = m.group(1)
-            full_url = urljoin(BASE, href)
-
-            # Date in span.ltime
-            ltime = wrapper.find("span", class_="ltime")
-            date_iso = ""
-            if ltime:
-                parsed = date_parser.parse(ltime.get_text(strip=True))
-                if parsed:
-                    date_iso = parsed.isoformat()
-
-            # Try to extract state from the URL's /city/<slug>/ segment
-            state = None
-            city_m = CITY_FROM_URL.search(href)
-            if city_m:
-                slug = city_m.group(1).lower()
-                state = CITY_SLUG_MAP.get(slug)
-
-            posts.append(Post(
-                id=post_id(self.id, native_id),
-                platform=self.id,
-                title=title,
-                date=date_iso,
-                region=None,  # classified by base class
-                state=state,
-                keywords_matched=[],
-                url=full_url,
-            ))
+            if p is not None:
+                posts.append(p)
 
         return posts
+
+    def _parse_row(self, wrapper) -> "Post | None":
+        h3 = wrapper.find("h3")
+        if not h3:
+            return None
+        title = h3.get_text(strip=True)
+        if not title:
+            return None
+
+        a = h3.find("a", href=True) or wrapper.find(
+            "a", href=lambda h: h and "information-id-" in h
+        )
+        if not a:
+            return None
+        href = a["href"]
+        m = ID_FROM_URL.search(href)
+        if not m:
+            return None
+        native_id = m.group(1)
+        full_url = urljoin(BASE, href)
+
+        ltime = wrapper.find("span", class_="ltime")
+        date_iso = ""
+        if ltime:
+            parsed = date_parser.parse(ltime.get_text(strip=True))
+            if parsed:
+                date_iso = parsed.isoformat()
+
+        state = None
+        city_m = CITY_FROM_URL.search(href)
+        if city_m:
+            slug = city_m.group(1).lower()
+            state = CITY_SLUG_MAP.get(slug)
+
+        return Post(
+            id=post_id(self.id, native_id),
+            platform=self.id,
+            title=title,
+            date=date_iso,
+            region=None,
+            state=state,
+            keywords_matched=[],
+            url=full_url,
+        )
 
 
 if __name__ == "__main__":

@@ -10,39 +10,74 @@ from typing import List, Optional, Tuple
 
 REGION_MAP = {
     "东部": [
+        # state-level
         "纽约", "上州", "宾州", "康州", "麻州", "新泽西", "缅因", "罗得岛",
-        "维吉尼亚", "佛蒙特", "特拉华", "新罕布什尔", "曼哈顿", "布鲁伦",
-        "布鲁克林", "法拉盛", "皇后区", "长岛", "波士顿", "费城", "华盛顿DC",
-        "NY", "NJ", "MA", "CT", "PA", "VA", "VT", "DE", "NH", "RI", "ME",
-        "New York", "New Jersey", "Massachusetts", "Connecticut",
-        "Pennsylvania", "Virginia", "Vermont", "Delaware",
+        "佛蒙特", "特拉华", "新罕布什尔",
+        # NY/NJ/MA cities
+        "曼哈顿", "布鲁伦", "布鲁克林", "法拉盛", "皇后区", "长岛", "波士顿",
+        "费城", "华盛顿DC", "Washington DC", "新泽西", "纽瓦克", "泽西市",
+        "Boston", "Philadelphia", "New York", "Manhattan", "Brooklyn",
+        "Flushing", "Queens", "Long Island",
+        # English state abbreviations / names
+        "NY", "NJ", "MA", "CT", "PA", "VT", "DE", "NH", "RI", "ME",
+        "New Jersey", "Massachusetts", "Connecticut",
+        "Pennsylvania", "Vermont", "Delaware",
     ],
     "南部": [
+        # states (note: VA / Virginia is South per US Census)
         "佛州", "德州", "南卡", "北卡", "马里兰", "乔治亚", "田纳西",
         "路易斯安娜", "肯塔基", "密西西比", "俄克拉荷马", "阿拉巴马",
-        "西维吉尼亚", "阿肯色", "迈阿密", "亚特兰大", "达拉斯", "休斯顿",
-        "奥兰多", "坦帕", "夏洛特", "罗利",
+        "西维吉尼亚", "阿肯色", "维吉尼亚",
+        # cities
+        "迈阿密", "亚特兰大", "达拉斯", "休斯顿", "奥兰多", "坦帕",
+        "夏洛特", "罗利", "纳什维尔", "新奥尔良", "孟菲斯", "杰克逊维尔",
+        "Miami", "Atlanta", "Dallas", "Houston", "Orlando", "Tampa",
+        # codes / English
         "FL", "TX", "GA", "NC", "SC", "TN", "MD", "KY", "AL", "MS",
-        "LA", "AR", "OK", "WV",
-        "Florida", "Texas", "Georgia", "Maryland",
+        "LA", "AR", "OK", "WV", "VA",
+        "Florida", "Texas", "Georgia", "Maryland", "Virginia",
+        "Tennessee", "Louisiana",
     ],
     "中部": [
+        # states
         "伊州", "俄亥俄", "密苏里", "堪萨斯", "爱荷华", "密歇根",
         "明尼苏达", "南达科他", "北达科他", "印第安纳", "威斯康星",
-        "内布拉斯加", "芝加哥", "底特律", "印第安纳波利斯", "明尼阿波利斯",
-        "圣路易斯", "克利夫兰", "哥伦布", "辛辛那提",
+        "内布拉斯加",
+        # cities
+        "芝加哥", "底特律", "印第安纳波利斯", "明尼阿波利斯",
+        "圣路易斯", "克利夫兰", "哥伦布", "辛辛那提", "密尔沃基",
+        "堪萨斯城",
+        "Chicago", "Detroit", "Minneapolis", "Cleveland",
+        # codes
         "IL", "MI", "MN", "OH", "IN", "WI", "MO", "IA", "KS", "NE",
         "SD", "ND",
         "Illinois", "Michigan", "Minnesota", "Ohio", "Indiana",
     ],
     "西部": [
+        # states (NOTE: bare "Washington" is ambiguous with DC; we use
+        # "Washington州" / "WA" / "华盛顿州" only)
         "加州", "犹他", "夏威夷", "内华达", "蒙大拿", "俄勒冈", "爱达荷",
-        "怀俄明", "华盛顿州", "亚利桑那", "科罗拉多", "阿拉斯加", "新墨西哥",
-        "洛杉矶", "旧金山", "湾区", "西雅图", "圣地亚哥", "尔湾",
-        "圣何塞", "奥克兰", "波特兰", "凤凰城", "丹佛", "拉斯维加斯",
-        "盐湖城",
+        "怀俄明", "华盛顿州", "Washington州", "亚利桑那", "科罗拉多",
+        "阿拉斯加", "新墨西哥",
+        # CA cities — broad coverage since the SoCal/Bay-Area Chinese
+        # community uses many specific city names in posts
+        "洛杉矶", "旧金山", "湾区", "圣地亚哥", "尔湾", "圣何塞", "奥克兰",
+        "圣盖博", "蒙特利公园", "蒙市", "阿罕布拉", "阿罕布拉市",
+        "罗兰岗", "罗兰岡", "钻石吧", "钻石吧市", "核桃", "核桃市",
+        "哈仙达", "哈仙达岗", "阿凯迪亚", "阿凯迪亚市",
+        "罗斯密", "Rosemead", "Arcadia", "Gardena", "加迪纳",
+        "圣马利诺", "天普市", "都柏林", "Dublin",
+        "弗里蒙特", "库柏蒂诺", "圣塔克拉拉", "圣马刁",
+        "Sunnyvale", "Cupertino", "Fremont", "Oakland", "San Jose",
+        "Los Angeles", "San Francisco", "San Diego",
+        # OR/WA cities
+        "波特兰", "西雅图", "Portland", "Seattle", "Beaverton", "Bellevue",
+        # AZ / NV / CO / UT / HI cities
+        "凤凰城", "丹佛", "拉斯维加斯", "盐湖城", "檀香山",
+        "Phoenix", "Denver", "Las Vegas", "Salt Lake City",
+        # codes
         "CA", "WA", "NV", "AZ", "CO", "OR", "UT", "ID", "MT", "WY", "AK", "HI", "NM",
-        "California", "Washington", "Nevada", "Arizona", "Colorado", "Oregon",
+        "California", "Nevada", "Arizona", "Colorado", "Oregon", "Hawaii",
     ],
 }
 

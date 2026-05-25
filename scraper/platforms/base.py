@@ -10,7 +10,7 @@ from typing import Iterable, List, Optional
 
 import requests
 
-from .. import config, keywords, regions
+from .. import config, keywords, regions, sanitize
 
 log = logging.getLogger(__name__)
 
@@ -58,21 +58,44 @@ class BasePlatformScraper(ABC):
         return r.text
 
     def run(self, days_back: int = None) -> List[Post]:
-        """Paginate until posts fall outside the lookback window or max pages."""
+        """Paginate until posts fall outside the lookback window or max pages.
+
+        Returns a tuple of (kept_posts, diagnostics) — diagnostics is exposed
+        via the instance attribute `last_diagnostics` after run() completes.
+        """
         days_back = days_back if days_back is not None else config.SCRAPE_DAYS_BACK
         cutoff = date.today() - timedelta(days=days_back)
 
         collected: List[Post] = []
         seen_ids = set()
         consecutive_empty = 0
+        # Diagnostics surfaced via meta.warnings
+        diag = {
+            "pages_fetched": 0,
+            "rows_parsed": 0,
+            "dropped_unparseable_date": 0,
+            "dropped_out_of_window": 0,
+            "dropped_not_restaurant": 0,
+            "dropped_duplicate": 0,
+            "fetch_failures": 0,
+        }
 
         for page_num in range(1, config.MAX_PAGES_PER_PLATFORM + 1):
             html = self.fetch_page(page_num)
             if html is None:
+                diag["fetch_failures"] += 1
                 log.warning("[%s] page %d returned nothing; stopping", self.id, page_num)
                 break
+            diag["pages_fetched"] += 1
 
-            page_posts = self.parse_page(html, page_num)
+            try:
+                page_posts = self.parse_page(html, page_num)
+            except Exception as exc:  # noqa: BLE001
+                log.exception("[%s] parse_page raised on page %d: %s", self.id, page_num, exc)
+                page_posts = []
+
+            diag["rows_parsed"] += len(page_posts)
+
             if not page_posts:
                 consecutive_empty += 1
                 if consecutive_empty >= 2:
@@ -85,34 +108,46 @@ class BasePlatformScraper(ABC):
             stop_paginating = False
             for p in page_posts:
                 if p.id in seen_ids:
+                    diag["dropped_duplicate"] += 1
                     continue
                 seen_ids.add(p.id)
 
+                # Drop posts whose date didn't parse — silently re-dating them
+                # to today inflates today's bucket and disables the lookback
+                # cutoff. If a platform stops returning dates entirely we'd
+                # rather see a 0-post run and investigate.
                 try:
                     post_d = date.fromisoformat(p.date)
                 except (ValueError, TypeError):
-                    # Unparsed date — assume current, don't let it stop pagination
-                    post_d = date.today()
+                    diag["dropped_unparseable_date"] += 1
+                    continue
 
                 if post_d < cutoff:
+                    diag["dropped_out_of_window"] += 1
                     stop_paginating = True
                     continue
 
-                # restaurant keyword filter
-                hits = keywords.match(p.title)
-                if not hits:
-                    continue
-                p.keywords_matched = hits
+                # Sanitize the title (strips PII before publication)
+                p.title = sanitize.sanitize_title(p.title)
 
-                # region classification
-                if not p.region:
-                    if p.state:
-                        p.region = regions.region_for(p.state)
-                    if not p.region:
-                        region, state = regions.classify(p.title)
-                        p.region = region
-                        if not p.state:
-                            p.state = state
+                # Restaurant filter (must hit a strong venue/role keyword)
+                if not keywords.is_restaurant(p.title):
+                    diag["dropped_not_restaurant"] += 1
+                    continue
+                # Still record all matched terms (incl. weak) for display
+                p.keywords_matched = keywords.match(p.title)
+
+                # Region classification: prefer title (more specific), use
+                # the URL-derived state as a fallback only when the title
+                # has no region tokens. (URL slugs lump multi-state cross-
+                # listings under a default like "New-York" — bad signal.)
+                title_region, title_state = regions.classify(p.title)
+                if title_region:
+                    p.region = title_region
+                    p.state = title_state or p.state
+                elif p.state:
+                    p.region = regions.region_for(p.state)
+                # else: leaves region=None — surfaced as 'unknown'
 
                 collected.append(p)
                 kept += 1
@@ -130,6 +165,7 @@ class BasePlatformScraper(ABC):
                 break
 
         log.info("[%s] total kept: %d", self.id, len(collected))
+        self.last_diagnostics = diag
         return collected
 
 

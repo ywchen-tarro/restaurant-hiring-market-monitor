@@ -140,9 +140,14 @@
     document.getElementById('kpiTopRegionSub').textContent =
       `${topReg.total} 帖 · 集中于 ${topStateName || '—'}`;
 
-    // Rising alerts: count platforms that grew >20% vs previous history entry
-    const alerts = computeAlerts();
-    document.getElementById('kpiAlerts').textContent = alerts.length;
+    // Rising alerts: count platforms with notable Δ vs previous history entry
+    const { rising, falling } = computeAlerts();
+    const totalSignals = rising.length + falling.length;
+    document.getElementById('kpiAlerts').textContent = totalSignals;
+    document.getElementById('kpiAlerts').style.color =
+      rising.length > falling.length ? 'var(--accent2)' : (falling.length > 0 ? 'var(--warn)' : 'var(--muted)');
+    const sub = document.getElementById('kpiAlertsSub');
+    if (sub) sub.textContent = `升温 ${rising.length} · 降温 ${falling.length}`;
   }
 
   function totalDeltaText() {
@@ -158,31 +163,48 @@
 
   function computeAlerts() {
     const h = state.data.history || [];
-    if (h.length < 2) return [];
+    if (h.length < 2) return { rising: [], falling: [] };
     const cur = h[h.length - 1].by_platform;
     const prev = h[h.length - 2].by_platform;
-    const alerts = [];
+    const rising = [], falling = [];
     for (const p of PLATFORMS) {
       const c = cur[p.id] || 0;
       const v = prev[p.id] || 0;
-      if (v === 0) continue;
-      if ((c - v) / v > 0.20) {
-        alerts.push({ platform: p, current: c, prev: v, pct: ((c - v) / v) * 100 });
-      }
+      if (v < 10) continue;  // ignore noisy small bases
+      const delta = (c - v) / v;
+      if (delta >= 0.20) rising.push({ platform: p, current: c, prev: v, pct: delta * 100 });
+      else if (delta <= -0.20) falling.push({ platform: p, current: c, prev: v, pct: delta * 100 });
     }
-    return alerts;
+    return { rising, falling };
+  }
+
+  function isStale() {
+    const lu = state.data && state.data.meta && state.data.meta.last_updated;
+    if (!lu) return false;
+    const ageMs = Date.now() - new Date(lu).getTime();
+    return ageMs > 4 * 24 * 3600 * 1000;
   }
 
   function renderAlertBanner() {
-    const alerts = computeAlerts();
+    const { rising, falling } = computeAlerts();
+    const warnings = (state.data && state.data.meta && state.data.meta.warnings) || [];
     const banner = document.getElementById('alertBanner');
-    if (alerts.length === 0) {
+    const text = document.getElementById('alertText');
+
+    const messages = [];
+    if (isStale()) {
+      messages.push(`⏰ 数据已 ${Math.floor((Date.now() - new Date(state.data.meta.last_updated).getTime()) / (24 * 3600 * 1000))} 天未更新 — 请检查 launchd 调度`);
+    }
+    warnings.forEach(w => messages.push(`⚠ ${w}`));
+    rising.forEach(a => messages.push(`▲ ${a.platform.name} 升温 +${a.pct.toFixed(0)}% (${a.prev} → ${a.current})`));
+    falling.forEach(a => messages.push(`▼ ${a.platform.name} 降温 ${a.pct.toFixed(0)}% (${a.prev} → ${a.current})`));
+
+    if (messages.length === 0) {
       banner.classList.remove('shown');
       return;
     }
     banner.classList.add('shown');
-    document.getElementById('alertText').textContent =
-      alerts.map(a => `${a.platform.name} +${a.pct.toFixed(0)}% (${a.prev} → ${a.current})`).join(' · ');
+    text.innerHTML = messages.map(m => escapeHtml(m)).join(' &nbsp;·&nbsp; ');
   }
 
   function populateSelects() {
@@ -458,15 +480,20 @@
     feed.innerHTML = '';
     filtered.slice(0, 300).forEach(p => {
       const platMeta = PLATFORM_BY_ID[p.platform] || { name: p.platform, color: '#888' };
+      const url = safeUrl(p.url);
+      const titleHtml = escapeHtml(p.title);
+      const titleEl = url
+        ? `<a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer">${titleHtml}</a>`
+        : titleHtml;
       const el = document.createElement('div');
       el.className = 'post-item';
       el.innerHTML = `
         <div class="post-meta">
-          <span class="post-platform" style="background:${platMeta.color}33; color:${platMeta.color}">${platMeta.name}</span>
-          <span class="post-time">${p.date || '—'}</span>
+          <span class="post-platform" style="background:${platMeta.color}33; color:${platMeta.color}">${escapeHtml(platMeta.name)}</span>
+          <span class="post-time">${escapeHtml(p.date || '—')}</span>
         </div>
-        <div class="post-title"><a href="${p.url}" target="_blank" rel="noopener">${escapeHtml(p.title)}</a></div>
-        <div class="post-region">${p.region || '未知地区'} · ${p.state || '—'} ${(p.keywords_matched || []).map(k => `<span class="kw-tag">${k}</span>`).join('')}</div>
+        <div class="post-title">${titleEl}</div>
+        <div class="post-region">${escapeHtml(p.region || '未知地区')} · ${escapeHtml(p.state || '—')} ${(p.keywords_matched || []).map(k => `<span class="kw-tag">${escapeHtml(k)}</span>`).join('')}</div>
       `;
       feed.appendChild(el);
     });
@@ -487,8 +514,15 @@
   }
 
   function escapeHtml(s) {
-    return String(s).replace(/[&<>"']/g, c => ({
+    return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({
       '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
     }[c]));
+  }
+
+  // Only http(s) URLs are safe to set as an href — anything else (javascript:,
+  // data:, file:) could trigger XSS / drive-by behavior when clicked.
+  function safeUrl(u) {
+    if (typeof u !== 'string') return null;
+    return /^https?:\/\//i.test(u) ? u : null;
   }
 })();

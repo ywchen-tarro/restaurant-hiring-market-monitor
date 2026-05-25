@@ -1,3 +1,4 @@
-requests>=2.31.0
-beautifulsoup4>=4.12.0
-lxml>=4.9.0
+# Pinned for reproducibility. Bump intentionally; do not switch back to
+# floor-only pins (>=) — they let a yanked or compromised release in.
+requests==2.32.5
+beautifulsoup4==4.14.3

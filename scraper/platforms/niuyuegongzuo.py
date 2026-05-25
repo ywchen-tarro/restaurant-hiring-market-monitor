@@ -64,45 +64,52 @@ class Scraper(BasePlatformScraper):
         posts: List[Post] = []
 
         for row in soup.select("div.jobs-grid1.dash-tall"):
-            link = row.find(
-                "a",
-                href=lambda h: bool(h and ID_FROM_URL.search(h)),
-            )
-            if not link:
-                continue
-            href = link["href"]
-            m = ID_FROM_URL.search(href)
-            if not m:
-                continue
-            native_id = m.group(1)
-            full_url = urljoin(BASE, href)
-            title = link.get_text(strip=True).lstrip("📜").strip()
-            if not title:
-                continue
-
-            # Date: text matching MM/DD/YY anywhere in the row
-            date_iso = self._extract_date(row)
-
-            # Location from URL slug
-            state = None
             try:
-                slug = unquote(href).split("/")[1].lower()
-                state = LOCATION_SLUG_MAP.get(slug)
-            except IndexError:
-                pass
-
-            posts.append(Post(
-                id=post_id(self.id, native_id),
-                platform=self.id,
-                title=title,
-                date=date_iso or "",
-                region=None,  # base class will classify
-                state=state,
-                keywords_matched=[],
-                url=full_url,
-            ))
+                p = self._parse_row(row)
+            except Exception as exc:  # noqa: BLE001
+                log.warning("[%s] row parse error: %s", self.id, exc)
+                continue
+            if p is not None:
+                posts.append(p)
 
         return posts
+
+    def _parse_row(self, row) -> "Post | None":
+        link = row.find(
+            "a",
+            href=lambda h: bool(h and ID_FROM_URL.search(h)),
+        )
+        if not link:
+            return None
+        href = link["href"]
+        m = ID_FROM_URL.search(href)
+        if not m:
+            return None
+        native_id = m.group(1)
+        full_url = urljoin(BASE, href)
+        title = link.get_text(strip=True).lstrip("📜").strip()
+        if not title:
+            return None
+
+        date_iso = self._extract_date(row)
+
+        state = None
+        try:
+            slug = unquote(href).split("/")[1].lower()
+            state = LOCATION_SLUG_MAP.get(slug)
+        except IndexError:
+            pass
+
+        return Post(
+            id=post_id(self.id, native_id),
+            platform=self.id,
+            title=title,
+            date=date_iso or "",
+            region=None,
+            state=state,
+            keywords_matched=[],
+            url=full_url,
+        )
 
     def _extract_date(self, row) -> str:
         for el in row.select("div.jobs-item.small_screen"):

@@ -10,11 +10,13 @@ venv/
 logs/
 *.log
 
-# Internal notes — never push
+# Internal notes — never push, regardless of where the file sits
 CLAUDE.md
+**/CLAUDE.md
 
 # Local-only dashboard view + benchmark data — never push
 local/
+**/benchmark.json
 
 # iCloud placeholders
 .icloud

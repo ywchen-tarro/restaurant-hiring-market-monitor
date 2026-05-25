@@ -1,10 +1,34 @@
 {
   "meta": {
-    "last_updated": "2026-05-25T15:05:18",
+    "last_updated": "2026-05-25T15:28:40-07:00",
     "scrape_days_back": 7,
     "date_from": "2026-05-18",
     "date_to": "2026-05-25",
-    "total_posts": 249
+    "total_posts": 150,
+    "unclassified_region": 1,
+    "warnings": [],
+    "diagnostics": {
+      "usahuarenjie": {
+        "status": "ok",
+        "pages_fetched": 1,
+        "rows_parsed": 40,
+        "dropped_unparseable_date": 0,
+        "dropped_out_of_window": 7,
+        "dropped_not_restaurant": 1,
+        "dropped_duplicate": 0,
+        "fetch_failures": 0
+      },
+      "niuyuegongzuo": {
+        "status": "ok",
+        "pages_fetched": 14,
+        "rows_parsed": 673,
+        "dropped_unparseable_date": 1,
+        "dropped_out_of_window": 23,
+        "dropped_not_restaurant": 531,
+        "dropped_duplicate": 0,
+        "fetch_failures": 0
+      }
+    }
   },
   "by_platform": {
     "168worker": {
@@ -24,19 +48,19 @@
       "daily_avg": 0.0
     },
     "niuyuegongzuo": {
-      "total": 217,
-      "daily_avg": 31.0
+      "total": 118,
+      "daily_avg": 16.86
     }
   },
   "by_region": {
     "东部": {
-      "total": 230,
+      "total": 129,
       "top_states": {
-        "法拉盛": 66,
-        "长岛": 53,
-        "新泽西": 27,
-        "皇后区": 23,
-        "曼哈顿": 19
+        "法拉盛": 51,
+        "长岛": 28,
+        "曼哈顿": 13,
+        "皇后区": 8,
+        "纽约": 7
       }
     },
     "南部": {
@@ -52,48 +76,48 @@
       "top_states": {}
     },
     "西部": {
-      "total": 14,
+      "total": 17,
       "top_states": {
-        "洛杉矶": 4,
-        "旧金山": 4,
-        "圣何塞": 2,
+        "尔湾": 2,
+        "洛杉矶": 2,
+        "旧金山": 2,
         "科罗拉多": 1,
-        "波特兰": 1
+        "Dublin": 1
       }
     }
   },
   "by_keyword": {
-    "招聘": 60,
-    "前台": 37,
-    "请人": 30,
+    "餐": 78,
     "师傅": 26,
     "炒锅": 22,
     "日餐": 20,
     "企台": 20,
     "餐馆": 16,
-    "招人": 16,
+    "招聘": 15,
     "外卖": 14,
+    "中餐": 13,
     "打杂": 12,
     "油锅": 11,
     "餐厅": 11,
     "寿司": 11,
-    "收银": 9,
+    "前台": 7,
+    "抓码": 7,
     "后厨": 7,
     "打包": 7,
     "厨房": 6,
-    "請人": 5,
-    "服务员": 4
+    "收银": 5,
+    "送餐": 4
   },
   "history": [
     {
       "run_date": "2026-05-25",
       "period": "2026-05-18 ~ 2026-05-25",
       "by_platform": {
-        "168worker": 0,
-        "usahuarenjie": 32,
         "500work": 0,
         "uscanyin": 0,
-        "niuyuegongzuo": 217
+        "usahuarenjie": 32,
+        "niuyuegongzuo": 217,
+        "168worker": 0
       },
       "total": 249
     }
@@ -119,6 +143,7 @@
       "region": "西部",
       "state": "科罗拉多",
       "keywords_matched": [
+        "餐",
         "日餐",
         "油锅"
       ],
@@ -130,9 +155,11 @@
       "title": "Dublin连锁中餐馆 诚聘前台",
       "date": "2026-05-25",
       "region": "西部",
-      "state": "圣何塞",
+      "state": "Dublin",
       "keywords_matched": [
         "餐馆",
+        "餐",
+        "中餐",
         "前台"
       ],
       "url": "https://www.usahuarenjie.com/city/San-Jose/information-id-276015.html"
@@ -143,11 +170,13 @@
       "title": "法拉盛餐厅招聘--男企台；纽约上州餐厅招聘--抓码兼帮炒",
       "date": "2026-05-24",
       "region": "东部",
-      "state": "纽约",
+      "state": "法拉盛",
       "keywords_matched": [
         "餐厅",
-        "招聘",
-        "企台"
+        "餐",
+        "企台",
+        "抓码",
+        "招聘"
       ],
       "url": "https://www.usahuarenjie.com/city/New-York/information-id-276029.html"
     },
@@ -159,7 +188,10 @@
       "region": "东部",
       "state": "纽约",
       "keywords_matched": [
-        "外卖"
+        "餐",
+        "中餐",
+        "外卖",
+        "送餐"
       ],
       "url": "https://www.usahuarenjie.com/city/New-York/information-id-276030.html"
     },
@@ -172,6 +204,7 @@
       "state": "波士顿",
       "keywords_matched": [
         "餐馆",
+        "餐",
         "企台"
       ],
       "url": "https://www.usahuarenjie.com/city/Boston/information-id-235484.html"
@@ -206,11 +239,13 @@
       "platform": "usahuarenjie",
       "title": "Rosemead海鲜餐馆招兼职打杂捡码",
       "date": "2026-05-22",
-      "region": null,
-      "state": null,
+      "region": "西部",
+      "state": "Rosemead",
       "keywords_matched": [
         "餐馆",
-        "打杂"
+        "餐",
+        "打杂",
+        "捡码"
       ],
       "url": "https://www.usahuarenjie.com/information-id-275963.html"
     },
@@ -219,11 +254,11 @@
       "platform": "usahuarenjie",
       "title": "阿凯迪亚mall烫吧招聘中厨煮锅和刷碗打杂",
       "date": "2026-05-22",
-      "region": "东部",
-      "state": "纽约",
+      "region": "西部",
+      "state": "阿凯迪亚",
       "keywords_matched": [
-        "招聘",
-        "打杂"
+        "打杂",
+        "招聘"
       ],
       "url": "https://www.usahuarenjie.com/city/New-York/information-id-275907.html"
     },
@@ -232,12 +267,15 @@
       "platform": "usahuarenjie",
       "title": "招聘：Gardena. 中餐海鲜馆  帮厨 ，略懂抓码，炒锅",
       "date": "2026-05-22",
-      "region": "东部",
-      "state": "纽约",
+      "region": "西部",
+      "state": "Gardena",
       "keywords_matched": [
-        "招聘",
+        "餐",
+        "中餐",
         "炒锅",
-        "帮厨"
+        "帮厨",
+        "抓码",
+        "招聘"
       ],
       "url": "https://www.usahuarenjie.com/city/New-York/information-id-275930.html"
     },
@@ -249,6 +287,7 @@
       "region": "南部",
       "state": "亚特兰大",
       "keywords_matched": [
+        "餐",
         "日餐",
         "企台"
       ],
@@ -276,9 +315,11 @@
       "state": "波士顿",
       "keywords_matched": [
         "餐厅",
-        "招聘",
+        "餐",
         "炒锅",
-        "洗碗"
+        "洗碗",
+        "抓码",
+        "招聘"
       ],
       "url": "https://www.usahuarenjie.com/city/Boston/information-id-231694.html"
     },
@@ -288,10 +329,11 @@
       "title": "Beaverton 地区招聘一名英文好的日料店服务员",
       "date": "2026-05-20",
       "region": "西部",
-      "state": "波特兰",
+      "state": "Beaverton",
       "keywords_matched": [
-        "招聘",
-        "服务员"
+        "日料",
+        "服务员",
+        "招聘"
       ],
       "url": "https://www.usahuarenjie.com/city/Portland/information-id-275811.html"
     },
@@ -303,8 +345,8 @@
       "region": null,
       "state": null,
       "keywords_matched": [
-        "炒锅",
-        "外卖"
+        "外卖",
+        "炒锅"
       ],
       "url": "https://www.usahuarenjie.com/city/Qtcs/information-id-275791.html"
     },
@@ -316,6 +358,7 @@
       "region": "西部",
       "state": "凤凰城",
       "keywords_matched": [
+        "餐",
         "日餐",
         "企台"
       ],
@@ -329,6 +372,7 @@
       "region": "东部",
       "state": "波士顿",
       "keywords_matched": [
+        "餐",
         "日餐",
         "油锅"
       ],
@@ -354,9 +398,10 @@
       "region": "西部",
       "state": "西雅图",
       "keywords_matched": [
+        "餐",
         "日餐",
-        "招聘",
-        "企台"
+        "企台",
+        "招聘"
       ],
       "url": "https://www.usahuarenjie.com/city/Seattle/information-id-275772.html"
     },
@@ -366,9 +411,10 @@
       "title": "橙县尔湾轻食餐厅招后厨",
       "date": "2026-05-20",
       "region": "西部",
-      "state": "洛杉矶",
+      "state": "尔湾",
       "keywords_matched": [
         "餐厅",
+        "餐",
         "后厨"
       ],
       "url": "https://www.usahuarenjie.com/city/Los-Angeles/information-id-275771.html"
@@ -379,9 +425,10 @@
       "title": "尔湾轻食餐厅招后厨，负责便当出餐备餐",
       "date": "2026-05-20",
       "region": "西部",
-      "state": "洛杉矶",
+      "state": "尔湾",
       "keywords_matched": [
         "餐厅",
+        "餐",
         "后厨"
       ],
       "url": "https://www.usahuarenjie.com/city/Los-Angeles/information-id-275770.html"
@@ -395,6 +442,7 @@
       "state": "洛杉矶",
       "keywords_matched": [
         "餐厅",
+        "餐",
         "炒锅",
         "师傅"
       ],
@@ -406,9 +454,11 @@
       "title": "位于湾区milpitas中餐馆诚招一名炒锅全工半工均可需要报税",
       "date": "2026-05-20",
       "region": "西部",
-      "state": "旧金山",
+      "state": "湾区",
       "keywords_matched": [
         "餐馆",
+        "餐",
+        "中餐",
         "炒锅"
       ],
       "url": "https://www.usahuarenjie.com/city/San-Francisco/information-id-275768.html"
@@ -422,9 +472,10 @@
       "state": "旧金山",
       "keywords_matched": [
         "餐厅",
-        "招聘",
+        "餐",
+        "打杂",
         "服务员",
-        "打杂"
+        "招聘"
       ],
       "url": "https://www.usahuarenjie.com/city/San-Francisco/information-id-275751.html"
     },
@@ -436,6 +487,7 @@
       "region": "西部",
       "state": "旧金山",
       "keywords_matched": [
+        "餐",
         "日餐",
         "服务员"
       ],
@@ -447,24 +499,13 @@
       "title": "Fremont 餐馆请男厨师一名，有经验优先，不包住",
       "date": "2026-05-19",
       "region": "西部",
-      "state": "旧金山",
+      "state": "Fremont",
       "keywords_matched": [
         "餐馆",
+        "餐",
         "厨师"
       ],
       "url": "https://www.usahuarenjie.com/city/San-Francisco/information-id-275749.html"
-    },
-    {
-      "id": "usahuarenjie_275786",
-      "platform": "usahuarenjie",
-      "title": "☎️延边泡菜工厂急招聘男女员工若干名☎️",
-      "date": "2026-05-19",
-      "region": "东部",
-      "state": "纽约",
-      "keywords_matched": [
-        "招聘"
-      ],
-      "url": "https://www.usahuarenjie.com/city/New-York/information-id-275786.html"
     },
     {
       "id": "usahuarenjie_275788",
@@ -472,10 +513,10 @@
       "title": "曼哈顿招聘熟手炒锅。",
       "date": "2026-05-19",
       "region": "东部",
-      "state": "纽约",
+      "state": "曼哈顿",
       "keywords_matched": [
-        "招聘",
-        "炒锅"
+        "炒锅",
+        "招聘"
       ],
       "url": "https://www.usahuarenjie.com/city/New-York/information-id-275788.html"
     },
@@ -485,9 +526,10 @@
       "title": "加州中海岸招油锅和抓码",
       "date": "2026-05-19",
       "region": "西部",
-      "state": "圣何塞",
+      "state": "加州",
       "keywords_matched": [
-        "油锅"
+        "油锅",
+        "抓码"
       ],
       "url": "https://www.usahuarenjie.com/city/San-Jose/information-id-275790.html"
     },
@@ -511,23 +553,24 @@
       "region": "南部",
       "state": "马里兰",
       "keywords_matched": [
-        "招聘",
+        "外卖",
         "炒锅",
-        "外卖"
+        "招聘"
       ],
       "url": "https://www.usahuarenjie.com/city/Qtcs/information-id-275681.html"
     },
     {
-      "id": "niuyuegongzuo_137722",
-      "platform": "niuyuegongzuo",
-      "title": "曼哈頓好区請人",
-      "date": "2026-05-25",
+      "id": "usahuarenjie_275740",
+      "platform": "usahuarenjie",
+      "title": "曼哈顿布鲁克林中餐店招店员$21W2 福利好晋升空间大",
+      "date": "2026-05-18",
       "region": "东部",
-      "state": "曼哈顿",
+      "state": "布鲁克林",
       "keywords_matched": [
-        "請人"
+        "餐",
+        "中餐"
       ],
-      "url": "https://niuyuegongzuo.com/manhattan/%E5%85%B6%E4%BB%96%E5%90%84%E7%B1%BB%E6%8B%9B%E8%81%98/%E6%9B%BC%E5%93%88%E9%A0%93%E5%A5%BD%E5%8C%BA%E8%AB%8B%E4%BA%BA/137722"
+      "url": "https://www.usahuarenjie.com/city/New-York/information-id-275740.html"
     },
     {
       "id": "niuyuegongzuo_137715",
@@ -535,22 +578,25 @@
       "title": "法拉盛餐厅招聘--企台； 纽约上州餐厅招聘--抓码兼帮炒",
       "date": "2026-05-25",
       "region": "东部",
-      "state": "上州",
+      "state": "法拉盛",
       "keywords_matched": [
         "餐厅",
-        "招聘",
-        "企台"
+        "餐",
+        "企台",
+        "抓码",
+        "招聘"
       ],
       "url": "https://niuyuegongzuo.com/upstate/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/%E6%B3%95%E6%8B%89%E7%9B%9B%E9%A4%90%E5%8E%85%E6%8B%9B%E8%81%98-%E4%BC%81%E5%8F%B0-%E7%BA%BD%E7%BA%A6%E4%B8%8A%E5%B7%9E%E9%A4%90%E5%8E%85%E6%8B%9B%E8%81%98-%E6%8A%93%E7%A0%81%E5%85%BC%E5%B8%AE%E7%82%92/137715"
     },
     {
       "id": "niuyuegongzuo_137714",
       "platform": "niuyuegongzuo",
-      "title": "上州中日餐请熟手炒锅师父，法拉盛接送，中午有午休，一周五天半;电话7187082268",
+      "title": "上州中日餐请熟手炒锅师父，法拉盛接送，中午有午休，一周五天半;电话[电话]",
       "date": "2026-05-25",
       "region": "东部",
-      "state": "上州",
+      "state": "法拉盛",
       "keywords_matched": [
+        "餐",
         "日餐",
         "炒锅"
       ],
@@ -564,6 +610,7 @@
       "region": "东部",
       "state": "法拉盛",
       "keywords_matched": [
+        "烧烤",
         "企台"
       ],
       "url": "https://niuyuegongzuo.com/flushing/%E5%85%B6%E4%BB%96%E5%90%84%E7%B1%BB%E6%8B%9B%E8%81%98/%E6%B3%95%E6%8B%89%E7%9B%9B%E7%83%A7%E7%83%A4%E5%BA%97%E8%81%98%E8%AF%B7%E7%86%9F%E6%89%8B%E4%BC%81%E5%8F%B0/137712"
@@ -571,12 +618,13 @@
     {
       "id": "niuyuegongzuo_137707",
       "platform": "niuyuegongzuo",
-      "title": "招工女企台学工busgirl肯学，一天150，法拉盛接送，有意请信息973-767-8887",
+      "title": "招工女企台学工busgirl肯学，一天150，法拉盛接送，有意请信息[电话]",
       "date": "2026-05-25",
       "region": "东部",
       "state": "法拉盛",
       "keywords_matched": [
-        "企台"
+        "企台",
+        "招工"
       ],
       "url": "https://niuyuegongzuo.com/flushing/%E5%85%B6%E4%BB%96%E5%90%84%E7%B1%BB%E6%8B%9B%E8%81%98/%E6%8B%9B%E5%B7%A5%E5%A5%B3%E4%BC%81%E5%8F%B0%E5%AD%A6%E5%B7%A5busgirl%E8%82%AF%E5%AD%A6%E4%B8%80%E5%A4%A9150%E6%B3%95%E6%8B%89%E7%9B%9B%E6%8E%A5%E9%80%81%E6%9C%89%E6%84%8F%E8%AF%B7%E4%BF%A1%E6%81%AF973-767-8887/137707"
     },
@@ -586,23 +634,50 @@
       "title": "法拉盛急需全日餐兼职女奇台",
       "date": "2026-05-25",
       "region": "东部",
-      "state": "长岛",
+      "state": "法拉盛",
       "keywords_matched": [
+        "餐",
         "日餐"
       ],
       "url": "https://niuyuegongzuo.com/longisland/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/%E6%B3%95%E6%8B%89%E7%9B%9B%E6%80%A5%E9%9C%80%E5%85%A8%E6%97%A5%E9%A4%90%E5%85%BC%E8%81%8C%E5%A5%B3%E5%A5%87%E5%8F%B0/137706"
     },
     {
-      "id": "niuyuegongzuo_123110",
+      "id": "niuyuegongzuo_137705",
       "platform": "niuyuegongzuo",
-      "title": "🍼 招聘｜母婴用品店 店员（Flushing / Bayside）",
+      "title": "兼职汽车送餐",
+      "date": "2026-05-25",
+      "region": "东部",
+      "state": "上州",
+      "keywords_matched": [
+        "餐",
+        "送餐"
+      ],
+      "url": "https://niuyuegongzuo.com/upstate/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/%E5%85%BC%E8%81%8C%E6%B1%BD%E8%BD%A6%E9%80%81%E9%A4%90/137705"
+    },
+    {
+      "id": "niuyuegongzuo_137704",
+      "platform": "niuyuegongzuo",
+      "title": "川菜请抓码",
+      "date": "2026-05-25",
+      "region": "东部",
+      "state": "曼哈顿",
+      "keywords_matched": [
+        "抓码"
+      ],
+      "url": "https://niuyuegongzuo.com/manhattan/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/%E5%B7%9D%E8%8F%9C%E8%AF%B7%E6%8A%93%E7%A0%81/137704"
+    },
+    {
+      "id": "niuyuegongzuo_137703",
+      "platform": "niuyuegongzuo",
+      "title": "teriyaki 快餐 招工 rockland county",
       "date": "2026-05-25",
       "region": "东部",
       "state": "法拉盛",
       "keywords_matched": [
-        "招聘"
+        "餐",
+        "招工"
       ],
-      "url": "https://niuyuegongzuo.com/flushing/%E9%94%80%E5%94%AE%E5%8A%A9%E7%90%86%E6%96%87%E5%91%98/%E6%8B%9B%E8%81%98%E6%AF%8D%E5%A9%B4%E7%94%A8%E5%93%81%E5%BA%97-%E5%BA%97%E5%91%98flushing-bayside/123110"
+      "url": "https://niuyuegongzuo.com/flushing/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/teriyaki-%E5%BF%AB%E9%A4%90-%E6%8B%9B%E5%B7%A5-rockland-county/137703"
     },
     {
       "id": "niuyuegongzuo_23156",
@@ -612,22 +687,12 @@
       "region": "东部",
       "state": "法拉盛",
       "keywords_matched": [
-        "招聘",
-        "外卖"
+        "餐",
+        "外卖",
+        "送餐",
+        "招聘"
       ],
       "url": "https://niuyuegongzuo.com/flushing/%E4%BB%93%E5%BA%93%E7%89%A9%E6%B5%81%E5%8F%B8%E6%9C%BA/%E9%A5%AD%E5%9B%A2%E5%A4%96%E5%8D%96%E8%AF%9A%E6%8C%9A%E6%8B%9B%E8%81%98%E9%80%81%E9%A4%90%E5%91%98%E6%97%B6%E9%97%B4%E7%81%B5%E6%B4%BB%E5%A4%9A%E5%8A%B3%E5%A4%9A%E5%BE%97%E9%A1%BA%E8%B7%AF%E5%A4%9A%E5%8D%95%E7%A8%B3%E5%AE%9A%E6%94%B6%E5%85%A5/23156"
-    },
-    {
-      "id": "niuyuegongzuo_137702",
-      "platform": "niuyuegongzuo",
-      "title": "长岛离法拉盛45分钟招工女前台一名",
-      "date": "2026-05-25",
-      "region": "东部",
-      "state": "长岛",
-      "keywords_matched": [
-        "前台"
-      ],
-      "url": "https://niuyuegongzuo.com/longisland/%E9%94%80%E5%94%AE%E5%8A%A9%E7%90%86%E6%96%87%E5%91%98/%E9%95%BF%E5%B2%9B%E7%A6%BB%E6%B3%95%E6%8B%89%E7%9B%9B45%E5%88%86%E9%92%9F%E6%8B%9B%E5%B7%A5%E5%A5%B3%E5%89%8D%E5%8F%B0%E4%B8%80%E5%90%8D/137702"
     },
     {
       "id": "niuyuegongzuo_137701",
@@ -647,8 +712,9 @@
       "title": "上州亚洲餐请熟手油锅师父 法拉盛接送",
       "date": "2026-05-25",
       "region": "东部",
-      "state": "上州",
+      "state": "法拉盛",
       "keywords_matched": [
+        "餐",
         "油锅"
       ],
       "url": "https://niuyuegongzuo.com/upstate/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/%E4%B8%8A%E5%B7%9E%E4%BA%9A%E6%B4%B2%E9%A4%90%E8%AF%B7%E7%86%9F%E6%89%8B%E6%B2%B9%E9%94%85%E5%B8%88%E7%88%B6-%E6%B3%95%E6%8B%89%E7%9B%9B%E6%8E%A5%E9%80%81/137700"
@@ -673,48 +739,10 @@
       "region": "东部",
       "state": "长岛",
       "keywords_matched": [
+        "餐",
         "日餐"
       ],
       "url": "https://niuyuegongzuo.com/longisland/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/%E6%97%A5%E9%A4%90%E9%AB%98%E8%96%AA%E8%AF%9A%E8%AF%B7%E7%94%9C%E4%B8%8D%E8%BE%A3/137695"
-    },
-    {
-      "id": "niuyuegongzuo_137692",
-      "platform": "niuyuegongzuo",
-      "title": "Brooklyn 脊椎诊所招聘 2名！｜诊所助理（前台接待及治疗协助）（中英粤）",
-      "date": "2026-05-25",
-      "region": "东部",
-      "state": "布鲁克林",
-      "keywords_matched": [
-        "招聘",
-        "前台"
-      ],
-      "url": "https://niuyuegongzuo.com/brooklyn/%E8%AF%8A%E6%89%80%E8%8D%AF%E6%88%BF/brooklyn-%E8%84%8A%E6%A4%8E%E8%AF%8A%E6%89%80%E6%8B%9B%E8%81%98-2%E5%90%8D%E8%AF%8A%E6%89%80%E5%8A%A9%E7%90%86%E5%89%8D%E5%8F%B0%E6%8E%A5%E5%BE%85%E5%8F%8A%E6%B2%BB%E7%96%97%E5%8D%8F%E5%8A%A9%E4%B8%AD%E8%8B%B1%E7%B2%A4/137692"
-    },
-    {
-      "id": "niuyuegongzuo_137691",
-      "platform": "niuyuegongzuo",
-      "title": "Brooklyn 脊椎诊所招人 2名！ 诊所助理（前台接待及治疗协助）（中英粤）",
-      "date": "2026-05-25",
-      "region": "东部",
-      "state": "布鲁克林",
-      "keywords_matched": [
-        "招人",
-        "前台"
-      ],
-      "url": "https://niuyuegongzuo.com/brooklyn/%E8%AF%8A%E6%89%80%E8%8D%AF%E6%88%BF/brooklyn-%E8%84%8A%E6%A4%8E%E8%AF%8A%E6%89%80%E6%8B%9B%E4%BA%BA-2%E5%90%8D-%E8%AF%8A%E6%89%80%E5%8A%A9%E7%90%86%E5%89%8D%E5%8F%B0%E6%8E%A5%E5%BE%85%E5%8F%8A%E6%B2%BB%E7%96%97%E5%8D%8F%E5%8A%A9%E4%B8%AD%E8%8B%B1%E7%B2%A4/137691"
-    },
-    {
-      "id": "niuyuegongzuo_137689",
-      "platform": "niuyuegongzuo",
-      "title": "新泽西正规按摩店高薪招聘按摩和前台需要熟手",
-      "date": "2026-05-24",
-      "region": "东部",
-      "state": "新泽西",
-      "keywords_matched": [
-        "招聘",
-        "前台"
-      ],
-      "url": "https://niuyuegongzuo.com/newjersey/%E6%8C%89%E6%91%A9%E7%BE%8E%E7%94%B2%E7%BE%8E%E5%9E%8B/%E6%96%B0%E6%B3%BD%E8%A5%BF%E6%AD%A3%E8%A7%84%E6%8C%89%E6%91%A9%E5%BA%97%E9%AB%98%E8%96%AA%E6%8B%9B%E8%81%98%E6%8C%89%E6%91%A9%E5%92%8C%E5%89%8D%E5%8F%B0%E9%9C%80%E8%A6%81%E7%86%9F%E6%89%8B/137689"
     },
     {
       "id": "niuyuegongzuo_137684",
@@ -724,22 +752,11 @@
       "region": "东部",
       "state": "法拉盛",
       "keywords_matched": [
+        "餐",
         "日餐",
         "炒锅"
       ],
       "url": "https://niuyuegongzuo.com/flushing/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/%E4%B8%AD%E6%97%A5%E9%A4%90%E7%82%92%E9%94%85/137684"
-    },
-    {
-      "id": "niuyuegongzuo_137682",
-      "platform": "niuyuegongzuo",
-      "title": "99批发 急需前台写单",
-      "date": "2026-05-24",
-      "region": "东部",
-      "state": "皇后区",
-      "keywords_matched": [
-        "前台"
-      ],
-      "url": "https://niuyuegongzuo.com/queens/%E9%94%80%E5%94%AE%E5%8A%A9%E7%90%86%E6%96%87%E5%91%98/99%E6%89%B9%E5%8F%91-%E6%80%A5%E9%9C%80%E5%89%8D%E5%8F%B0%E5%86%99%E5%8D%95/137682"
     },
     {
       "id": "niuyuegongzuo_137679",
@@ -750,6 +767,7 @@
       "state": "法拉盛",
       "keywords_matched": [
         "餐馆",
+        "餐",
         "打杂"
       ],
       "url": "https://niuyuegongzuo.com/flushing/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/%E6%B3%95%E6%8B%89%E7%9B%9B%E9%A4%90%E9%A6%86%E8%AF%B7%E6%89%93%E6%9D%82%E5%A5%B3%E4%BA%BA%E5%91%98/137679"
@@ -763,7 +781,9 @@
       "state": "法拉盛",
       "keywords_matched": [
         "餐馆",
-        "油锅"
+        "餐",
+        "油锅",
+        "抓码"
       ],
       "url": "https://niuyuegongzuo.com/flushing/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/%E6%B3%95%E6%8B%89%E7%9B%9B%E4%B8%9C%E5%8C%97%E9%A4%90%E9%A6%86%E6%8B%9B%E6%B2%B9%E9%94%85%E6%8A%93%E7%A0%81%E6%8A%80%E6%9C%AF%E4%B8%93%E5%91%98/137678"
     },
@@ -776,19 +796,33 @@
       "state": "法拉盛",
       "keywords_matched": [
         "餐馆",
-        "企台",
-        "厨师"
+        "餐",
+        "厨师",
+        "企台"
       ],
       "url": "https://niuyuegongzuo.com/flushing/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/%E6%B3%95%E6%8B%89%E7%9B%9B%E4%B8%9C%E5%8C%97%E9%A4%90%E9%A6%86-%E6%8B%9B%E5%8E%A8%E5%B8%88%E4%BC%81%E5%8F%B0/137677"
     },
     {
+      "id": "niuyuegongzuo_137672",
+      "platform": "niuyuegongzuo",
+      "title": "Elmhurst Grand Ave甜品/餃子店 (金陵超市附近）",
+      "date": "2026-05-24",
+      "region": "东部",
+      "state": "皇后区",
+      "keywords_matched": [
+        "甜品"
+      ],
+      "url": "https://niuyuegongzuo.com/queens/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/elmhurst-grand-ave%E7%94%9C%E5%93%81%E9%A4%83%E5%AD%90%E5%BA%97-%E9%87%91%E9%99%B5%E8%B6%85%E5%B8%82%E9%99%84%E8%BF%91/137672"
+    },
+    {
       "id": "niuyuegongzuo_137670",
       "platform": "niuyuegongzuo",
-      "title": "新泽西全日餐法拉盛接送35分钟请年轻打杂有空可学油锅或星期一散工一天有意请速度联系7185019299",
+      "title": "新泽西全日餐法拉盛接送35分钟请年轻打杂有空可学油锅或星期一散工一天有意请速度联系[电话]",
       "date": "2026-05-24",
       "region": "东部",
       "state": "新泽西",
       "keywords_matched": [
+        "餐",
         "日餐",
         "油锅",
         "打杂"
@@ -796,24 +830,12 @@
       "url": "https://niuyuegongzuo.com/newjersey/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/%E6%96%B0%E6%B3%BD%E8%A5%BF%E5%85%A8%E6%97%A5%E9%A4%90%E6%B3%95%E6%8B%89%E7%9B%9B%E6%8E%A5%E9%80%8135%E5%88%86%E9%92%9F%E8%AF%B7%E5%B9%B4%E8%BD%BB%E6%89%93%E6%9D%82%E6%9C%89%E7%A9%BA%E5%8F%AF%E5%AD%A6%E6%B2%B9%E9%94%85%E6%88%96%E6%98%9F%E6%9C%9F%E4%B8%80%E6%95%A3%E5%B7%A5%E4%B8%80%E5%A4%A9%E6%9C%89%E6%84%8F%E8%AF%B7%E9%80%9F%E5%BA%A6%E8%81%94%E7%B3%BB7185019299/137670"
     },
     {
-      "id": "niuyuegongzuo_137669",
-      "platform": "niuyuegongzuo",
-      "title": "法拉盛接送 新泽西富人区招人小工（全职/周末兼职）",
-      "date": "2026-05-24",
-      "region": "东部",
-      "state": "新泽西",
-      "keywords_matched": [
-        "招人"
-      ],
-      "url": "https://niuyuegongzuo.com/newjersey/%E6%8C%89%E6%91%A9%E7%BE%8E%E7%94%B2%E7%BE%8E%E5%9E%8B/%E6%B3%95%E6%8B%89%E7%9B%9B%E6%8E%A5%E9%80%81-%E6%96%B0%E6%B3%BD%E8%A5%BF%E5%AF%8C%E4%BA%BA%E5%8C%BA%E6%8B%9B%E4%BA%BA%E5%B0%8F%E5%B7%A5%E5%85%A8%E8%81%8C%E5%91%A8%E6%9C%AB%E5%85%BC%E8%81%8C/137669"
-    },
-    {
       "id": "niuyuegongzuo_137666",
       "platform": "niuyuegongzuo",
       "title": "NY~~~Bayside 急需 厨房!!!!!",
       "date": "2026-05-24",
       "region": "东部",
-      "state": "皇后区",
+      "state": "NY",
       "keywords_matched": [
         "厨房"
       ],
@@ -822,11 +844,12 @@
     {
       "id": "niuyuegongzuo_137665",
       "platform": "niuyuegongzuo",
-      "title": "上州日餐誠徵sushi chef, part time/full time，法拉盛接送，有意者請電或簡訊914-527-2993",
+      "title": "上州日餐誠徵sushi chef, part time/full time，法拉盛接送，有意者請電或簡訊[电话]",
       "date": "2026-05-24",
       "region": "东部",
-      "state": "上州",
+      "state": "法拉盛",
       "keywords_matched": [
+        "餐",
         "日餐"
       ],
       "url": "https://niuyuegongzuo.com/upstate/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/%E4%B8%8A%E5%B7%9E%E6%97%A5%E9%A4%90%E8%AA%A0%E5%BE%B5sushi-chef-part-timefull-time%E6%B3%95%E6%8B%89%E7%9B%9B%E6%8E%A5%E9%80%81%E6%9C%89%E6%84%8F%E8%80%85%E8%AB%8B%E9%9B%BB%E6%88%96%E7%B0%A1%E8%A8%8A914-527-2993/137665"
@@ -844,18 +867,6 @@
       "url": "https://niuyuegongzuo.com/flushing/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/%E6%B3%95%E6%8B%89%E7%9B%9B%E6%8E%A5%E9%80%81%E8%AF%B7pt%E5%AF%BF%E5%8F%B8%E6%8A%80%E6%9C%AF%E4%B8%93%E5%91%98%E5%92%8C%E5%8A%A9%E6%89%8B/137661"
     },
     {
-      "id": "niuyuegongzuo_137660",
-      "platform": "niuyuegongzuo",
-      "title": "甲店请人！💅💅💅",
-      "date": "2026-05-24",
-      "region": "东部",
-      "state": "上州",
-      "keywords_matched": [
-        "请人"
-      ],
-      "url": "https://niuyuegongzuo.com/upstate/%E6%8C%89%E6%91%A9%E7%BE%8E%E7%94%B2%E7%BE%8E%E5%9E%8B/%E7%94%B2%E5%BA%97%E8%AF%B7%E4%BA%BA/137660"
-    },
-    {
       "id": "niuyuegongzuo_137657",
       "platform": "niuyuegongzuo",
       "title": "中歺外卖店请前台",
@@ -863,58 +874,10 @@
       "region": "东部",
       "state": "法拉盛",
       "keywords_matched": [
-        "前台",
-        "外卖"
+        "外卖",
+        "前台"
       ],
       "url": "https://niuyuegongzuo.com/flushing/%E9%94%80%E5%94%AE%E5%8A%A9%E7%90%86%E6%96%87%E5%91%98/%E4%B8%AD%E6%AD%BA%E5%A4%96%E5%8D%96%E5%BA%97%E8%AF%B7%E5%89%8D%E5%8F%B0/137657"
-    },
-    {
-      "id": "niuyuegongzuo_137655",
-      "platform": "niuyuegongzuo",
-      "title": "头疗店请人",
-      "date": "2026-05-23",
-      "region": "东部",
-      "state": "长岛",
-      "keywords_matched": [
-        "请人"
-      ],
-      "url": "https://niuyuegongzuo.com/longisland/%E5%85%B6%E4%BB%96%E5%90%84%E7%B1%BB%E6%8B%9B%E8%81%98/%E5%A4%B4%E7%96%97%E5%BA%97%E8%AF%B7%E4%BA%BA/137655"
-    },
-    {
-      "id": "niuyuegongzuo_137654",
-      "platform": "niuyuegongzuo",
-      "title": "上州45分钟车程，富白好区甲店请人 发拉盛接送",
-      "date": "2026-05-23",
-      "region": "东部",
-      "state": "上州",
-      "keywords_matched": [
-        "请人"
-      ],
-      "url": "https://niuyuegongzuo.com/upstate/%E6%8C%89%E6%91%A9%E7%BE%8E%E7%94%B2%E7%BE%8E%E5%9E%8B/%E4%B8%8A%E5%B7%9E45%E5%88%86%E9%92%9F%E8%BD%A6%E7%A8%8B%E5%AF%8C%E7%99%BD%E5%A5%BD%E5%8C%BA%E7%94%B2%E5%BA%97%E8%AF%B7%E4%BA%BA-%E5%8F%91%E6%8B%89%E7%9B%9B%E6%8E%A5%E9%80%81/137654"
-    },
-    {
-      "id": "niuyuegongzuo_137652",
-      "platform": "niuyuegongzuo",
-      "title": "长岛38出口美甲店请人自备7人座车负责接送的美甲大中小工皆可",
-      "date": "2026-05-23",
-      "region": "东部",
-      "state": "长岛",
-      "keywords_matched": [
-        "请人"
-      ],
-      "url": "https://niuyuegongzuo.com/longisland/%E6%8C%89%E6%91%A9%E7%BE%8E%E7%94%B2%E7%BE%8E%E5%9E%8B/%E9%95%BF%E5%B2%9B38%E5%87%BA%E5%8F%A3%E7%BE%8E%E7%94%B2%E5%BA%97%E8%AF%B7%E4%BA%BA%E8%87%AA%E5%A4%877%E4%BA%BA%E5%BA%A7%E8%BD%A6%E8%B4%9F%E8%B4%A3%E6%8E%A5%E9%80%81%E7%9A%84%E7%BE%8E%E7%94%B2%E5%A4%A7%E4%B8%AD%E5%B0%8F%E5%B7%A5%E7%9A%86%E5%8F%AF/137652"
-    },
-    {
-      "id": "niuyuegongzuo_137651",
-      "platform": "niuyuegongzuo",
-      "title": "纽约上州罗切斯特白区高档甲店，高薪请人大工、小工（提成高，小费好，。 小费补到20%，画花20%提成。拔毛均有提成，",
-      "date": "2026-05-23",
-      "region": "东部",
-      "state": "上州",
-      "keywords_matched": [
-        "请人"
-      ],
-      "url": "https://niuyuegongzuo.com/upstate/%E6%8C%89%E6%91%A9%E7%BE%8E%E7%94%B2%E7%BE%8E%E5%9E%8B/%E7%BA%BD%E7%BA%A6%E4%B8%8A%E5%B7%9E%E7%BD%97%E5%88%87%E6%96%AF%E7%89%B9%E7%99%BD%E5%8C%BA%E9%AB%98%E6%A1%A3%E7%94%B2%E5%BA%97%E9%AB%98%E8%96%AA%E8%AF%B7%E4%BA%BA%E5%A4%A7%E5%B7%A5%E5%B0%8F%E5%B7%A5%E6%8F%90%E6%88%90%E9%AB%98%E5%B0%8F%E8%B4%B9%E5%A5%BD-%E5%B0%8F%E8%B4%B9%E8%A1%A5%E5%88%B020%E7%94%BB%E8%8A%B120%E6%8F%90%E6%88%90%E6%8B%94%E6%AF%9B%E5%9D%87%E6%9C%89%E6%8F%90%E6%88%90/137651"
     },
     {
       "id": "niuyuegongzuo_137649",
@@ -925,8 +888,9 @@
       "state": "法拉盛",
       "keywords_matched": [
         "餐馆",
-        "企台",
-        "炒锅"
+        "餐",
+        "炒锅",
+        "企台"
       ],
       "url": "https://niuyuegongzuo.com/flushing/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/%E9%A4%90%E9%A6%86%E8%AF%B7%E7%82%92%E9%94%85%E4%BC%81%E5%8F%B0/137649"
     },
@@ -951,6 +915,7 @@
       "region": "东部",
       "state": "布鲁克林",
       "keywords_matched": [
+        "餐",
         "招人"
       ],
       "url": "https://niuyuegongzuo.com/brooklyn/%E4%BF%9D%E5%A7%86%E5%AE%B6%E6%94%BF%E6%B8%85%E6%B4%81/williamsburg-%E5%8F%B0%E5%BC%8F%E6%97%A9%E9%A4%90%E5%BA%97-%E6%8B%9B%E4%BA%BA%E5%81%9A%E9%A5%AD%E5%9B%A2/137647"
@@ -961,9 +926,10 @@
       "title": "长岛中日餐馆请熟手炒锅 法拉盛接送",
       "date": "2026-05-23",
       "region": "东部",
-      "state": "长岛",
+      "state": "法拉盛",
       "keywords_matched": [
         "餐馆",
+        "餐",
         "日餐",
         "炒锅"
       ],
@@ -975,24 +941,12 @@
       "title": "长岛亚洲餐厅请Food Runner 法拉盛接送20分钟",
       "date": "2026-05-23",
       "region": "东部",
-      "state": "长岛",
-      "keywords_matched": [
-        "餐厅"
-      ],
-      "url": "https://niuyuegongzuo.com/longisland/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/%E9%95%BF%E5%B2%9B%E4%BA%9A%E6%B4%B2%E9%A4%90%E5%8E%85%E8%AF%B7food-runner-%E6%B3%95%E6%8B%89%E7%9B%9B%E6%8E%A5%E9%80%8120%E5%88%86%E9%92%9F/137643"
-    },
-    {
-      "id": "niuyuegongzuo_137642",
-      "platform": "niuyuegongzuo",
-      "title": "法拉盛家庭医生诊所招聘前台",
-      "date": "2026-05-23",
-      "region": "东部",
       "state": "法拉盛",
       "keywords_matched": [
-        "招聘",
-        "前台"
+        "餐厅",
+        "餐"
       ],
-      "url": "https://niuyuegongzuo.com/flushing/%E8%AF%8A%E6%89%80%E8%8D%AF%E6%88%BF/%E6%B3%95%E6%8B%89%E7%9B%9B%E5%AE%B6%E5%BA%AD%E5%8C%BB%E7%94%9F%E8%AF%8A%E6%89%80%E6%8B%9B%E8%81%98%E5%89%8D%E5%8F%B0/137642"
+      "url": "https://niuyuegongzuo.com/longisland/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/%E9%95%BF%E5%B2%9B%E4%BA%9A%E6%B4%B2%E9%A4%90%E5%8E%85%E8%AF%B7food-runner-%E6%B3%95%E6%8B%89%E7%9B%9B%E6%8E%A5%E9%80%8120%E5%88%86%E9%92%9F/137643"
     },
     {
       "id": "niuyuegongzuo_137639",
@@ -1007,17 +961,28 @@
       "url": "https://niuyuegongzuo.com/longisland/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/%E9%95%BF%E5%B2%9B%E5%AF%BF%E5%8F%B8%E5%8A%A9%E6%89%8B/137639"
     },
     {
-      "id": "niuyuegongzuo_137629",
+      "id": "niuyuegongzuo_137637",
       "platform": "niuyuegongzuo",
-      "title": "法拉盛接送 NJ半小时车程美食广场招前台收银",
+      "title": "长岛亚洲餐 法拉盛接送 需 busboy 一名有意者可短信[电话]",
       "date": "2026-05-23",
       "region": "东部",
       "state": "法拉盛",
       "keywords_matched": [
-        "前台",
-        "收银"
+        "餐"
       ],
-      "url": "https://niuyuegongzuo.com/flushing/%E9%94%80%E5%94%AE%E5%8A%A9%E7%90%86%E6%96%87%E5%91%98/%E6%B3%95%E6%8B%89%E7%9B%9B%E6%8E%A5%E9%80%81-nj%E5%8D%8A%E5%B0%8F%E6%97%B6%E8%BD%A6%E7%A8%8B%E7%BE%8E%E9%A3%9F%E5%B9%BF%E5%9C%BA%E6%8B%9B%E5%89%8D%E5%8F%B0%E6%94%B6%E9%93%B6/137629"
+      "url": "https://niuyuegongzuo.com/longisland/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/%E9%95%BF%E5%B2%9B%E4%BA%9A%E6%B4%B2%E9%A4%90-%E6%B3%95%E6%8B%89%E7%9B%9B%E6%8E%A5%E9%80%81-%E9%9C%80-busboy-%E4%B8%80%E5%90%8D%E6%9C%89%E6%84%8F%E8%80%85%E5%8F%AF%E7%9F%AD%E4%BF%A1-6462708988/137637"
+    },
+    {
+      "id": "niuyuegongzuo_137628",
+      "platform": "niuyuegongzuo",
+      "title": "长岛三菜一汤周末自驾车女分餐",
+      "date": "2026-05-23",
+      "region": "东部",
+      "state": "长岛",
+      "keywords_matched": [
+        "餐"
+      ],
+      "url": "https://niuyuegongzuo.com/longisland/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/%E9%95%BF%E5%B2%9B%E4%B8%89%E8%8F%9C%E4%B8%80%E6%B1%A4%E5%91%A8%E6%9C%AB%E8%87%AA%E9%A9%BE%E8%BD%A6%E5%A5%B3%E5%88%86%E9%A4%90/137628"
     },
     {
       "id": "niuyuegongzuo_137626",
@@ -1028,6 +993,7 @@
       "state": "曼哈顿",
       "keywords_matched": [
         "餐厅",
+        "餐",
         "招聘",
         "前台"
       ],
@@ -1036,12 +1002,13 @@
     {
       "id": "niuyuegongzuo_137623",
       "platform": "niuyuegongzuo",
-      "title": "纽约上州布法罗餐馆急聘：打杂;铁板师父  包吃住 917-306-2038",
+      "title": "纽约上州布法罗餐馆急聘：打杂;铁板师父  包吃住[电话]",
       "date": "2026-05-23",
       "region": "东部",
-      "state": "上州",
+      "state": "纽约",
       "keywords_matched": [
         "餐馆",
+        "餐",
         "打杂"
       ],
       "url": "https://niuyuegongzuo.com/upstate/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/%E7%BA%BD%E7%BA%A6%E4%B8%8A%E5%B7%9E%E5%B8%83%E6%B3%95%E7%BD%97%E9%A4%90%E9%A6%86%E6%80%A5%E8%81%98%E6%89%93%E6%9D%82%E9%93%81%E6%9D%BF%E5%B8%88%E7%88%B6-%E5%8C%85%E5%90%83%E4%BD%8F-917-306-2038/137623"
@@ -1067,6 +1034,7 @@
       "state": "法拉盛",
       "keywords_matched": [
         "餐馆",
+        "餐",
         "招聘"
       ],
       "url": "https://niuyuegongzuo.com/flushing/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/%E6%B3%95%E6%8B%89%E7%9B%9B%E6%8B%9B%E8%81%98-%E9%A4%90%E9%A6%86%E6%B0%B4%E7%94%B5%E7%BB%B4%E4%BF%AE%E5%B7%A5-%E6%9C%A8%E5%B7%A5-%E7%94%B5%E5%B7%A5-%E6%9D%82%E5%B7%A5/137621"
@@ -1074,52 +1042,15 @@
     {
       "id": "niuyuegongzuo_137619",
       "platform": "niuyuegongzuo",
-      "title": "长岛火锅店请熟手企台。法拉盛接送。718-207-7153。广告勿扰，谢谢",
+      "title": "长岛火锅店请熟手企台。法拉盛接送。[电话]。广告勿扰，谢谢",
       "date": "2026-05-23",
       "region": "东部",
-      "state": "长岛",
+      "state": "法拉盛",
       "keywords_matched": [
         "火锅",
         "企台"
       ],
       "url": "https://niuyuegongzuo.com/longisland/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/%E9%95%BF%E5%B2%9B%E7%81%AB%E9%94%85%E5%BA%97%E8%AF%B7%E7%86%9F%E6%89%8B%E4%BC%81%E5%8F%B0%E6%B3%95%E6%8B%89%E7%9B%9B%E6%8E%A5%E9%80%81718-207-7153%E5%B9%BF%E5%91%8A%E5%8B%BF%E6%89%B0%E8%B0%A2%E8%B0%A2/137619"
-    },
-    {
-      "id": "niuyuegongzuo_75190",
-      "platform": "niuyuegongzuo",
-      "title": "法拉盛皮肤科招聘有经验前台",
-      "date": "2026-05-23",
-      "region": "东部",
-      "state": "法拉盛",
-      "keywords_matched": [
-        "招聘",
-        "前台"
-      ],
-      "url": "https://niuyuegongzuo.com/flushing/%E8%AF%8A%E6%89%80%E8%8D%AF%E6%88%BF/%E6%B3%95%E6%8B%89%E7%9B%9B%E7%9A%AE%E8%82%A4%E7%A7%91%E6%8B%9B%E8%81%98%E6%9C%89%E7%BB%8F%E9%AA%8C%E5%89%8D%E5%8F%B0/75190"
-    },
-    {
-      "id": "niuyuegongzuo_137613",
-      "platform": "niuyuegongzuo",
-      "title": "纽约上州 Albany白区美甲店招聘，距离法拉盛3小时",
-      "date": "2026-05-22",
-      "region": "东部",
-      "state": "上州",
-      "keywords_matched": [
-        "招聘"
-      ],
-      "url": "https://niuyuegongzuo.com/upstate/%E6%8C%89%E6%91%A9%E7%BE%8E%E7%94%B2%E7%BE%8E%E5%9E%8B/%E7%BA%BD%E7%BA%A6%E4%B8%8A%E5%B7%9E-albany%E7%99%BD%E5%8C%BA%E7%BE%8E%E7%94%B2%E5%BA%97%E6%8B%9B%E8%81%98%E8%B7%9D%E7%A6%BB%E6%B3%95%E6%8B%89%E7%9B%9B3%E5%B0%8F%E6%97%B6/137613"
-    },
-    {
-      "id": "niuyuegongzuo_137611",
-      "platform": "niuyuegongzuo",
-      "title": "长𡷊按摩请人",
-      "date": "2026-05-22",
-      "region": "东部",
-      "state": "长岛",
-      "keywords_matched": [
-        "请人"
-      ],
-      "url": "https://niuyuegongzuo.com/longisland/%E6%8C%89%E6%91%A9%E7%BE%8E%E7%94%B2%E7%BE%8E%E5%9E%8B/%E9%95%BF%F0%A1%B7%8A%E6%8C%89%E6%91%A9%E8%AF%B7%E4%BA%BA/137611"
     },
     {
       "id": "niuyuegongzuo_137607",
@@ -1137,39 +1068,17 @@
     {
       "id": "niuyuegongzuo_137606",
       "platform": "niuyuegongzuo",
-      "title": "长岛中餐堂吃店请星期五和星期六厨房打杂，法拉盛接送,  有意请速度联系9172080079",
+      "title": "长岛中餐堂吃店请星期五和星期六厨房打杂，法拉盛接送,  有意请速度联系[电话]",
       "date": "2026-05-22",
       "region": "东部",
-      "state": "长岛",
+      "state": "法拉盛",
       "keywords_matched": [
+        "餐",
+        "中餐",
         "厨房",
         "打杂"
       ],
       "url": "https://niuyuegongzuo.com/longisland/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/%E9%95%BF%E5%B2%9B%E4%B8%AD%E9%A4%90%E5%A0%82%E5%90%83%E5%BA%97%E8%AF%B7%E6%98%9F%E6%9C%9F%E4%BA%94%E5%92%8C%E6%98%9F%E6%9C%9F%E5%85%AD%E5%8E%A8%E6%88%BF%E6%89%93%E6%9D%82%E6%B3%95%E6%8B%89%E7%9B%9B%E6%8E%A5%E9%80%81-%E6%9C%89%E6%84%8F%E8%AF%B7%E9%80%9F%E5%BA%A6%E8%81%94%E7%B3%BB9172080079/137606"
-    },
-    {
-      "id": "niuyuegongzuo_137602",
-      "platform": "niuyuegongzuo",
-      "title": "布鲁克林窗厂招人人!！！！",
-      "date": "2026-05-22",
-      "region": "东部",
-      "state": "布鲁克林",
-      "keywords_matched": [
-        "招人"
-      ],
-      "url": "https://niuyuegongzuo.com/brooklyn/%E5%85%B6%E4%BB%96%E5%90%84%E7%B1%BB%E6%8B%9B%E8%81%98/%E5%B8%83%E9%B2%81%E5%85%8B%E6%9E%97%E7%AA%97%E5%8E%82%E6%8B%9B%E4%BA%BA%E4%BA%BA/137602"
-    },
-    {
-      "id": "niuyuegongzuo_137601",
-      "platform": "niuyuegongzuo",
-      "title": "曼哈顿针灸诊所招人针灸医师",
-      "date": "2026-05-22",
-      "region": "东部",
-      "state": "曼哈顿",
-      "keywords_matched": [
-        "招人"
-      ],
-      "url": "https://niuyuegongzuo.com/manhattan/%E8%AF%8A%E6%89%80%E8%8D%AF%E6%88%BF/%E6%9B%BC%E5%93%88%E9%A1%BF%E9%92%88%E7%81%B8%E8%AF%8A%E6%89%80%E6%8B%9B%E4%BA%BA%E9%92%88%E7%81%B8%E5%8C%BB%E5%B8%88/137601"
     },
     {
       "id": "niuyuegongzuo_137593",
@@ -1184,54 +1093,6 @@
       "url": "https://niuyuegongzuo.com/queens/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/%E7%9A%87%E5%90%8E%E5%8C%BA%E8%AF%B7%E7%82%B9%E5%BF%83%E5%B8%88%E5%82%85/137593"
     },
     {
-      "id": "niuyuegongzuo_137592",
-      "platform": "niuyuegongzuo",
-      "title": "紐約皇后區（法拉盛）招聘 POS 刷卡機 & 電腦產品銷售人員",
-      "date": "2026-05-22",
-      "region": "东部",
-      "state": "法拉盛",
-      "keywords_matched": [
-        "招聘"
-      ],
-      "url": "https://niuyuegongzuo.com/flushing/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/%E7%B4%90%E7%B4%84%E7%9A%87%E5%90%8E%E5%8D%80%E6%B3%95%E6%8B%89%E7%9B%9B%E6%8B%9B%E8%81%98-pos-%E5%88%B7%E5%8D%A1%E6%A9%9F-%E9%9B%BB%E8%85%A6%E7%94%A2%E5%93%81%E9%8A%B7%E5%94%AE%E4%BA%BA%E5%93%A1/137592"
-    },
-    {
-      "id": "niuyuegongzuo_137591",
-      "platform": "niuyuegongzuo",
-      "title": "新泽西 大型新开甲店请人",
-      "date": "2026-05-22",
-      "region": "东部",
-      "state": "新泽西",
-      "keywords_matched": [
-        "请人"
-      ],
-      "url": "https://niuyuegongzuo.com/newjersey/%E6%8C%89%E6%91%A9%E7%BE%8E%E7%94%B2%E7%BE%8E%E5%9E%8B/%E6%96%B0%E6%B3%BD%E8%A5%BF-%E5%A4%A7%E5%9E%8B%E6%96%B0%E5%BC%80%E7%94%B2%E5%BA%97%E8%AF%B7%E4%BA%BA/137591"
-    },
-    {
-      "id": "niuyuegongzuo_137588",
-      "platform": "niuyuegongzuo",
-      "title": "纽约废金属回收企业招人-仓库运营经理\n助理",
-      "date": "2026-05-22",
-      "region": "东部",
-      "state": "皇后区",
-      "keywords_matched": [
-        "招人"
-      ],
-      "url": "https://niuyuegongzuo.com/queens/%E9%94%80%E5%94%AE%E5%8A%A9%E7%90%86%E6%96%87%E5%91%98/%E7%BA%BD%E7%BA%A6%E5%BA%9F%E9%87%91%E5%B1%9E%E5%9B%9E%E6%94%B6%E4%BC%81%E4%B8%9A%E6%8B%9B%E4%BA%BA-%E4%BB%93%E5%BA%93%E8%BF%90%E8%90%A5%E7%BB%8F%E7%90%86-%E5%8A%A9%E7%90%86/137588"
-    },
-    {
-      "id": "niuyuegongzuo_137584",
-      "platform": "niuyuegongzuo",
-      "title": "法拉盛公寓请人",
-      "date": "2026-05-22",
-      "region": "东部",
-      "state": "法拉盛",
-      "keywords_matched": [
-        "请人"
-      ],
-      "url": "https://niuyuegongzuo.com/flushing/%E5%B7%A5%E5%9C%B0%E8%A3%85%E4%BF%AE%E5%BB%BA%E7%AD%91/%E6%B3%95%E6%8B%89%E7%9B%9B%E5%85%AC%E5%AF%93%E8%AF%B7%E4%BA%BA/137584"
-    },
-    {
       "id": "niuyuegongzuo_137571",
       "platform": "niuyuegongzuo",
       "title": "曼哈顿中餐馆请熟手超过一名",
@@ -1239,7 +1100,9 @@
       "region": "东部",
       "state": "曼哈顿",
       "keywords_matched": [
-        "餐馆"
+        "餐馆",
+        "餐",
+        "中餐"
       ],
       "url": "https://niuyuegongzuo.com/manhattan/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/%E6%9B%BC%E5%93%88%E9%A1%BF%E4%B8%AD%E9%A4%90%E9%A6%86%E8%AF%B7%E7%86%9F%E6%89%8B%E8%B6%85%E8%BF%87%E4%B8%80%E5%90%8D/137571"
     },
@@ -1251,6 +1114,7 @@
       "region": "东部",
       "state": "法拉盛",
       "keywords_matched": [
+        "烧烤",
         "炒锅"
       ],
       "url": "https://niuyuegongzuo.com/flushing/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/%E6%B3%95%E6%8B%89%E7%9B%9B%E7%83%A7%E7%83%A4%E5%BA%97%E8%AF%B7%E7%82%92%E9%94%85/137570"
@@ -1258,12 +1122,13 @@
     {
       "id": "niuyuegongzuo_137569",
       "platform": "niuyuegongzuo",
-      "title": "新泽西餐厅请人！☎️646-306-5159",
+      "title": "新泽西餐厅请人！☎️[电话]",
       "date": "2026-05-22",
       "region": "东部",
       "state": "新泽西",
       "keywords_matched": [
         "餐厅",
+        "餐",
         "请人"
       ],
       "url": "https://niuyuegongzuo.com/newjersey/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/%E6%96%B0%E6%B3%BD%E8%A5%BF%E9%A4%90%E5%8E%85%E8%AF%B7%E4%BA%BA646-306-5159/137569"
@@ -1271,10 +1136,10 @@
     {
       "id": "niuyuegongzuo_137568",
       "platform": "niuyuegongzuo",
-      "title": "法拉盛长岛接送请熟手teriyaki专业师傅 周1100 电话3476548234",
+      "title": "法拉盛长岛接送请熟手teriyaki专业师傅 周1100 电话[电话]",
       "date": "2026-05-22",
       "region": "东部",
-      "state": "长岛",
+      "state": "法拉盛",
       "keywords_matched": [
         "师傅"
       ],
@@ -1283,13 +1148,13 @@
     {
       "id": "niuyuegongzuo_137567",
       "platform": "niuyuegongzuo",
-      "title": "长岛布菲店高薪招聘炒锅师父• 要求：熟手，有经验，做事认真，法拉盛接送也可入住, 待遇远高于市场行情，诚意满满（面议） 有能力的来，绝对不会让你失望 电话：3473996080",
+      "title": "长岛布菲店高薪招聘炒锅师父• 要求：熟手，有经验，做事认真，法拉盛接送也可入住, 待遇远高于市场行情，诚意满满（面议） 有能力的来，绝对不会让你失望 电话：[电话]",
       "date": "2026-05-22",
       "region": "东部",
-      "state": "长岛",
+      "state": "法拉盛",
       "keywords_matched": [
-        "招聘",
-        "炒锅"
+        "炒锅",
+        "招聘"
       ],
       "url": "https://niuyuegongzuo.com/longisland/%E9%94%80%E5%94%AE%E5%8A%A9%E7%90%86%E6%96%87%E5%91%98/%E9%95%BF%E5%B2%9B%E5%B8%83%E8%8F%B2%E5%BA%97%E9%AB%98%E8%96%AA%E6%8B%9B%E8%81%98%E7%82%92%E9%94%85%E5%B8%88%E7%88%B6-%E8%A6%81%E6%B1%82%E7%86%9F%E6%89%8B%E6%9C%89%E7%BB%8F%E9%AA%8C%E5%81%9A%E4%BA%8B%E8%AE%A4%E7%9C%9F%E6%B3%95%E6%8B%89%E7%9B%9B%E6%8E%A5%E9%80%81%E4%B9%9F%E5%8F%AF%E5%85%A5%E4%BD%8F-%E5%BE%85%E9%81%87%E8%BF%9C%E9%AB%98%E4%BA%8E%E5%B8%82%E5%9C%BA%E8%A1%8C%E6%83%85%E8%AF%9A%E6%84%8F%E6%BB%A1%E6%BB%A1%E9%9D%A2%E8%AE%AE-%E6%9C%89%E8%83%BD%E5%8A%9B%E7%9A%84%E6%9D%A5%E7%BB%9D%E5%AF%B9%E4%B8%8D%E4%BC%9A%E8%AE%A9%E4%BD%A0%E5%A4%B1%E6%9C%9B-%E7%94%B5%E8%AF%9D3473996080/137567"
     },
@@ -1301,8 +1166,10 @@
       "region": "东部",
       "state": "法拉盛",
       "keywords_matched": [
-        "前台",
-        "外卖"
+        "餐",
+        "中餐",
+        "外卖",
+        "前台"
       ],
       "url": "https://niuyuegongzuo.com/flushing/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/%E4%B8%AD%E9%A4%90%E5%A4%96%E5%8D%96%E5%BA%97%E5%89%8D%E5%8F%B0%E6%8E%A5%E7%94%B5%E8%AF%9D-%E4%B8%AD%E9%A4%90%E5%A4%96%E5%8D%96%E5%BA%97%E5%89%8D%E5%8F%B0%E6%8E%A5%E7%94%B5%E8%AF%9D/137561"
     },
@@ -1319,90 +1186,6 @@
       "url": "https://niuyuegongzuo.com/flushing/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/%E8%AF%B7%E5%AF%BF%E5%8F%B8%E5%8A%A9%E6%89%8B%E6%88%96%E5%AD%A6%E5%BE%92-%E6%B3%95%E6%8B%89%E7%9B%9B%E6%8E%A5%E9%80%81/137560"
     },
     {
-      "id": "niuyuegongzuo_136725",
-      "platform": "niuyuegongzuo",
-      "title": "医疗器材请全职前台/管理全职文员(Elmhurst 艾姆赫斯特)",
-      "date": "2026-05-22",
-      "region": "东部",
-      "state": "皇后区",
-      "keywords_matched": [
-        "前台"
-      ],
-      "url": "https://niuyuegongzuo.com/queens/%E8%AF%8A%E6%89%80%E8%8D%AF%E6%88%BF/%E5%8C%BB%E7%96%97%E5%99%A8%E6%9D%90%E8%AF%B7%E5%85%A8%E8%81%8C%E5%89%8D%E5%8F%B0%E7%AE%A1%E7%90%86%E5%85%A8%E8%81%8C%E6%96%87%E5%91%98elmhurst-%E8%89%BE%E5%A7%86%E8%B5%AB%E6%96%AF%E7%89%B9/136725"
-    },
-    {
-      "id": "niuyuegongzuo_137559",
-      "platform": "niuyuegongzuo",
-      "title": "法拉盛诊所诚聘按摩师; 前台和诊所助理; 欢迎大学生  电话 9178588570 预约面试",
-      "date": "2026-05-22",
-      "region": "东部",
-      "state": "法拉盛",
-      "keywords_matched": [
-        "前台"
-      ],
-      "url": "https://niuyuegongzuo.com/flushing/%E6%8C%89%E6%91%A9%E7%BE%8E%E7%94%B2%E7%BE%8E%E5%9E%8B/%E6%B3%95%E6%8B%89%E7%9B%9B%E8%AF%8A%E6%89%80%E8%AF%9A%E8%81%98%E6%8C%89%E6%91%A9%E5%B8%88-%E5%89%8D%E5%8F%B0%E5%92%8C%E8%AF%8A%E6%89%80%E5%8A%A9%E7%90%86-%E6%AC%A2%E8%BF%8E%E5%A4%A7%E5%AD%A6%E7%94%9F-%E7%94%B5%E8%AF%9D-9178588570-%E9%A2%84%E7%BA%A6%E9%9D%A2%E8%AF%95/137559"
-    },
-    {
-      "id": "niuyuegongzuo_90538",
-      "platform": "niuyuegongzuo",
-      "title": "招聘电商运营人员",
-      "date": "2026-05-22",
-      "region": "东部",
-      "state": "布鲁克林",
-      "keywords_matched": [
-        "招聘"
-      ],
-      "url": "https://niuyuegongzuo.com/brooklyn/%E9%94%80%E5%94%AE%E5%8A%A9%E7%90%86%E6%96%87%E5%91%98/%E6%8B%9B%E8%81%98%E7%94%B5%E5%95%86%E8%BF%90%E8%90%A5%E4%BA%BA%E5%91%98/90538"
-    },
-    {
-      "id": "niuyuegongzuo_137557",
-      "platform": "niuyuegongzuo",
-      "title": "长岛请人打印机操作技工",
-      "date": "2026-05-22",
-      "region": "东部",
-      "state": "长岛",
-      "keywords_matched": [
-        "请人"
-      ],
-      "url": "https://niuyuegongzuo.com/longisland/%E5%85%B6%E4%BB%96%E5%90%84%E7%B1%BB%E6%8B%9B%E8%81%98/%E9%95%BF%E5%B2%9B%E8%AF%B7%E4%BA%BA%E6%89%93%E5%8D%B0%E6%9C%BA%E6%93%8D%E4%BD%9C%E6%8A%80%E5%B7%A5/137557"
-    },
-    {
-      "id": "niuyuegongzuo_137552",
-      "platform": "niuyuegongzuo",
-      "title": "法拉盛皮肤科诊所急聘有经验前台",
-      "date": "2026-05-22",
-      "region": "东部",
-      "state": "法拉盛",
-      "keywords_matched": [
-        "前台"
-      ],
-      "url": "https://niuyuegongzuo.com/flushing/%E8%AF%8A%E6%89%80%E8%8D%AF%E6%88%BF/%E6%B3%95%E6%8B%89%E7%9B%9B%E7%9A%AE%E8%82%A4%E7%A7%91%E8%AF%8A%E6%89%80%E6%80%A5%E8%81%98%E6%9C%89%E7%BB%8F%E9%AA%8C%E5%89%8D%E5%8F%B0/137552"
-    },
-    {
-      "id": "niuyuegongzuo_137545",
-      "platform": "niuyuegongzuo",
-      "title": "🔥🔥🔥上州近法拉盛甲店招聘全能大工小工数名！",
-      "date": "2026-05-22",
-      "region": "东部",
-      "state": "上州",
-      "keywords_matched": [
-        "招聘"
-      ],
-      "url": "https://niuyuegongzuo.com/upstate/%E6%8C%89%E6%91%A9%E7%BE%8E%E7%94%B2%E7%BE%8E%E5%9E%8B/%E4%B8%8A%E5%B7%9E%E8%BF%91%E6%B3%95%E6%8B%89%E7%9B%9B%E7%94%B2%E5%BA%97%E6%8B%9B%E8%81%98%E5%85%A8%E8%83%BD%E5%A4%A7%E5%B7%A5%E5%B0%8F%E5%B7%A5%E6%95%B0%E5%90%8D/137545"
-    },
-    {
-      "id": "niuyuegongzuo_137543",
-      "platform": "niuyuegongzuo",
-      "title": "上州罗切斯特请人",
-      "date": "2026-05-22",
-      "region": "东部",
-      "state": "上州",
-      "keywords_matched": [
-        "请人"
-      ],
-      "url": "https://niuyuegongzuo.com/upstate/%E6%8C%89%E6%91%A9%E7%BE%8E%E7%94%B2%E7%BE%8E%E5%9E%8B/%E4%B8%8A%E5%B7%9E%E7%BD%97%E5%88%87%E6%96%AF%E7%89%B9%E8%AF%B7%E4%BA%BA/137543"
-    },
-    {
       "id": "niuyuegongzuo_137541",
       "platform": "niuyuegongzuo",
       "title": "长岛38 出口 日餐拉面 请企台.30+/小时",
@@ -1410,22 +1193,11 @@
       "region": "东部",
       "state": "长岛",
       "keywords_matched": [
+        "餐",
         "日餐",
         "企台"
       ],
       "url": "https://niuyuegongzuo.com/longisland/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/%E9%95%BF%E5%B2%9B38-%E5%87%BA%E5%8F%A3-%E6%97%A5%E9%A4%90%E6%8B%89%E9%9D%A2-%E8%AF%B7%E4%BC%81%E5%8F%B030%E5%B0%8F%E6%97%B6/137541"
-    },
-    {
-      "id": "niuyuegongzuo_137540",
-      "platform": "niuyuegongzuo",
-      "title": "☎️☎️☎️☎️新泽西正规店招聘男按摩师",
-      "date": "2026-05-21",
-      "region": "东部",
-      "state": "新泽西",
-      "keywords_matched": [
-        "招聘"
-      ],
-      "url": "https://niuyuegongzuo.com/newjersey/%E6%8C%89%E6%91%A9%E7%BE%8E%E7%94%B2%E7%BE%8E%E5%9E%8B/%E6%96%B0%E6%B3%BD%E8%A5%BF%E6%AD%A3%E8%A7%84%E5%BA%97%E6%8B%9B%E8%81%98%E7%94%B7%E6%8C%89%E6%91%A9%E5%B8%88/137540"
     },
     {
       "id": "niuyuegongzuo_137537",
@@ -1435,6 +1207,7 @@
       "region": "东部",
       "state": "长岛",
       "keywords_matched": [
+        "餐",
         "日餐",
         "厨房",
         "师傅"
@@ -1461,8 +1234,8 @@
       "region": "东部",
       "state": "新泽西",
       "keywords_matched": [
-        "厨房",
         "油锅",
+        "厨房",
         "师傅"
       ],
       "url": "https://niuyuegongzuo.com/newjersey/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/%E6%96%B0%E6%B3%BD%E8%A5%BF%E6%8B%89%E9%9D%A2%E5%BA%97%E8%AF%B7%E5%8E%A8%E6%88%BF%E6%B2%B9%E9%94%85%E7%85%AE%E9%9D%A2%E4%B8%93%E4%B8%9A%E5%B8%88%E5%82%85/137531"
@@ -1475,33 +1248,10 @@
       "region": "东部",
       "state": "皇后区",
       "keywords_matched": [
+        "餐",
         "打包"
       ],
       "url": "https://niuyuegongzuo.com/queens/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/%E8%BF%9E%E9%94%81%E5%BF%AB%E9%A4%90%E7%B1%B3%E7%B2%89%E5%BA%97%E6%8B%9B%E5%87%89%E8%8F%9C%E6%89%93%E5%8C%85/135759"
-    },
-    {
-      "id": "niuyuegongzuo_137528",
-      "platform": "niuyuegongzuo",
-      "title": "法拉盛北方大道超市招聘肉部員工",
-      "date": "2026-05-21",
-      "region": "东部",
-      "state": "法拉盛",
-      "keywords_matched": [
-        "招聘"
-      ],
-      "url": "https://niuyuegongzuo.com/flushing/%E5%85%B6%E4%BB%96%E5%90%84%E7%B1%BB%E6%8B%9B%E8%81%98/%E6%B3%95%E6%8B%89%E7%9B%9B%E5%8C%97%E6%96%B9%E5%A4%A7%E9%81%93%E8%B6%85%E5%B8%82%E6%8B%9B%E8%81%98%E8%82%89%E9%83%A8%E5%93%A1%E5%B7%A5/137528"
-    },
-    {
-      "id": "niuyuegongzuo_137527",
-      "platform": "niuyuegongzuo",
-      "title": "新泽西纯正规床、脚忙店请人女按摩师full time 或part time （需有工卡），50岁以下，5年以上认真工好大力。（6000左右）法拉盛接送30分钟。☎️201-515-9451",
-      "date": "2026-05-21",
-      "region": "东部",
-      "state": "新泽西",
-      "keywords_matched": [
-        "请人"
-      ],
-      "url": "https://niuyuegongzuo.com/newjersey/%E6%8C%89%E6%91%A9%E7%BE%8E%E7%94%B2%E7%BE%8E%E5%9E%8B/%E6%96%B0%E6%B3%BD%E8%A5%BF%E7%BA%AF%E6%AD%A3%E8%A7%84%E5%BA%8A%E8%84%9A%E5%BF%99%E5%BA%97%E8%AF%B7%E4%BA%BA%E5%A5%B3%E6%8C%89%E6%91%A9%E5%B8%88full-time-%E6%88%96part-time-%E9%9C%80%E6%9C%89%E5%B7%A5%E5%8D%A150%E5%B2%81%E4%BB%A5%E4%B8%8B5%E5%B9%B4%E4%BB%A5%E4%B8%8A%E8%AE%A4%E7%9C%9F%E5%B7%A5%E5%A5%BD%E5%A4%A7%E5%8A%9B6000%E5%B7%A6%E5%8F%B3%E6%B3%95%E6%8B%89%E7%9B%9B%E6%8E%A5%E9%80%8130%E5%88%86%E9%92%9F201-515-9451/137527"
     },
     {
       "id": "niuyuegongzuo_137518",
@@ -1528,93 +1278,23 @@
       "url": "https://niuyuegongzuo.com/newjersey/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/%E6%96%B0%E6%B3%BD%E8%A5%BF%E8%AF%B7parttime%E4%BC%81%E5%8F%B0/137516"
     },
     {
-      "id": "niuyuegongzuo_137514",
-      "platform": "niuyuegongzuo",
-      "title": "超市請人",
-      "date": "2026-05-21",
-      "region": "东部",
-      "state": "皇后区",
-      "keywords_matched": [
-        "請人"
-      ],
-      "url": "https://niuyuegongzuo.com/queens/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/%E8%B6%85%E5%B8%82%E8%AB%8B%E4%BA%BA/137514"
-    },
-    {
       "id": "niuyuegongzuo_137508",
       "platform": "niuyuegongzuo",
       "title": "熊猫外卖招 皇后、布鲁克林、曼哈顿 送餐员",
       "date": "2026-05-21",
       "region": "东部",
-      "state": "曼哈顿",
+      "state": "布鲁克林",
       "keywords_matched": [
-        "外卖"
+        "餐",
+        "外卖",
+        "送餐"
       ],
       "url": "https://niuyuegongzuo.com/manhattan/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/%E7%86%8A%E7%8C%AB%E5%A4%96%E5%8D%96%E6%8B%9B-%E7%9A%87%E5%90%8E%E5%B8%83%E9%B2%81%E5%85%8B%E6%9E%97%E6%9B%BC%E5%93%88%E9%A1%BF-%E9%80%81%E9%A4%90%E5%91%98/137508"
     },
     {
-      "id": "niuyuegongzuo_137507",
-      "platform": "niuyuegongzuo",
-      "title": "悟空公司招聘送快递司机",
-      "date": "2026-05-21",
-      "region": "东部",
-      "state": "长岛",
-      "keywords_matched": [
-        "招聘"
-      ],
-      "url": "https://niuyuegongzuo.com/longisland/%E4%BB%93%E5%BA%93%E7%89%A9%E6%B5%81%E5%8F%B8%E6%9C%BA/%E6%82%9F%E7%A9%BA%E5%85%AC%E5%8F%B8%E6%8B%9B%E8%81%98%E9%80%81%E5%BF%AB%E9%80%92%E5%8F%B8%E6%9C%BA/137507"
-    },
-    {
-      "id": "niuyuegongzuo_137505",
-      "platform": "niuyuegongzuo",
-      "title": "请人：仓库主管及经理 高薪＋福利优厚",
-      "date": "2026-05-21",
-      "region": "东部",
-      "state": "新泽西",
-      "keywords_matched": [
-        "请人"
-      ],
-      "url": "https://niuyuegongzuo.com/newjersey/%E4%BB%93%E5%BA%93%E7%89%A9%E6%B5%81%E5%8F%B8%E6%9C%BA/%E8%AF%B7%E4%BA%BA%E4%BB%93%E5%BA%93%E4%B8%BB%E7%AE%A1%E5%8F%8A%E7%BB%8F%E7%90%86-%E9%AB%98%E8%96%AA%E7%A6%8F%E5%88%A9%E4%BC%98%E5%8E%9A/137505"
-    },
-    {
-      "id": "niuyuegongzuo_137504",
-      "platform": "niuyuegongzuo",
-      "title": "王牌电器请人 9176811751",
-      "date": "2026-05-21",
-      "region": "东部",
-      "state": "法拉盛",
-      "keywords_matched": [
-        "请人"
-      ],
-      "url": "https://niuyuegongzuo.com/flushing/%E5%85%B6%E4%BB%96%E5%90%84%E7%B1%BB%E6%8B%9B%E8%81%98/%E7%8E%8B%E7%89%8C%E7%94%B5%E5%99%A8%E8%AF%B7%E4%BA%BA-9176811751/137504"
-    },
-    {
-      "id": "niuyuegongzuo_137503",
-      "platform": "niuyuegongzuo",
-      "title": "长岛53出口食品工厂高薪请人",
-      "date": "2026-05-21",
-      "region": "东部",
-      "state": "长岛",
-      "keywords_matched": [
-        "请人"
-      ],
-      "url": "https://niuyuegongzuo.com/longisland/%E4%BB%93%E5%BA%93%E7%89%A9%E6%B5%81%E5%8F%B8%E6%9C%BA/%E9%95%BF%E5%B2%9B53%E5%87%BA%E5%8F%A3%E9%A3%9F%E5%93%81%E5%B7%A5%E5%8E%82%E9%AB%98%E8%96%AA%E8%AF%B7%E4%BA%BA/137503"
-    },
-    {
-      "id": "niuyuegongzuo_137502",
-      "platform": "niuyuegongzuo",
-      "title": "******法拉盛新世界老妈麻辣烫请前台，店里电话718-358-2339 Sunny******",
-      "date": "2026-05-21",
-      "region": "东部",
-      "state": "法拉盛",
-      "keywords_matched": [
-        "前台"
-      ],
-      "url": "https://niuyuegongzuo.com/flushing/%E9%94%80%E5%94%AE%E5%8A%A9%E7%90%86%E6%96%87%E5%91%98/%E6%B3%95%E6%8B%89%E7%9B%9B%E6%96%B0%E4%B8%96%E7%95%8C%E8%80%81%E5%A6%88%E9%BA%BB%E8%BE%A3%E7%83%AB%E8%AF%B7%E5%89%8D%E5%8F%B0%E5%BA%97%E9%87%8C%E7%94%B5%E8%AF%9D718-358-2339-sunny/137502"
-    },
-    {
       "id": "niuyuegongzuo_137497",
       "platform": "niuyuegongzuo",
-      "title": "请寿司师傅/助手 周56 两天PT 法拉盛接送 9176698116",
+      "title": "请寿司师傅/助手 周56 两天PT 法拉盛接送[电话]",
       "date": "2026-05-21",
       "region": "东部",
       "state": "法拉盛",
@@ -1633,6 +1313,7 @@
       "state": "法拉盛",
       "keywords_matched": [
         "餐館",
+        "餐",
         "請人"
       ],
       "url": "https://niuyuegongzuo.com/flushing/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/%E9%95%B7%E5%B3%B6%E9%A4%90%E9%A4%A8%E8%AB%8B%E4%BA%BA/137496"
@@ -1655,7 +1336,7 @@
       "title": "长岛大颈请厨房打杂法拉盛接送",
       "date": "2026-05-21",
       "region": "东部",
-      "state": "长岛",
+      "state": "法拉盛",
       "keywords_matched": [
         "厨房",
         "打杂"
@@ -1668,143 +1349,11 @@
       "title": "法拉盛接送请熟手女打包",
       "date": "2026-05-21",
       "region": "东部",
-      "state": "新泽西",
+      "state": "法拉盛",
       "keywords_matched": [
         "打包"
       ],
       "url": "https://niuyuegongzuo.com/newjersey/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/%E6%B3%95%E6%8B%89%E7%9B%9B%E6%8E%A5%E9%80%81%E8%AF%B7%E7%86%9F%E6%89%8B%E5%A5%B3%E6%89%93%E5%8C%85/137492"
-    },
-    {
-      "id": "niuyuegongzuo_137487",
-      "platform": "niuyuegongzuo",
-      "title": "Brooklyn 会计师楼 招聘-",
-      "date": "2026-05-21",
-      "region": "东部",
-      "state": "布鲁克林",
-      "keywords_matched": [
-        "招聘"
-      ],
-      "url": "https://niuyuegongzuo.com/brooklyn/%E5%85%B6%E4%BB%96%E5%90%84%E7%B1%BB%E6%8B%9B%E8%81%98/brooklyn-%E4%BC%9A%E8%AE%A1%E5%B8%88%E6%A5%BC-%E6%8B%9B%E8%81%98/137487"
-    },
-    {
-      "id": "niuyuegongzuo_137480",
-      "platform": "niuyuegongzuo",
-      "title": "法拉盛老人活动中心诚聘：全职/兼职的前台/文员",
-      "date": "2026-05-21",
-      "region": "东部",
-      "state": "法拉盛",
-      "keywords_matched": [
-        "前台"
-      ],
-      "url": "https://niuyuegongzuo.com/flushing/%E8%AF%8A%E6%89%80%E8%8D%AF%E6%88%BF/%E6%B3%95%E6%8B%89%E7%9B%9B%E8%80%81%E4%BA%BA%E6%B4%BB%E5%8A%A8%E4%B8%AD%E5%BF%83%E8%AF%9A%E8%81%98%E5%85%A8%E8%81%8C%E5%85%BC%E8%81%8C%E7%9A%84%E5%89%8D%E5%8F%B0%E6%96%87%E5%91%98/137480"
-    },
-    {
-      "id": "niuyuegongzuo_137479",
-      "platform": "niuyuegongzuo",
-      "title": "请人办公室文员,全职",
-      "date": "2026-05-21",
-      "region": "东部",
-      "state": "曼哈顿",
-      "keywords_matched": [
-        "请人"
-      ],
-      "url": "https://niuyuegongzuo.com/manhattan/%E9%94%80%E5%94%AE%E5%8A%A9%E7%90%86%E6%96%87%E5%91%98/%E8%AF%B7%E4%BA%BA%E5%8A%9E%E5%85%AC%E5%AE%A4%E6%96%87%E5%91%98%E5%85%A8%E8%81%8C/137479"
-    },
-    {
-      "id": "niuyuegongzuo_137478",
-      "platform": "niuyuegongzuo",
-      "title": "招聘 护理员（PCA/HHA）（中文优先） 时薪 $22/小时",
-      "date": "2026-05-21",
-      "region": "东部",
-      "state": "法拉盛",
-      "keywords_matched": [
-        "招聘"
-      ],
-      "url": "https://niuyuegongzuo.com/flushing/%E9%94%80%E5%94%AE%E5%8A%A9%E7%90%86%E6%96%87%E5%91%98/%E6%8B%9B%E8%81%98-%E6%8A%A4%E7%90%86%E5%91%98pcahha%E4%B8%AD%E6%96%87%E4%BC%98%E5%85%88-%E6%97%B6%E8%96%AA-22%E5%B0%8F%E6%97%B6/137478"
-    },
-    {
-      "id": "niuyuegongzuo_137474",
-      "platform": "niuyuegongzuo",
-      "title": "音乐学校招人 传单派发员工",
-      "date": "2026-05-21",
-      "region": "东部",
-      "state": "法拉盛",
-      "keywords_matched": [
-        "招人"
-      ],
-      "url": "https://niuyuegongzuo.com/flushing/%E5%85%B6%E4%BB%96%E5%90%84%E7%B1%BB%E6%8B%9B%E8%81%98/%E9%9F%B3%E4%B9%90%E5%AD%A6%E6%A0%A1%E6%8B%9B%E4%BA%BA-%E4%BC%A0%E5%8D%95%E6%B4%BE%E5%8F%91%E5%91%98%E5%B7%A5/137474"
-    },
-    {
-      "id": "niuyuegongzuo_137473",
-      "platform": "niuyuegongzuo",
-      "title": "曼哈顿日货超市诚聘长期收银兼理货员（年龄40以下/需自理交通/待遇电议）",
-      "date": "2026-05-21",
-      "region": "东部",
-      "state": "曼哈顿",
-      "keywords_matched": [
-        "收银"
-      ],
-      "url": "https://niuyuegongzuo.com/manhattan/%E5%85%B6%E4%BB%96%E5%90%84%E7%B1%BB%E6%8B%9B%E8%81%98/%E6%9B%BC%E5%93%88%E9%A1%BF%E6%97%A5%E8%B4%A7%E8%B6%85%E5%B8%82%E8%AF%9A%E8%81%98%E9%95%BF%E6%9C%9F%E6%94%B6%E9%93%B6%E5%85%BC%E7%90%86%E8%B4%A7%E5%91%98%E5%B9%B4%E9%BE%8440%E4%BB%A5%E4%B8%8B%E9%9C%80%E8%87%AA%E7%90%86%E4%BA%A4%E9%80%9A%E5%BE%85%E9%81%87%E7%94%B5%E8%AE%AE/137473"
-    },
-    {
-      "id": "niuyuegongzuo_137130",
-      "platform": "niuyuegongzuo",
-      "title": "音乐学校招聘｜传单派发人员（兼职）",
-      "date": "2026-05-21",
-      "region": "东部",
-      "state": "法拉盛",
-      "keywords_matched": [
-        "招聘"
-      ],
-      "url": "https://niuyuegongzuo.com/flushing/%E6%B1%82%E8%81%8C%E6%89%BE%E5%B7%A5%E4%BD%9C/%E9%9F%B3%E4%B9%90%E5%AD%A6%E6%A0%A1%E6%8B%9B%E8%81%98%E4%BC%A0%E5%8D%95%E6%B4%BE%E5%8F%91%E4%BA%BA%E5%91%98%E5%85%BC%E8%81%8C/137130"
-    },
-    {
-      "id": "niuyuegongzuo_137470",
-      "platform": "niuyuegongzuo",
-      "title": "NJ07036物流公司招聘",
-      "date": "2026-05-21",
-      "region": "东部",
-      "state": "新泽西",
-      "keywords_matched": [
-        "招聘"
-      ],
-      "url": "https://niuyuegongzuo.com/newjersey/%E9%94%80%E5%94%AE%E5%8A%A9%E7%90%86%E6%96%87%E5%91%98/nj07036%E7%89%A9%E6%B5%81%E5%85%AC%E5%8F%B8%E6%8B%9B%E8%81%98/137470"
-    },
-    {
-      "id": "niuyuegongzuo_137468",
-      "platform": "niuyuegongzuo",
-      "title": "法拉盛皮肤科诊所现招有经验前台",
-      "date": "2026-05-21",
-      "region": "东部",
-      "state": "法拉盛",
-      "keywords_matched": [
-        "前台"
-      ],
-      "url": "https://niuyuegongzuo.com/flushing/%E8%AF%8A%E6%89%80%E8%8D%AF%E6%88%BF/%E6%B3%95%E6%8B%89%E7%9B%9B%E7%9A%AE%E8%82%A4%E7%A7%91%E8%AF%8A%E6%89%80%E7%8E%B0%E6%8B%9B%E6%9C%89%E7%BB%8F%E9%AA%8C%E5%89%8D%E5%8F%B0/137468"
-    },
-    {
-      "id": "niuyuegongzuo_137460",
-      "platform": "niuyuegongzuo",
-      "title": "新泽西Florence海外仓（08518）招人出库组长",
-      "date": "2026-05-21",
-      "region": "东部",
-      "state": "新泽西",
-      "keywords_matched": [
-        "招人"
-      ],
-      "url": "https://niuyuegongzuo.com/newjersey/%E4%BB%93%E5%BA%93%E7%89%A9%E6%B5%81%E5%8F%B8%E6%9C%BA/%E6%96%B0%E6%B3%BD%E8%A5%BFflorence%E6%B5%B7%E5%A4%96%E4%BB%9308518%E6%8B%9B%E4%BA%BA%E5%87%BA%E5%BA%93%E7%BB%84%E9%95%BF/137460"
-    },
-    {
-      "id": "niuyuegongzuo_137458",
-      "platform": "niuyuegongzuo",
-      "title": "招聘26尺司机（高薪）",
-      "date": "2026-05-21",
-      "region": "东部",
-      "state": "新泽西",
-      "keywords_matched": [
-        "招聘"
-      ],
-      "url": "https://niuyuegongzuo.com/newjersey/%E4%BB%93%E5%BA%93%E7%89%A9%E6%B5%81%E5%8F%B8%E6%9C%BA/%E6%8B%9B%E8%81%9826%E5%B0%BA%E5%8F%B8%E6%9C%BA%E9%AB%98%E8%96%AA/137458"
     },
     {
       "id": "niuyuegongzuo_137456",
@@ -1819,42 +1368,6 @@
       "url": "https://niuyuegongzuo.com/flushing/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/%E6%B3%95%E6%8B%89%E7%9B%9B%E5%A5%B6%E8%8C%B6%E5%BA%97%E8%AF%B7%E5%85%A8%E8%81%8C%E7%94%B7%E4%BA%BA%E5%91%98/137456"
     },
     {
-      "id": "niuyuegongzuo_137455",
-      "platform": "niuyuegongzuo",
-      "title": "新泽西请人 A 牌司机",
-      "date": "2026-05-21",
-      "region": "东部",
-      "state": "新泽西",
-      "keywords_matched": [
-        "请人"
-      ],
-      "url": "https://niuyuegongzuo.com/newjersey/%E9%94%80%E5%94%AE%E5%8A%A9%E7%90%86%E6%96%87%E5%91%98/%E6%96%B0%E6%B3%BD%E8%A5%BF%E8%AF%B7%E4%BA%BA-a-%E7%89%8C%E5%8F%B8%E6%9C%BA/137455"
-    },
-    {
-      "id": "niuyuegongzuo_137447",
-      "platform": "niuyuegongzuo",
-      "title": "长岛白区招聘全职女大工;30 分钟车程;准时下班;法拉盛接送， ☎️6462367401",
-      "date": "2026-05-20",
-      "region": "东部",
-      "state": "长岛",
-      "keywords_matched": [
-        "招聘"
-      ],
-      "url": "https://niuyuegongzuo.com/longisland/%E6%8C%89%E6%91%A9%E7%BE%8E%E7%94%B2%E7%BE%8E%E5%9E%8B/%E9%95%BF%E5%B2%9B%E7%99%BD%E5%8C%BA%E6%8B%9B%E8%81%98%E5%85%A8%E8%81%8C%E5%A5%B3%E5%A4%A7%E5%B7%A530-%E5%88%86%E9%92%9F%E8%BD%A6%E7%A8%8B%E5%87%86%E6%97%B6%E4%B8%8B%E7%8F%AD%E6%B3%95%E6%8B%89%E7%9B%9B%E6%8E%A5%E9%80%81-6462367401/137447"
-    },
-    {
-      "id": "niuyuegongzuo_137445",
-      "platform": "niuyuegongzuo",
-      "title": "燕文物流招聘通知",
-      "date": "2026-05-20",
-      "region": "东部",
-      "state": "新泽西",
-      "keywords_matched": [
-        "招聘"
-      ],
-      "url": "https://niuyuegongzuo.com/newjersey/%E4%BB%93%E5%BA%93%E7%89%A9%E6%B5%81%E5%8F%B8%E6%9C%BA/%E7%87%95%E6%96%87%E7%89%A9%E6%B5%81%E6%8B%9B%E8%81%98%E9%80%9A%E7%9F%A5/137445"
-    },
-    {
       "id": "niuyuegongzuo_137440",
       "platform": "niuyuegongzuo",
       "title": "曼哈顿中餐馆请炒锅一名",
@@ -1863,6 +1376,8 @@
       "state": "曼哈顿",
       "keywords_matched": [
         "餐馆",
+        "餐",
+        "中餐",
         "炒锅"
       ],
       "url": "https://niuyuegongzuo.com/manhattan/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/%E6%9B%BC%E5%93%88%E9%A1%BF%E4%B8%AD%E9%A4%90%E9%A6%86%E8%AF%B7%E7%82%92%E9%94%85%E4%B8%80%E5%90%8D/137440"
@@ -1870,11 +1385,12 @@
     {
       "id": "niuyuegongzuo_137439",
       "platform": "niuyuegongzuo",
-      "title": "长岛全日餐请经验自驾棋台929-922-9788",
+      "title": "长岛全日餐请经验自驾棋台[电话]",
       "date": "2026-05-20",
       "region": "东部",
       "state": "长岛",
       "keywords_matched": [
+        "餐",
         "日餐"
       ],
       "url": "https://niuyuegongzuo.com/longisland/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/%E9%95%BF%E5%B2%9B%E5%85%A8%E6%97%A5%E9%A4%90%E8%AF%B7%E7%BB%8F%E9%AA%8C%E8%87%AA%E9%A9%BE%E6%A3%8B%E5%8F%B0929-922-9788/137439"
@@ -1882,53 +1398,17 @@
     {
       "id": "niuyuegongzuo_137438",
       "platform": "niuyuegongzuo",
-      "title": "bayside 全日餐请打杂洗碗，需报税，全职兼职皆可 短信917-943-6399",
+      "title": "bayside 全日餐请打杂洗碗，需报税，全职兼职皆可 短信[电话]",
       "date": "2026-05-20",
       "region": "东部",
       "state": "皇后区",
       "keywords_matched": [
+        "餐",
         "日餐",
-        "洗碗",
-        "打杂"
+        "打杂",
+        "洗碗"
       ],
       "url": "https://niuyuegongzuo.com/queens/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/bayside-%E5%85%A8%E6%97%A5%E9%A4%90%E8%AF%B7%E6%89%93%E6%9D%82%E6%B4%97%E7%A2%97%E9%9C%80%E6%8A%A5%E7%A8%8E%E5%85%A8%E8%81%8C%E5%85%BC%E8%81%8C%E7%9A%86%E5%8F%AF-%E7%9F%AD%E4%BF%A1917-943-6399/137438"
-    },
-    {
-      "id": "niuyuegongzuo_137436",
-      "platform": "niuyuegongzuo",
-      "title": "Woodside招聘酒店全职前台",
-      "date": "2026-05-20",
-      "region": "东部",
-      "state": "皇后区",
-      "keywords_matched": [
-        "招聘",
-        "前台"
-      ],
-      "url": "https://niuyuegongzuo.com/queens/%E9%94%80%E5%94%AE%E5%8A%A9%E7%90%86%E6%96%87%E5%91%98/woodside%E6%8B%9B%E8%81%98%E9%85%92%E5%BA%97%E5%85%A8%E8%81%8C%E5%89%8D%E5%8F%B0/137436"
-    },
-    {
-      "id": "niuyuegongzuo_137435",
-      "platform": "niuyuegongzuo",
-      "title": "法拉盛建筑师事务所请人绘图员",
-      "date": "2026-05-20",
-      "region": "东部",
-      "state": "法拉盛",
-      "keywords_matched": [
-        "请人"
-      ],
-      "url": "https://niuyuegongzuo.com/flushing/%E5%B7%A5%E5%9C%B0%E8%A3%85%E4%BF%AE%E5%BB%BA%E7%AD%91/%E6%B3%95%E6%8B%89%E7%9B%9B%E5%BB%BA%E7%AD%91%E5%B8%88%E4%BA%8B%E5%8A%A1%E6%89%80%E8%AF%B7%E4%BA%BA%E7%BB%98%E5%9B%BE%E5%91%98/137435"
-    },
-    {
-      "id": "niuyuegongzuo_137430",
-      "platform": "niuyuegongzuo",
-      "title": "新泽西装修队招聘小工、泥水、油漆、木工、大工, 包午饭安排新泽西住宿",
-      "date": "2026-05-20",
-      "region": "东部",
-      "state": "新泽西",
-      "keywords_matched": [
-        "招聘"
-      ],
-      "url": "https://niuyuegongzuo.com/newjersey/%E6%8C%89%E6%91%A9%E7%BE%8E%E7%94%B2%E7%BE%8E%E5%9E%8B/%E6%96%B0%E6%B3%BD%E8%A5%BF%E8%A3%85%E4%BF%AE%E9%98%9F%E6%8B%9B%E8%81%98%E5%B0%8F%E5%B7%A5%E6%B3%A5%E6%B0%B4%E6%B2%B9%E6%BC%86%E6%9C%A8%E5%B7%A5%E5%A4%A7%E5%B7%A5-%E5%8C%85%E5%8D%88%E9%A5%AD%E5%AE%89%E6%8E%92%E6%96%B0%E6%B3%BD%E8%A5%BF%E4%BD%8F%E5%AE%BF/137430"
     },
     {
       "id": "niuyuegongzuo_137429",
@@ -1938,26 +1418,15 @@
       "region": "东部",
       "state": "曼哈顿",
       "keywords_matched": [
+        "餐",
         "收银"
       ],
       "url": "https://niuyuegongzuo.com/manhattan/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/%E4%BA%9A%E6%B4%B2%E9%A4%90%E8%AF%B7%E6%9C%89%E7%BB%8F%E9%AA%8C%E6%94%B6%E9%93%B6/137429"
     },
     {
-      "id": "niuyuegongzuo_137415",
-      "platform": "niuyuegongzuo",
-      "title": "法拉盛牙科诊所请part-time前台助理",
-      "date": "2026-05-20",
-      "region": "东部",
-      "state": "法拉盛",
-      "keywords_matched": [
-        "前台"
-      ],
-      "url": "https://niuyuegongzuo.com/flushing/%E8%AF%8A%E6%89%80%E8%8D%AF%E6%88%BF/%E6%B3%95%E6%8B%89%E7%9B%9B%E7%89%99%E7%A7%91%E8%AF%8A%E6%89%80%E8%AF%B7part-time%E5%89%8D%E5%8F%B0%E5%8A%A9%E7%90%86/137415"
-    },
-    {
       "id": "niuyuegongzuo_137414",
       "platform": "niuyuegongzuo",
-      "title": "长岛49 出口  橱柜工厂 石材加工厂 请 办公室文员，会英文懂办公软件,   熟手磨石头师傅   ，非诚勿扰 3477544310    6318155058",
+      "title": "长岛49 出口  橱柜工厂 石材加工厂 请 办公室文员，会英文懂办公软件,   熟手磨石头师傅   ，非诚勿扰[电话]   [电话]",
       "date": "2026-05-20",
       "region": "东部",
       "state": "长岛",
@@ -1967,40 +1436,16 @@
       "url": "https://niuyuegongzuo.com/longisland/%E9%94%80%E5%94%AE%E5%8A%A9%E7%90%86%E6%96%87%E5%91%98/%E9%95%BF%E5%B2%9B49-%E5%87%BA%E5%8F%A3-%E6%A9%B1%E6%9F%9C%E5%B7%A5%E5%8E%82-%E7%9F%B3%E6%9D%90%E5%8A%A0%E5%B7%A5%E5%8E%82-%E8%AF%B7-%E5%8A%9E%E5%85%AC%E5%AE%A4%E6%96%87%E5%91%98%E4%BC%9A%E8%8B%B1%E6%96%87%E6%87%82%E5%8A%9E%E5%85%AC%E8%BD%AF%E4%BB%B6-%E7%86%9F%E6%89%8B%E7%A3%A8%E7%9F%B3%E5%A4%B4%E5%B8%88%E5%82%85-%E9%9D%9E%E8%AF%9A%E5%8B%BF%E6%89%B0-3477544310-6318155058/137414"
     },
     {
-      "id": "niuyuegongzuo_137411",
+      "id": "niuyuegongzuo_137413",
       "platform": "niuyuegongzuo",
-      "title": "corona 可乐娜 请99收银",
-      "date": "2026-05-20",
-      "region": "东部",
-      "state": "皇后区",
-      "keywords_matched": [
-        "收银"
-      ],
-      "url": "https://niuyuegongzuo.com/queens/%E5%85%B6%E4%BB%96%E5%90%84%E7%B1%BB%E6%8B%9B%E8%81%98/corona-%E5%8F%AF%E4%B9%90%E5%A8%9C-%E8%AF%B799%E6%94%B6%E9%93%B6/137411"
-    },
-    {
-      "id": "niuyuegongzuo_137409",
-      "platform": "niuyuegongzuo",
-      "title": "纽约安装门窗公司\n招聘安装师父",
+      "title": "不锈钢工厂招氩弧焊技术专员，薪资资薪好;包午餐 法拉盛接送 。非诚勿扰！电话号码：[电话]",
       "date": "2026-05-20",
       "region": "东部",
       "state": "法拉盛",
       "keywords_matched": [
-        "招聘"
+        "餐"
       ],
-      "url": "https://niuyuegongzuo.com/flushing/%E5%B7%A5%E5%9C%B0%E8%A3%85%E4%BF%AE%E5%BB%BA%E7%AD%91/%E7%BA%BD%E7%BA%A6%E5%AE%89%E8%A3%85%E9%97%A8%E7%AA%97%E5%85%AC%E5%8F%B8-%E6%8B%9B%E8%81%98%E5%AE%89%E8%A3%85%E5%B8%88%E7%88%B6/137409"
-    },
-    {
-      "id": "niuyuegongzuo_137406",
-      "platform": "niuyuegongzuo",
-      "title": "麦克凯曼律师楼招聘全职办公室助理",
-      "date": "2026-05-20",
-      "region": "东部",
-      "state": "法拉盛",
-      "keywords_matched": [
-        "招聘"
-      ],
-      "url": "https://niuyuegongzuo.com/flushing/%E9%94%80%E5%94%AE%E5%8A%A9%E7%90%86%E6%96%87%E5%91%98/%E9%BA%A6%E5%85%8B%E5%87%AF%E6%9B%BC%E5%BE%8B%E5%B8%88%E6%A5%BC%E6%8B%9B%E8%81%98%E5%85%A8%E8%81%8C%E5%8A%9E%E5%85%AC%E5%AE%A4%E5%8A%A9%E7%90%86/137406"
+      "url": "https://niuyuegongzuo.com/flushing/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/%E4%B8%8D%E9%94%88%E9%92%A2%E5%B7%A5%E5%8E%82%E6%8B%9B%E6%B0%A9%E5%BC%A7%E7%84%8A%E6%8A%80%E6%9C%AF%E4%B8%93%E5%91%98%E8%96%AA%E8%B5%84%E8%B5%84%E8%96%AA%E5%A5%BD%E5%8C%85%E5%8D%88%E9%A4%90-%E6%B3%95%E6%8B%89%E7%9B%9B%E6%8E%A5%E9%80%81-%E9%9D%9E%E8%AF%9A%E5%8B%BF%E6%89%B0%E7%94%B5%E8%AF%9D%E5%8F%B7%E7%A0%81347-515-8079/137413"
     },
     {
       "id": "niuyuegongzuo_137405",
@@ -2015,30 +1460,6 @@
       "url": "https://niuyuegongzuo.com/brooklyn/%E5%85%B6%E4%BB%96%E5%90%84%E7%B1%BB%E6%8B%9B%E8%81%98/%E5%B8%83%E9%B2%81%E5%85%8B%E6%9E%97%E5%B9%B2%E6%B4%97%E6%94%B9%E8%A1%A3%E5%BA%97%E6%80%A5%E9%9C%80%E7%86%9F%E6%89%8B%E6%94%B9%E8%A1%A3%E8%A3%81%E7%BC%9D%E5%B8%88%E5%82%85/137405"
     },
     {
-      "id": "niuyuegongzuo_137399",
-      "platform": "niuyuegongzuo",
-      "title": "LIC 长岛市连锁幼儿园招聘三岁/四岁班主班老师",
-      "date": "2026-05-20",
-      "region": "东部",
-      "state": "皇后区",
-      "keywords_matched": [
-        "招聘"
-      ],
-      "url": "https://niuyuegongzuo.com/queens/%E8%80%81%E5%B8%88%E6%95%99%E7%BB%83/lic-%E9%95%BF%E5%B2%9B%E5%B8%82%E8%BF%9E%E9%94%81%E5%B9%BC%E5%84%BF%E5%9B%AD%E6%8B%9B%E8%81%98%E4%B8%89%E5%B2%81%E5%9B%9B%E5%B2%81%E7%8F%AD%E4%B8%BB%E7%8F%AD%E8%80%81%E5%B8%88/137399"
-    },
-    {
-      "id": "niuyuegongzuo_137393",
-      "platform": "niuyuegongzuo",
-      "title": "企业請人",
-      "date": "2026-05-20",
-      "region": "东部",
-      "state": "法拉盛",
-      "keywords_matched": [
-        "請人"
-      ],
-      "url": "https://niuyuegongzuo.com/flushing/%E9%94%80%E5%94%AE%E5%8A%A9%E7%90%86%E6%96%87%E5%91%98/%E4%BC%81%E4%B8%9A%E8%AB%8B%E4%BA%BA/137393"
-    },
-    {
       "id": "niuyuegongzuo_137378",
       "platform": "niuyuegongzuo",
       "title": "法拉盛請熟手打磨石頭和安裝臺面師傅",
@@ -2049,18 +1470,6 @@
         "師傅"
       ],
       "url": "https://niuyuegongzuo.com/flushing/%E5%85%B6%E4%BB%96%E5%90%84%E7%B1%BB%E6%8B%9B%E8%81%98/%E6%B3%95%E6%8B%89%E7%9B%9B%E8%AB%8B%E7%86%9F%E6%89%8B%E6%89%93%E7%A3%A8%E7%9F%B3%E9%A0%AD%E5%92%8C%E5%AE%89%E8%A3%9D%E8%87%BA%E9%9D%A2%E5%B8%AB%E5%82%85/137378"
-    },
-    {
-      "id": "niuyuegongzuo_137377",
-      "platform": "niuyuegongzuo",
-      "title": "🎵音乐学校招聘🎵 传单派发人员（兼职）",
-      "date": "2026-05-20",
-      "region": "东部",
-      "state": "法拉盛",
-      "keywords_matched": [
-        "招聘"
-      ],
-      "url": "https://niuyuegongzuo.com/flushing/%E5%85%B6%E4%BB%96%E5%90%84%E7%B1%BB%E6%8B%9B%E8%81%98/%E9%9F%B3%E4%B9%90%E5%AD%A6%E6%A0%A1%E6%8B%9B%E8%81%98-%E4%BC%A0%E5%8D%95%E6%B4%BE%E5%8F%91%E4%BA%BA%E5%91%98%E5%85%BC%E8%81%8C/137377"
     },
     {
       "id": "niuyuegongzuo_137371",
@@ -2075,161 +1484,28 @@
       "url": "https://niuyuegongzuo.com/flushing/%E9%94%80%E5%94%AE%E5%8A%A9%E7%90%86%E6%96%87%E5%91%98/%E6%B3%95%E6%8B%89%E7%9B%9B%E6%A9%B1%E6%9F%9C%E7%9F%B3%E6%9D%90-%E8%AF%B7%E5%AE%89%E8%A3%85%E5%8F%B0%E9%9D%A2%E5%B8%88%E5%82%85/137371"
     },
     {
-      "id": "niuyuegongzuo_137366",
+      "id": "niuyuegongzuo_137297",
       "platform": "niuyuegongzuo",
-      "title": "❣️❣️大学点 🏊‍游泳学校招聘 游泳教练数名❣️❣️",
-      "date": "2026-05-20",
-      "region": "东部",
-      "state": "法拉盛",
-      "keywords_matched": [
-        "招聘"
-      ],
-      "url": "https://niuyuegongzuo.com/flushing/%E8%80%81%E5%B8%88%E6%95%99%E7%BB%83/%E5%A4%A7%E5%AD%A6%E7%82%B9-%E6%B8%B8%E6%B3%B3%E5%AD%A6%E6%A0%A1%E6%8B%9B%E8%81%98-%E6%B8%B8%E6%B3%B3%E6%95%99%E7%BB%83%E6%95%B0%E5%90%8D/137366"
-    },
-    {
-      "id": "niuyuegongzuo_137365",
-      "platform": "niuyuegongzuo",
-      "title": "动漫仓库招聘全职工作人员；工作地点：长岛48出口",
-      "date": "2026-05-20",
-      "region": "东部",
-      "state": "长岛",
-      "keywords_matched": [
-        "招聘"
-      ],
-      "url": "https://niuyuegongzuo.com/longisland/%E9%94%80%E5%94%AE%E5%8A%A9%E7%90%86%E6%96%87%E5%91%98/%E5%8A%A8%E6%BC%AB%E4%BB%93%E5%BA%93%E6%8B%9B%E8%81%98%E5%85%A8%E8%81%8C%E5%B7%A5%E4%BD%9C%E4%BA%BA%E5%91%98%E5%B7%A5%E4%BD%9C%E5%9C%B0%E7%82%B9%E9%95%BF%E5%B2%9B48%E5%87%BA%E5%8F%A3/137365"
-    },
-    {
-      "id": "niuyuegongzuo_137354",
-      "platform": "niuyuegongzuo",
-      "title": "法拉盛美睫店招熟手前台，需中英文流利，有责任心 耐心，有意请马上联系：3478285251",
-      "date": "2026-05-20",
-      "region": "东部",
-      "state": "法拉盛",
-      "keywords_matched": [
-        "前台"
-      ],
-      "url": "https://niuyuegongzuo.com/flushing/%E6%8C%89%E6%91%A9%E7%BE%8E%E7%94%B2%E7%BE%8E%E5%9E%8B/%E6%B3%95%E6%8B%89%E7%9B%9B%E7%BE%8E%E7%9D%AB%E5%BA%97%E6%8B%9B%E7%86%9F%E6%89%8B%E5%89%8D%E5%8F%B0%E9%9C%80%E4%B8%AD%E8%8B%B1%E6%96%87%E6%B5%81%E5%88%A9%E6%9C%89%E8%B4%A3%E4%BB%BB%E5%BF%83-%E8%80%90%E5%BF%83%E6%9C%89%E6%84%8F%E8%AF%B7%E9%A9%AC%E4%B8%8A%E8%81%94%E7%B3%BB3478285251/137354"
-    },
-    {
-      "id": "niuyuegongzuo_137349",
-      "platform": "niuyuegongzuo",
-      "title": "💙长岛美睫店, 请经验美睫师和前台💙",
-      "date": "2026-05-20",
-      "region": "东部",
-      "state": "长岛",
-      "keywords_matched": [
-        "前台"
-      ],
-      "url": "https://niuyuegongzuo.com/longisland/%E6%8C%89%E6%91%A9%E7%BE%8E%E7%94%B2%E7%BE%8E%E5%9E%8B/%E9%95%BF%E5%B2%9B%E7%BE%8E%E7%9D%AB%E5%BA%97-%E8%AF%B7%E7%BB%8F%E9%AA%8C%E7%BE%8E%E7%9D%AB%E5%B8%88%E5%92%8C%E5%89%8D%E5%8F%B0/137349"
-    },
-    {
-      "id": "niuyuegongzuo_137348",
-      "platform": "niuyuegongzuo",
-      "title": "纽约bayside的hair salon找全职前台",
-      "date": "2026-05-20",
-      "region": "东部",
-      "state": "皇后区",
-      "keywords_matched": [
-        "前台"
-      ],
-      "url": "https://niuyuegongzuo.com/queens/%E9%94%80%E5%94%AE%E5%8A%A9%E7%90%86%E6%96%87%E5%91%98/%E7%BA%BD%E7%BA%A6bayside%E7%9A%84hair-salon%E6%89%BE%E5%85%A8%E8%81%8C%E5%89%8D%E5%8F%B0/137348"
-    },
-    {
-      "id": "niuyuegongzuo_137346",
-      "platform": "niuyuegongzuo",
-      "title": "纽约布鲁克林Downtown高端美睫店招人前台",
-      "date": "2026-05-20",
-      "region": "东部",
-      "state": "布鲁克林",
-      "keywords_matched": [
-        "招人",
-        "前台"
-      ],
-      "url": "https://niuyuegongzuo.com/brooklyn/%E6%8C%89%E6%91%A9%E7%BE%8E%E7%94%B2%E7%BE%8E%E5%9E%8B/%E7%BA%BD%E7%BA%A6%E5%B8%83%E9%B2%81%E5%85%8B%E6%9E%97downtown%E9%AB%98%E7%AB%AF%E7%BE%8E%E7%9D%AB%E5%BA%97%E6%8B%9B%E4%BA%BA%E5%89%8D%E5%8F%B0/137346"
-    },
-    {
-      "id": "niuyuegongzuo_137342",
-      "platform": "niuyuegongzuo",
-      "title": "专业美睫店招前台",
-      "date": "2026-05-20",
-      "region": "东部",
-      "state": "皇后区",
-      "keywords_matched": [
-        "前台"
-      ],
-      "url": "https://niuyuegongzuo.com/queens/%E6%8C%89%E6%91%A9%E7%BE%8E%E7%94%B2%E7%BE%8E%E5%9E%8B/%E4%B8%93%E4%B8%9A%E7%BE%8E%E7%9D%AB%E5%BA%97%E6%8B%9B%E5%89%8D%E5%8F%B0/137342"
-    },
-    {
-      "id": "niuyuegongzuo_137338",
-      "platform": "niuyuegongzuo",
-      "title": "新泽西中部10多年发廊请人有经验美发师\n 请拨打这个应聘电话 848-228-9146",
-      "date": "2026-05-20",
-      "region": "东部",
-      "state": "新泽西",
-      "keywords_matched": [
-        "请人"
-      ],
-      "url": "https://niuyuegongzuo.com/newjersey/%E6%8C%89%E6%91%A9%E7%BE%8E%E7%94%B2%E7%BE%8E%E5%9E%8B/%E6%96%B0%E6%B3%BD%E8%A5%BF%E4%B8%AD%E9%83%A810%E5%A4%9A%E5%B9%B4%E5%8F%91%E5%BB%8A%E8%AF%B7%E4%BA%BA%E6%9C%89%E7%BB%8F%E9%AA%8C%E7%BE%8E%E5%8F%91%E5%B8%88-%E8%AF%B7%E6%8B%A8%E6%89%93%E8%BF%99%E4%B8%AA%E5%BA%94%E8%81%98%E7%94%B5%E8%AF%9D-848-228-9146/137338"
-    },
-    {
-      "id": "niuyuegongzuo_137330",
-      "platform": "niuyuegongzuo",
-      "title": "🔥曼哈顿中城专业睫毛店请人睫毛师🔥",
+      "title": "曼哈顿面店 请出餐师父",
       "date": "2026-05-20",
       "region": "东部",
       "state": "曼哈顿",
       "keywords_matched": [
-        "请人"
+        "餐"
       ],
-      "url": "https://niuyuegongzuo.com/manhattan/%E6%8C%89%E6%91%A9%E7%BE%8E%E7%94%B2%E7%BE%8E%E5%9E%8B/%E6%9B%BC%E5%93%88%E9%A1%BF%E4%B8%AD%E5%9F%8E%E4%B8%93%E4%B8%9A%E7%9D%AB%E6%AF%9B%E5%BA%97%E8%AF%B7%E4%BA%BA%E7%9D%AB%E6%AF%9B%E5%B8%88/137330"
+      "url": "https://niuyuegongzuo.com/manhattan/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/%E6%9B%BC%E5%93%88%E9%A1%BF%E9%9D%A2%E5%BA%97-%E8%AF%B7%E5%87%BA%E9%A4%90%E5%B8%88%E7%88%B6/137297"
     },
     {
-      "id": "niuyuegongzuo_137328",
+      "id": "niuyuegongzuo_137296",
       "platform": "niuyuegongzuo",
-      "title": "法拉盛中式美睫店招聘👀👀",
+      "title": "法拉盛接送长岛亚洲餐请sushi 助手和三手",
       "date": "2026-05-20",
       "region": "东部",
       "state": "法拉盛",
       "keywords_matched": [
-        "招聘"
+        "餐"
       ],
-      "url": "https://niuyuegongzuo.com/flushing/%E6%8C%89%E6%91%A9%E7%BE%8E%E7%94%B2%E7%BE%8E%E5%9E%8B/%E6%B3%95%E6%8B%89%E7%9B%9B%E4%B8%AD%E5%BC%8F%E7%BE%8E%E7%9D%AB%E5%BA%97%E6%8B%9B%E8%81%98/137328"
-    },
-    {
-      "id": "niuyuegongzuo_137325",
-      "platform": "niuyuegongzuo",
-      "title": "曼哈顿睫毛店招聘有经验睫毛师",
-      "date": "2026-05-20",
-      "region": "东部",
-      "state": "曼哈顿",
-      "keywords_matched": [
-        "招聘"
-      ],
-      "url": "https://niuyuegongzuo.com/manhattan/%E6%8C%89%E6%91%A9%E7%BE%8E%E7%94%B2%E7%BE%8E%E5%9E%8B/%E6%9B%BC%E5%93%88%E9%A1%BF%E7%9D%AB%E6%AF%9B%E5%BA%97%E6%8B%9B%E8%81%98%E6%9C%89%E7%BB%8F%E9%AA%8C%E7%9D%AB%E6%AF%9B%E5%B8%88/137325"
-    },
-    {
-      "id": "niuyuegongzuo_137315",
-      "platform": "niuyuegongzuo",
-      "title": "长岛甲店招聘;离法拉盛50分钟;法拉盛接送",
-      "date": "2026-05-20",
-      "region": "东部",
-      "state": "长岛",
-      "keywords_matched": [
-        "招聘"
-      ],
-      "url": "https://niuyuegongzuo.com/longisland/%E6%8C%89%E6%91%A9%E7%BE%8E%E7%94%B2%E7%BE%8E%E5%9E%8B/%E9%95%BF%E5%B2%9B%E7%94%B2%E5%BA%97%E6%8B%9B%E8%81%98%E7%A6%BB%E6%B3%95%E6%8B%89%E7%9B%9B50%E5%88%86%E9%92%9F%E6%B3%95%E6%8B%89%E7%9B%9B%E6%8E%A5%E9%80%81/137315"
-    },
-    {
-      "id": "niuyuegongzuo_137307",
-      "platform": "niuyuegongzuo",
-      "title": "长岛甲店请人：长岛好区34 出口请经验 周末大工和中工 自驾开车优先。手机1-646-526-2741或短信",
-      "date": "2026-05-20",
-      "region": "东部",
-      "state": "长岛",
-      "keywords_matched": [
-        "请人"
-      ],
-      "url": "https://niuyuegongzuo.com/longisland/%E6%8C%89%E6%91%A9%E7%BE%8E%E7%94%B2%E7%BE%8E%E5%9E%8B/%E9%95%BF%E5%B2%9B%E7%94%B2%E5%BA%97%E8%AF%B7%E4%BA%BA%E9%95%BF%E5%B2%9B%E5%A5%BD%E5%8C%BA34-%E5%87%BA%E5%8F%A3%E8%AF%B7%E7%BB%8F%E9%AA%8C-%E5%91%A8%E6%9C%AB%E5%A4%A7%E5%B7%A5%E5%92%8C%E4%B8%AD%E5%B7%A5-%E8%87%AA%E9%A9%BE%E5%BC%80%E8%BD%A6%E4%BC%98%E5%85%88%E6%89%8B%E6%9C%BA1-646-526-2741%E6%88%96%E7%9F%AD%E4%BF%A1/137307"
+      "url": "https://niuyuegongzuo.com/longisland/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/%E6%B3%95%E6%8B%89%E7%9B%9B%E6%8E%A5%E9%80%81%E9%95%BF%E5%B2%9B%E4%BA%9A%E6%B4%B2%E9%A4%90%E8%AF%B7sushi-%E5%8A%A9%E6%89%8B%E5%92%8C%E4%B8%89%E6%89%8B/137296"
     },
     {
       "id": "niuyuegongzuo_137295",
@@ -2239,6 +1515,7 @@
       "region": "东部",
       "state": "法拉盛",
       "keywords_matched": [
+        "烧烤",
         "师傅"
       ],
       "url": "https://niuyuegongzuo.com/flushing/%E5%85%B6%E4%BB%96%E5%90%84%E7%B1%BB%E6%8B%9B%E8%81%98/%E8%AF%B7%E7%83%A7%E7%83%A4%E5%B8%88%E5%82%85-%E6%B3%95%E6%8B%89%E7%9B%9B/137295"
@@ -2251,21 +1528,10 @@
       "region": "东部",
       "state": "法拉盛",
       "keywords_matched": [
+        "餐",
         "打包"
       ],
       "url": "https://niuyuegongzuo.com/flushing/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/%E6%B3%95%E6%8B%89%E7%9B%9B%E6%8E%A5%E9%80%81%E8%AF%B7%E7%86%9F%E6%89%8B%E6%89%93%E5%8C%85%E5%87%BA%E9%A4%90/137294"
-    },
-    {
-      "id": "niuyuegongzuo_137291",
-      "platform": "niuyuegongzuo",
-      "title": "招聘旅游大巴司机",
-      "date": "2026-05-20",
-      "region": "东部",
-      "state": "布鲁克林",
-      "keywords_matched": [
-        "招聘"
-      ],
-      "url": "https://niuyuegongzuo.com/brooklyn/%E4%BB%93%E5%BA%93%E7%89%A9%E6%B5%81%E5%8F%B8%E6%9C%BA/%E6%8B%9B%E8%81%98%E6%97%85%E6%B8%B8%E5%A4%A7%E5%B7%B4%E5%8F%B8%E6%9C%BA/137291"
     },
     {
       "id": "niuyuegongzuo_137288",
@@ -2273,8 +1539,9 @@
       "title": "长岛市面馆后厨打杂聘请（可兼职）",
       "date": "2026-05-20",
       "region": "东部",
-      "state": "皇后区",
+      "state": "长岛",
       "keywords_matched": [
+        "面馆",
         "后厨",
         "打杂"
       ],
@@ -2306,18 +1573,6 @@
       "url": "https://niuyuegongzuo.com/flushing/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/%E5%A5%B6%E8%8C%B6%E6%89%B9%E5%8F%91%E8%AF%B7%E4%BB%93%E5%BA%93%E5%85%BC%E9%80%81%E8%B4%A7/137285"
     },
     {
-      "id": "niuyuegongzuo_137284",
-      "platform": "niuyuegongzuo",
-      "title": "酒店全职前台",
-      "date": "2026-05-20",
-      "region": "东部",
-      "state": "皇后区",
-      "keywords_matched": [
-        "前台"
-      ],
-      "url": "https://niuyuegongzuo.com/queens/%E9%94%80%E5%94%AE%E5%8A%A9%E7%90%86%E6%96%87%E5%91%98/%E9%85%92%E5%BA%97%E5%85%A8%E8%81%8C%E5%89%8D%E5%8F%B0/137284"
-    },
-    {
       "id": "niuyuegongzuo_137281",
       "platform": "niuyuegongzuo",
       "title": "火锅店请后厨",
@@ -2329,18 +1584,6 @@
         "后厨"
       ],
       "url": "https://niuyuegongzuo.com/queens/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/%E7%81%AB%E9%94%85%E5%BA%97%E8%AF%B7%E5%90%8E%E5%8E%A8/137281"
-    },
-    {
-      "id": "niuyuegongzuo_137280",
-      "platform": "niuyuegongzuo",
-      "title": "八大道幼儿园招聘兼职",
-      "date": "2026-05-20",
-      "region": "东部",
-      "state": "布鲁克林",
-      "keywords_matched": [
-        "招聘"
-      ],
-      "url": "https://niuyuegongzuo.com/brooklyn/%E8%80%81%E5%B8%88%E6%95%99%E7%BB%83/%E5%85%AB%E5%A4%A7%E9%81%93%E5%B9%BC%E5%84%BF%E5%9B%AD%E6%8B%9B%E8%81%98%E5%85%BC%E8%81%8C/137280"
     },
     {
       "id": "niuyuegongzuo_137277",
@@ -2363,47 +1606,12 @@
       "region": "东部",
       "state": "长岛",
       "keywords_matched": [
-        "炒锅",
-        "外卖"
+        "餐",
+        "中餐",
+        "外卖",
+        "炒锅"
       ],
       "url": "https://niuyuegongzuo.com/longisland/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/%E9%95%BF%E5%B2%9B%E4%B8%AD%E9%A4%90%E5%A4%96%E5%8D%96%E5%BA%97%E8%AF%B7%E7%82%92%E9%94%85%E5%B8%88%E7%88%B6/137273"
-    },
-    {
-      "id": "niuyuegongzuo_137271",
-      "platform": "niuyuegongzuo",
-      "title": "新泽西华人仓库招人叉车操作员",
-      "date": "2026-05-20",
-      "region": "东部",
-      "state": "新泽西",
-      "keywords_matched": [
-        "招人"
-      ],
-      "url": "https://niuyuegongzuo.com/newjersey/%E4%BB%93%E5%BA%93%E7%89%A9%E6%B5%81%E5%8F%B8%E6%9C%BA/%E6%96%B0%E6%B3%BD%E8%A5%BF%E5%8D%8E%E4%BA%BA%E4%BB%93%E5%BA%93%E6%8B%9B%E4%BA%BA%E5%8F%89%E8%BD%A6%E6%93%8D%E4%BD%9C%E5%91%98/137271"
-    },
-    {
-      "id": "niuyuegongzuo_137270",
-      "platform": "niuyuegongzuo",
-      "title": "脑神经专科招聘全职前台",
-      "date": "2026-05-20",
-      "region": "东部",
-      "state": "曼哈顿",
-      "keywords_matched": [
-        "招聘",
-        "前台"
-      ],
-      "url": "https://niuyuegongzuo.com/manhattan/%E8%AF%8A%E6%89%80%E8%8D%AF%E6%88%BF/%E8%84%91%E7%A5%9E%E7%BB%8F%E4%B8%93%E7%A7%91%E6%8B%9B%E8%81%98%E5%85%A8%E8%81%8C%E5%89%8D%E5%8F%B0/137270"
-    },
-    {
-      "id": "niuyuegongzuo_137269",
-      "platform": "niuyuegongzuo",
-      "title": "甲店请人",
-      "date": "2026-05-20",
-      "region": "东部",
-      "state": "上州",
-      "keywords_matched": [
-        "请人"
-      ],
-      "url": "https://niuyuegongzuo.com/upstate/%E6%8C%89%E6%91%A9%E7%BE%8E%E7%94%B2%E7%BE%8E%E5%9E%8B/%E7%94%B2%E5%BA%97%E8%AF%B7%E4%BA%BA/137269"
     },
     {
       "id": "niuyuegongzuo_137268",
@@ -2426,24 +1634,14 @@
       "region": "东部",
       "state": "长岛",
       "keywords_matched": [
+        "餐",
+        "中餐",
+        "外卖",
         "招人",
         "前台",
-        "收银",
-        "外卖"
+        "收银"
       ],
       "url": "https://niuyuegongzuo.com/longisland/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/%E9%95%BF%E5%B2%9B%E4%B8%AD%E9%A4%90%E5%A4%96%E5%8D%96%E5%BA%97%E6%8B%9B%E4%BA%BA%E5%89%8D%E5%8F%B0%E6%94%B6%E9%93%B6/137266"
-    },
-    {
-      "id": "niuyuegongzuo_137264",
-      "platform": "niuyuegongzuo",
-      "title": "@招聘聘兼职工作人员 @",
-      "date": "2026-05-20",
-      "region": "东部",
-      "state": "法拉盛",
-      "keywords_matched": [
-        "招聘"
-      ],
-      "url": "https://niuyuegongzuo.com/flushing/%E8%AF%8A%E6%89%80%E8%8D%AF%E6%88%BF/%E6%8B%9B%E8%81%98%E8%81%98%E5%85%BC%E8%81%8C%E5%B7%A5%E4%BD%9C%E4%BA%BA%E5%91%98/137264"
     },
     {
       "id": "niuyuegongzuo_137263",
@@ -2453,6 +1651,7 @@
       "region": "东部",
       "state": "曼哈顿",
       "keywords_matched": [
+        "餐",
         "日餐",
         "企台"
       ],
@@ -2484,42 +1683,6 @@
       "url": "https://niuyuegongzuo.com/flushing/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/%E8%AF%B7%E5%AF%BF%E5%8F%B8%E5%8A%A9%E6%89%8B%E6%B3%95%E6%8B%89%E7%9B%9B%E6%8E%A5%E9%80%81%E6%88%96%E8%80%85%E8%87%AA%E5%B7%B1%E5%9D%90%E8%BD%A6/137255"
     },
     {
-      "id": "niuyuegongzuo_137254",
-      "platform": "niuyuegongzuo",
-      "title": "法拉盛诊所 请兼职前台",
-      "date": "2026-05-20",
-      "region": "东部",
-      "state": "法拉盛",
-      "keywords_matched": [
-        "前台"
-      ],
-      "url": "https://niuyuegongzuo.com/flushing/%E8%AF%8A%E6%89%80%E8%8D%AF%E6%88%BF/%E6%B3%95%E6%8B%89%E7%9B%9B%E8%AF%8A%E6%89%80-%E8%AF%B7%E5%85%BC%E8%81%8C%E5%89%8D%E5%8F%B0/137254"
-    },
-    {
-      "id": "niuyuegongzuo_137253",
-      "platform": "niuyuegongzuo",
-      "title": "新泽西仓库招聘：主管 / 组长 / 办公室助理 支持H1B",
-      "date": "2026-05-20",
-      "region": "东部",
-      "state": "新泽西",
-      "keywords_matched": [
-        "招聘"
-      ],
-      "url": "https://niuyuegongzuo.com/newjersey/%E5%B7%A5%E5%9C%B0%E8%A3%85%E4%BF%AE%E5%BB%BA%E7%AD%91/%E6%96%B0%E6%B3%BD%E8%A5%BF%E4%BB%93%E5%BA%93%E6%8B%9B%E8%81%98%E4%B8%BB%E7%AE%A1-%E7%BB%84%E9%95%BF-%E5%8A%9E%E5%85%AC%E5%AE%A4%E5%8A%A9%E7%90%86-%E6%94%AF%E6%8C%81h1b/137253"
-    },
-    {
-      "id": "niuyuegongzuo_137248",
-      "platform": "niuyuegongzuo",
-      "title": "医疗器材请全职前台/管理全职文员(Elmhurst 艾姆赫斯特)",
-      "date": "2026-05-20",
-      "region": "东部",
-      "state": "皇后区",
-      "keywords_matched": [
-        "前台"
-      ],
-      "url": "https://niuyuegongzuo.com/queens/%E9%94%80%E5%94%AE%E5%8A%A9%E7%90%86%E6%96%87%E5%91%98/%E5%8C%BB%E7%96%97%E5%99%A8%E6%9D%90%E8%AF%B7%E5%85%A8%E8%81%8C%E5%89%8D%E5%8F%B0%E7%AE%A1%E7%90%86%E5%85%A8%E8%81%8C%E6%96%87%E5%91%98elmhurst-%E8%89%BE%E5%A7%86%E8%B5%AB%E6%96%AF%E7%89%B9/137248"
-    },
-    {
       "id": "niuyuegongzuo_137247",
       "platform": "niuyuegongzuo",
       "title": "曼哈顿店请裁缝师傅",
@@ -2532,21 +1695,9 @@
       "url": "https://niuyuegongzuo.com/manhattan/%E5%B7%A5%E5%9C%B0%E8%A3%85%E4%BF%AE%E5%BB%BA%E7%AD%91/%E6%9B%BC%E5%93%88%E9%A1%BF%E5%BA%97%E8%AF%B7%E8%A3%81%E7%BC%9D%E5%B8%88%E5%82%85/137247"
     },
     {
-      "id": "niuyuegongzuo_137246",
-      "platform": "niuyuegongzuo",
-      "title": "长岛工厂招聘技术工人",
-      "date": "2026-05-20",
-      "region": "东部",
-      "state": "长岛",
-      "keywords_matched": [
-        "招聘"
-      ],
-      "url": "https://niuyuegongzuo.com/longisland/%E5%85%B6%E4%BB%96%E5%90%84%E7%B1%BB%E6%8B%9B%E8%81%98/%E9%95%BF%E5%B2%9B%E5%B7%A5%E5%8E%82%E6%8B%9B%E8%81%98%E6%8A%80%E6%9C%AF%E5%B7%A5%E4%BA%BA/137246"
-    },
-    {
       "id": "niuyuegongzuo_137245",
       "platform": "niuyuegongzuo",
-      "title": "请sushi师傅、炒锅646-359-0300",
+      "title": "请sushi师傅、炒锅[电话]",
       "date": "2026-05-20",
       "region": "东部",
       "state": "长岛",
@@ -2557,18 +1708,6 @@
       "url": "https://niuyuegongzuo.com/longisland/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/%E8%AF%B7sushi%E5%B8%88%E5%82%85%E7%82%92%E9%94%85646-359-0300/137245"
     },
     {
-      "id": "niuyuegongzuo_137244",
-      "platform": "niuyuegongzuo",
-      "title": "纽约曼哈顿 西药房请人",
-      "date": "2026-05-20",
-      "region": "东部",
-      "state": "曼哈顿",
-      "keywords_matched": [
-        "请人"
-      ],
-      "url": "https://niuyuegongzuo.com/manhattan/%E9%94%80%E5%94%AE%E5%8A%A9%E7%90%86%E6%96%87%E5%91%98/%E7%BA%BD%E7%BA%A6%E6%9B%BC%E5%93%88%E9%A1%BF-%E8%A5%BF%E8%8D%AF%E6%88%BF%E8%AF%B7%E4%BA%BA/137244"
-    },
-    {
       "id": "niuyuegongzuo_137242",
       "platform": "niuyuegongzuo",
       "title": "长岛日餐店请熟手厨房师傅",
@@ -2576,6 +1715,7 @@
       "region": "东部",
       "state": "长岛",
       "keywords_matched": [
+        "餐",
         "日餐",
         "厨房",
         "师傅"
@@ -2590,47 +1730,11 @@
       "region": "东部",
       "state": "长岛",
       "keywords_matched": [
+        "餐",
         "企台",
         "收银"
       ],
       "url": "https://niuyuegongzuo.com/longisland/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/%E9%95%BF%E5%B2%9B%E4%BA%9A%E6%B4%B2%E9%A4%90%E8%AF%B7%E7%86%9F%E6%89%8B%E4%BC%81%E5%8F%B0-and-%E7%86%9F%E6%89%8B%E6%94%B6%E9%93%B6/137235"
-    },
-    {
-      "id": "niuyuegongzuo_137234",
-      "platform": "niuyuegongzuo",
-      "title": "Jericho长岛报关行招人一名货代/报关员",
-      "date": "2026-05-20",
-      "region": "东部",
-      "state": "长岛",
-      "keywords_matched": [
-        "招人"
-      ],
-      "url": "https://niuyuegongzuo.com/longisland/%E5%85%B6%E4%BB%96%E5%90%84%E7%B1%BB%E6%8B%9B%E8%81%98/jericho%E9%95%BF%E5%B2%9B%E6%8A%A5%E5%85%B3%E8%A1%8C%E6%8B%9B%E4%BA%BA%E4%B8%80%E5%90%8D%E8%B4%A7%E4%BB%A3%E6%8A%A5%E5%85%B3%E5%91%98/137234"
-    },
-    {
-      "id": "niuyuegongzuo_137230",
-      "platform": "niuyuegongzuo",
-      "title": "皇家国旅 招人全职 前台销售&后台客服",
-      "date": "2026-05-20",
-      "region": "东部",
-      "state": "法拉盛",
-      "keywords_matched": [
-        "招人",
-        "前台"
-      ],
-      "url": "https://niuyuegongzuo.com/flushing/%E9%94%80%E5%94%AE%E5%8A%A9%E7%90%86%E6%96%87%E5%91%98/%E7%9A%87%E5%AE%B6%E5%9B%BD%E6%97%85-%E6%8B%9B%E4%BA%BA%E5%85%A8%E8%81%8C-%E5%89%8D%E5%8F%B0%E9%94%80%E5%94%AE%E5%90%8E%E5%8F%B0%E5%AE%A2%E6%9C%8D/137230"
-    },
-    {
-      "id": "niuyuegongzuo_137229",
-      "platform": "niuyuegongzuo",
-      "title": "🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢纽约上州 罗切斯特 招人小工\n中工\n大工 🟢🟢🟢🟢🟢🟢🟢🟢🟢",
-      "date": "2026-05-20",
-      "region": "东部",
-      "state": "上州",
-      "keywords_matched": [
-        "招人"
-      ],
-      "url": "https://niuyuegongzuo.com/upstate/%E6%8C%89%E6%91%A9%E7%BE%8E%E7%94%B2%E7%BE%8E%E5%9E%8B/%E7%BA%BD%E7%BA%A6%E4%B8%8A%E5%B7%9E-%E7%BD%97%E5%88%87%E6%96%AF%E7%89%B9-%E6%8B%9B%E4%BA%BA%E5%B0%8F%E5%B7%A5-%E4%B8%AD%E5%B7%A5-%E5%A4%A7%E5%B7%A5/137229"
     },
     {
       "id": "niuyuegongzuo_137228",
@@ -2640,46 +1744,23 @@
       "region": "东部",
       "state": "长岛",
       "keywords_matched": [
+        "餐",
         "企台",
         "收银"
       ],
       "url": "https://niuyuegongzuo.com/longisland/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/%E9%95%BF%E5%B2%9B%E4%BA%9A%E6%B4%B2%E9%A4%90%E8%AF%B7%E7%86%9F%E6%89%8B%E4%BC%81%E5%8F%B0-and-%E7%86%9F%E6%89%8B%E6%94%B6%E9%93%B6/137228"
     },
     {
-      "id": "niuyuegongzuo_137226",
+      "id": "niuyuegongzuo_135584",
       "platform": "niuyuegongzuo",
-      "title": "动漫仓库招聘全职工作职员；工作地点：长岛48出口",
+      "title": "连锁快餐米粉店招煮粉煮面员",
       "date": "2026-05-20",
       "region": "东部",
-      "state": "长岛",
+      "state": "纽约",
       "keywords_matched": [
-        "招聘"
+        "餐"
       ],
-      "url": "https://niuyuegongzuo.com/longisland/%E9%94%80%E5%94%AE%E5%8A%A9%E7%90%86%E6%96%87%E5%91%98/%E5%8A%A8%E6%BC%AB%E4%BB%93%E5%BA%93%E6%8B%9B%E8%81%98%E5%85%A8%E8%81%8C%E5%B7%A5%E4%BD%9C%E8%81%8C%E5%91%98%E5%B7%A5%E4%BD%9C%E5%9C%B0%E7%82%B9%E9%95%BF%E5%B2%9B48%E5%87%BA%E5%8F%A3/137226"
-    },
-    {
-      "id": "niuyuegongzuo_137223",
-      "platform": "niuyuegongzuo",
-      "title": "❣️❣️大学点 🏊‍游泳学校招聘 游泳教练数名❣️❣️",
-      "date": "2026-05-20",
-      "region": "东部",
-      "state": "法拉盛",
-      "keywords_matched": [
-        "招聘"
-      ],
-      "url": "https://niuyuegongzuo.com/flushing/%E8%80%81%E5%B8%88%E6%95%99%E7%BB%83/%E5%A4%A7%E5%AD%A6%E7%82%B9-%E6%B8%B8%E6%B3%B3%E5%AD%A6%E6%A0%A1%E6%8B%9B%E8%81%98-%E6%B8%B8%E6%B3%B3%E6%95%99%E7%BB%83%E6%95%B0%E5%90%8D/137223"
-    },
-    {
-      "id": "niuyuegongzuo_137217",
-      "platform": "niuyuegongzuo",
-      "title": "法拉盛接送新泽西富人区招人熟手小工全职/周末兼职",
-      "date": "2026-05-20",
-      "region": "东部",
-      "state": "新泽西",
-      "keywords_matched": [
-        "招人"
-      ],
-      "url": "https://niuyuegongzuo.com/newjersey/%E6%8C%89%E6%91%A9%E7%BE%8E%E7%94%B2%E7%BE%8E%E5%9E%8B/%E6%B3%95%E6%8B%89%E7%9B%9B%E6%8E%A5%E9%80%81%E6%96%B0%E6%B3%BD%E8%A5%BF%E5%AF%8C%E4%BA%BA%E5%8C%BA%E6%8B%9B%E4%BA%BA%E7%86%9F%E6%89%8B%E5%B0%8F%E5%B7%A5%E5%85%A8%E8%81%8C%E5%91%A8%E6%9C%AB%E5%85%BC%E8%81%8C/137217"
+      "url": "https://niuyuegongzuo.com/bronx/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/%E8%BF%9E%E9%94%81%E5%BF%AB%E9%A4%90%E7%B1%B3%E7%B2%89%E5%BA%97%E6%8B%9B%E7%85%AE%E7%B2%89%E7%85%AE%E9%9D%A2%E5%91%98/135584"
     },
     {
       "id": "niuyuegongzuo_137216",
@@ -2689,9 +1770,11 @@
       "region": "东部",
       "state": "长岛",
       "keywords_matched": [
+        "餐",
+        "中餐",
+        "外卖",
         "前台",
-        "收银",
-        "外卖"
+        "收银"
       ],
       "url": "https://niuyuegongzuo.com/longisland/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/%E9%95%BF%E5%B2%9B%E4%B8%AD%E9%A4%90%E5%A4%96%E5%8D%96%E5%BA%97%E8%AF%9A%E8%81%98%E5%89%8D%E5%8F%B0%E6%94%B6%E9%93%B6/137216"
     },
@@ -2706,30 +1789,6 @@
         "寿司"
       ],
       "url": "https://niuyuegongzuo.com/longisland/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/%E7%BB%8F%E9%AA%8C%E5%AF%BF%E5%8F%B8%E6%8A%80%E6%9C%AF%E4%B8%93%E5%91%98/137215"
-    },
-    {
-      "id": "niuyuegongzuo_87215",
-      "platform": "niuyuegongzuo",
-      "title": "曼哈顿中医诊所诚聘前台全职/兼职",
-      "date": "2026-05-20",
-      "region": "东部",
-      "state": "曼哈顿",
-      "keywords_matched": [
-        "前台"
-      ],
-      "url": "https://niuyuegongzuo.com/manhattan/%E5%85%B6%E4%BB%96%E5%90%84%E7%B1%BB%E6%8B%9B%E8%81%98/%E6%9B%BC%E5%93%88%E9%A1%BF%E4%B8%AD%E5%8C%BB%E8%AF%8A%E6%89%80%E8%AF%9A%E8%81%98%E5%89%8D%E5%8F%B0%E5%85%A8%E8%81%8C%E5%85%BC%E8%81%8C/87215"
-    },
-    {
-      "id": "niuyuegongzuo_137212",
-      "platform": "niuyuegongzuo",
-      "title": "贝塞/bayside最大甲店 请大工。小工。前台经理 报酬好。提成高- 6468862276",
-      "date": "2026-05-20",
-      "region": "东部",
-      "state": "皇后区",
-      "keywords_matched": [
-        "前台"
-      ],
-      "url": "https://niuyuegongzuo.com/queens/%E6%8C%89%E6%91%A9%E7%BE%8E%E7%94%B2%E7%BE%8E%E5%9E%8B/%E8%B4%9D%E5%A1%9Ebayside%E6%9C%80%E5%A4%A7%E7%94%B2%E5%BA%97-%E8%AF%B7%E5%A4%A7%E5%B7%A5%E5%B0%8F%E5%B7%A5%E5%89%8D%E5%8F%B0%E7%BB%8F%E7%90%86-%E6%8A%A5%E9%85%AC%E5%A5%BD%E6%8F%90%E6%88%90%E9%AB%98-6468862276/137212"
     },
     {
       "id": "niuyuegongzuo_137206",
@@ -2751,6 +1810,7 @@
       "region": "东部",
       "state": "法拉盛",
       "keywords_matched": [
+        "餐",
         "打包"
       ],
       "url": "https://niuyuegongzuo.com/flushing/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/%E6%B3%95%E6%8B%89%E7%9B%9B%E6%8E%A5%E9%80%81%E8%AF%B7%E7%86%9F%E6%89%8B%E6%89%93%E5%8C%85%E5%87%BA%E9%A4%90/137201"
@@ -2761,11 +1821,12 @@
       "title": "长岛市面馆后厨打杂请人（可兼职）",
       "date": "2026-05-19",
       "region": "东部",
-      "state": "皇后区",
+      "state": "长岛",
       "keywords_matched": [
-        "请人",
+        "面馆",
         "后厨",
-        "打杂"
+        "打杂",
+        "请人"
       ],
       "url": "https://niuyuegongzuo.com/queens/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/%E9%95%BF%E5%B2%9B%E5%B8%82%E9%9D%A2%E9%A6%86%E5%90%8E%E5%8E%A8%E6%89%93%E6%9D%82%E8%AF%B7%E4%BA%BA%E5%8F%AF%E5%85%BC%E8%81%8C/137200"
     },
@@ -2785,7 +1846,7 @@
     {
       "id": "niuyuegongzuo_137195",
       "platform": "niuyuegongzuo",
-      "title": "长岛49 出口  橱柜工厂 石材加工厂 请 办公室文员，会英文懂办公软件;  熟手磨石头师傅   ，非诚勿扰 3477544310    6318155058",
+      "title": "长岛49 出口  橱柜工厂 石材加工厂 请 办公室文员，会英文懂办公软件;  熟手磨石头师傅   ，非诚勿扰[电话]   [电话]",
       "date": "2026-05-19",
       "region": "东部",
       "state": "长岛",
@@ -2795,40 +1856,16 @@
       "url": "https://niuyuegongzuo.com/longisland/%E9%94%80%E5%94%AE%E5%8A%A9%E7%90%86%E6%96%87%E5%91%98/%E9%95%BF%E5%B2%9B49-%E5%87%BA%E5%8F%A3-%E6%A9%B1%E6%9F%9C%E5%B7%A5%E5%8E%82-%E7%9F%B3%E6%9D%90%E5%8A%A0%E5%B7%A5%E5%8E%82-%E8%AF%B7-%E5%8A%9E%E5%85%AC%E5%AE%A4%E6%96%87%E5%91%98%E4%BC%9A%E8%8B%B1%E6%96%87%E6%87%82%E5%8A%9E%E5%85%AC%E8%BD%AF%E4%BB%B6-%E7%86%9F%E6%89%8B%E7%A3%A8%E7%9F%B3%E5%A4%B4%E5%B8%88%E5%82%85-%E9%9D%9E%E8%AF%9A%E5%8B%BF%E6%89%B0-3477544310-6318155058/137195"
     },
     {
-      "id": "niuyuegongzuo_137193",
-      "platform": "niuyuegongzuo",
-      "title": "corona 可乐娜 请99收银",
-      "date": "2026-05-19",
-      "region": "东部",
-      "state": "皇后区",
-      "keywords_matched": [
-        "收银"
-      ],
-      "url": "https://niuyuegongzuo.com/queens/%E5%85%B6%E4%BB%96%E5%90%84%E7%B1%BB%E6%8B%9B%E8%81%98/corona-%E5%8F%AF%E4%B9%90%E5%A8%9C-%E8%AF%B799%E6%94%B6%E9%93%B6/137193"
-    },
-    {
       "id": "niuyuegongzuo_137192",
       "platform": "niuyuegongzuo",
       "title": "纽约安装门窗集团;急招安装师傅",
       "date": "2026-05-19",
       "region": "东部",
-      "state": "法拉盛",
+      "state": "纽约",
       "keywords_matched": [
         "师傅"
       ],
       "url": "https://niuyuegongzuo.com/flushing/%E5%B7%A5%E5%9C%B0%E8%A3%85%E4%BF%AE%E5%BB%BA%E7%AD%91/%E7%BA%BD%E7%BA%A6%E5%AE%89%E8%A3%85%E9%97%A8%E7%AA%97%E9%9B%86%E5%9B%A2%E6%80%A5%E6%8B%9B%E5%AE%89%E8%A3%85%E5%B8%88%E5%82%85/137192"
-    },
-    {
-      "id": "niuyuegongzuo_137191",
-      "platform": "niuyuegongzuo",
-      "title": "长岛诚聘前台",
-      "date": "2026-05-19",
-      "region": "东部",
-      "state": "长岛",
-      "keywords_matched": [
-        "前台"
-      ],
-      "url": "https://niuyuegongzuo.com/longisland/%E9%94%80%E5%94%AE%E5%8A%A9%E7%90%86%E6%96%87%E5%91%98/%E9%95%BF%E5%B2%9B%E8%AF%9A%E8%81%98%E5%89%8D%E5%8F%B0/137191"
     },
     {
       "id": "niuyuegongzuo_137190",
@@ -2838,21 +1875,10 @@
       "region": "东部",
       "state": "法拉盛",
       "keywords_matched": [
+        "烧烤",
         "师傅"
       ],
       "url": "https://niuyuegongzuo.com/flushing/%E5%85%B6%E4%BB%96%E5%90%84%E7%B1%BB%E6%8B%9B%E8%81%98/%E8%AF%B7%E7%83%A7%E7%83%A4%E5%B8%88%E5%82%85-%E6%B3%95%E6%8B%89%E7%9B%9B/137190"
-    },
-    {
-      "id": "niuyuegongzuo_137188",
-      "platform": "niuyuegongzuo",
-      "title": "法拉盛注册会计师楼招聘 兼职/全职助理",
-      "date": "2026-05-19",
-      "region": "东部",
-      "state": "法拉盛",
-      "keywords_matched": [
-        "招聘"
-      ],
-      "url": "https://niuyuegongzuo.com/flushing/%E9%94%80%E5%94%AE%E5%8A%A9%E7%90%86%E6%96%87%E5%91%98/%E6%B3%95%E6%8B%89%E7%9B%9B%E6%B3%A8%E5%86%8C%E4%BC%9A%E8%AE%A1%E5%B8%88%E6%A5%BC%E6%8B%9B%E8%81%98-%E5%85%BC%E8%81%8C%E5%85%A8%E8%81%8C%E5%8A%A9%E7%90%86/137188"
     },
     {
       "id": "niuyuegongzuo_137185",
@@ -2886,10 +1912,22 @@
       "region": "东部",
       "state": "长岛",
       "keywords_matched": [
-        "前台",
-        "外卖"
+        "外卖",
+        "前台"
       ],
       "url": "https://niuyuegongzuo.com/longisland/%E9%94%80%E5%94%AE%E5%8A%A9%E7%90%86%E6%96%87%E5%91%98/%E9%95%BF%E5%B2%9B%E5%A4%96%E5%8D%96%E5%BA%97%E8%AF%B7%E7%86%9F%E6%89%8B%E5%89%8D%E5%8F%B0/137182"
+    },
+    {
+      "id": "niuyuegongzuo_137181",
+      "platform": "niuyuegongzuo",
+      "title": "曼哈顿下城面店 招出餐师父",
+      "date": "2026-05-19",
+      "region": "东部",
+      "state": "曼哈顿",
+      "keywords_matched": [
+        "餐"
+      ],
+      "url": "https://niuyuegongzuo.com/manhattan/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/%E6%9B%BC%E5%93%88%E9%A1%BF%E4%B8%8B%E5%9F%8E%E9%9D%A2%E5%BA%97-%E6%8B%9B%E5%87%BA%E9%A4%90%E5%B8%88%E7%88%B6/137181"
     },
     {
       "id": "niuyuegongzuo_137180",
@@ -2897,23 +1935,11 @@
       "title": "法拉盛接送新店请熟手打包",
       "date": "2026-05-19",
       "region": "东部",
-      "state": "新泽西",
+      "state": "法拉盛",
       "keywords_matched": [
         "打包"
       ],
       "url": "https://niuyuegongzuo.com/newjersey/%E5%85%B6%E4%BB%96%E5%90%84%E7%B1%BB%E6%8B%9B%E8%81%98/%E6%B3%95%E6%8B%89%E7%9B%9B%E6%8E%A5%E9%80%81%E6%96%B0%E5%BA%97%E8%AF%B7%E7%86%9F%E6%89%8B%E6%89%93%E5%8C%85/137180"
-    },
-    {
-      "id": "niuyuegongzuo_137179",
-      "platform": "niuyuegongzuo",
-      "title": "请人 法拉盛接送",
-      "date": "2026-05-19",
-      "region": "东部",
-      "state": "上州",
-      "keywords_matched": [
-        "请人"
-      ],
-      "url": "https://niuyuegongzuo.com/upstate/%E5%85%B6%E4%BB%96%E5%90%84%E7%B1%BB%E6%8B%9B%E8%81%98/%E8%AF%B7%E4%BA%BA-%E6%B3%95%E6%8B%89%E7%9B%9B%E6%8E%A5%E9%80%81/137179"
     },
     {
       "id": "niuyuegongzuo_137178",
@@ -2924,33 +1950,10 @@
       "state": "法拉盛",
       "keywords_matched": [
         "餐館",
+        "餐",
         "請人"
       ],
       "url": "https://niuyuegongzuo.com/flushing/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/%E9%95%B7%E5%B3%B6%E9%A4%90%E9%A4%A8%E8%AB%8B%E4%BA%BA/137178"
-    },
-    {
-      "id": "niuyuegongzuo_137176",
-      "platform": "niuyuegongzuo",
-      "title": "招聘：卡车配件行业-销售经理",
-      "date": "2026-05-19",
-      "region": "东部",
-      "state": "新泽西",
-      "keywords_matched": [
-        "招聘"
-      ],
-      "url": "https://niuyuegongzuo.com/newjersey/%E9%94%80%E5%94%AE%E5%8A%A9%E7%90%86%E6%96%87%E5%91%98/%E6%8B%9B%E8%81%98%E5%8D%A1%E8%BD%A6%E9%85%8D%E4%BB%B6%E8%A1%8C%E4%B8%9A-%E9%94%80%E5%94%AE%E7%BB%8F%E7%90%86/137176"
-    },
-    {
-      "id": "niuyuegongzuo_135214",
-      "platform": "niuyuegongzuo",
-      "title": "🔥布鲁克林 儿科诊所 诚聘前台！！🔥🔥",
-      "date": "2026-05-19",
-      "region": "东部",
-      "state": "布鲁克林",
-      "keywords_matched": [
-        "前台"
-      ],
-      "url": "https://niuyuegongzuo.com/brooklyn/%E8%AF%8A%E6%89%80%E8%8D%AF%E6%88%BF/%E5%B8%83%E9%B2%81%E5%85%8B%E6%9E%97-%E5%84%BF%E7%A7%91%E8%AF%8A%E6%89%80-%E8%AF%9A%E8%81%98%E5%89%8D%E5%8F%B0/135214"
     },
     {
       "id": "niuyuegongzuo_137166",
@@ -2961,6 +1964,7 @@
       "state": "法拉盛",
       "keywords_matched": [
         "餐馆",
+        "餐",
         "炒锅"
       ],
       "url": "https://niuyuegongzuo.com/flushing/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/%E9%A4%90%E9%A6%86%E8%AF%B7%E7%82%92%E9%94%85/137166"
@@ -2968,12 +1972,13 @@
     {
       "id": "niuyuegongzuo_137165",
       "platform": "niuyuegongzuo",
-      "title": "新泽西诚请餐厅企台，联系电话732-672-9992",
+      "title": "新泽西诚请餐厅企台，联系电话[电话]",
       "date": "2026-05-18",
       "region": "东部",
       "state": "新泽西",
       "keywords_matched": [
         "餐厅",
+        "餐",
         "企台"
       ],
       "url": "https://niuyuegongzuo.com/newjersey/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/%E6%96%B0%E6%B3%BD%E8%A5%BF%E8%AF%9A%E8%AF%B7%E9%A4%90%E5%8E%85%E4%BC%81%E5%8F%B0%E8%81%94%E7%B3%BB%E7%94%B5%E8%AF%9D732-672-9992/137165"
@@ -2986,6 +1991,7 @@
       "region": "东部",
       "state": "长岛",
       "keywords_matched": [
+        "餐",
         "日餐",
         "企台"
       ],
@@ -2999,8 +2005,8 @@
       "region": "东部",
       "state": "曼哈顿",
       "keywords_matched": [
-        "招聘",
-        "師傅"
+        "師傅",
+        "招聘"
       ],
       "url": "https://niuyuegongzuo.com/manhattan/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/%E6%9B%BC%E5%93%88%E9%A0%93%E6%97%A5%E6%9C%AC%E8%B6%85%E5%B8%82%E8%AA%A0%E8%AB%8B%E6%8B%9B%E8%81%98%E4%B8%80%E5%90%8D%E9%95%B7%E6%9C%9F%E5%85%BC%E8%81%B7%E4%B8%80%E4%BA%8C%E5%9B%9B%E7%9A%84sushi%E5%B8%AB%E5%82%85/137163"
     },
@@ -3029,6 +2035,18 @@
       "url": "https://niuyuegongzuo.com/manhattan/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/%E6%9B%BC%E5%93%88%E9%A1%BF%E8%AF%B7sushi%E4%BC%81%E5%8F%B0/137161"
     },
     {
+      "id": "niuyuegongzuo_137160",
+      "platform": "niuyuegongzuo",
+      "title": "纽约长岛快餐店聘请, 生熟手都可",
+      "date": "2026-05-18",
+      "region": "东部",
+      "state": "纽约",
+      "keywords_matched": [
+        "餐"
+      ],
+      "url": "https://niuyuegongzuo.com/longisland/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/%E7%BA%BD%E7%BA%A6%E9%95%BF%E5%B2%9B%E5%BF%AB%E9%A4%90%E5%BA%97%E8%81%98%E8%AF%B7-%E7%94%9F%E7%86%9F%E6%89%8B%E9%83%BD%E5%8F%AF/137160"
+    },
+    {
       "id": "niuyuegongzuo_137157",
       "platform": "niuyuegongzuo",
       "title": "长岛亚洲餐请兼职汽车送外卖",
@@ -3036,6 +2054,7 @@
       "region": "东部",
       "state": "长岛",
       "keywords_matched": [
+        "餐",
         "外卖"
       ],
       "url": "https://niuyuegongzuo.com/longisland/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/%E9%95%BF%E5%B2%9B%E4%BA%9A%E6%B4%B2%E9%A4%90%E8%AF%B7%E5%85%BC%E8%81%8C%E6%B1%BD%E8%BD%A6%E9%80%81%E5%A4%96%E5%8D%96/137157"
@@ -3048,57 +2067,10 @@
       "region": "东部",
       "state": "法拉盛",
       "keywords_matched": [
-        "餐馆"
+        "餐馆",
+        "餐"
       ],
       "url": "https://niuyuegongzuo.com/flushing/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/%E6%B3%95%E6%8B%89%E7%9B%9B%E7%8E%8B%E5%AD%90%E8%A1%97%E9%A4%90%E9%A6%86%E6%80%A5%E8%81%98/137156"
-    },
-    {
-      "id": "niuyuegongzuo_137152",
-      "platform": "niuyuegongzuo",
-      "title": "长岛38出口💅高档甲店，客人好保底小费20%，请人熟手臭粉UVGel全能大工，小工，",
-      "date": "2026-05-18",
-      "region": "东部",
-      "state": "长岛",
-      "keywords_matched": [
-        "请人"
-      ],
-      "url": "https://niuyuegongzuo.com/longisland/%E6%8C%89%E6%91%A9%E7%BE%8E%E7%94%B2%E7%BE%8E%E5%9E%8B/%E9%95%BF%E5%B2%9B38%E5%87%BA%E5%8F%A3%E9%AB%98%E6%A1%A3%E7%94%B2%E5%BA%97%E5%AE%A2%E4%BA%BA%E5%A5%BD%E4%BF%9D%E5%BA%95%E5%B0%8F%E8%B4%B920%E8%AF%B7%E4%BA%BA%E7%86%9F%E6%89%8B%E8%87%AD%E7%B2%89uvgel%E5%85%A8%E8%83%BD%E5%A4%A7%E5%B7%A5%E5%B0%8F%E5%B7%A5/137152"
-    },
-    {
-      "id": "niuyuegongzuo_137143",
-      "platform": "niuyuegongzuo",
-      "title": "* 长岛（办公室）纽约新泽西，卡车运输企业招聘办公室职员！",
-      "date": "2026-05-18",
-      "region": "东部",
-      "state": "长岛",
-      "keywords_matched": [
-        "招聘"
-      ],
-      "url": "https://niuyuegongzuo.com/longisland/%E4%BB%93%E5%BA%93%E7%89%A9%E6%B5%81%E5%8F%B8%E6%9C%BA/%E9%95%BF%E5%B2%9B%E5%8A%9E%E5%85%AC%E5%AE%A4%E7%BA%BD%E7%BA%A6%E6%96%B0%E6%B3%BD%E8%A5%BF%E5%8D%A1%E8%BD%A6%E8%BF%90%E8%BE%93%E4%BC%81%E4%B8%9A%E6%8B%9B%E8%81%98%E5%8A%9E%E5%85%AC%E5%AE%A4%E8%81%8C%E5%91%98/137143"
-    },
-    {
-      "id": "niuyuegongzuo_137137",
-      "platform": "niuyuegongzuo",
-      "title": "按摩招人：长岛20年老店\n商场正规按摩\n招收50岁以下健康人士\n男女都可",
-      "date": "2026-05-18",
-      "region": "东部",
-      "state": "长岛",
-      "keywords_matched": [
-        "招人"
-      ],
-      "url": "https://niuyuegongzuo.com/longisland/%E6%8C%89%E6%91%A9%E7%BE%8E%E7%94%B2%E7%BE%8E%E5%9E%8B/%E6%8C%89%E6%91%A9%E6%8B%9B%E4%BA%BA%E9%95%BF%E5%B2%9B20%E5%B9%B4%E8%80%81%E5%BA%97-%E5%95%86%E5%9C%BA%E6%AD%A3%E8%A7%84%E6%8C%89%E6%91%A9-%E6%8B%9B%E6%94%B650%E5%B2%81%E4%BB%A5%E4%B8%8B%E5%81%A5%E5%BA%B7%E4%BA%BA%E5%A3%AB-%E7%94%B7%E5%A5%B3%E9%83%BD%E5%8F%AF/137137"
-    },
-    {
-      "id": "niuyuegongzuo_137131",
-      "platform": "niuyuegongzuo",
-      "title": "* 音乐学校招聘 传单派发职员 *（兼职）",
-      "date": "2026-05-18",
-      "region": "东部",
-      "state": "法拉盛",
-      "keywords_matched": [
-        "招聘"
-      ],
-      "url": "https://niuyuegongzuo.com/flushing/%E5%85%B6%E4%BB%96%E5%90%84%E7%B1%BB%E6%8B%9B%E8%81%98/%E9%9F%B3%E4%B9%90%E5%AD%A6%E6%A0%A1%E6%8B%9B%E8%81%98-%E4%BC%A0%E5%8D%95%E6%B4%BE%E5%8F%91%E8%81%8C%E5%91%98-%E5%85%BC%E8%81%8C/137131"
     },
     {
       "id": "niuyuegongzuo_137127",
@@ -3108,8 +2080,10 @@
       "region": "东部",
       "state": "长岛",
       "keywords_matched": [
-        "炒锅",
-        "外卖"
+        "餐",
+        "中餐",
+        "外卖",
+        "炒锅"
       ],
       "url": "https://niuyuegongzuo.com/longisland/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/%E9%95%BF%E5%B2%9B%E4%B8%AD%E9%A4%90%E5%A4%96%E5%8D%96%E5%BA%97%E8%AF%B7%E7%86%9F%E6%89%8B%E7%82%92%E9%94%85%E5%B8%88%E7%88%B6/137127"
     },
@@ -3121,22 +2095,10 @@
       "region": "东部",
       "state": "长岛",
       "keywords_matched": [
-        "企台",
-        "外卖"
+        "外卖",
+        "企台"
       ],
       "url": "https://niuyuegongzuo.com/longisland/%E5%85%B6%E4%BB%96%E5%90%84%E7%B1%BB%E6%8B%9B%E8%81%98/%E8%AF%B7%E6%95%A3%E5%B7%A5%E5%8C%85%E5%A4%96%E5%8D%96%E5%92%8C%E6%95%A3%E5%B7%A5%E4%BC%81%E5%8F%B0/137125"
-    },
-    {
-      "id": "niuyuegongzuo_137124",
-      "platform": "niuyuegongzuo",
-      "title": "海外仓多职位招聘 住BK有接送",
-      "date": "2026-05-18",
-      "region": "东部",
-      "state": "新泽西",
-      "keywords_matched": [
-        "招聘"
-      ],
-      "url": "https://niuyuegongzuo.com/newjersey/%E9%94%80%E5%94%AE%E5%8A%A9%E7%90%86%E6%96%87%E5%91%98/%E6%B5%B7%E5%A4%96%E4%BB%93%E5%A4%9A%E8%81%8C%E4%BD%8D%E6%8B%9B%E8%81%98-%E4%BD%8Fbk%E6%9C%89%E6%8E%A5%E9%80%81/137124"
     },
     {
       "id": "niuyuegongzuo_137120",
@@ -3149,42 +2111,6 @@
         "师傅"
       ],
       "url": "https://niuyuegongzuo.com/flushing/%E5%85%B6%E4%BB%96%E5%90%84%E7%B1%BB%E6%8B%9B%E8%81%98/%E6%B3%95%E6%8B%89%E7%9B%9B%E8%AF%B7%E7%86%9F%E6%89%8B%E5%AE%89%E8%A3%85%E5%8F%B0%E9%9D%A2%E5%92%8C%E7%9F%B3%E5%A4%B4%E6%89%93%E7%A3%A8%E5%B8%88%E5%82%85/137120"
-    },
-    {
-      "id": "niuyuegongzuo_128951",
-      "platform": "niuyuegongzuo",
-      "title": "招聘：保险经纪 Insurance Broker",
-      "date": "2026-05-18",
-      "region": "东部",
-      "state": "法拉盛",
-      "keywords_matched": [
-        "招聘"
-      ],
-      "url": "https://niuyuegongzuo.com/flushing/%E9%94%80%E5%94%AE%E5%8A%A9%E7%90%86%E6%96%87%E5%91%98/%E6%8B%9B%E8%81%98%E4%BF%9D%E9%99%A9%E7%BB%8F%E7%BA%AA-insurance-broker/128951"
-    },
-    {
-      "id": "niuyuegongzuo_137106",
-      "platform": "niuyuegongzuo",
-      "title": "洗衣店请人",
-      "date": "2026-05-18",
-      "region": "东部",
-      "state": "法拉盛",
-      "keywords_matched": [
-        "请人"
-      ],
-      "url": "https://niuyuegongzuo.com/flushing/%E5%85%B6%E4%BB%96%E5%90%84%E7%B1%BB%E6%8B%9B%E8%81%98/%E6%B4%97%E8%A1%A3%E5%BA%97%E8%AF%B7%E4%BA%BA/137106"
-    },
-    {
-      "id": "niuyuegongzuo_137102",
-      "platform": "niuyuegongzuo",
-      "title": "近法拉盛长岛仓库请人",
-      "date": "2026-05-18",
-      "region": "东部",
-      "state": "长岛",
-      "keywords_matched": [
-        "请人"
-      ],
-      "url": "https://niuyuegongzuo.com/longisland/%E4%BB%93%E5%BA%93%E7%89%A9%E6%B5%81%E5%8F%B8%E6%9C%BA/%E8%BF%91%E6%B3%95%E6%8B%89%E7%9B%9B%E9%95%BF%E5%B2%9B%E4%BB%93%E5%BA%93%E8%AF%B7%E4%BA%BA/137102"
     },
     {
       "id": "niuyuegongzuo_137099",

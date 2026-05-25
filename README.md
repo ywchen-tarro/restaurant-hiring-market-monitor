@@ -106,12 +106,29 @@ bash run.sh
 bash install_schedule.sh
 ```
 
-The installer writes a launchd plist to `~/Library/LaunchAgents/`. Trigger a test run anytime:
+The installer writes two launchd plists to `~/Library/LaunchAgents/`:
+- **scraper** — Mon + Thu 09:00 → runs the scrape and pushes the JSON
+- **watchdog** — daily 10:00 → checks the heartbeat and pops a macOS notification if no successful run in 4+ days
+
+> **One manual step the first time:** if the project lives in iCloud Drive, macOS blocks launchd-spawned processes from reading it. After `install_schedule.sh`, grant **Full Disk Access** to `/bin/bash`:
+> System Settings → Privacy & Security → Full Disk Access → `+` → Cmd+Shift+G → type `/bin/bash` → toggle on. The installer prints these instructions when it runs.
+
+Trigger a test run anytime:
 
 ```bash
 launchctl start local.restaurant-hiring-monitor
 tail -f logs/scraper.log
 ```
+
+### Monitoring — is it still running?
+
+Three layers, in increasing effort:
+
+1. **macOS Notification Center** — every scrape (Mon + Thu) fires a banner: `Hiring Monitor: OK · 150 posts · pushed` on success, `Hiring Monitor: FAIL` on failure. The daily watchdog fires `Hiring Monitor: STALE` if no successful run in 4+ days (catches the case where the Mac was asleep through the scheduled window).
+2. **Status command** — `bash check-health.sh` prints last successful run, time since, warnings, per-platform diagnostics, launchd job status, recent log tails, and git state on one screen.
+3. **Dashboard banner** — if `meta.last_updated` is >4 days old when someone opens the dashboard, an orange banner reads `数据已 N 天未更新 — 请检查 launchd 调度`.
+
+Per-platform health (rows parsed, posts dropped, dropped-by-reason) is written to `meta.diagnostics` in `posts.json` on every run, so a silent schema-drift on one platform shows up immediately.
 
 ### View locally during development
 

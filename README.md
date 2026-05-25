@@ -40,11 +40,13 @@ A Growth team uses this to:
 
 | Platform | URL | Status |
 |---|---|---|
-| 168worker | https://www.168worker.com/list/1_0 | Disabled — anti-bot block, see "Adding platforms" below |
+| 168worker | https://www.168worker.com/list/1_0 | Disabled — anti-bot block (see [ROADMAP.md](./ROADMAP.md)) |
 | 华人街生活网 | https://www.usahuarenjie.com/category-catid-251.html | ✅ Active |
 | 500work | https://www.500work.com/ | Disabled — anti-bot block |
 | 北美餐饮通 | https://uscanyin.com/en/jobs | Disabled — pagination scale (~4,500 pages) needs custom handling |
 | 纽约工作网 | https://niuyuegongzuo.com/ | ✅ Active |
+
+The plan to unblock the disabled platforms — including which anti-bot tools to try in what order, and how to add new ones — lives in [ROADMAP.md](./ROADMAP.md).
 
 A post is counted as a restaurant job when its title matches at least one **strong** keyword — a clear venue (`餐馆`, `火锅`, `日料`, `奶茶`) or a restaurant-specific role (`炒锅`, `油锅`, `厨师`, `企台`, `打杂`, `服务员`). Ambiguous terms (`招聘`, `招人`, `请人`, `前台`, `收银`) appear in many other industries and don't qualify a post on their own.
 

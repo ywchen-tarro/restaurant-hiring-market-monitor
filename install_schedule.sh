@@ -14,6 +14,21 @@ if [ ! -f "$TEMPLATE" ]; then
     exit 1
 fi
 
+# launchd inherits a stripped environment. git push will fail silently if
+# git can't find a credential helper that works without a TTY. The gh CLI
+# stores its token in macOS Keychain and is accessible from launchd as long
+# as gh is configured as the helper. `gh auth setup-git` does this — it's
+# idempotent so we re-run it here as defensive setup.
+if command -v gh >/dev/null 2>&1; then
+    if ! gh auth status >/dev/null 2>&1; then
+        echo "Warning: gh CLI is not authenticated. Run 'gh auth login' first." >&2
+    else
+        gh auth setup-git
+    fi
+else
+    echo "Warning: gh CLI not on PATH. Install it or git push will fail under launchd." >&2
+fi
+
 mkdir -p "${PROJECT_DIR}/logs"
 mkdir -p "${HOME}/Library/LaunchAgents"
 

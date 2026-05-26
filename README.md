@@ -2,7 +2,7 @@
 
 > Is the US restaurant market expanding or cooling right now?
 
-Twice a week, this project counts how many restaurant-job posts appear on the five largest Chinese-language US job boards. More posts → restaurants are growing → more demand in the market. Fewer posts → cooling. The number is a fast, free, weekly read on a market segment that no public dataset tracks at this resolution.
+Every day, this project counts how many restaurant-job posts appear on the six largest Chinese-language US job boards. More posts → restaurants are growing → more demand in the market. Fewer posts → cooling. The number is a fast, free, daily read on a market segment that no public dataset tracks at this resolution.
 
 **Live dashboard:** https://ywchen-tarro.github.io/restaurant-hiring-market-monitor/
 
@@ -12,7 +12,7 @@ Twice a week, this project counts how many restaurant-job posts appear on the fi
 
 > **Everything user-facing is time-based.** Counts, deltas, and the
 > rising/cooling signal all bucket posts by their **post date** (the date
-> on the source listing), not by which scrape batch found them. The Mon/Thu
+> on the source listing), not by which scrape batch found them. The daily
 > scrape cadence is an implementation detail.
 
 Top of page is a row of five KPI cards (English / 中文 labels swap with the language toggle):
@@ -49,7 +49,7 @@ The Market Signal card and alert banner compare each platform's **last-7-day pos
 
 A Growth team uses this to:
 1. **Time outbound pushes** into regions that are heating up.
-2. **Spot cooling early** — when the signal drops two runs in a row, the segment is softening.
+2. **Spot cooling early** — when the signal drops 2-3 days in a row, the segment is softening.
 3. **Skip slow weeks** — no point launching campaigns when volume is at a local minimum.
 
 ---
@@ -69,7 +69,22 @@ All six platforms are active. **168worker and 500work share the same CMS / post 
 
 For the anti-bot strategy (TLS fingerprinting via `curl_cffi`, why it was needed, and what to try next) and how to add new platforms — see [ROADMAP.md](./ROADMAP.md).
 
-A post is counted as a restaurant job when its title matches at least one **strong** keyword — a clear venue (`餐馆`, `火锅`, `日料`, `奶茶`) or a restaurant-specific role (`炒锅`, `油锅`, `厨师`, `企台`, `打杂`, `服务员`). Ambiguous terms (`招聘`, `招人`, `请人`, `前台`, `收银`) appear in many other industries and don't qualify a post on their own.
+A post is counted as a restaurant job when its title passes the filter in
+`scraper/keywords.py`:
+
+- **Venue keywords** are strong restaurant anchors: `餐馆`, `餐厅`, `餐饮`,
+  `火锅`, `奶茶`, `日餐`, `中餐`, `寿司`, `烧烤`, `外卖`, `面馆`,
+  `茶餐厅`, `饭店`, etc.
+- **Role keywords** are strong restaurant-specific jobs: `炒锅`, `油锅`,
+  `厨师`, `厨房`, `后厨`, `企台`, `帮厨`, `打杂`, `洗碗`, `服务员`,
+  `点餐`, `送餐`, `抓码`, `面点`, etc.
+- **Weak keywords** are display-only: `招聘`, `招人`, `请人`, `前台`,
+  `收银`, `师傅`, `打包`. They appear in many other industries, so they
+  do **not** qualify a post on their own.
+- **Negative keywords** block obvious non-restaurant trades when no venue
+  keyword is present: `电工`, `装修`, `门窗`, `叉车`, `仓库`, `干洗`,
+  `裁缝`, `安装`, `维修`, `拣货`, etc. A venue anchor wins, so
+  `餐馆水电维修工` still counts.
 
 Each post is classified into one of four US regions: 东部 / 南部 / 中部 / 西部, by state-token match against ~150 city/state names (Simplified + Traditional Chinese + English).
 
@@ -143,15 +158,15 @@ gh auth setup-git
 bash run.sh
 ```
 
-### Install the schedule (Mon + Thu 09:00 local time)
+### Install the schedule (daily at 09:00 local time)
 
 ```bash
 bash install_schedule.sh
 ```
 
 The installer writes two launchd plists to `~/Library/LaunchAgents/`:
-- **scraper** — Mon + Thu 09:00 → runs the scrape and pushes the JSON
-- **watchdog** — daily 10:00 → checks the heartbeat and pops a macOS notification if no successful run in 4+ days
+- **scraper** — daily 09:00 → runs the scrape and pushes the JSON
+- **watchdog** — daily 10:00 → checks the heartbeat and pops a macOS notification if no successful run in the last 36 hours
 
 > **One manual step the first time:** if the project lives in iCloud Drive, macOS blocks launchd-spawned processes from reading it. After `install_schedule.sh`, grant **Full Disk Access** to `/bin/bash`:
 > System Settings → Privacy & Security → Full Disk Access → `+` → Cmd+Shift+G → type `/bin/bash` → toggle on. The installer prints these instructions when it runs.
@@ -179,7 +194,7 @@ The dashboard is responsive down to phone widths (≥320px). Breakpoints:
 
 Three layers, in increasing effort:
 
-1. **macOS Notification Center** — every scrape (Mon + Thu) fires a banner: `Hiring Monitor: OK · 150 posts · pushed` on success, `Hiring Monitor: FAIL` on failure. The daily watchdog fires `Hiring Monitor: STALE` if no successful run in 4+ days (catches the case where the Mac was asleep through the scheduled window).
+1. **macOS Notification Center** — every daily scrape fires a banner: `Hiring Monitor: OK · 150 posts · pushed` on success, `Hiring Monitor: FAIL` on failure. The daily watchdog fires `Hiring Monitor: STALE` if no successful run in the last 36 hours (catches the case where the Mac was asleep through the scheduled window).
 2. **Status command** — `bash check-health.sh` prints last successful run, time since, warnings, per-platform diagnostics, launchd job status, recent log tails, and git state on one screen.
 3. **Dashboard banner** — if `meta.last_updated` is >4 days old when someone opens the dashboard, an orange banner reads `数据已 N 天未更新 — 请检查 launchd 调度`.
 
@@ -235,6 +250,33 @@ All knobs live in **`scraper/config.py`**:
 - `PLATFORMS` — list of platforms; `"enabled": false` toggles one off.
 - `USER_AGENTS` — desktop-only UA rotation pool.
 
+### Tuning restaurant keywords
+
+Keyword maintenance lives in **`scraper/keywords.py`**. The dashboard's
+`by_keyword` and post tags come from `match()`, while inclusion/exclusion is
+controlled by `is_restaurant()`.
+
+Use this rule of thumb:
+
+- Add a term to `VENUE_KEYWORDS` when it clearly means a restaurant, food
+  venue, or food-service category. Examples: a new cuisine/category such as
+  `拉面`, `烤肉`, `饺子馆`, if you decide those should count reliably.
+- Add a term to `ROLE_KEYWORDS` only when the role is overwhelmingly
+  restaurant-specific. Examples: `煎炉`, `蒸包`, `烧腊`, if live data shows
+  they are common and low-noise.
+- Add a term to `WEAK_KEYWORDS` when it is useful for display/search but too
+  broad to qualify a post alone. Examples: `师傅`, `打包`, `前台`, `收银`.
+- Add a term to `NEGATIVE_KEYWORDS` when it identifies non-restaurant trade
+  jobs that otherwise slip through. Examples: `装修`, `门窗`, `仓库`,
+  `裁缝`, `维修`.
+
+After changing keywords:
+
+1. Add or update examples in `tests/test_keywords.py`.
+2. Run `python3 -m pytest -q`.
+3. Re-run a scrape only after tests pass, then compare `meta.total_posts`,
+   `meta.unique_posts`, and a sample of excluded/included titles.
+
 ---
 
 ## Adding a platform
@@ -284,7 +326,7 @@ local.restaurant-hiring-monitor.plist  ← the launchd job
 
 ## How a run works
 
-1. `launchd` fires `run.sh` at 09:00 on Mon/Thu.
+1. `launchd` fires `run.sh` daily at 09:00 local time.
 2. `scraper.scrape` iterates enabled platforms. Each `Scraper.run()` paginates from page 1 until either (a) a post date falls outside `SCRAPE_DAYS_BACK`, (b) two consecutive empty pages, or (c) the per-platform `max_pages` cap.
 3. For each parsed post: drop if date doesn't parse, drop if outside the window, drop if no strong keyword. Otherwise sanitize the title, classify the region, and add to the output set.
 4. `output.write_posts_json` aggregates by platform/region/keyword, **atomically** writes both `docs/data/posts.json` (current 7-day window + run-audit log) AND `docs/data/daily.json` (per-day time series — accumulates across runs, days outside the current window are frozen).

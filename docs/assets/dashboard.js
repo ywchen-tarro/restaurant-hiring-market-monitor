@@ -326,10 +326,12 @@
   }
 
   function isStale() {
+    // Daily scrape cadence: anything older than 36 hours means at
+    // least one scheduled run was missed.
     const lu = state.data && state.data.meta && state.data.meta.last_updated;
     if (!lu) return false;
     const ageMs = Date.now() - new Date(lu).getTime();
-    return ageMs > 4 * 24 * 3600 * 1000;
+    return ageMs > 36 * 3600 * 1000;
   }
 
   function renderTodayKpi() {

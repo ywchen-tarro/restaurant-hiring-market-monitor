@@ -115,6 +115,60 @@ def test_mixed_real_scenario():
     assert output._unique_post_count(posts) == 5
 
 
+def test_meiguogongzuo_self_dedup():
+    """meiguogongzuo reposts the same job under a new ID — those should
+    collapse to one in the unique count."""
+    posts = [
+        _mk("a", "meiguogongzuo", "中日餐 炒锅"),
+        _mk("b", "meiguogongzuo", "中日餐 炒锅"),       # same normalized title
+        _mk("c", "meiguogongzuo", "长岛寿司助手"),
+        _mk("d", "meiguogongzuo", "长岛寿司助手"),       # repost
+    ]
+    # 2 distinct titles after self-dedup
+    assert output._unique_post_count(posts) == 2
+
+
+def test_meiguogongzuo_self_dedup_normalized_through_punctuation():
+    """Self-dedup should ignore punctuation/whitespace/emoji like mirror dedup."""
+    posts = [
+        _mk("a", "meiguogongzuo", "中日餐 炒锅"),
+        _mk("b", "meiguogongzuo", "📜中日餐  炒锅！"),  # decorations only
+    ]
+    assert output._unique_post_count(posts) == 1
+
+
+def test_self_dedup_does_not_affect_other_platforms():
+    """A platform NOT in SELF_DEDUP_PLATFORMS keeps within-platform repeats."""
+    posts = [
+        _mk("a", "niuyuegongzuo", "熟手炒锅"),
+        _mk("b", "niuyuegongzuo", "熟手炒锅"),
+        _mk("c", "niuyuegongzuo", "熟手炒锅"),
+    ]
+    assert output._unique_post_count(posts) == 3
+
+
+def test_mirror_dedup_still_intact():
+    """The mirror-group dedup must not be broken by the new self-dedup path."""
+    posts = [
+        _mk("a", "168worker", "请熟手炒锅"),
+        _mk("b", "500work",   "请熟手炒锅"),
+    ]
+    assert output._unique_post_count(posts) == 1
+
+
+def test_mirror_and_self_dedup_combined():
+    """Mirror group + self-dedup platform in the same dataset both apply."""
+    posts = [
+        _mk("a", "168worker",     "炒锅师傅"),
+        _mk("b", "500work",       "炒锅师傅"),       # mirror dup
+        _mk("c", "meiguogongzuo", "炒锅师傅"),       # NOT a mirror; counts as 1
+        _mk("d", "meiguogongzuo", "炒锅师傅"),       # self-dedup with (c)
+        _mk("e", "niuyuegongzuo", "炒锅师傅"),       # independent → kept
+    ]
+    # 1 (mirror) + 1 (mgg) + 1 (nyge) = 3
+    assert output._unique_post_count(posts) == 3
+
+
 def test_unique_count_handles_blank_title():
     posts = [_mk("a", "168worker", "")]
     # Untitled — still counts as 1 (no normalization key collision)

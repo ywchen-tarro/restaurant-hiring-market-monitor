@@ -15,21 +15,14 @@
     <key>WorkingDirectory</key>
     <string>__PROJECT_PATH__</string>
 
+    <!-- Daily at 09:00 local time. Daily cadence keeps uscanyin's
+         relative-date dates aligned (otherwise "1 hour ago" posts from
+         the day before a scrape land on the wrong day). -->
     <key>StartCalendarInterval</key>
-    <array>
-        <!-- Monday 09:00 -->
-        <dict>
-            <key>Weekday</key><integer>1</integer>
-            <key>Hour</key><integer>9</integer>
-            <key>Minute</key><integer>0</integer>
-        </dict>
-        <!-- Thursday 09:00 -->
-        <dict>
-            <key>Weekday</key><integer>4</integer>
-            <key>Hour</key><integer>9</integer>
-            <key>Minute</key><integer>0</integer>
-        </dict>
-    </array>
+    <dict>
+        <key>Hour</key><integer>9</integer>
+        <key>Minute</key><integer>0</integer>
+    </dict>
 
     <key>StandardOutPath</key>
     <string>__PROJECT_PATH__/logs/scraper.log</string>

@@ -49,6 +49,10 @@ install_plist "local.restaurant-hiring-monitor-watchdog"
 
 cat <<'EOF'
 
+Installed: scraper runs DAILY at 09:00 local time.
+Installed: watchdog runs DAILY at 10:00 — alerts via macOS Notification
+Center if no successful scrape in the last 36 hours.
+
 ═══════════════════════════════════════════════════════════════════
   ONE MANUAL STEP REQUIRED — macOS Full Disk Access
 ═══════════════════════════════════════════════════════════════════

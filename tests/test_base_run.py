@@ -239,7 +239,8 @@ class _BadScraper(_StubScraper):
 def test_parse_page_exception_does_not_kill_run():
     today = date(2026, 5, 25)
     page1 = [_mk("a", "中日餐请炒锅", 0, today)]
-    page3 = [_mk("c", "请师傅", 0, today)]
+    # "中餐请师傅" still passes (师傅 alone wouldn't, but 中餐 is venue)
+    page3 = [_mk("c", "中餐请师傅", 0, today)]
     s = _BadScraper([page1, [], page3])
     with mock.patch("scraper.platforms.base.date") as fake_date:
         fake_date.today.return_value = today

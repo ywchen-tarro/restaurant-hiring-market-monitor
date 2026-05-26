@@ -7,7 +7,11 @@ from typing import Optional
 SCRAPE_DAYS_BACK = 7
 
 # ── Schedule (informational; real schedule lives in launchd plist) ──
-SCHEDULE_DAYS = ["Monday", "Thursday"]
+# Daily at 09:00 local time. Daily cadence is required so uscanyin's
+# relative-date posts ("1 hour ago" / "yesterday") get captured on the
+# day they were posted — a less-frequent cadence would lose multi-day
+# resolution for that platform.
+SCHEDULE_DAYS = ["Daily"]
 SCHEDULE_TIME = "09:00"
 
 # ── Politeness / anti-bot ─────────────────────────────────────

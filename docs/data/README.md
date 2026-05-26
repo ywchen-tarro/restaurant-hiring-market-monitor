@@ -136,4 +136,4 @@ const series = Object.entries(daily.days).map(([d, info]) => ({
 
 - Both files are written atomically (`tmp + os.replace`) — a crash during write can't leave a corrupt file.
 - If `posts.json` is found unparseable on the next run, it's preserved as `posts.json.corrupt-<timestamp>` rather than silently overwritten.
-- Both are committed to git. The current size is ~150 KB total; estimated growth ~1 KB per scrape (Mon + Thu = ~100 KB/year).
+- Both are committed to git. The current size is ~150 KB total; estimated growth ~1 KB per daily scrape (~365 KB/year).

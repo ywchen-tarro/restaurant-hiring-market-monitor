@@ -19,9 +19,9 @@ if [ -f "$HEARTBEAT" ]; then
     AGE_H=$(( (NOW - LAST) / 3600 ))
     AGE_D=$(( AGE_H / 24 ))
     LAST_HUMAN=$(date -r "$LAST" '+%Y-%m-%d %H:%M:%S')
-    if [ "$AGE_H" -gt 96 ]; then
+    if [ "$AGE_H" -gt 36 ]; then
         echo -e "Last success: ${red}${LAST_HUMAN}  (${AGE_D}d ${AGE_H}h ago — STALE)${reset}"
-    elif [ "$AGE_H" -gt 48 ]; then
+    elif [ "$AGE_H" -gt 24 ]; then
         echo -e "Last success: ${yellow}${LAST_HUMAN}  (${AGE_D}d ${AGE_H}h ago)${reset}"
     else
         echo -e "Last success: ${green}${LAST_HUMAN}  (${AGE_H}h ago)${reset}"

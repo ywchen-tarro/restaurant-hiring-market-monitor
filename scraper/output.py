@@ -36,6 +36,12 @@ MIRROR_GROUPS = [
     frozenset({"168worker", "500work"}),
 ]
 
+# Self-dedup platforms: sites that repost the same job under new IDs
+# within a single window (meiguogongzuo observed ~10% repost rate).
+# Posts on these platforms with identical normalized titles collapse to
+# one in the unique count.
+SELF_DEDUP_PLATFORMS = frozenset({"meiguogongzuo"})
+
 
 def _normalize_title(t: str) -> str:
     if not t:
@@ -54,20 +60,33 @@ def _mirror_group_id(platform: str):
 
 
 def _unique_post_count(posts: List[Post]) -> int:
-    """Count distinct posts, collapsing only mirror-group duplicates."""
+    """Count distinct posts.
+
+    Collapses:
+    - Mirror-group duplicates: identical normalized title across the
+      platforms in a single MIRROR_GROUPS entry (168worker ↔ 500work).
+    - Self-dedup platforms: identical normalized title within the same
+      platform (meiguogongzuo same-title-different-ID reposts).
+
+    Posts on platforms that are in neither category, and untitled posts,
+    are counted individually — we can't tell distinct restaurants apart
+    when they happen to share a generic title.
+    """
     counted = 0
-    seen_in_group = set()  # (group_id, normalized_title)
+    seen = set()
     for p in posts:
         nt = _normalize_title(p.title) if p.title else ""
         gid = _mirror_group_id(p.platform)
-        if gid is None or not nt:
-            # Independent platform OR untitled: count every instance.
+        if gid is not None and nt:
+            key = ("mirror", gid, nt)
+        elif p.platform in SELF_DEDUP_PLATFORMS and nt:
+            key = ("self", p.platform, nt)
+        else:
             counted += 1
             continue
-        key = (gid, nt)
-        if key in seen_in_group:
+        if key in seen:
             continue
-        seen_in_group.add(key)
+        seen.add(key)
         counted += 1
     return counted
 

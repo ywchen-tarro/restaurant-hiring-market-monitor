@@ -11,9 +11,10 @@ mkdir -p logs
 
 export PATH="/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:$PATH"
 
-# Max age before we consider the data stale. 96h = 4 days; scrape runs every
-# 3-4 days (Mon → Thu = 3, Thu → Mon = 4). Anything > 4 days is suspicious.
-MAX_AGE_HOURS=96
+# Max age before we consider the data stale. With daily scrape cadence,
+# anything > 36 hours means at least one scheduled run was missed (a
+# day's grace period for a one-off failure or sleep window).
+MAX_AGE_HOURS=36
 
 notify() {
     local title="$1"

@@ -663,8 +663,27 @@
         borderWidth: 2,
       }));
 
-      // 7-day moving average overlay on the per-day totals
+      // Per-day TOTAL (sum across all platforms for that day). Plotted as
+      // a thicker solid white line so the user can compare any single
+      // platform's spike against the day's actual total — without this,
+      // a spike day shows the platform's value visually exceeding the
+      // 7-day MA, which looks like "platform > total" but is just the
+      // MA dampening the spike.
       const totals = sliced.map(k => (days[k] || {}).total || 0);
+      datasets.push({
+        label: t('trendTotal'),
+        data: totals,
+        borderColor: '#e8ecf4',
+        backgroundColor: '#e8ecf433',
+        borderWidth: 3,
+        pointRadius: 2,
+        pointHoverRadius: 5,
+        tension: 0.25,
+        fill: false,
+      });
+
+      // 7-day moving average overlay on the per-day totals — keeps the
+      // smoothed-trend signal alongside the raw totals.
       const ma7 = totals.map((_, i) => {
         const start = Math.max(0, i - 6);
         const window = totals.slice(start, i + 1);
@@ -673,7 +692,7 @@
       datasets.push({
         label: t('trendOverlay'),
         data: ma7,
-        borderColor: '#e8ecf4',
+        borderColor: '#9aa2b8',
         borderDash: [6, 4],
         borderWidth: 2,
         pointRadius: 0,

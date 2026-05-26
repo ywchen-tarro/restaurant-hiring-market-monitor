@@ -44,9 +44,9 @@
       <div class="card-sub" id="kpiTotalSub">—</div>
     </div>
     <div class="card">
-      <div class="card-label" data-i18n="kpiWindow">Coverage</div>
-      <div class="card-value" id="kpiWindow">—</div>
-      <div class="card-sub" id="kpiWindowSub">—</div>
+      <div class="card-label" data-i18n="kpiToday">Today's posts</div>
+      <div class="card-value" id="kpiToday">—</div>
+      <div class="card-sub" id="kpiTodaySub">—</div>
     </div>
     <div class="card">
       <div class="card-label" data-i18n="kpiTopPlatform">Most active platform</div>
@@ -75,6 +75,10 @@
 
   <!-- TAB: OVERVIEW -->
   <div class="tab-content active" id="tab-overview">
+    <div class="panel" style="margin-bottom:16px;">
+      <div class="panel-header"><span class="panel-title" data-i18n="heatmapTitle">Last 35 days · post-date heatmap</span></div>
+      <div id="heatmap" class="heatmap"></div>
+    </div>
     <div class="main-grid">
       <div class="panel">
         <div class="panel-header">
@@ -144,6 +148,12 @@
           <option value="南部" data-i18n="south">South</option>
           <option value="中部" data-i18n="midwest">Midwest</option>
           <option value="西部" data-i18n="west">West</option>
+        </select>
+        <select id="postDate">
+          <option value="" data-i18n="dateAll">All dates</option>
+          <option value="today" data-i18n="dateToday">Today</option>
+          <option value="yesterday" data-i18n="dateYesterday">Yesterday</option>
+          <option value="7" data-i18n="dateLast7">Last 7 days</option>
         </select>
       </div>
       <div class="filter-row" id="kwFilter"></div>

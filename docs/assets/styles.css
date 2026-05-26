@@ -106,6 +106,58 @@ input[type=text] {
 .p-count { font-family: var(--mono); font-size: 12px; width: 36px; text-align: right; }
 .p-trend { font-size: 10px; font-family: var(--mono); width: 46px; text-align: right; }
 
+/* HEATMAP CALENDAR (GitHub-style) */
+.heatmap {
+  display: grid;
+  grid-template-columns: auto repeat(7, 1fr);
+  gap: 4px;
+  align-items: center;
+  padding: 4px 0;
+}
+.heatmap .hm-row-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--muted);
+  padding-right: 4px;
+  text-align: right;
+}
+.heatmap .hm-day {
+  height: 28px;
+  border-radius: 4px;
+  position: relative;
+  cursor: default;
+  transition: outline .12s;
+}
+.heatmap .hm-day:hover { outline: 1px solid var(--text); }
+.heatmap .hm-day-empty { background: transparent; }
+.heatmap .hm-col-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--muted);
+  text-align: center;
+  padding: 4px 0;
+}
+.heatmap .hm-legend {
+  grid-column: 2 / -1;
+  display: flex;
+  justify-content: flex-end;
+  gap: 6px;
+  align-items: center;
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--muted);
+  margin-top: 6px;
+}
+.heatmap .hm-legend-scale {
+  display: inline-flex;
+  gap: 2px;
+}
+.heatmap .hm-legend-cell { width: 12px; height: 12px; border-radius: 3px; }
+
+@media (max-width: 640px) {
+  .heatmap .hm-day { height: 22px; }
+}
+
 /* REGION MAP (choropleth) */
 .region-map {
   position: relative;

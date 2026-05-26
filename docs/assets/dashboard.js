@@ -26,8 +26,9 @@
   // ────────────────────────────────────────────────────────
   const state = {
     data: null,        // parsed posts.json
+    daily: null,       // parsed daily.json (per-day time series)
     benchmark: null,   // optional local-only overlay
-    filters: { search: '', platform: '', region: '', keyword: '' },
+    filters: { search: '', platform: '', region: '', keyword: '', date: '' },
     charts: { pie: null, trend: null },
   };
 
@@ -52,11 +53,14 @@
       if (state.data) {
         renderHeader(); renderKpis(); renderAlertBanner();
         populateSelects();  // refreshes platform options
+        renderHeatmap();
         renderOverview(); renderTrend(); renderRegion(); renderPosts();
       }
     });
     const dataUrl = window.DASHBOARD_DATA_URL || './data/posts.json';
     const benchmarkUrl = window.DASHBOARD_BENCHMARK_URL || './benchmark.json';
+    const dailyUrl = window.DASHBOARD_DAILY_URL ||
+      (dataUrl.endsWith('posts.json') ? dataUrl.replace('posts.json', 'daily.json') : './data/daily.json');
     try {
       const r = await fetch(dataUrl, { cache: 'no-store' });
       if (!r.ok) throw new Error(dataUrl + ' fetch failed: ' + r.status);
@@ -66,6 +70,10 @@
       renderEmpty();
       return;
     }
+    try {
+      const r = await fetch(dailyUrl, { cache: 'no-store' });
+      if (r.ok) state.daily = await r.json();
+    } catch (_) { /* daily.json is optional; tolerate absence */ }
     try {
       const r = await fetch(benchmarkUrl, { cache: 'no-store' });
       if (r.ok) state.benchmark = await r.json();
@@ -96,6 +104,8 @@
     $('postSearch').addEventListener('input', e => { state.filters.search = e.target.value.trim(); renderPosts(); });
     $('postPlatform').addEventListener('change', e => { state.filters.platform = e.target.value; renderPosts(); });
     $('postRegion').addEventListener('change', e => { state.filters.region = e.target.value; renderPosts(); });
+    const dateSel = $('postDate');
+    if (dateSel) dateSel.addEventListener('change', e => { state.filters.date = e.target.value; renderPosts(); });
     $('regionPlatform').addEventListener('change', renderRegion);
     $('trendRange').addEventListener('change', renderTrend);
   }
@@ -117,6 +127,7 @@
     renderHeader();
     renderKpis();
     populateSelects();
+    renderHeatmap();
     renderOverview();
     renderTrend();
     renderRegion();
@@ -152,8 +163,8 @@
       subEl.textContent = deltaTxt;
     }
 
-    document.getElementById('kpiWindow').textContent = `${d.meta.scrape_days_back}d`;
-    document.getElementById('kpiWindowSub').textContent = d.meta.date_from;
+    // KPI: today vs 7d average (reads daily.json)
+    renderTodayKpi();
 
     // Top platform
     const platRanked = PLATFORMS
@@ -219,6 +230,40 @@
     return ageMs > 4 * 24 * 3600 * 1000;
   }
 
+  function renderTodayKpi() {
+    const days = state.daily && state.daily.days;
+    const valEl = document.getElementById('kpiToday');
+    const subEl = document.getElementById('kpiTodaySub');
+    if (!days) {
+      if (valEl) valEl.textContent = '—';
+      if (subEl) subEl.textContent = '';
+      return;
+    }
+    const dateKeys = Object.keys(days).sort();
+    if (!dateKeys.length) {
+      valEl.textContent = '—';
+      subEl.textContent = t('kpiTodayNone');
+      return;
+    }
+    const latest = dateKeys[dateKeys.length - 1];
+    const todayTotal = days[latest] ? days[latest].total : 0;
+    // 7-day prior window: last 7 days INCLUDING today
+    const last7 = dateKeys.slice(-7).map(k => days[k].total || 0);
+    const avg = last7.length ? (last7.reduce((s, n) => s + n, 0) / last7.length) : 0;
+    const avgRounded = avg.toFixed(1);
+    let deltaTxt = '—';
+    if (avg > 0) {
+      const pct = ((todayTotal - avg) / avg) * 100;
+      const arrow = pct >= 0 ? '▲' : '▼';
+      deltaTxt = `${arrow} ${Math.abs(pct).toFixed(0)}%`;
+    }
+    valEl.textContent = todayTotal;
+    valEl.style.color = avg > 0
+      ? (todayTotal >= avg ? 'var(--accent2)' : 'var(--warn)')
+      : 'var(--text)';
+    subEl.textContent = t('kpiTodaySub', { avg: avgRounded, delta: deltaTxt });
+  }
+
   function renderAlertBanner() {
     const { rising, falling } = computeAlerts();
     const warnings = (state.data && state.data.meta && state.data.meta.warnings) || [];
@@ -262,6 +307,114 @@
       const o2 = document.createElement('option');
       o2.value = p.id; o2.textContent = label; rp.appendChild(o2);
     });
+  }
+
+  // ────────────────────────────────────────────────────────
+  // HEATMAP CALENDAR (GitHub-style, last 35 days)
+  // ────────────────────────────────────────────────────────
+  function renderHeatmap() {
+    const container = document.getElementById('heatmap');
+    if (!container) return;
+    const days = state.daily && state.daily.days;
+    if (!days || !Object.keys(days).length) {
+      container.innerHTML = `<div class="empty-state" style="grid-column: 1/-1;">${escapeHtml(t('noData'))}</div>`;
+      return;
+    }
+
+    // Build the last 35 days ending today (today's local date)
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const fmtIso = (d) => d.toISOString().slice(0, 10);
+    const fmtShort = (d) => {
+      const m = String(d.getMonth() + 1).padStart(2, '0');
+      const day = String(d.getDate()).padStart(2, '0');
+      return `${m}/${day}`;
+    };
+
+    // 35 days laid out by week — 5 rows × 7 cols.
+    // Week boundary: Sunday start (to match calendar convention).
+    // The grid ends on today and goes back 34 days, then pads to the
+    // start of the week containing the earliest day.
+    const dates = [];
+    for (let i = 34; i >= 0; i--) {
+      const d = new Date(today);
+      d.setDate(d.getDate() - i);
+      dates.push(d);
+    }
+
+    // Find max for color scale
+    const counts = dates.map(d => (days[fmtIso(d)] || { total: 0 }).total || 0);
+    const max = Math.max(1, ...counts);
+
+    // Color tier function (5 tiers, dark surface → accent → warm)
+    const tier = (n) => {
+      if (n === 0) return '#1a1e28';
+      const ratio = Math.min(1, n / max);
+      // Stops: dark-surface, dim-blue, blue, light-blue, warm-orange
+      if (ratio < 0.2) return '#1e3a8a';
+      if (ratio < 0.4) return '#2563EB';
+      if (ratio < 0.6) return '#3d7fff';
+      if (ratio < 0.85) return '#7bb0ff';
+      return '#ff8c42';
+    };
+
+    // Build grid: organize by weekday columns and week rows
+    // Row 0 is the earliest week; columns are weekday (0=Sun ... 6=Sat)
+    const grid = [];
+    let curWeek = [];
+    dates.forEach(d => {
+      if (curWeek.length === 0 && d.getDay() !== 0) {
+        // Pad the front of the first week with empty cells
+        for (let p = 0; p < d.getDay(); p++) curWeek.push(null);
+      }
+      curWeek.push(d);
+      if (curWeek.length === 7) {
+        grid.push(curWeek);
+        curWeek = [];
+      }
+    });
+    if (curWeek.length) {
+      while (curWeek.length < 7) curWeek.push(null);
+      grid.push(curWeek);
+    }
+
+    const lang = window.I18N ? window.I18N.getLang() : 'en';
+    const dayLabels = lang === 'zh'
+      ? ['日','一','二','三','四','五','六']
+      : ['S','M','T','W','T','F','S'];
+
+    // Render
+    let html = '<div></div>';  // top-left empty corner
+    dayLabels.forEach(l => { html += `<div class="hm-col-label">${escapeHtml(l)}</div>`; });
+
+    grid.forEach((week, weekIdx) => {
+      // Row label: month of the first non-null day in the week
+      const firstReal = week.find(d => d !== null);
+      const lbl = firstReal ? fmtShort(firstReal) : '';
+      html += `<div class="hm-row-label">${escapeHtml(lbl)}</div>`;
+      week.forEach(d => {
+        if (d === null) {
+          html += '<div class="hm-day hm-day-empty"></div>';
+          return;
+        }
+        const iso = fmtIso(d);
+        const info = days[iso] || { total: 0, by_platform: {}, by_region: {} };
+        const c = info.total || 0;
+        const fill = tier(c);
+        const tip = `${iso} · ${c} ${c === 1 ? 'post' : 'posts'}`;
+        html += `<div class="hm-day" style="background:${fill}" title="${escapeHtml(tip)}" data-iso="${iso}" data-count="${c}"></div>`;
+      });
+    });
+
+    // Legend row
+    html += '<div></div>';
+    const legendStops = ['#1a1e28','#1e3a8a','#2563EB','#3d7fff','#7bb0ff','#ff8c42'];
+    const legendCells = legendStops.map(c => `<span class="hm-legend-cell" style="background:${c}"></span>`).join('');
+    html += `<div class="hm-legend" style="grid-column: 2 / span 7;">
+      <span>0</span><span class="hm-legend-scale">${legendCells}</span><span>${max}</span>
+    </div>`;
+
+    container.innerHTML = html;
   }
 
   // ────────────────────────────────────────────────────────
@@ -357,31 +510,82 @@
   function renderTrend() {
     const d = state.data;
     if (!d) return;
-    const range = parseInt(document.getElementById('trendRange').value, 10);
-    let history = (d.history || []).slice();
-    if (range > 0) history = history.slice(-range);
+    const rangeRaw = parseInt(document.getElementById('trendRange').value, 10);
 
-    if (history.length === 0) {
-      document.getElementById('trendNotice').style.display = 'block';
-      document.getElementById('trendNotice').textContent = t('noRecentData');
-    } else if (history.length === 1) {
-      document.getElementById('trendNotice').style.display = 'block';
-      document.getElementById('trendNotice').textContent = t('noRecentData');
+    // Prefer the per-day series from daily.json. Fall back to the
+    // per-run history[] when daily.json is unavailable.
+    const days = state.daily && state.daily.days;
+    let labels, datasets;
+    const noticeEl = document.getElementById('trendNotice');
+
+    if (days && Object.keys(days).length > 0) {
+      // Range here is "last N runs" semantics ported to days — treat as
+      // "last N×~3 days" (Mon/Thu cadence) or just last N days.
+      // Simpler: if range is 8 -> last 14 days; 12 -> 30 days; -1 -> all.
+      const dateKeys = Object.keys(days).sort();
+      let sliced;
+      if (rangeRaw === 8) sliced = dateKeys.slice(-14);
+      else if (rangeRaw === 12) sliced = dateKeys.slice(-30);
+      else sliced = dateKeys;
+
+      labels = sliced;
+      datasets = PLATFORMS.map(p => ({
+        label: platformName(p.id),
+        data: sliced.map(k => ((days[k] || {}).by_platform || {})[p.id] || 0),
+        borderColor: p.color,
+        backgroundColor: p.color + '33',
+        tension: 0.25,
+        pointRadius: 2,
+        pointHoverRadius: 5,
+        borderWidth: 2,
+      }));
+
+      // 7-day moving average overlay on the per-day totals
+      const totals = sliced.map(k => (days[k] || {}).total || 0);
+      const ma7 = totals.map((_, i) => {
+        const start = Math.max(0, i - 6);
+        const window = totals.slice(start, i + 1);
+        return window.reduce((s, n) => s + n, 0) / window.length;
+      });
+      datasets.push({
+        label: t('trendOverlay'),
+        data: ma7,
+        borderColor: '#e8ecf4',
+        borderDash: [6, 4],
+        borderWidth: 2,
+        pointRadius: 0,
+        tension: 0.2,
+        fill: false,
+      });
+
+      if (sliced.length < 2) {
+        noticeEl.style.display = 'block';
+        noticeEl.textContent = t('noRecentData');
+      } else {
+        noticeEl.style.display = 'none';
+      }
     } else {
-      document.getElementById('trendNotice').style.display = 'none';
+      // Fallback to per-run history
+      let history = (d.history || []).slice();
+      if (rangeRaw > 0) history = history.slice(-rangeRaw);
+      if (history.length <= 1) {
+        noticeEl.style.display = 'block';
+        noticeEl.textContent = t('noRecentData');
+      } else {
+        noticeEl.style.display = 'none';
+      }
+      labels = history.map(h => h.run_date);
+      datasets = PLATFORMS.map(p => ({
+        label: platformName(p.id),
+        data: history.map(h => (h.by_platform || {})[p.id] || 0),
+        borderColor: p.color,
+        backgroundColor: p.color + '33',
+        tension: 0.25,
+        pointRadius: 3,
+        pointHoverRadius: 5,
+        borderWidth: 2,
+      }));
     }
-
-    const labels = history.map(h => h.run_date);
-    const datasets = PLATFORMS.map(p => ({
-      label: platformName(p.id),
-      data: history.map(h => (h.by_platform || {})[p.id] || 0),
-      borderColor: p.color,
-      backgroundColor: p.color + '33',
-      tension: 0.25,
-      pointRadius: 3,
-      pointHoverRadius: 5,
-      borderWidth: 2,
-    }));
 
     // Optional benchmark overlay (local-only)
     if (state.benchmark && Array.isArray(state.benchmark.series)) {
@@ -647,11 +851,25 @@
     });
 
     const f = state.filters;
+    // Build date filter cutoff once
+    const now = new Date(); now.setHours(0, 0, 0, 0);
+    const isoNow = now.toISOString().slice(0, 10);
+    const yesterday = new Date(now); yesterday.setDate(yesterday.getDate() - 1);
+    const isoYesterday = yesterday.toISOString().slice(0, 10);
+    const last7Cutoff = new Date(now); last7Cutoff.setDate(last7Cutoff.getDate() - 6);
+    const isoLast7 = last7Cutoff.toISOString().slice(0, 10);
+
     const filtered = posts.filter(p => {
       if (f.search && !p.title.toLowerCase().includes(f.search.toLowerCase())) return false;
       if (f.platform && p.platform !== f.platform) return false;
       if (f.region && p.region !== f.region) return false;
       if (f.keyword && !(p.keywords_matched || []).includes(f.keyword)) return false;
+      if (f.date) {
+        const pd = p.date || '';
+        if (f.date === 'today' && pd !== isoNow) return false;
+        else if (f.date === 'yesterday' && pd !== isoYesterday) return false;
+        else if (f.date === '7' && pd < isoLast7) return false;
+      }
       return true;
     });
 

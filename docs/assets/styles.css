@@ -86,13 +86,12 @@ input[type=text] {
 }
 
 /* Chart.js canvases must live inside a position:relative parent with a
- * fixed height, otherwise responsive=true + maintainAspectRatio=false
- * make the canvas grow without bound on every redraw. Set the height on
- * the wrapper, never directly on the canvas. */
+ * fixed height. responsive=true + maintainAspectRatio=false otherwise
+ * grow the canvas without bound on every redraw. Chart.js sets the
+ * canvas's own dimensions — do NOT override them in CSS. */
 .chart-wrap { position: relative; width: 100%; }
 .chart-wrap-trend { height: 280px; }
 .chart-wrap-pie { height: 180px; }
-.chart-wrap canvas { width: 100% !important; height: 100% !important; display: block; }
 
 /* PLATFORM TABLE */
 .platform-list { display: flex; flex-direction: column; gap: 8px; margin-top: 16px; }

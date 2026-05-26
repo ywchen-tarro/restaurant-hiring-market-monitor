@@ -349,9 +349,10 @@
     }
     const latest = dateKeys[dateKeys.length - 1];
     const todayTotal = days[latest] ? days[latest].total : 0;
-    // 7-day prior window: last 7 days INCLUDING today
-    const last7 = dateKeys.slice(-7).map(k => days[k].total || 0);
-    const avg = last7.length ? (last7.reduce((s, n) => s + n, 0) / last7.length) : 0;
+    // Compare today against the AVERAGE OF THE 7 DAYS BEFORE TODAY
+    // (don't include today in its own benchmark).
+    const prior7 = dateKeys.slice(-8, -1).map(k => days[k].total || 0);
+    const avg = prior7.length ? (prior7.reduce((s, n) => s + n, 0) / prior7.length) : 0;
     const avgRounded = avg.toFixed(1);
     let deltaTxt = '—';
     if (avg > 0) {
@@ -967,13 +968,21 @@
     });
 
     const f = state.filters;
-    // Build date filter cutoff once
+    // Build date filter cutoffs from LOCAL date components (toISOString
+    // would shift to UTC and break the filter overnight in negative-
+    // offset timezones).
+    const fmtLocalIso = (d) => {
+      const y = d.getFullYear();
+      const m = String(d.getMonth() + 1).padStart(2, '0');
+      const day = String(d.getDate()).padStart(2, '0');
+      return `${y}-${m}-${day}`;
+    };
     const now = new Date(); now.setHours(0, 0, 0, 0);
-    const isoNow = now.toISOString().slice(0, 10);
+    const isoNow = fmtLocalIso(now);
     const yesterday = new Date(now); yesterday.setDate(yesterday.getDate() - 1);
-    const isoYesterday = yesterday.toISOString().slice(0, 10);
+    const isoYesterday = fmtLocalIso(yesterday);
     const last7Cutoff = new Date(now); last7Cutoff.setDate(last7Cutoff.getDate() - 6);
-    const isoLast7 = last7Cutoff.toISOString().slice(0, 10);
+    const isoLast7 = fmtLocalIso(last7Cutoff);
 
     const filtered = posts.filter(p => {
       if (f.search && !p.title.toLowerCase().includes(f.search.toLowerCase())) return false;

@@ -10,6 +10,7 @@ from __future__ import annotations
 import json
 from datetime import date, timedelta
 from pathlib import Path
+from unittest import mock
 
 import pytest
 
@@ -235,6 +236,26 @@ def test_no_warning_for_normal_variation():
     assert warnings == []
 
 
+def test_warning_on_all_platforms_zero():
+    """Global signal: total dropped to 0 while prior run had real data → warn."""
+    history = [
+        {"run_date": "2026-05-22", "by_platform": {"168worker": 30, "uscanyin": 50}},
+        {"run_date": "2026-05-25", "by_platform": {"168worker": 0, "uscanyin": 0}},
+    ]
+    warnings = output._compute_warnings(history, diagnostics=None)
+    # Should include the global "all zero" warning (more informative than
+    # the per-platform messages alone — both small-volume platforms can
+    # fail at once without crossing the per-platform 5-floor)
+    assert any("all platforms" in w.lower() for w in warnings)
+
+
+def test_no_global_zero_warning_on_first_run():
+    """No prior data → no spurious 'all platforms zero' warning on day 1."""
+    history = [{"run_date": "2026-05-25", "by_platform": {"168worker": 0}}]
+    warnings = output._compute_warnings(history, diagnostics=None)
+    assert not any("all platforms" in w.lower() for w in warnings)
+
+
 def test_warning_on_high_unparsed_date_rate():
     diagnostics = {"168worker": {"status": "ok", "rows_parsed": 100, "dropped_unparseable_date": 15}}
     history = [{"run_date": "2026-05-25", "by_platform": {"168worker": 85}}]
@@ -287,3 +308,106 @@ def test_load_existing_preserves_corrupt_file(tmp_path: Path):
     # Corrupt file renamed aside
     corrupts = list(tmp_path.glob("corrupt.json.corrupt-*"))
     assert len(corrupts) == 1
+
+
+# ─────────────────────────────────────────────────────────────
+# write_posts_json end-to-end (full output shape, history append,
+# daily.json side effect)
+# ─────────────────────────────────────────────────────────────
+
+def test_write_posts_json_end_to_end(tmp_path: Path):
+    """Full happy path: write posts.json with a real Post; ensure all
+    documented top-level keys exist, history starts fresh, daily.json
+    co-exists alongside (atomic). """
+    import json
+    posts_path = tmp_path / "posts.json"
+    daily_path = tmp_path / "daily.json"
+    posts = [
+        _mk("a", "niuyuegongzuo", "中日餐请炒锅",  region="东部", state="法拉盛"),
+        _mk("b", "168worker",     "请师傅",         region="东部", state="纽约"),
+    ]
+    # Patch the config defaults to point at tmp paths
+    with mock.patch.object(output.config, "OUTPUT_JSON", posts_path), \
+         mock.patch.object(output.config, "DAILY_JSON", daily_path):
+        output.write_posts_json(posts, days_back=7, diagnostics={"168worker": {"status": "ok"}})
+
+    assert posts_path.exists()
+    d = json.loads(posts_path.read_text(encoding="utf-8"))
+    # Documented schema
+    for key in ("meta", "by_platform", "by_region", "by_keyword", "history", "posts"):
+        assert key in d, f"missing top-level key: {key}"
+    assert d["meta"]["total_posts"] == 2
+    assert d["meta"]["unique_posts"] >= 1
+    assert d["meta"]["scrape_days_back"] == 7
+    # History was appended (single new entry)
+    assert len(d["history"]) == 1
+    assert d["history"][0]["total"] == 2
+    assert d["history"][0]["total_unique"] >= 1
+
+    # daily.json side-effect file also written
+    assert daily_path.exists()
+    daily = json.loads(daily_path.read_text(encoding="utf-8"))
+    assert "days" in daily
+    assert "meta" in daily and "schema_version" in daily["meta"]
+
+
+def test_write_posts_json_empty_posts_still_produces_valid_file(tmp_path: Path):
+    """All platforms returned 0 today: writer should still produce a
+    valid posts.json (and daily.json) rather than crash."""
+    import json
+    posts_path = tmp_path / "posts.json"
+    daily_path = tmp_path / "daily.json"
+    with mock.patch.object(output.config, "OUTPUT_JSON", posts_path), \
+         mock.patch.object(output.config, "DAILY_JSON", daily_path):
+        output.write_posts_json([], days_back=7)
+    d = json.loads(posts_path.read_text(encoding="utf-8"))
+    assert d["meta"]["total_posts"] == 0
+    assert d["meta"]["unique_posts"] == 0
+    assert d["posts"] == []
+    assert len(d["history"]) == 1
+    assert d["history"][0]["total"] == 0
+
+
+def test_write_posts_json_history_accumulates_across_days(tmp_path: Path):
+    """Two runs on different days produce 2 history entries (frozen
+    older days preserved)."""
+    import json
+    posts_path = tmp_path / "posts.json"
+    daily_path = tmp_path / "daily.json"
+    with mock.patch.object(output.config, "OUTPUT_JSON", posts_path), \
+         mock.patch.object(output.config, "DAILY_JSON", daily_path):
+        output.write_posts_json([_mk("a", "niuyuegongzuo", "中日餐请炒锅")], days_back=7)
+        d1 = json.loads(posts_path.read_text(encoding="utf-8"))
+        # Patch the run_date of the first entry to look like yesterday so
+        # the next run treats it as a different day
+        d1["history"][0]["run_date"] = "2026-05-24"
+        posts_path.write_text(json.dumps(d1, ensure_ascii=False), encoding="utf-8")
+        output.write_posts_json([_mk("b", "168worker", "请师傅")], days_back=7)
+        d2 = json.loads(posts_path.read_text(encoding="utf-8"))
+    assert len(d2["history"]) == 2
+
+
+def test_write_posts_json_atomic_write_no_tmp_left(tmp_path: Path):
+    posts_path = tmp_path / "posts.json"
+    daily_path = tmp_path / "daily.json"
+    with mock.patch.object(output.config, "OUTPUT_JSON", posts_path), \
+         mock.patch.object(output.config, "DAILY_JSON", daily_path):
+        output.write_posts_json([_mk("a", "niuyuegongzuo", "中日餐请炒锅")], days_back=7)
+    tmps = list(tmp_path.glob("*.tmp"))
+    assert tmps == [], f"left-over tmp files: {tmps}"
+
+
+def test_write_posts_json_meiguogongzuo_listed_in_by_platform_even_when_empty(tmp_path: Path):
+    """All platforms in config.PLATFORMS should appear in by_platform —
+    a 0 total for a configured platform is meaningful (vs missing key)."""
+    import json
+    posts_path = tmp_path / "posts.json"
+    daily_path = tmp_path / "daily.json"
+    with mock.patch.object(output.config, "OUTPUT_JSON", posts_path), \
+         mock.patch.object(output.config, "DAILY_JSON", daily_path):
+        output.write_posts_json([_mk("a", "niuyuegongzuo", "中日餐请炒锅")], days_back=7)
+    d = json.loads(posts_path.read_text(encoding="utf-8"))
+    for plat in output.config.PLATFORMS:
+        if plat.get("enabled"):
+            assert plat["id"] in d["by_platform"], \
+                f"enabled platform {plat['id']} missing from by_platform"

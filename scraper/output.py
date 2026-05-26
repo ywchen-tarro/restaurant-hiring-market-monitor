@@ -218,6 +218,20 @@ def _compute_warnings(
     cur = new_history[-1]["by_platform"]
     prev = new_history[-2]["by_platform"] if len(new_history) >= 2 else {}
 
+    # Global signal: if total dropped to 0 while prior run had real data,
+    # the most likely cause is a network/auth/config failure across the
+    # whole run — not a real "market went to zero". Per-platform checks
+    # below catch single-platform failures but only when the prior was
+    # large enough to clear the noise floor; this catches the case where
+    # several small-volume platforms simultaneously went silent.
+    cur_total = sum(cur.values()) if cur else 0
+    prev_total = sum(prev.values()) if prev else 0
+    if cur_total == 0 and prev_total > 0:
+        warnings.append(
+            f"all platforms returned 0 posts (prior run: {prev_total}) — "
+            f"likely a network, auth, or config failure"
+        )
+
     for pid, count in cur.items():
         prev_count = prev.get(pid, 0)
         if count == 0 and prev_count >= _PRIOR_MIN_FOR_ZERO_WARN:

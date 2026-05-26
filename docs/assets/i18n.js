@@ -78,7 +78,7 @@
       coverageRamping: 'Newly tracked, trend not yet comparable: {names}',
       staleData:  'Data not updated for {days}d — check launchd schedule',
 
-      footer:  'Monitors 5 US Chinese-language restaurant job boards · auto-refreshes Mon + Thu 09:00 local time',
+      footer:  'Monitors 6 US Chinese-language restaurant job boards · auto-refreshes Mon + Thu 09:00 local time',
       footerData: 'Window: {from} → {to} · {total} posts ({unique} unique)',
       langLabel: '中文',  // label shown on toggle button when EN is active
     },
@@ -147,7 +147,7 @@
       coverageRamping: '新接入平台，趋势对比尚不可靠：{names}',
       staleData:  '数据已 {days} 天未更新 — 请检查 launchd 调度',
 
-      footer:  '监控 5 个美国华人餐馆招聘网站 · 每周一、周四 09:00 自动更新',
+      footer:  '监控 6 个美国华人餐馆招聘网站 · 每周一、周四 09:00 自动更新',
       footerData: '数据范围：{from} → {to} · {total} 条（去重后 {unique}）',
       langLabel: 'EN',
     },

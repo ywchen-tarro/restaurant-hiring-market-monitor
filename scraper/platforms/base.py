@@ -48,14 +48,20 @@ class BasePlatformScraper(ABC):
     def parse_page(self, html: str, page_num: int) -> List[Post]: ...
 
     # ── default driver ────────────────────────────────────────
+    # Subclass can override to pass impersonate="chrome120" etc.
+    impersonate: Optional[str] = None
+
     def fetch_page(self, page_num: int) -> Optional[str]:
         from ..http_client import polite_get
         url = self.page_url(page_num)
         log.info("[%s] GET page %d: %s", self.id, page_num, url)
-        r = polite_get(url, session=self.session)
+        r = polite_get(url, session=self.session, impersonate=self.impersonate)
         if r is None:
             return None
         return r.text
+
+    # Subclass may override to cap pagination shorter than the default.
+    max_pages: Optional[int] = None
 
     def run(self, days_back: int = None) -> List[Post]:
         """Paginate until posts fall outside the lookback window or max pages.
@@ -65,6 +71,12 @@ class BasePlatformScraper(ABC):
         """
         days_back = days_back if days_back is not None else config.SCRAPE_DAYS_BACK
         cutoff = date.today() - timedelta(days=days_back)
+        # Per-platform override, then config default
+        page_cap = (
+            self.max_pages
+            if self.max_pages is not None
+            else config.MAX_PAGES_PER_PLATFORM
+        )
 
         collected: List[Post] = []
         seen_ids = set()
@@ -80,7 +92,7 @@ class BasePlatformScraper(ABC):
             "fetch_failures": 0,
         }
 
-        for page_num in range(1, config.MAX_PAGES_PER_PLATFORM + 1):
+        for page_num in range(1, page_cap + 1):
             html = self.fetch_page(page_num)
             if html is None:
                 diag["fetch_failures"] += 1

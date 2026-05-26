@@ -14,7 +14,9 @@ SCHEDULE_TIME = "09:00"
 DELAY_MIN = 2
 DELAY_MAX = 8
 MAX_RETRIES = 3
-REQUEST_TIMEOUT = 15
+# Generous timeout: uscanyin's deeper paginated pages can take ~17s to
+# render server-side. A short timeout drops them entirely.
+REQUEST_TIMEOUT = 30
 
 # Cap pages per platform to stop runaway pagination. Real signal
 # rarely needs more than this within a 7-day window.
@@ -43,7 +45,7 @@ PLATFORMS = [
         "color": "#2563EB",
         "url": "https://www.168worker.com/list/1_0",
         "pagination": "path",
-        "enabled": False,  # follow-up
+        "enabled": True,
     },
     {
         "id": "usahuarenjie",
@@ -59,7 +61,7 @@ PLATFORMS = [
         "color": "#B45309",
         "url": "https://www.500work.com/",
         "pagination": "query",
-        "enabled": False,  # follow-up
+        "enabled": True,
     },
     {
         "id": "uscanyin",
@@ -67,7 +69,11 @@ PLATFORMS = [
         "color": "#9D174D",
         "url": "https://uscanyin.com/en/jobs",
         "pagination": "query",
-        "enabled": False,  # follow-up
+        "enabled": True,
+        # Deeper paginated pages take ~17s to render server-side. Cap tight:
+        # ~16 posts per page × 8 pages = ~128 posts, far more than a 7-day
+        # restaurant window needs from this site.
+        "max_pages": 8,
     },
     {
         "id": "niuyuegongzuo",

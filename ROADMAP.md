@@ -4,17 +4,23 @@ Tracks the engineering work needed to take this from "MVP with 2 platforms" to a
 
 ---
 
-## Now: 2/5 platforms active
+## Now: 5/5 platforms active
 
-| Platform | Status | Reason |
+| Platform | Status | Transport |
 |---|---|---|
-| niuyuegongzuo.com | ✅ Active | Plain GET works; simple `?page=N` pagination |
-| usahuarenjie.com | ✅ Active | Plain GET works; clean `/category-catid-251-page-N.html` pagination |
-| 168worker.com | ❌ Disabled | 403 on plain GET — fronted by anti-bot (Cloudflare/Akamai signature) |
-| 500work.com | ❌ Disabled | 403 on plain GET — same class of protection |
-| uscanyin.com | ⚠ Deferred | Plain GET works, but listing is **4,593 pages** — needs custom date-cutoff logic before it's worth enabling |
+| niuyuegongzuo.com | ✅ Active | `requests` (plain) |
+| usahuarenjie.com | ✅ Active | `requests` (plain) |
+| 168worker.com | ✅ Active | `curl_cffi` impersonating chrome120 (TLS-fingerprint bypass) |
+| 500work.com | ✅ Active | `curl_cffi` impersonating chrome120 (same CMS as 168worker) |
+| uscanyin.com | ✅ Active | `requests` (plain, 30s timeout for slow paginated pages) |
 
-168worker is the **highest priority** to unblock: it's the historical baseline for the signal and the only platform with a known correlation to internal business outcomes (see internal notes for context). Even at its current decayed volume (~26/day), it remains the calibration anchor.
+All 5 platforms are now scraping. The 168worker / 500work block turned out to be a TLS-fingerprint check — Level 2 of the escalation ladder (`curl_cffi`) cleared it on the first try.
+
+### Known data quality issue — 168 ↔ 500work overlap
+
+168worker.com and 500work.com share the same CMS *and the same post database*: identical `/page/<id>` URLs, identical titles, byte-for-byte the same listings. Enabling both inflates the aggregate `total_posts` because the same job is counted twice (once per host).
+
+**Per-platform breakdowns still tell the truth** — the dashboard shows each platform's reach independently. The aggregate signal is approximately doubled for whatever portion is co-listed. Until cross-platform deduplication lands (below), trust per-platform trends; treat the aggregate as a directional indicator only.
 
 ---
 
@@ -158,11 +164,11 @@ Similarweb rank #4,518. Likely similar to meiguogongzuo. Same status — uninves
 
 ### Correctness / robustness (P1)
 
+- [ ] **Cross-platform deduplication** (HIGH — promoted to P0 after enabling 168+500work): track normalized-title hashes across platforms; expose `meta.unique_posts` distinct from `meta.total_posts`; dashboard headline should use unique. Without this the aggregate signal is inflated by the 168/500work overlap.
 - [ ] **Add tests**: pytest fixtures with saved HTML pages per platform; unit tests for `date_parser`, `regions.classify`, `keywords.is_restaurant`, `output._merge_history`. The MVP currently relies on manual smoke tests — first DOM change is silent breakage.
 - [ ] **English 2-letter state code matching**: require word boundaries for `NY`/`NJ`/`MA`/`CT`/`PA`/`VA` to avoid `SUNNYVALE → NY` false matches.
-- [ ] **Cross-platform deduplication**: title-normalized hash to deduplicate when the same job is cross-posted on multiple boards. Tracking duplication rate per run as a diagnostic.
-- [ ] **launchd missed-run catch-up**: if the Mac was asleep on a scheduled run, fire a catch-up on next wake.
-- [ ] **Stale-data alerting beyond the dashboard**: a small osascript banner or a heartbeat ping when no successful scrape has happened in 4+ days.
+- [ ] **launchd missed-run catch-up**: if the Mac was asleep on a scheduled run, fire a catch-up on next wake. (Watchdog notification is in place; actual catch-up scrape on wake is not.)
+- [x] **Stale-data alerting** — done. Watchdog plist + macOS Notification Center.
 
 ### Signal quality (P2)
 

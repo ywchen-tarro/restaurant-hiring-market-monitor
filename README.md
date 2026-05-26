@@ -38,15 +38,17 @@ A Growth team uses this to:
 
 ## What it tracks
 
-| Platform | URL | Status |
+| Platform | URL | Transport |
 |---|---|---|
-| 168worker | https://www.168worker.com/list/1_0 | Disabled — anti-bot block (see [ROADMAP.md](./ROADMAP.md)) |
-| 华人街生活网 | https://www.usahuarenjie.com/category-catid-251.html | ✅ Active |
-| 500work | https://www.500work.com/ | Disabled — anti-bot block |
-| 北美餐饮通 | https://uscanyin.com/en/jobs | Disabled — pagination scale (~4,500 pages) needs custom handling |
-| 纽约工作网 | https://niuyuegongzuo.com/ | ✅ Active |
+| 168worker | https://www.168worker.com/list/1_0 | `curl_cffi` (chrome120 TLS) |
+| 华人街生活网 | https://www.usahuarenjie.com/category-catid-251.html | `requests` |
+| 500work | https://www.500work.com/ | `curl_cffi` (chrome120 TLS) |
+| 北美餐饮通 | https://uscanyin.com/en/jobs | `requests` (30s timeout) |
+| 纽约工作网 | https://niuyuegongzuo.com/ | `requests` |
 
-The plan to unblock the disabled platforms — including which anti-bot tools to try in what order, and how to add new ones — lives in [ROADMAP.md](./ROADMAP.md).
+All five platforms are active. **168worker and 500work share the same CMS / post database** — identical post IDs cross-listed on both. The aggregate `total_posts` overcounts because of this; see [ROADMAP.md](./ROADMAP.md) for the cross-platform deduplication follow-up. Per-platform breakdowns on the dashboard are accurate.
+
+For the anti-bot strategy (TLS fingerprinting via `curl_cffi`, why it was needed, and what to try next) and how to add new platforms — see [ROADMAP.md](./ROADMAP.md).
 
 A post is counted as a restaurant job when its title matches at least one **strong** keyword — a clear venue (`餐馆`, `火锅`, `日料`, `奶茶`) or a restaurant-specific role (`炒锅`, `油锅`, `厨师`, `企台`, `打杂`, `服务员`). Ambiguous terms (`招聘`, `招人`, `请人`, `前台`, `收银`) appear in many other industries and don't qualify a post on their own.
 
@@ -119,6 +121,18 @@ Trigger a test run anytime:
 launchctl start local.restaurant-hiring-monitor
 tail -f logs/scraper.log
 ```
+
+### Languages
+
+The dashboard ships in **English by default** with a one-click toggle to **Chinese (Simplified)**. The toggle sits in the top-right of the header (`EN` ↔ `中文`); your preference is saved in localStorage and persists across visits. Post titles always stay in their source language (they're scraped from Chinese-language boards); region/state/platform labels are translated.
+
+### Mobile
+
+The dashboard is responsive down to phone widths (≥320px). Breakpoints:
+- **≥960px**: full desktop — 5 KPI cards in a row, side-by-side panels
+- **640-960px**: tablet — 2-column KPIs, stacked panels
+- **<640px**: phone — 1-column KPIs, horizontally-scrollable tabs, stacked filters, compact charts
+- **<380px**: super-narrow — drops the logo badge and "last run" status text to save space
 
 ### Monitoring — is it still running?
 

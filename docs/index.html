@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Restaurant Hiring Market Monitor</title>
 <meta name="description" content="Tracking US restaurant job posting volume across major Chinese-language job boards.">
+<meta name="theme-color" content="#0d0f14">
 <link rel="stylesheet" href="./assets/styles.css">
 </head>
 <body>
@@ -13,12 +14,13 @@
   <!-- HEADER -->
   <div class="header">
     <div class="logo">
-      <span class="logo-mark">MARKET</span>
-      <span class="logo-title">餐馆招聘信号监控</span>
+      <span class="logo-mark" data-i18n="logoBadge">MARKET</span>
+      <span class="logo-title" data-i18n="logoTitle">Restaurant Hiring Signal</span>
     </div>
     <div class="header-meta">
+      <button id="langToggle" class="lang-toggle" type="button" aria-label="Toggle language">中文</button>
       <div class="status-dot"></div>
-      <span class="status-text" id="lastRunText">尚未运行</span>
+      <span class="status-text" id="lastRunText" data-i18n="statusNeverRun">Not yet run</span>
     </div>
   </div>
 
@@ -30,47 +32,45 @@
 
   <!-- SCHEDULE BAR -->
   <div class="schedule-bar">
-    <div class="schedule-info">
-      自动调度：每 <span>周一 09:00</span> 和 <span>周四 09:00</span> 本地运行
-    </div>
-    <div class="next-run" id="nextRunText">数据窗口：—</div>
+    <div class="schedule-info" data-i18n="scheduleInfo">Auto schedule: Mon 09:00 and Thu 09:00 local time</div>
+    <div class="next-run" id="nextRunText"></div>
   </div>
 
   <!-- SUMMARY CARDS -->
   <div class="summary-row">
     <div class="card">
-      <div class="card-label">本期总帖数</div>
+      <div class="card-label" data-i18n="kpiTotal">Posts this period</div>
       <div class="card-value" id="kpiTotal">—</div>
       <div class="card-sub" id="kpiTotalSub">—</div>
     </div>
     <div class="card">
-      <div class="card-label">覆盖窗口</div>
+      <div class="card-label" data-i18n="kpiWindow">Coverage</div>
       <div class="card-value" id="kpiWindow">—</div>
       <div class="card-sub" id="kpiWindowSub">—</div>
     </div>
     <div class="card">
-      <div class="card-label">最活跃平台</div>
+      <div class="card-label" data-i18n="kpiTopPlatform">Most active platform</div>
       <div class="card-value" style="font-size:16px; margin-top:4px;" id="kpiTopPlatform">—</div>
       <div class="card-sub" id="kpiTopPlatformSub">—</div>
     </div>
     <div class="card">
-      <div class="card-label">招聘最活跃地区</div>
+      <div class="card-label" data-i18n="kpiTopRegion">Most active region</div>
       <div class="card-value" style="font-size:16px; margin-top:4px;" id="kpiTopRegion">—</div>
       <div class="card-sub" id="kpiTopRegionSub">—</div>
     </div>
     <div class="card">
-      <div class="card-label">市场信号</div>
+      <div class="card-label" data-i18n="kpiAlerts">Market signal</div>
       <div class="card-value" id="kpiAlerts">—</div>
-      <div class="card-sub" id="kpiAlertsSub">较上次变化 ±20% 以上</div>
+      <div class="card-sub" id="kpiAlertsSub" data-i18n="kpiAlertsSub">±20% vs last run</div>
     </div>
   </div>
 
   <!-- TABS -->
   <div class="tabs">
-    <div class="tab active" data-tab="overview">概览</div>
-    <div class="tab" data-tab="trend">趋势</div>
-    <div class="tab" data-tab="region">地区分布</div>
-    <div class="tab" data-tab="posts">帖子详情</div>
+    <div class="tab active" data-tab="overview" data-i18n="tabOverview">Overview</div>
+    <div class="tab" data-tab="trend" data-i18n="tabTrend">Trend</div>
+    <div class="tab" data-tab="region" data-i18n="tabRegion">Regions</div>
+    <div class="tab" data-tab="posts" data-i18n="tabPosts">Posts</div>
   </div>
 
   <!-- TAB: OVERVIEW -->
@@ -78,14 +78,14 @@
     <div class="main-grid">
       <div class="panel">
         <div class="panel-header">
-          <span class="panel-title">各平台帖量</span>
+          <span class="panel-title" data-i18n="platformList">Posts by platform</span>
         </div>
         <div class="platform-list" id="platformList">
-          <div class="empty-state">尚无数据</div>
+          <div class="empty-state" data-i18n="noData">No data yet</div>
         </div>
       </div>
       <div class="panel">
-        <div class="panel-header"><span class="panel-title">平台占比</span></div>
+        <div class="panel-header"><span class="panel-title" data-i18n="platformShare">Platform share</span></div>
         <canvas id="pieChart"></canvas>
         <div id="pieLegend" style="margin-top: 12px; display: flex; flex-direction: column; gap: 6px;"></div>
       </div>
@@ -96,12 +96,12 @@
   <div class="tab-content" id="tab-trend">
     <div class="panel">
       <div class="panel-header">
-        <span class="panel-title">各平台周帖量趋势</span>
+        <span class="panel-title" data-i18n="trendChart">Weekly platform volume</span>
         <div class="panel-controls">
           <select id="trendRange">
-            <option value="8">最近 8 次</option>
-            <option value="12">最近 12 次</option>
-            <option value="-1">全部</option>
+            <option value="8" data-i18n="rangeLast8">Last 8 runs</option>
+            <option value="12" data-i18n="rangeLast12">Last 12 runs</option>
+            <option value="-1" data-i18n="rangeAll">All runs</option>
           </select>
         </div>
       </div>
@@ -114,15 +114,15 @@
   <div class="tab-content" id="tab-region">
     <div class="panel">
       <div class="panel-header">
-        <span class="panel-title">地区招聘热度</span>
+        <span class="panel-title" data-i18n="regionHeatmap">Regional hiring activity</span>
         <div class="panel-controls">
           <select id="regionPlatform">
-            <option value="all">全平台合计</option>
+            <option value="all" data-i18n="allPlatforms">All platforms</option>
           </select>
         </div>
       </div>
       <div class="region-grid" id="regionGrid">
-        <div class="empty-state" style="grid-column: 1/-1;">尚无地区数据</div>
+        <div class="empty-state" style="grid-column: 1/-1;" data-i18n="noData">No data yet</div>
       </div>
     </div>
   </div>
@@ -130,28 +130,28 @@
   <!-- TAB: POSTS -->
   <div class="tab-content" id="tab-posts">
     <div class="panel">
-      <div class="panel-header"><span class="panel-title">最新餐馆招聘帖</span></div>
+      <div class="panel-header"><span class="panel-title" data-i18n="latestPosts">Latest restaurant job posts</span></div>
       <div class="filter-row">
-        <input type="text" id="postSearch" placeholder="搜索标题…">
+        <input type="text" id="postSearch" data-i18n-placeholder="searchPlaceholder" placeholder="Search title…">
         <select id="postPlatform">
-          <option value="">全部平台</option>
+          <option value="" data-i18n="allPlatforms">All platforms</option>
         </select>
         <select id="postRegion">
-          <option value="">全部地区</option>
-          <option value="东部">东部</option>
-          <option value="南部">南部</option>
-          <option value="中部">中部</option>
-          <option value="西部">西部</option>
+          <option value="" data-i18n="allRegions">All regions</option>
+          <option value="东部" data-i18n="east">East</option>
+          <option value="南部" data-i18n="south">South</option>
+          <option value="中部" data-i18n="midwest">Midwest</option>
+          <option value="西部" data-i18n="west">West</option>
         </select>
       </div>
       <div class="filter-row" id="kwFilter"></div>
       <div class="posts-feed" id="postsFeed">
-        <div class="empty-state">尚无帖子</div>
+        <div class="empty-state" data-i18n="noPosts">No matching posts</div>
       </div>
     </div>
   </div>
 
-  <footer>
+  <footer data-i18n="footer">
     Generated by the restaurant hiring market monitor. Source data refreshed twice weekly.
   </footer>
 </div>
@@ -159,6 +159,7 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"
         integrity="sha384-9nhczxUqK87bcKHh20fSQcTGD4qq5GhayNYSYWqwBkINBhOfQLg/P5HG5lF1urn4"
         crossorigin="anonymous"></script>
+<script src="./assets/i18n.js"></script>
 <script src="./assets/dashboard.js"></script>
 </body>
 </html>

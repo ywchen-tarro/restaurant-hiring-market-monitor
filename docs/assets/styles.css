@@ -180,8 +180,79 @@ footer { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border
 footer a { color: var(--muted); text-decoration: none; }
 footer a:hover { color: var(--accent); }
 
+/* Language toggle in header */
+.lang-toggle {
+  background: var(--surface2);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  padding: 4px 10px;
+  font-family: var(--mono);
+  font-size: 11px;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  transition: background .15s, border-color .15s;
+}
+.lang-toggle:hover { border-color: var(--accent); }
+.lang-toggle:active { background: var(--surface); }
+
+/* Tablet — 900px and below */
 @media (max-width: 960px) {
   .summary-row { grid-template-columns: repeat(2, 1fr); }
   .main-grid { grid-template-columns: 1fr; }
   .region-grid { grid-template-columns: 1fr; }
+  .app { padding: 16px; }
+}
+
+/* Phone — 640px and below */
+@media (max-width: 640px) {
+  body { font-size: 13px; }
+  .app { padding: 12px; max-width: 100%; }
+
+  .header { flex-wrap: wrap; gap: 12px; margin-bottom: 16px; }
+  .logo { gap: 8px; }
+  .logo-title { font-size: 15px; }
+  .header-meta { gap: 10px; flex-wrap: wrap; }
+
+  /* KPI cards: 1 column on phones — easier to read */
+  .summary-row { grid-template-columns: 1fr; gap: 8px; margin-bottom: 16px; }
+  .card { padding: 12px 14px; }
+  .card-value { font-size: 22px; }
+
+  /* Schedule bar wraps */
+  .schedule-bar { flex-direction: column; align-items: flex-start; gap: 6px; padding: 10px 12px; }
+  .schedule-info { font-size: 11px; }
+
+  /* Tabs scroll horizontally if too wide */
+  .tabs { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .tabs::-webkit-scrollbar { display: none; }
+  .tab { white-space: nowrap; padding: 8px 12px; font-size: 12px; }
+
+  .panel { padding: 14px; }
+  .panel-header { flex-wrap: wrap; gap: 8px; }
+
+  /* Filter row stacks */
+  .filter-row { gap: 6px; }
+  input[type=text] { width: 100%; }
+  .filter-row select { flex: 1; min-width: 0; }
+
+  /* Posts feed: tighter */
+  .posts-feed { max-height: none; }
+  .post-item { padding: 10px; }
+  .post-title { font-size: 13px; }
+
+  /* Region grid stays 1-col (already from tablet rule) */
+  .region-block { padding: 12px; }
+  .state-name { min-width: 60px; font-size: 11px; }
+
+  /* Smaller chart heights so they don't dominate the viewport */
+  #trendChart { height: 220px !important; }
+  #pieChart { height: 160px !important; }
+}
+
+/* Very narrow phones */
+@media (max-width: 380px) {
+  .logo-mark { display: none; }
+  .header-meta .status-text { display: none; }
+  .card-value { font-size: 20px; }
 }

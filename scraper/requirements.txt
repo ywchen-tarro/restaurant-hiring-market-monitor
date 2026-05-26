@@ -2,3 +2,8 @@
 # floor-only pins (>=) — they let a yanked or compromised release in.
 requests==2.32.5
 beautifulsoup4==4.14.3
+
+# Used by platforms that need a real Chrome TLS fingerprint to defeat
+# Cloudflare-class anti-bot (168worker, 500work). Optional from a
+# strict-dependency view — only loaded when a platform sets `impersonate`.
+curl_cffi==0.7.4

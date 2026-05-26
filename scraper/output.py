@@ -14,6 +14,7 @@ from __future__ import annotations
 import json
 import logging
 import os
+import re
 from collections import Counter
 from datetime import date, datetime, timedelta
 from pathlib import Path
@@ -21,6 +22,21 @@ from typing import Dict, List, Optional
 
 from . import config
 from .platforms.base import Post
+
+# 168worker.com and 500work.com share a CMS and republish many of the same
+# job posts. Without dedup, the aggregate signal would be inflated. We
+# normalize titles (strip emoji, collapse whitespace, lowercase) and count
+# distinct posts in `meta.unique_posts`.
+_KEEP_RE = re.compile(r"[一-鿿A-Za-z0-9]+")
+
+
+def _normalize_title(t: str) -> str:
+    if not t:
+        return ""
+    # Keep only CJK + ASCII alphanumerics. Drops emoji, punctuation,
+    # symbols, the redaction placeholder, and whitespace. The result is a
+    # tight signature that's robust to minor formatting differences.
+    return "".join(_KEEP_RE.findall(t)).lower()
 
 log = logging.getLogger(__name__)
 
@@ -90,12 +106,19 @@ def _aggregate(posts: List[Post], days_back: int) -> dict:
             kw_counter[kw] += 1
     by_keyword = dict(kw_counter.most_common(20))
 
+    # Cross-platform deduplication — 168worker / 500work overlap heavily.
+    unique_titles = {_normalize_title(p.title) for p in posts if p.title}
+    unique_titles.discard("")  # exclude untitled
+    unique_count = len(unique_titles)
+
     meta = {
         "last_updated": datetime.now().astimezone().isoformat(timespec="seconds"),
         "scrape_days_back": days_back,
         "date_from": date_from,
         "date_to": date_to,
         "total_posts": len(posts),
+        "unique_posts": unique_count,
+        "duplicate_count": max(0, len(posts) - unique_count),
         "unclassified_region": unclassified,
     }
 
@@ -123,29 +146,25 @@ def _new_history_entry(posts: List[Post], days_back: int) -> dict:
 
 
 def _merge_history(existing: dict, new_entry: dict) -> List[dict]:
-    """Append the new entry, OR merge with the same-day entry by taking the
-    per-platform max. This protects against a partially-failed re-run
-    silently replacing a healthier earlier run."""
+    """Append the new entry, OR replace the same-day entry only when the
+    new run is at least as healthy. "Healthy" = higher total.
+
+    Why: a partially-failed re-run could otherwise overwrite a good entry
+    with a smaller number, silently corrupting the trend. Conversely, if
+    the morning run failed (small total) and a re-run succeeded (big total),
+    we want the bigger number. Single-direction replacement keeps each
+    history point a real, internally-consistent snapshot — unlike the
+    earlier per-platform max-merge which could synthesize a total that
+    no single run produced.
+    """
     history = list(existing.get("history", []))
     if not history or history[-1].get("run_date") != new_entry["run_date"]:
         history.append(new_entry)
         return history
 
     prev = history[-1]
-    merged_by_platform = {}
-    pids = set(prev.get("by_platform", {})) | set(new_entry["by_platform"])
-    for pid in pids:
-        merged_by_platform[pid] = max(
-            prev.get("by_platform", {}).get(pid, 0),
-            new_entry["by_platform"].get(pid, 0),
-        )
-    merged = {
-        "run_date": new_entry["run_date"],
-        "period": new_entry["period"],
-        "by_platform": merged_by_platform,
-        "total": sum(merged_by_platform.values()),
-    }
-    history[-1] = merged
+    if new_entry.get("total", 0) >= prev.get("total", 0):
+        history[-1] = new_entry
     return history
 
 

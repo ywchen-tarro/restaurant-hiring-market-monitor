@@ -15,6 +15,13 @@ _REL_RE = re.compile(
     r"(?P<n>\d+)\s*(?P<unit>分钟|分鐘|小时|小時|天|日|周|週|月|年)前"
 )
 
+# English equivalents (uscanyin renders dates in English):
+#   "1 hour ago", "5 hours ago", "2 days ago", "1 minute ago", "3 weeks ago"
+_REL_EN_RE = re.compile(
+    r"(?P<n>\d+)\s+(?P<unit>minute|hour|day|week|month|year)s?\s+ago",
+    re.IGNORECASE,
+)
+
 
 def parse(text: str, today: Optional[date] = None) -> Optional[date]:
     """Parse a date string in any of the formats job-boards use.
@@ -39,9 +46,10 @@ def parse(text: str, today: Optional[date] = None) -> Optional[date]:
     s = text.strip()
     today = today or date.today()
 
-    if s in ("刚刚", "剛剛", "今天"):
+    s_lower = s.lower()
+    if s in ("刚刚", "剛剛", "今天") or s_lower in ("just now", "now", "today"):
         return today
-    if s == "昨天":
+    if s == "昨天" or s_lower == "yesterday":
         return today - timedelta(days=1)
     if s == "前天":
         return today - timedelta(days=2)
@@ -59,6 +67,21 @@ def parse(text: str, today: Optional[date] = None) -> Optional[date]:
         if unit == "月":
             return today - timedelta(days=30 * n)
         if unit == "年":
+            return today - timedelta(days=365 * n)
+
+    m = _REL_EN_RE.search(s)
+    if m:
+        n = int(m.group("n"))
+        unit = m.group("unit").lower()
+        if unit in ("minute", "hour"):
+            return today
+        if unit == "day":
+            return today - timedelta(days=n)
+        if unit == "week":
+            return today - timedelta(days=7 * n)
+        if unit == "month":
+            return today - timedelta(days=30 * n)
+        if unit == "year":
             return today - timedelta(days=365 * n)
 
     # ISO-ish: YYYY-MM-DD or YYYY/MM/DD

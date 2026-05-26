@@ -31,6 +31,10 @@
     charts: { pie: null, trend: null },
   };
 
+  // i18n helper — falls back to identity if i18n.js failed to load.
+  const t = (k, p) => (window.I18N ? window.I18N.t(k, p) : k);
+  const regionName = (c) => (window.I18N ? window.I18N.region(c) : c);
+
   // ────────────────────────────────────────────────────────
   // ENTRY POINT
   // ────────────────────────────────────────────────────────
@@ -39,6 +43,15 @@
   async function init() {
     wireTabs();
     wireFilters();
+    wireLangToggle();
+    window.addEventListener('langchange', () => {
+      // Re-render dynamic content. data-i18n attributes already updated
+      // by i18n.js itself; we only need to refresh JS-generated strings.
+      if (state.data) {
+        renderHeader(); renderKpis(); renderAlertBanner();
+        renderOverview(); renderTrend(); renderRegion(); renderPosts();
+      }
+    });
     const dataUrl = window.DASHBOARD_DATA_URL || './data/posts.json';
     const benchmarkUrl = window.DASHBOARD_BENCHMARK_URL || './benchmark.json';
     try {
@@ -84,11 +97,17 @@
     $('trendRange').addEventListener('change', renderTrend);
   }
 
+  function wireLangToggle() {
+    const btn = document.getElementById('langToggle');
+    if (!btn || !window.I18N) return;
+    btn.addEventListener('click', () => window.I18N.toggle());
+  }
+
   function renderEmpty() {
     document.getElementById('kpiTotal').textContent = '—';
-    document.getElementById('lastRunText').textContent = '尚未运行 (posts.json 未找到)';
+    document.getElementById('lastRunText').textContent = t('statusNeverRun');
     document.querySelector('#platformList').innerHTML =
-      '<div class="empty-state">尚无数据。请运行 <code>bash run.sh</code> 生成 docs/data/posts.json</div>';
+      '<div class="empty-state">' + t('noData') + ' — ' + t('noDataHelp') + '</div>';
   }
 
   function renderAll() {
@@ -107,16 +126,28 @@
   // ────────────────────────────────────────────────────────
   function renderHeader() {
     const d = state.data;
+    const lang = window.I18N ? window.I18N.getLang() : 'en';
+    const locale = lang === 'zh' ? 'zh-CN' : 'en-US';
     document.getElementById('lastRunText').textContent =
-      '上次运行: ' + new Date(d.meta.last_updated).toLocaleString('zh-CN');
+      t('lastRunPrefix') + ': ' + new Date(d.meta.last_updated).toLocaleString(locale);
     document.getElementById('nextRunText').textContent =
-      `数据窗口: ${d.meta.date_from} ~ ${d.meta.date_to} (${d.meta.scrape_days_back}d)`;
+      `${t('dataWindowLabel')}: ${d.meta.date_from} ~ ${d.meta.date_to} (${d.meta.scrape_days_back}d)`;
   }
 
   function renderKpis() {
     const d = state.data;
-    document.getElementById('kpiTotal').textContent = d.meta.total_posts;
-    document.getElementById('kpiTotalSub').textContent = totalDeltaText();
+    // Show unique_posts as the headline when dedup found duplicates;
+    // otherwise show total_posts.
+    const total = d.meta.total_posts;
+    const unique = d.meta.unique_posts != null ? d.meta.unique_posts : total;
+    document.getElementById('kpiTotal').textContent = unique;
+    const subEl = document.getElementById('kpiTotalSub');
+    const deltaTxt = totalDeltaText();
+    if (unique < total) {
+      subEl.textContent = `${total} ${t('rangeAll').toLowerCase()} · ${deltaTxt}`;
+    } else {
+      subEl.textContent = deltaTxt;
+    }
 
     document.getElementById('kpiWindow').textContent = `${d.meta.scrape_days_back}d`;
     document.getElementById('kpiWindowSub').textContent = d.meta.date_from;
@@ -127,18 +158,18 @@
       .sort((a, b) => b.total - a.total);
     const top = platRanked[0];
     document.getElementById('kpiTopPlatform').textContent = top.name;
-    document.getElementById('kpiTopPlatformSub').textContent = `${top.total} 帖`;
+    document.getElementById('kpiTopPlatformSub').textContent = `${top.total}`;
 
     // Top region
     const regRanked = REGIONS
       .map(r => ({ r, total: (d.by_region[r] || {}).total || 0 }))
       .sort((a, b) => b.total - a.total);
     const topReg = regRanked[0];
-    document.getElementById('kpiTopRegion').textContent = topReg.r;
+    document.getElementById('kpiTopRegion').textContent = regionName(topReg.r);
     const topStates = (d.by_region[topReg.r] || {}).top_states || {};
     const topStateName = Object.keys(topStates)[0] || '';
     document.getElementById('kpiTopRegionSub').textContent =
-      `${topReg.total} 帖 · 集中于 ${topStateName || '—'}`;
+      t('kpiTopRegionSub', { total: topReg.total, state: topStateName || '—' });
 
     // Rising alerts: count platforms with notable Δ vs previous history entry
     const { rising, falling } = computeAlerts();
@@ -147,18 +178,18 @@
     document.getElementById('kpiAlerts').style.color =
       rising.length > falling.length ? 'var(--accent2)' : (falling.length > 0 ? 'var(--warn)' : 'var(--muted)');
     const sub = document.getElementById('kpiAlertsSub');
-    if (sub) sub.textContent = `升温 ${rising.length} · 降温 ${falling.length}`;
+    if (sub) sub.textContent = t('kpiAlertsBreakdown', { rising: rising.length, falling: falling.length });
   }
 
   function totalDeltaText() {
     const h = state.data.history || [];
-    if (h.length < 2) return '首次运行';
+    if (h.length < 2) return t('kpiTotalSubFirst');
     const cur = h[h.length - 1].total;
     const prev = h[h.length - 2].total;
-    if (prev === 0) return '上次为 0';
+    if (prev === 0) return '—';
     const pct = ((cur - prev) / prev) * 100;
     const arrow = pct >= 0 ? '▲' : '▼';
-    return `${arrow} ${Math.abs(pct).toFixed(1)}% 较上次`;
+    return `${arrow} ${Math.abs(pct).toFixed(1)}%`;
   }
 
   function computeAlerts() {
@@ -193,11 +224,12 @@
 
     const messages = [];
     if (isStale()) {
-      messages.push(`⏰ 数据已 ${Math.floor((Date.now() - new Date(state.data.meta.last_updated).getTime()) / (24 * 3600 * 1000))} 天未更新 — 请检查 launchd 调度`);
+      const days = Math.floor((Date.now() - new Date(state.data.meta.last_updated).getTime()) / (24 * 3600 * 1000));
+      messages.push('⏰ ' + t('staleData', { days }));
     }
     warnings.forEach(w => messages.push(`⚠ ${w}`));
-    rising.forEach(a => messages.push(`▲ ${a.platform.name} 升温 +${a.pct.toFixed(0)}% (${a.prev} → ${a.current})`));
-    falling.forEach(a => messages.push(`▼ ${a.platform.name} 降温 ${a.pct.toFixed(0)}% (${a.prev} → ${a.current})`));
+    rising.forEach(a => messages.push(`▲ ${a.platform.name} ${t('rising')} +${a.pct.toFixed(0)}% (${a.prev} → ${a.current})`));
+    falling.forEach(a => messages.push(`▼ ${a.platform.name} ${t('cooling')} ${a.pct.toFixed(0)}% (${a.prev} → ${a.current})`));
 
     if (messages.length === 0) {
       banner.classList.remove('shown');
@@ -316,12 +348,10 @@
 
     if (history.length === 0) {
       document.getElementById('trendNotice').style.display = 'block';
-      document.getElementById('trendNotice').innerHTML =
-        '<strong>提示</strong> · 趋势图需要至少 2 次运行才能展示曲线。';
+      document.getElementById('trendNotice').textContent = t('noRecentData');
     } else if (history.length === 1) {
       document.getElementById('trendNotice').style.display = 'block';
-      document.getElementById('trendNotice').innerHTML =
-        '<strong>提示</strong> · 当前只有 1 次运行的数据。再运行一次后可看到趋势。';
+      document.getElementById('trendNotice').textContent = t('noRecentData');
     } else {
       document.getElementById('trendNotice').style.display = 'none';
     }
@@ -424,14 +454,14 @@
       const stateRows = states.length
         ? states.map(([n, c], i) => `
             <div class="state-row">
-              <span class="state-name">${n}</span>
+              <span class="state-name">${escapeHtml(n)}</span>
               <div class="state-bar-wrap"><div class="state-bar ${i === 0 ? 'peak' : ''}" style="width:${(c / maxState) * 100}%"></div></div>
               <span class="state-count">${c}</span>
             </div>`).join('')
-        : '<div class="empty-state" style="padding:14px; font-size:12px;">无数据</div>';
+        : `<div class="empty-state" style="padding:14px; font-size:12px;">${escapeHtml(t('noData'))}</div>`;
       block.innerHTML = `
         <div class="region-head">
-          <span class="region-name">${r}</span>
+          <span class="region-name">${escapeHtml(regionName(r))}</span>
           <span class="region-total">${info.total}</span>
         </div>
         <div class="state-list">${stateRows}</div>
@@ -448,16 +478,15 @@
     if (!d) return;
     const posts = d.posts || [];
 
-    // Keyword chips
+    // Keyword chips — re-render on language change too
     const kwFilter = document.getElementById('kwFilter');
-    if (kwFilter.children.length === 0) {
-      const top = Object.entries(d.by_keyword || {}).slice(0, 12);
-      const allChip = chip('全部', '', state.filters.keyword === '');
-      kwFilter.appendChild(allChip);
-      top.forEach(([kw, n]) => {
-        kwFilter.appendChild(chip(`${kw} · ${n}`, kw, state.filters.keyword === kw));
-      });
-    }
+    kwFilter.innerHTML = '';
+    const top = Object.entries(d.by_keyword || {}).slice(0, 12);
+    const allChip = chip(t('rangeAll'), '', state.filters.keyword === '');
+    kwFilter.appendChild(allChip);
+    top.forEach(([kw, n]) => {
+      kwFilter.appendChild(chip(`${kw} · ${n}`, kw, state.filters.keyword === kw));
+    });
 
     const f = state.filters;
     const filtered = posts.filter(p => {
@@ -470,7 +499,7 @@
 
     const feed = document.getElementById('postsFeed');
     if (filtered.length === 0) {
-      feed.innerHTML = '<div class="empty-state">无匹配帖子</div>';
+      feed.innerHTML = `<div class="empty-state">${escapeHtml(t('noPosts'))}</div>`;
       return;
     }
 
@@ -493,7 +522,7 @@
           <span class="post-time">${escapeHtml(p.date || '—')}</span>
         </div>
         <div class="post-title">${titleEl}</div>
-        <div class="post-region">${escapeHtml(p.region || '未知地区')} · ${escapeHtml(p.state || '—')} ${(p.keywords_matched || []).map(k => `<span class="kw-tag">${escapeHtml(k)}</span>`).join('')}</div>
+        <div class="post-region">${escapeHtml(regionName(p.region) || t('unknownRegion'))} · ${escapeHtml(p.state || '—')} ${(p.keywords_matched || []).map(k => `<span class="kw-tag">${escapeHtml(k)}</span>`).join('')}</div>
       `;
       feed.appendChild(el);
     });

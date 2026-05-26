@@ -146,6 +146,17 @@
       t('lastRunPrefix') + ': ' + new Date(d.meta.last_updated).toLocaleString(locale);
     document.getElementById('nextRunText').textContent =
       `${t('dataWindowLabel')}: ${d.meta.date_from} ~ ${d.meta.date_to} (${d.meta.scrape_days_back}d)`;
+
+    // Footer data line
+    const footerEl = document.getElementById('footerData');
+    if (footerEl) {
+      footerEl.textContent = t('footerData', {
+        from: d.meta.date_from,
+        to: d.meta.date_to,
+        total: d.meta.total_posts,
+        unique: d.meta.unique_posts != null ? d.meta.unique_posts : d.meta.total_posts,
+      });
+    }
   }
 
   function renderKpis() {
@@ -519,13 +530,10 @@
     const noticeEl = document.getElementById('trendNotice');
 
     if (days && Object.keys(days).length > 0) {
-      // Range here is "last N runs" semantics ported to days — treat as
-      // "last N×~3 days" (Mon/Thu cadence) or just last N days.
-      // Simpler: if range is 8 -> last 14 days; 12 -> 30 days; -1 -> all.
+      // The selector now expresses days directly (14, 30, -1 for all).
       const dateKeys = Object.keys(days).sort();
       let sliced;
-      if (rangeRaw === 8) sliced = dateKeys.slice(-14);
-      else if (rangeRaw === 12) sliced = dateKeys.slice(-30);
+      if (rangeRaw > 0) sliced = dateKeys.slice(-rangeRaw);
       else sliced = dateKeys;
 
       labels = sliced;

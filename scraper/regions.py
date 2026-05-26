@@ -6,6 +6,7 @@ rather than '纽约' (also 东部 here, but disambiguation matters for some pair
 
 from __future__ import annotations
 
+import re
 from typing import List, Optional, Tuple
 
 REGION_MAP = {
@@ -32,11 +33,14 @@ REGION_MAP = {
         "迈阿密", "亚特兰大", "达拉斯", "休斯顿", "奥兰多", "坦帕",
         "夏洛特", "罗利", "纳什维尔", "新奥尔良", "孟菲斯", "杰克逊维尔",
         "Miami", "Atlanta", "Dallas", "Houston", "Orlando", "Tampa",
+        "Charlotte", "Raleigh", "Nashville", "New Orleans", "Memphis",
         # codes / English
         "FL", "TX", "GA", "NC", "SC", "TN", "MD", "KY", "AL", "MS",
         "LA", "AR", "OK", "WV", "VA",
         "Florida", "Texas", "Georgia", "Maryland", "Virginia",
-        "Tennessee", "Louisiana",
+        "Tennessee", "Louisiana", "Arkansas", "Alabama", "Mississippi",
+        "Kentucky", "Oklahoma", "West Virginia",
+        "North Carolina", "South Carolina",
     ],
     "中部": [
         # states
@@ -48,10 +52,14 @@ REGION_MAP = {
         "圣路易斯", "克利夫兰", "哥伦布", "辛辛那提", "密尔沃基",
         "堪萨斯城",
         "Chicago", "Detroit", "Minneapolis", "Cleveland",
+        "Indianapolis", "Milwaukee", "Columbus", "Cincinnati",
+        "St. Louis", "Kansas City",
         # codes
         "IL", "MI", "MN", "OH", "IN", "WI", "MO", "IA", "KS", "NE",
         "SD", "ND",
         "Illinois", "Michigan", "Minnesota", "Ohio", "Indiana",
+        "Wisconsin", "Missouri", "Iowa", "Kansas", "Nebraska",
+        "South Dakota", "North Dakota",
     ],
     "西部": [
         # states (NOTE: bare "Washington" is ambiguous with DC; we use
@@ -78,17 +86,35 @@ REGION_MAP = {
         # codes
         "CA", "WA", "NV", "AZ", "CO", "OR", "UT", "ID", "MT", "WY", "AK", "HI", "NM",
         "California", "Nevada", "Arizona", "Colorado", "Oregon", "Hawaii",
+        "Utah", "New Mexico", "Wyoming", "Montana", "Idaho", "Alaska",
     ],
 }
 
 
+def _is_ascii_token(t: str) -> bool:
+    """ASCII-only tokens (state codes like 'NY', names like 'California') need
+    word-boundary matching. Chinese tokens use substring matching since CJK
+    has no spaces. Mixed-script tokens (e.g. '华盛顿DC') treat as Chinese."""
+    return all(ord(c) < 128 for c in t)
+
+
 # Pre-build a flat list of (token, state, region), sorted by token length desc
-# so we match longer/more-specific tokens first.
-_TOKENS = []  # list of (token, state, region)
+# so we match longer/more-specific tokens first. ASCII tokens get a compiled
+# word-boundary regex; Chinese tokens use plain substring containment.
+_TOKENS = []  # list of (token, state, region, ascii_pattern_or_None)
 for _region, _tokens in REGION_MAP.items():
     for _t in _tokens:
-        _TOKENS.append((_t, _t, _region))
+        pattern = None
+        if _is_ascii_token(_t):
+            pattern = re.compile(r'\b' + re.escape(_t) + r'\b', re.IGNORECASE)
+        _TOKENS.append((_t, _t, _region, pattern))
 _TOKENS.sort(key=lambda x: len(x[0]), reverse=True)
+
+
+def _matches(text: str, token: str, pattern) -> bool:
+    if pattern is not None:
+        return bool(pattern.search(text))
+    return token in text
 
 
 def classify(text: str) -> Tuple[Optional[str], Optional[str]]:
@@ -96,11 +122,14 @@ def classify(text: str) -> Tuple[Optional[str], Optional[str]]:
 
     State is the matched token verbatim (Chinese name preferred). Region is
     one of: '东部' / '南部' / '中部' / '西部'. Returns (None, None) if nothing matches.
+
+    ASCII tokens are matched with word boundaries to avoid e.g. `SUNNYVALE`
+    matching `NY` or `SAN JOSE` matching `OR`.
     """
     if not text:
         return None, None
-    for token, state, region in _TOKENS:
-        if token in text:
+    for token, state, region, pattern in _TOKENS:
+        if _matches(text, token, pattern):
             return region, state
     return None, None
 
@@ -109,7 +138,7 @@ def region_for(state: str) -> Optional[str]:
     """Look up the region for an already-known state token."""
     if not state:
         return None
-    for token, _, region in _TOKENS:
+    for token, _, region, _pat in _TOKENS:
         if token == state:
             return region
     return None

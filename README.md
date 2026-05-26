@@ -186,6 +186,34 @@ cd docs && python3 -m http.server 8080
 
 ---
 
+## Tests
+
+The project ships with a pytest suite — 119 tests, no network calls (uses
+saved HTML fixtures per platform).
+
+```bash
+python3 -m pip install -r scraper/requirements-dev.txt
+bash run-tests.sh
+```
+
+What's covered:
+
+- `tests/test_date_parser.py` — every parsing branch (ISO, MM/DD/YY, Chinese
+  + English relative dates, edge cases).
+- `tests/test_keywords.py` — strong/weak split, false-positive blocking,
+  traditional Chinese.
+- `tests/test_regions.py` — word-boundary ASCII matching (no more
+  `SUNNYVALE → NY`), Virginia → South, longest-token precedence.
+- `tests/test_sanitize.py` — every phone format observed in the wild,
+  non-matches (years, salaries).
+- `tests/test_output.py` — mirror-group dedup, history merge, daily merge,
+  atomic write, corrupt-file preservation, schema-drift warnings.
+- `tests/test_platforms.py` — per-platform `parse_page` against a real
+  saved fixture; defensive empty/malformed-HTML tests.
+
+If a platform's DOM changes, the next test run catches it before the
+schedule silently produces zeros.
+
 ## Tuning
 
 All knobs live in **`scraper/config.py`**:

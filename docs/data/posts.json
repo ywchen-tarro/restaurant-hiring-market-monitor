@@ -1,34 +1,36 @@
 {
   "meta": {
-    "last_updated": "2026-05-25T22:59:23-07:00",
+    "last_updated": "2026-05-26T10:35:39-07:00",
     "scrape_days_back": 7,
-    "date_from": "2026-05-19",
-    "date_to": "2026-05-25",
-    "total_posts": 512,
-    "unique_posts": 451,
-    "duplicate_count": 61,
-    "unclassified_region": 14,
-    "warnings": [],
+    "date_from": "2026-05-20",
+    "date_to": "2026-05-26",
+    "total_posts": 453,
+    "unique_posts": 444,
+    "duplicate_count": 9,
+    "unclassified_region": 8,
+    "warnings": [
+      "168worker: dropped to 0 (prior: 51) — possible scrape failure or schema drift"
+    ],
     "diagnostics": {
       "168worker": {
         "status": "ok",
-        "pages_fetched": 1,
-        "rows_parsed": 100,
+        "pages_fetched": 0,
+        "rows_parsed": 0,
         "dropped_unparseable_date": 0,
-        "dropped_out_of_window": 41,
-        "dropped_future_date": 7,
-        "dropped_not_restaurant": 8,
+        "dropped_out_of_window": 0,
+        "dropped_future_date": 0,
+        "dropped_not_restaurant": 0,
         "dropped_duplicate": 0,
-        "fetch_failures": 0
+        "fetch_failures": 1
       },
       "usahuarenjie": {
         "status": "ok",
         "pages_fetched": 1,
         "rows_parsed": 40,
         "dropped_unparseable_date": 0,
-        "dropped_out_of_window": 7,
+        "dropped_out_of_window": 12,
         "dropped_future_date": 0,
-        "dropped_not_restaurant": 3,
+        "dropped_not_restaurant": 1,
         "dropped_duplicate": 0,
         "fetch_failures": 0
       },
@@ -37,31 +39,31 @@
         "pages_fetched": 1,
         "rows_parsed": 100,
         "dropped_unparseable_date": 0,
-        "dropped_out_of_window": 41,
-        "dropped_future_date": 7,
-        "dropped_not_restaurant": 8,
+        "dropped_out_of_window": 46,
+        "dropped_future_date": 0,
+        "dropped_not_restaurant": 9,
         "dropped_duplicate": 0,
         "fetch_failures": 0
       },
       "uscanyin": {
         "status": "ok",
         "pages_fetched": 8,
-        "rows_parsed": 157,
+        "rows_parsed": 159,
         "dropped_unparseable_date": 0,
         "dropped_out_of_window": 0,
         "dropped_future_date": 0,
-        "dropped_not_restaurant": 33,
+        "dropped_not_restaurant": 39,
         "dropped_duplicate": 0,
         "fetch_failures": 0
       },
       "niuyuegongzuo": {
         "status": "ok",
-        "pages_fetched": 13,
-        "rows_parsed": 625,
+        "pages_fetched": 14,
+        "rows_parsed": 673,
         "dropped_unparseable_date": 1,
-        "dropped_out_of_window": 19,
-        "dropped_future_date": 2,
-        "dropped_not_restaurant": 507,
+        "dropped_out_of_window": 36,
+        "dropped_future_date": 0,
+        "dropped_not_restaurant": 540,
         "dropped_duplicate": 0,
         "fetch_failures": 0
       },
@@ -70,9 +72,9 @@
         "pages_fetched": 16,
         "rows_parsed": 1088,
         "dropped_unparseable_date": 0,
-        "dropped_out_of_window": 1,
+        "dropped_out_of_window": 30,
         "dropped_future_date": 0,
-        "dropped_not_restaurant": 913,
+        "dropped_not_restaurant": 893,
         "dropped_duplicate": 0,
         "fetch_failures": 0
       }
@@ -80,93 +82,93 @@
   },
   "by_platform": {
     "168worker": {
-      "total": 44,
-      "daily_avg": 6.29
+      "total": 0,
+      "daily_avg": 0.0
     },
     "usahuarenjie": {
-      "total": 30,
-      "daily_avg": 4.29
+      "total": 27,
+      "daily_avg": 3.86
     },
     "500work": {
-      "total": 44,
-      "daily_avg": 6.29
+      "total": 45,
+      "daily_avg": 6.43
     },
     "uscanyin": {
-      "total": 124,
-      "daily_avg": 17.71
+      "total": 120,
+      "daily_avg": 17.14
     },
     "niuyuegongzuo": {
       "total": 96,
       "daily_avg": 13.71
     },
     "meiguogongzuo": {
-      "total": 174,
-      "daily_avg": 24.86
+      "total": 165,
+      "daily_avg": 23.57
     }
   },
   "by_region": {
     "东部": {
-      "total": 383,
+      "total": 339,
       "top_states": {
-        "法拉盛": 105,
-        "纽约": 88,
-        "长岛": 48,
-        "新泽西": 42,
-        "曼哈顿": 28
+        "法拉盛": 93,
+        "纽约": 91,
+        "长岛": 44,
+        "新泽西": 33,
+        "曼哈顿": 23
       }
     },
     "南部": {
-      "total": 59,
+      "total": 57,
       "top_states": {
-        "佛州": 12,
         "乔治亚": 11,
-        "亚特兰大": 9,
-        "马里兰": 7,
-        "德州": 5
+        "佛州": 11,
+        "南卡": 7,
+        "马里兰": 6,
+        "维吉尼亚": 5
       }
     },
     "中部": {
-      "total": 20,
+      "total": 18,
       "top_states": {
-        "印第安纳": 5,
-        "芝加哥": 4,
-        "爱荷华": 2,
-        "明尼苏达": 2,
-        "俄亥俄": 2
+        "芝加哥": 3,
+        "印第安纳": 3,
+        "密歇根": 3,
+        "俄亥俄": 2,
+        "伊州": 2
       }
     },
     "西部": {
-      "total": 36,
+      "total": 31,
       "top_states": {
-        "旧金山": 5,
-        "Gardena": 4,
-        "阿凯迪亚": 4,
-        "加州": 3,
-        "西雅图": 3
+        "科罗拉多": 4,
+        "新墨西哥": 3,
+        "阿凯迪亚": 3,
+        "Gardena": 3,
+        "加州": 3
       }
     }
   },
   "by_keyword": {
-    "餐": 264,
-    "炒锅": 100,
-    "师傅": 83,
-    "日餐": 75,
-    "企台": 71,
-    "寿司": 65,
-    "餐馆": 63,
-    "中餐": 61,
-    "招聘": 56,
+    "餐": 227,
+    "炒锅": 91,
+    "师傅": 75,
+    "企台": 67,
+    "日餐": 64,
+    "寿司": 62,
+    "餐馆": 54,
+    "中餐": 52,
     "外卖": 50,
-    "打杂": 43,
-    "餐厅": 30,
-    "厨房": 29,
-    "油锅": 24,
-    "抓码": 22,
-    "前台": 21,
+    "招聘": 43,
+    "打杂": 34,
+    "油锅": 27,
+    "厨房": 27,
+    "餐厅": 24,
+    "抓码": 20,
+    "前台": 18,
     "送餐": 15,
-    "打包": 15,
-    "洗碗": 14,
-    "后厨": 14
+    "烧烤": 13,
+    "奶茶": 13,
+    "收银": 12
   },
   "history": [
     {
@@ -182,615 +184,84 @@
       },
       "total": 582,
       "total_unique": 531
+    },
+    {
+      "run_date": "2026-05-26",
+      "period": "2026-05-20 ~ 2026-05-26",
+      "by_platform": {
+        "168worker": 0,
+        "usahuarenjie": 27,
+        "500work": 45,
+        "uscanyin": 120,
+        "niuyuegongzuo": 96,
+        "meiguogongzuo": 165
+      },
+      "total": 453,
+      "total_unique": 444
     }
   ],
   "posts": [
     {
-      "id": "168worker_437669",
-      "platform": "168worker",
-      "title": "曼哈顿请熟手炒锅",
-      "date": "2026-05-25",
-      "region": "东部",
-      "state": "曼哈顿",
+      "id": "usahuarenjie_276071",
+      "platform": "usahuarenjie",
+      "title": "Kissimmee火锅店在迪士尼附近请熟手启台不包住",
+      "date": "2026-05-26",
+      "region": "南部",
+      "state": "奥兰多",
       "keywords_matched": [
-        "炒锅"
+        "火锅"
       ],
-      "url": "https://www.168worker.com/page/437669"
+      "url": "https://www.usahuarenjie.com/city/Orlando/information-id-276071.html"
     },
     {
-      "id": "168worker_453874",
-      "platform": "168worker",
-      "title": "法拉盛东北餐馆招二厨师傅",
-      "date": "2026-05-25",
-      "region": "东部",
-      "state": "法拉盛",
-      "keywords_matched": [
-        "餐馆",
-        "餐",
-        "厨师",
-        "师傅"
-      ],
-      "url": "https://www.168worker.com/page/453874"
-    },
-    {
-      "id": "168worker_455255",
-      "platform": "168worker",
-      "title": "纽约招聘川湘菜主厨！纽约餐厅店长!",
-      "date": "2026-05-25",
-      "region": "东部",
-      "state": "纽约",
-      "keywords_matched": [
-        "餐厅",
-        "餐",
-        "招聘"
-      ],
-      "url": "https://www.168worker.com/page/455255"
-    },
-    {
-      "id": "168worker_420895",
-      "platform": "168worker",
-      "title": "新泽西餐馆请打杂师傅，法拉盛接送。",
-      "date": "2026-05-25",
-      "region": "东部",
-      "state": "新泽西",
-      "keywords_matched": [
-        "餐馆",
-        "餐",
-        "打杂",
-        "师傅"
-      ],
-      "url": "https://www.168worker.com/page/420895"
-    },
-    {
-      "id": "168worker_455645",
-      "platform": "168worker",
-      "title": "新泽西爱迪生中餐馆招聘兼职",
-      "date": "2026-05-25",
-      "region": "东部",
-      "state": "新泽西",
-      "keywords_matched": [
-        "餐馆",
-        "餐",
-        "中餐",
-        "招聘"
-      ],
-      "url": "https://www.168worker.com/page/455645"
-    },
-    {
-      "id": "168worker_380687",
-      "platform": "168worker",
-      "title": "旧金山湾区餐馆聘请熟手企台",
-      "date": "2026-05-25",
+      "id": "usahuarenjie_276066",
+      "platform": "usahuarenjie",
+      "title": "新墨西哥诚聘, 有经验的寿司专业师傅熟手, 住宿单间",
+      "date": "2026-05-26",
       "region": "西部",
-      "state": "旧金山",
-      "keywords_matched": [
-        "餐馆",
-        "餐",
-        "企台"
-      ],
-      "url": "https://www.168worker.com/page/380687"
-    },
-    {
-      "id": "168worker_455641",
-      "platform": "168worker",
-      "title": "寿司/铁板店招人",
-      "date": "2026-05-25",
-      "region": null,
-      "state": "伊丽莎白",
+      "state": "新墨西哥",
       "keywords_matched": [
         "寿司",
-        "招人"
+        "师傅"
       ],
-      "url": "https://www.168worker.com/page/455641"
+      "url": "https://www.usahuarenjie.com/city/Qtcs/information-id-276066.html"
     },
     {
-      "id": "168worker_378405",
-      "platform": "168worker",
-      "title": "饭团外卖招聘送餐员！时间灵活！多劳多得！顺路多单！稳定收入！",
-      "date": "2026-05-25",
-      "region": "东部",
-      "state": "法拉盛",
-      "keywords_matched": [
-        "餐",
-        "外卖",
-        "送餐",
-        "招聘"
-      ],
-      "url": "https://www.168worker.com/page/378405"
-    },
-    {
-      "id": "168worker_455636",
-      "platform": "168worker",
-      "title": "法拉盛餐厅招聘--男企台；纽约上州餐厅招聘--抓码兼帮炒",
-      "date": "2026-05-25",
-      "region": "东部",
-      "state": "法拉盛",
-      "keywords_matched": [
-        "餐厅",
-        "餐",
-        "企台",
-        "抓码",
-        "招聘"
-      ],
-      "url": "https://www.168worker.com/page/455636"
-    },
-    {
-      "id": "168worker_455635",
-      "platform": "168worker",
-      "title": "史丹岛-中餐外卖-送餐员",
-      "date": "2026-05-25",
-      "region": null,
-      "state": "史登岛",
-      "keywords_matched": [
-        "餐",
-        "中餐",
-        "外卖",
-        "送餐"
-      ],
-      "url": "https://www.168worker.com/page/455635"
-    },
-    {
-      "id": "168worker_436674",
-      "platform": "168worker",
-      "title": "生手寿司学徒",
-      "date": "2026-05-25",
-      "region": null,
-      "state": "纽黑文",
-      "keywords_matched": [
-        "寿司"
-      ],
-      "url": "https://www.168worker.com/page/436674"
-    },
-    {
-      "id": "168worker_455625",
-      "platform": "168worker",
-      "title": "Ellicott City 小吃店招聘炒锅",
-      "date": "2026-05-24",
-      "region": "南部",
-      "state": "马里兰",
-      "keywords_matched": [
-        "炒锅",
-        "招聘"
-      ],
-      "url": "https://www.168worker.com/page/455625"
-    },
-    {
-      "id": "168worker_439760",
-      "platform": "168worker",
-      "title": "紐約長島Great Neck 招廚房人員 包水餃餛飩師傅",
-      "date": "2026-05-24",
-      "region": "东部",
-      "state": "长岛",
-      "keywords_matched": [
-        "廚房",
-        "師傅"
-      ],
-      "url": "https://www.168worker.com/page/439760"
-    },
-    {
-      "id": "168worker_445485",
-      "platform": "168worker",
-      "title": "手抓海鲜店聘请企台",
-      "date": "2026-05-24",
+      "id": "usahuarenjie_235484",
+      "platform": "usahuarenjie",
+      "title": "海鲜餐馆聘请企台",
+      "date": "2026-05-26",
       "region": "东部",
       "state": "波士顿",
-      "keywords_matched": [
-        "企台"
-      ],
-      "url": "https://www.168worker.com/page/445485"
-    },
-    {
-      "id": "168worker_336496",
-      "platform": "168worker",
-      "title": "东北餐馆  法拉盛 招企台",
-      "date": "2026-05-24",
-      "region": "东部",
-      "state": "法拉盛",
       "keywords_matched": [
         "餐馆",
         "餐",
         "企台"
       ],
-      "url": "https://www.168worker.com/page/336496"
+      "url": "https://www.usahuarenjie.com/city/Boston/information-id-235484.html"
     },
     {
-      "id": "168worker_328611",
-      "platform": "168worker",
-      "title": "招聘熟手炒锅",
-      "date": "2026-05-24",
-      "region": "东部",
-      "state": "罗得岛",
-      "keywords_matched": [
-        "炒锅",
-        "招聘"
-      ],
-      "url": "https://www.168worker.com/page/328611"
-    },
-    {
-      "id": "168worker_316745",
-      "platform": "168worker",
-      "title": "法拉盛外卖店请熟手打杂[电话]",
-      "date": "2026-05-24",
-      "region": "东部",
-      "state": "法拉盛",
-      "keywords_matched": [
-        "外卖",
-        "打杂"
-      ],
-      "url": "https://www.168worker.com/page/316745"
-    },
-    {
-      "id": "168worker_454404",
-      "platform": "168worker",
-      "title": "布鲁伦请前台打包，厨房帮手各一名。",
-      "date": "2026-05-24",
-      "region": "东部",
-      "state": "布鲁伦",
-      "keywords_matched": [
-        "厨房",
-        "前台",
-        "打包"
-      ],
-      "url": "https://www.168worker.com/page/454404"
-    },
-    {
-      "id": "168worker_449126",
-      "platform": "168worker",
-      "title": "日餐铁板",
-      "date": "2026-05-23",
-      "region": null,
-      "state": "水牛城",
-      "keywords_matched": [
-        "餐",
-        "日餐"
-      ],
-      "url": "https://www.168worker.com/page/449126"
-    },
-    {
-      "id": "168worker_455606",
-      "platform": "168worker",
-      "title": "招聘：Gardena. 中餐海鲜馆  帮厨 ，略懂抓码，炒锅",
-      "date": "2026-05-23",
-      "region": "西部",
-      "state": "Gardena",
-      "keywords_matched": [
-        "餐",
-        "中餐",
-        "炒锅",
-        "帮厨",
-        "抓码",
-        "招聘"
-      ],
-      "url": "https://www.168worker.com/page/455606"
-    },
-    {
-      "id": "168worker_339081",
-      "platform": "168worker",
-      "title": "法拉盛美食城诚请男帮厨..可教",
-      "date": "2026-05-23",
-      "region": "东部",
-      "state": "法拉盛",
-      "keywords_matched": [
-        "帮厨"
-      ],
-      "url": "https://www.168worker.com/page/339081"
-    },
-    {
-      "id": "168worker_446959",
-      "platform": "168worker",
-      "title": "新泽西Jersey City招全职/兼职服务员",
-      "date": "2026-05-23",
-      "region": "东部",
-      "state": "新泽西",
-      "keywords_matched": [
-        "服务员"
-      ],
-      "url": "https://www.168worker.com/page/446959"
-    },
-    {
-      "id": "168worker_455598",
-      "platform": "168worker",
-      "title": "阿凯迪亚mall烫吧招聘中厨煮锅和刷碗打杂",
-      "date": "2026-05-23",
-      "region": "西部",
-      "state": "阿凯迪亚",
-      "keywords_matched": [
-        "打杂",
-        "招聘"
-      ],
-      "url": "https://www.168worker.com/page/455598"
-    },
-    {
-      "id": "168worker_455594",
-      "platform": "168worker",
-      "title": "聘请中日餐炒锅",
-      "date": "2026-05-23",
-      "region": null,
-      "state": "巴拿马城",
-      "keywords_matched": [
-        "餐",
-        "日餐",
-        "炒锅"
-      ],
-      "url": "https://www.168worker.com/page/455594"
-    },
-    {
-      "id": "168worker_440662",
-      "platform": "168worker",
-      "title": "❤️新泽西美式中餐招炒锅，parttime一天，包吃住[电话]",
-      "date": "2026-05-22",
-      "region": "东部",
-      "state": "新泽西",
-      "keywords_matched": [
-        "餐",
-        "中餐",
-        "炒锅"
-      ],
-      "url": "https://www.168worker.com/page/440662"
-    },
-    {
-      "id": "168worker_416009",
-      "platform": "168worker",
-      "title": "近纽约堂吃店请熟手帮炒抓码",
-      "date": "2026-05-22",
-      "region": "东部",
-      "state": "纽约",
-      "keywords_matched": [
-        "抓码"
-      ],
-      "url": "https://www.168worker.com/page/416009"
-    },
-    {
-      "id": "168worker_250356",
-      "platform": "168worker",
-      "title": "法拉盛外卖店请熟手炒锅，肉器[电话]",
-      "date": "2026-05-22",
-      "region": "东部",
-      "state": "法拉盛",
-      "keywords_matched": [
-        "外卖",
-        "炒锅"
-      ],
-      "url": "https://www.168worker.com/page/250356"
-    },
-    {
-      "id": "168worker_449616",
-      "platform": "168worker",
-      "title": "南卡中餐招抓马/水锅",
-      "date": "2026-05-22",
-      "region": "南部",
-      "state": "南卡",
-      "keywords_matched": [
-        "餐",
-        "中餐"
-      ],
-      "url": "https://www.168worker.com/page/449616"
-    },
-    {
-      "id": "168worker_455501",
-      "platform": "168worker",
-      "title": "NJ超市中餐请炒锅part time",
-      "date": "2026-05-22",
-      "region": null,
-      "state": "爱迪生",
-      "keywords_matched": [
-        "餐",
-        "中餐",
-        "炒锅"
-      ],
-      "url": "https://www.168worker.com/page/455501"
-    },
-    {
-      "id": "168worker_455566",
-      "platform": "168worker",
-      "title": "中歺堂吃店招聘 油锅",
-      "date": "2026-05-21",
-      "region": "南部",
-      "state": "亚特兰大",
-      "keywords_matched": [
-        "油锅",
-        "招聘"
-      ],
-      "url": "https://www.168worker.com/page/455566"
-    },
-    {
-      "id": "168worker_454011",
-      "platform": "168worker",
-      "title": "连锁快餐米粉店招凉菜打包",
-      "date": "2026-05-21",
-      "region": "东部",
-      "state": "皇后区",
-      "keywords_matched": [
-        "餐",
-        "打包"
-      ],
-      "url": "https://www.168worker.com/page/454011"
-    },
-    {
-      "id": "168worker_446333",
-      "platform": "168worker",
-      "title": "法拉盛茶餐厅请炒锅师傅",
-      "date": "2026-05-21",
-      "region": "东部",
-      "state": "法拉盛",
-      "keywords_matched": [
-        "餐厅",
-        "餐",
-        "茶餐厅",
-        "炒锅",
-        "师傅"
-      ],
-      "url": "https://www.168worker.com/page/446333"
-    },
-    {
-      "id": "168worker_76315",
-      "platform": "168worker",
-      "title": "麻州波士顿 湘菜餐厅诚招 帮厨 肉企，洗碗 ，炒锅",
-      "date": "2026-05-21",
+      "id": "usahuarenjie_231694",
+      "platform": "usahuarenjie",
+      "title": "波士顿湘菜餐厅，招聘炒锅，洗碗，凉菜头台，抓码，菜杂",
+      "date": "2026-05-26",
       "region": "东部",
       "state": "波士顿",
       "keywords_matched": [
         "餐厅",
         "餐",
         "炒锅",
-        "帮厨",
-        "洗碗"
-      ],
-      "url": "https://www.168worker.com/page/76315"
-    },
-    {
-      "id": "168worker_440666",
-      "platform": "168worker",
-      "title": "长岛市LIC米线店诚招 企台2名",
-      "date": "2026-05-21",
-      "region": "东部",
-      "state": "长岛",
-      "keywords_matched": [
-        "企台"
-      ],
-      "url": "https://www.168worker.com/page/440666"
-    },
-    {
-      "id": "168worker_450414",
-      "platform": "168worker",
-      "title": "休斯顿中国城黄金广场餐馆招聘前厅人员 企台！",
-      "date": "2026-05-21",
-      "region": "南部",
-      "state": "休斯顿",
-      "keywords_matched": [
-        "餐馆",
-        "餐",
-        "企台",
+        "洗碗",
+        "抓码",
         "招聘"
       ],
-      "url": "https://www.168worker.com/page/450414"
-    },
-    {
-      "id": "168worker_455538",
-      "platform": "168worker",
-      "title": "请炒锅",
-      "date": "2026-05-20",
-      "region": "南部",
-      "state": "亚特兰大",
-      "keywords_matched": [
-        "炒锅"
-      ],
-      "url": "https://www.168worker.com/page/455538"
-    },
-    {
-      "id": "168worker_455534",
-      "platform": "168worker",
-      "title": "加州中海岸招油锅和抓码",
-      "date": "2026-05-20",
-      "region": "西部",
-      "state": "加州",
-      "keywords_matched": [
-        "油锅",
-        "抓码"
-      ],
-      "url": "https://www.168worker.com/page/455534"
-    },
-    {
-      "id": "168worker_450808",
-      "platform": "168worker",
-      "title": "北方餐馆招企台",
-      "date": "2026-05-20",
-      "region": "东部",
-      "state": "法拉盛",
-      "keywords_matched": [
-        "餐馆",
-        "餐",
-        "企台"
-      ],
-      "url": "https://www.168worker.com/page/450808"
-    },
-    {
-      "id": "168worker_392112",
-      "platform": "168worker",
-      "title": "新泽西请熟手炒锅",
-      "date": "2026-05-20",
-      "region": "东部",
-      "state": "新泽西",
-      "keywords_matched": [
-        "炒锅"
-      ],
-      "url": "https://www.168worker.com/page/392112"
-    },
-    {
-      "id": "168worker_455520",
-      "platform": "168worker",
-      "title": "中日餐请一名女生起台或者前台",
-      "date": "2026-05-20",
-      "region": "南部",
-      "state": "路易斯安娜",
-      "keywords_matched": [
-        "餐",
-        "日餐",
-        "前台"
-      ],
-      "url": "https://www.168worker.com/page/455520"
-    },
-    {
-      "id": "168worker_455507",
-      "platform": "168worker",
-      "title": "诚聘炒锅师傅｜离大中华15分钟",
-      "date": "2026-05-19",
-      "region": "南部",
-      "state": "亚特兰大",
-      "keywords_matched": [
-        "炒锅",
-        "师傅"
-      ],
-      "url": "https://www.168worker.com/page/455507"
-    },
-    {
-      "id": "168worker_455497",
-      "platform": "168worker",
-      "title": "招聘餐馆经理",
-      "date": "2026-05-19",
-      "region": "南部",
-      "state": "亚特兰大",
-      "keywords_matched": [
-        "餐馆",
-        "餐",
-        "招聘"
-      ],
-      "url": "https://www.168worker.com/page/455497"
-    },
-    {
-      "id": "168worker_455489",
-      "platform": "168worker",
-      "title": "曼哈顿布鲁克林中餐店招店员$21W2 福利好晋升空间大",
-      "date": "2026-05-19",
-      "region": "东部",
-      "state": "布鲁克林",
-      "keywords_matched": [
-        "餐",
-        "中餐"
-      ],
-      "url": "https://www.168worker.com/page/455489"
-    },
-    {
-      "id": "168worker_454926",
-      "platform": "168worker",
-      "title": "法拉盛北方餐馆招聘厨房打杂",
-      "date": "2026-05-19",
-      "region": "东部",
-      "state": "法拉盛",
-      "keywords_matched": [
-        "餐馆",
-        "餐",
-        "厨房",
-        "打杂",
-        "招聘"
-      ],
-      "url": "https://www.168worker.com/page/454926"
+      "url": "https://www.usahuarenjie.com/city/Boston/information-id-231694.html"
     },
     {
       "id": "usahuarenjie_276045",
       "platform": "usahuarenjie",
       "title": "离芝加哥三小时寿司店高薪请一，二手寿司师傅",
-      "date": "2026-05-25",
+      "date": "2026-05-26",
       "region": "中部",
       "state": "芝加哥",
       "keywords_matched": [
@@ -844,7 +315,7 @@
       "id": "usahuarenjie_276029",
       "platform": "usahuarenjie",
       "title": "法拉盛餐厅招聘--男企台；纽约上州餐厅招聘--抓码兼帮炒",
-      "date": "2026-05-24",
+      "date": "2026-05-25",
       "region": "东部",
       "state": "法拉盛",
       "keywords_matched": [
@@ -860,7 +331,7 @@
       "id": "usahuarenjie_276030",
       "platform": "usahuarenjie",
       "title": "史丹岛-中餐外卖-送餐员",
-      "date": "2026-05-24",
+      "date": "2026-05-25",
       "region": "东部",
       "state": "纽约",
       "keywords_matched": [
@@ -875,27 +346,13 @@
       "id": "usahuarenjie_276039",
       "platform": "usahuarenjie",
       "title": "曼哈顿请熟手炒锅",
-      "date": "2026-05-24",
+      "date": "2026-05-25",
       "region": "东部",
       "state": "曼哈顿",
       "keywords_matched": [
         "炒锅"
       ],
       "url": "https://www.usahuarenjie.com/city/New-York/information-id-276039.html"
-    },
-    {
-      "id": "usahuarenjie_235484",
-      "platform": "usahuarenjie",
-      "title": "海鲜餐馆聘请企台",
-      "date": "2026-05-24",
-      "region": "东部",
-      "state": "波士顿",
-      "keywords_matched": [
-        "餐馆",
-        "餐",
-        "企台"
-      ],
-      "url": "https://www.usahuarenjie.com/city/Boston/information-id-235484.html"
     },
     {
       "id": "usahuarenjie_275937",
@@ -981,23 +438,6 @@
         "师傅"
       ],
       "url": "https://www.usahuarenjie.com/city/Boston/information-id-275833.html"
-    },
-    {
-      "id": "usahuarenjie_231694",
-      "platform": "usahuarenjie",
-      "title": "波士顿湘菜餐厅，招聘炒锅，洗碗，凉菜头台，抓码，菜杂",
-      "date": "2026-05-21",
-      "region": "东部",
-      "state": "波士顿",
-      "keywords_matched": [
-        "餐厅",
-        "餐",
-        "炒锅",
-        "洗碗",
-        "抓码",
-        "招聘"
-      ],
-      "url": "https://www.usahuarenjie.com/city/Boston/information-id-231694.html"
     },
     {
       "id": "usahuarenjie_275811",
@@ -1140,74 +580,142 @@
       "url": "https://www.usahuarenjie.com/city/San-Francisco/information-id-275768.html"
     },
     {
-      "id": "usahuarenjie_275751",
-      "platform": "usahuarenjie",
-      "title": "Sanramon新餐厅招聘打杂服务员不包吃住",
-      "date": "2026-05-19",
-      "region": "西部",
-      "state": "旧金山",
+      "id": "500work_358628",
+      "platform": "500work",
+      "title": "请 经理 经验厨师 企台",
+      "date": "2026-05-26",
+      "region": "中部",
+      "state": "芝加哥",
       "keywords_matched": [
-        "餐厅",
-        "餐",
-        "打杂",
-        "服务员",
-        "招聘"
+        "厨师",
+        "企台"
       ],
-      "url": "https://www.usahuarenjie.com/city/San-Francisco/information-id-275751.html"
+      "url": "https://www.500work.com/page/358628"
     },
     {
-      "id": "usahuarenjie_275750",
-      "platform": "usahuarenjie",
-      "title": "Berkeley日餐请女服务员，要求报税。有经验优先",
-      "date": "2026-05-19",
-      "region": "西部",
-      "state": "旧金山",
-      "keywords_matched": [
-        "餐",
-        "日餐",
-        "服务员"
-      ],
-      "url": "https://www.usahuarenjie.com/city/San-Francisco/information-id-275750.html"
-    },
-    {
-      "id": "usahuarenjie_275749",
-      "platform": "usahuarenjie",
-      "title": "Fremont 餐馆请男厨师一名，有经验优先，不包住",
-      "date": "2026-05-19",
-      "region": "西部",
-      "state": "Fremont",
+      "id": "500work_454824",
+      "platform": "500work",
+      "title": "电话接单 & 打包员 － 外卖餐馆",
+      "date": "2026-05-26",
+      "region": "南部",
+      "state": "亚特兰大",
       "keywords_matched": [
         "餐馆",
         "餐",
-        "厨师"
+        "外卖",
+        "打包"
       ],
-      "url": "https://www.usahuarenjie.com/city/San-Francisco/information-id-275749.html"
+      "url": "https://www.500work.com/page/454824"
     },
     {
-      "id": "usahuarenjie_275788",
-      "platform": "usahuarenjie",
-      "title": "曼哈顿招聘熟手炒锅。",
-      "date": "2026-05-19",
+      "id": "500work_386025",
+      "platform": "500work",
+      "title": "连锁快餐米粉店招煮粉煮面员",
+      "date": "2026-05-26",
       "region": "东部",
       "state": "曼哈顿",
       "keywords_matched": [
-        "炒锅",
-        "招聘"
+        "餐"
       ],
-      "url": "https://www.usahuarenjie.com/city/New-York/information-id-275788.html"
+      "url": "https://www.500work.com/page/386025"
     },
     {
-      "id": "usahuarenjie_275790",
-      "platform": "usahuarenjie",
-      "title": "加州中海岸招油锅和抓码",
-      "date": "2026-05-19",
-      "region": "西部",
-      "state": "加州",
+      "id": "500work_453874",
+      "platform": "500work",
+      "title": "法拉盛东北餐馆招二厨师傅",
+      "date": "2026-05-26",
+      "region": "东部",
+      "state": "法拉盛",
       "keywords_matched": [
-        "油锅",
+        "餐馆",
+        "餐",
+        "厨师",
+        "师傅"
+      ],
+      "url": "https://www.500work.com/page/453874"
+    },
+    {
+      "id": "500work_445485",
+      "platform": "500work",
+      "title": "手抓海鲜店聘请企台",
+      "date": "2026-05-26",
+      "region": "东部",
+      "state": "波士顿",
+      "keywords_matched": [
+        "企台"
+      ],
+      "url": "https://www.500work.com/page/445485"
+    },
+    {
+      "id": "500work_76315",
+      "platform": "500work",
+      "title": "麻州波士顿 湘菜餐厅诚招 帮厨 ，肉企 ，炒锅  ，抓码，头台",
+      "date": "2026-05-26",
+      "region": "东部",
+      "state": "波士顿",
+      "keywords_matched": [
+        "餐厅",
+        "餐",
+        "炒锅",
+        "帮厨",
         "抓码"
       ],
-      "url": "https://www.usahuarenjie.com/city/San-Jose/information-id-275790.html"
+      "url": "https://www.500work.com/page/76315"
+    },
+    {
+      "id": "500work_455255",
+      "platform": "500work",
+      "title": "纽约招聘川湘菜主厨！纽约餐厅店长!",
+      "date": "2026-05-26",
+      "region": "东部",
+      "state": "纽约",
+      "keywords_matched": [
+        "餐厅",
+        "餐",
+        "招聘"
+      ],
+      "url": "https://www.500work.com/page/455255"
+    },
+    {
+      "id": "500work_450808",
+      "platform": "500work",
+      "title": "北方餐馆招企台",
+      "date": "2026-05-26",
+      "region": "东部",
+      "state": "法拉盛",
+      "keywords_matched": [
+        "餐馆",
+        "餐",
+        "企台"
+      ],
+      "url": "https://www.500work.com/page/450808"
+    },
+    {
+      "id": "500work_449926",
+      "platform": "500work",
+      "title": "招聘炒锅师傅一名，烧烤师傅一名",
+      "date": "2026-05-26",
+      "region": "东部",
+      "state": "长岛",
+      "keywords_matched": [
+        "烧烤",
+        "炒锅",
+        "招聘",
+        "师傅"
+      ],
+      "url": "https://www.500work.com/page/449926"
+    },
+    {
+      "id": "500work_455649",
+      "platform": "500work",
+      "title": "请熟手炒锅，会看电脑单",
+      "date": "2026-05-25",
+      "region": "南部",
+      "state": "南卡",
+      "keywords_matched": [
+        "炒锅"
+      ],
+      "url": "https://www.500work.com/page/455649"
     },
     {
       "id": "500work_437669",
@@ -1220,35 +728,6 @@
         "炒锅"
       ],
       "url": "https://www.500work.com/page/437669"
-    },
-    {
-      "id": "500work_453874",
-      "platform": "500work",
-      "title": "法拉盛东北餐馆招二厨师傅",
-      "date": "2026-05-25",
-      "region": "东部",
-      "state": "法拉盛",
-      "keywords_matched": [
-        "餐馆",
-        "餐",
-        "厨师",
-        "师傅"
-      ],
-      "url": "https://www.500work.com/page/453874"
-    },
-    {
-      "id": "500work_455255",
-      "platform": "500work",
-      "title": "纽约招聘川湘菜主厨！纽约餐厅店长!",
-      "date": "2026-05-25",
-      "region": "东部",
-      "state": "纽约",
-      "keywords_matched": [
-        "餐厅",
-        "餐",
-        "招聘"
-      ],
-      "url": "https://www.500work.com/page/455255"
     },
     {
       "id": "500work_420895",
@@ -1390,18 +869,6 @@
         "師傅"
       ],
       "url": "https://www.500work.com/page/439760"
-    },
-    {
-      "id": "500work_445485",
-      "platform": "500work",
-      "title": "手抓海鲜店聘请企台",
-      "date": "2026-05-24",
-      "region": "东部",
-      "state": "波士顿",
-      "keywords_matched": [
-        "企台"
-      ],
-      "url": "https://www.500work.com/page/445485"
     },
     {
       "id": "500work_336496",
@@ -1647,22 +1114,6 @@
       "url": "https://www.500work.com/page/446333"
     },
     {
-      "id": "500work_76315",
-      "platform": "500work",
-      "title": "麻州波士顿 湘菜餐厅诚招 帮厨 肉企，洗碗 ，炒锅",
-      "date": "2026-05-21",
-      "region": "东部",
-      "state": "波士顿",
-      "keywords_matched": [
-        "餐厅",
-        "餐",
-        "炒锅",
-        "帮厨",
-        "洗碗"
-      ],
-      "url": "https://www.500work.com/page/76315"
-    },
-    {
       "id": "500work_440666",
       "platform": "500work",
       "title": "长岛市LIC米线店诚招 企台2名",
@@ -1715,20 +1166,6 @@
       "url": "https://www.500work.com/page/455534"
     },
     {
-      "id": "500work_450808",
-      "platform": "500work",
-      "title": "北方餐馆招企台",
-      "date": "2026-05-20",
-      "region": "东部",
-      "state": "法拉盛",
-      "keywords_matched": [
-        "餐馆",
-        "餐",
-        "企台"
-      ],
-      "url": "https://www.500work.com/page/450808"
-    },
-    {
       "id": "500work_392112",
       "platform": "500work",
       "title": "新泽西请熟手炒锅",
@@ -1755,66 +1192,1015 @@
       "url": "https://www.500work.com/page/455520"
     },
     {
-      "id": "500work_455507",
-      "platform": "500work",
-      "title": "诚聘炒锅师傅｜离大中华15分钟",
-      "date": "2026-05-19",
+      "id": "uscanyin_224425",
+      "platform": "uscanyin",
+      "title": "威廉斯堡 Bedford Ave 中日餐企台（全职&兼职）",
+      "date": "2026-05-26",
+      "region": "东部",
+      "state": "纽约",
+      "keywords_matched": [
+        "餐",
+        "日餐",
+        "企台"
+      ],
+      "url": "https://uscanyin.com/en/community/jobs/224425-%e5%a8%81%e5%bb%89%e6%96%af%e5%a0%a1%20Bedford%20Ave%20%e4%b8%ad%e6%97%a5%e9%a4%90%e4%bc%81%e5%8f%b0%ef%bc%88%e5%85%a8%e8%81%8c%26%e5%85%bc%e8%81%8c%ef%bc%89/"
+    },
+    {
+      "id": "uscanyin_224424",
+      "platform": "uscanyin",
+      "title": "招聘炒锅",
+      "date": "2026-05-26",
       "region": "南部",
-      "state": "亚特兰大",
+      "state": "乔治亚",
+      "keywords_matched": [
+        "炒锅",
+        "招聘"
+      ],
+      "url": "https://uscanyin.com/en/community/jobs/224424-%e6%8b%9b%e8%81%98%e7%82%92%e9%94%85"
+    },
+    {
+      "id": "uscanyin_224423",
+      "platform": "uscanyin",
+      "title": "亚洲餐请炒锅",
+      "date": "2026-05-26",
+      "region": "东部",
+      "state": "宾州",
+      "keywords_matched": [
+        "餐",
+        "炒锅"
+      ],
+      "url": "https://uscanyin.com/en/community/jobs/224423-%e4%ba%9a%e6%b4%b2%e9%a4%90%e8%af%b7%e7%82%92%e9%94%85"
+    },
+    {
+      "id": "uscanyin_224422",
+      "platform": "uscanyin",
+      "title": "厨房铁板师傅",
+      "date": "2026-05-26",
+      "region": "南部",
+      "state": "密西西比",
+      "keywords_matched": [
+        "厨房",
+        "师傅"
+      ],
+      "url": "https://uscanyin.com/en/community/jobs/224422-%e5%8e%a8%e6%88%bf%e9%93%81%e6%9d%bf%e5%b8%88%e5%82%85"
+    },
+    {
+      "id": "uscanyin_224421",
+      "platform": "uscanyin",
+      "title": "请全职熟练切肉兼打杂",
+      "date": "2026-05-26",
+      "region": "东部",
+      "state": "纽约",
+      "keywords_matched": [
+        "打杂"
+      ],
+      "url": "https://uscanyin.com/en/community/jobs/224421-%e8%af%b7%e5%85%a8%e8%81%8c%e7%86%9f%e7%bb%83%e5%88%87%e8%82%89%e5%85%bc%e6%89%93%e6%9d%82"
+    },
+    {
+      "id": "uscanyin_224419",
+      "platform": "uscanyin",
+      "title": "宾州全日餐厨房铁板师傅5000 或电仪离纽约5小时[电话]广告勿扰",
+      "date": "2026-05-26",
+      "region": "东部",
+      "state": "纽约",
+      "keywords_matched": [
+        "餐",
+        "日餐",
+        "厨房",
+        "师傅"
+      ],
+      "url": "https://uscanyin.com/en/community/jobs/224419-%e5%ae%be%e5%b7%9e%e5%85%a8%e6%97%a5%e9%a4%90%e5%8e%a8%e6%88%bf%e9%93%81%e6%9d%bf%e5%b8%88%e5%82%855000%20%e6%88%96%e7%94%b5%e4%bb%aa%e7%a6%bb%e7%ba%bd%e7%ba%a65%e5%b0%8f%e6%97%b66467893643%e5%b9%bf%e5%91%8a%e5%8b%bf%e6%89%b0"
+    },
+    {
+      "id": "uscanyin_224418",
+      "platform": "uscanyin",
+      "title": "南卡Greenville 亚洲餐 炒锅.",
+      "date": "2026-05-26",
+      "region": "南部",
+      "state": "南卡",
+      "keywords_matched": [
+        "餐",
+        "炒锅"
+      ],
+      "url": "https://uscanyin.com/en/community/jobs/224418-%e5%8d%97%e5%8d%a1Greenville%20%e4%ba%9a%e6%b4%b2%e9%a4%90%20%e7%82%92%e9%94%85."
+    },
+    {
+      "id": "uscanyin_224415",
+      "platform": "uscanyin",
+      "title": "饭团外卖 Fantuan Delivery 招聘配送员（波士顿地区）",
+      "date": "2026-05-26",
+      "region": "东部",
+      "state": "波士顿",
+      "keywords_matched": [
+        "外卖",
+        "招聘"
+      ],
+      "url": "https://uscanyin.com/en/community/jobs/224415-%e9%a5%ad%e5%9b%a2%e5%a4%96%e5%8d%96%20Fantuan%20Delivery%20%e6%8b%9b%e8%81%98%e9%85%8d%e9%80%81%e5%91%98%ef%bc%88%e6%b3%a2%e5%a3%ab%e9%a1%bf%e5%9c%b0%e5%8c%ba%ef%bc%89"
+    },
+    {
+      "id": "uscanyin_224413",
+      "platform": "uscanyin",
+      "title": "诚请熟手炒锅",
+      "date": "2026-05-26",
+      "region": "东部",
+      "state": "纽约",
+      "keywords_matched": [
+        "炒锅"
+      ],
+      "url": "https://uscanyin.com/en/community/jobs/224413-%e8%af%9a%e8%af%b7%e7%86%9f%e6%89%8b%e7%82%92%e9%94%85"
+    },
+    {
+      "id": "uscanyin_224412",
+      "platform": "uscanyin",
+      "title": "外卖炒锅",
+      "date": "2026-05-26",
+      "region": "东部",
+      "state": "纽约",
+      "keywords_matched": [
+        "外卖",
+        "炒锅"
+      ],
+      "url": "https://uscanyin.com/en/community/jobs/224412-%e5%a4%96%e5%8d%96%e7%82%92%e9%94%85"
+    },
+    {
+      "id": "uscanyin_224411",
+      "platform": "uscanyin",
+      "title": "请熟手寿司师傅 长工,散工",
+      "date": "2026-05-26",
+      "region": "东部",
+      "state": "纽约",
+      "keywords_matched": [
+        "寿司",
+        "师傅"
+      ],
+      "url": "https://uscanyin.com/en/community/jobs/224411-%e8%af%b7%e7%86%9f%e6%89%8b%e5%af%bf%e5%8f%b8%e5%b8%88%e5%82%85-%e9%95%bf%e5%b7%a5%2c%e6%95%a3%e5%b7%a5"
+    },
+    {
+      "id": "uscanyin_224410",
+      "platform": "uscanyin",
+      "title": "日餐厨房Taryaki 师傅",
+      "date": "2026-05-26",
+      "region": "东部",
+      "state": "纽约",
+      "keywords_matched": [
+        "餐",
+        "日餐",
+        "厨房",
+        "师傅"
+      ],
+      "url": "https://uscanyin.com/en/community/jobs/224410-%e6%97%a5%e9%a4%90%e5%8e%a8%e6%88%bfTaryaki%20%e5%b8%88%e5%82%85"
+    },
+    {
+      "id": "uscanyin_224409",
+      "platform": "uscanyin",
+      "title": "中歺外卖",
+      "date": "2026-05-26",
+      "region": "东部",
+      "state": "纽约",
+      "keywords_matched": [
+        "外卖"
+      ],
+      "url": "https://uscanyin.com/en/community/jobs/224409-%e4%b8%ad%e6%ad%ba%e5%a4%96%e5%8d%96"
+    },
+    {
+      "id": "uscanyin_224408",
+      "platform": "uscanyin",
+      "title": "寿司助手 // 甜不辣师傅",
+      "date": "2026-05-26",
+      "region": "西部",
+      "state": "科罗拉多",
+      "keywords_matched": [
+        "寿司",
+        "师傅"
+      ],
+      "url": "https://uscanyin.com/en/community/jobs/224408-%e5%af%bf%e5%8f%b8%e5%8a%a9%e6%89%8b%20%2f%2f%20%e7%94%9c%e4%b8%8d%e8%be%a3%e5%b8%88%e5%82%85"
+    },
+    {
+      "id": "uscanyin_224407",
+      "platform": "uscanyin",
+      "title": "熟手炒锅",
+      "date": "2026-05-26",
+      "region": "东部",
+      "state": "纽约",
+      "keywords_matched": [
+        "炒锅"
+      ],
+      "url": "https://uscanyin.com/en/community/jobs/224407-%e7%86%9f%e6%89%8b%e7%82%92%e9%94%85"
+    },
+    {
+      "id": "uscanyin_224405",
+      "platform": "uscanyin",
+      "title": "油锅甜不辣",
+      "date": "2026-05-26",
+      "region": "南部",
+      "state": "维吉尼亚",
+      "keywords_matched": [
+        "油锅"
+      ],
+      "url": "https://uscanyin.com/en/community/jobs/224405-%e6%b2%b9%e9%94%85%e7%94%9c%e4%b8%8d%e8%be%a3"
+    },
+    {
+      "id": "uscanyin_224404",
+      "platform": "uscanyin",
+      "title": "诚信聘请打杂和油锅一位",
+      "date": "2026-05-26",
+      "region": "中部",
+      "state": "印第安纳",
+      "keywords_matched": [
+        "油锅",
+        "打杂"
+      ],
+      "url": "https://uscanyin.com/en/community/jobs/224404-%e8%af%9a%e4%bf%a1%e8%81%98%e8%af%b7%e6%89%93%e6%9d%82%e5%92%8c%e6%b2%b9%e9%94%85%e4%b8%80%e4%bd%8d"
+    },
+    {
+      "id": "uscanyin_224403",
+      "platform": "uscanyin",
+      "title": "白区中餐外卖店请打杂",
+      "date": "2026-05-26",
+      "region": "中部",
+      "state": "密歇根",
+      "keywords_matched": [
+        "餐",
+        "中餐",
+        "外卖",
+        "打杂"
+      ],
+      "url": "https://uscanyin.com/en/community/jobs/224403-%e7%99%bd%e5%8c%ba%e4%b8%ad%e9%a4%90%e5%a4%96%e5%8d%96%e5%ba%97%e8%af%b7%e6%89%93%e6%9d%82"
+    },
+    {
+      "id": "uscanyin_224402",
+      "platform": "uscanyin",
+      "title": "自助餐服务员",
+      "date": "2026-05-26",
+      "region": "中部",
+      "state": "俄亥俄",
+      "keywords_matched": [
+        "餐",
+        "服务员"
+      ],
+      "url": "https://uscanyin.com/en/community/jobs/224402-%e8%87%aa%e5%8a%a9%e9%a4%90%e6%9c%8d%e5%8a%a1%e5%91%98"
+    },
+    {
+      "id": "uscanyin_224401",
+      "platform": "uscanyin",
+      "title": "AYCE 日歺企台",
+      "date": "2026-05-26",
+      "region": "南部",
+      "state": "维吉尼亚",
+      "keywords_matched": [
+        "企台"
+      ],
+      "url": "https://uscanyin.com/en/community/jobs/224401-AYCE%20%e6%97%a5%e6%ad%ba%e4%bc%81%e5%8f%b0"
+    },
+    {
+      "id": "uscanyin_224400",
+      "platform": "uscanyin",
+      "title": "外卖帮炒",
+      "date": "2026-05-26",
+      "region": "东部",
+      "state": "纽约",
+      "keywords_matched": [
+        "外卖"
+      ],
+      "url": "https://uscanyin.com/en/community/jobs/224400-%e5%a4%96%e5%8d%96%e5%b8%ae%e7%82%92"
+    },
+    {
+      "id": "uscanyin_224398",
+      "platform": "uscanyin",
+      "title": "请油锅",
+      "date": "2026-05-26",
+      "region": "东部",
+      "state": "纽约",
+      "keywords_matched": [
+        "油锅"
+      ],
+      "url": "https://uscanyin.com/en/community/jobs/224398-%e8%af%b7%e6%b2%b9%e9%94%85"
+    },
+    {
+      "id": "uscanyin_224397",
+      "platform": "uscanyin",
+      "title": "日餐铁板",
+      "date": "2026-05-26",
+      "region": "东部",
+      "state": "宾州",
+      "keywords_matched": [
+        "餐",
+        "日餐"
+      ],
+      "url": "https://uscanyin.com/en/community/jobs/224397-%e6%97%a5%e9%a4%90%e9%93%81%e6%9d%bf"
+    },
+    {
+      "id": "uscanyin_224396",
+      "platform": "uscanyin",
+      "title": "熟手女企台",
+      "date": "2026-05-26",
+      "region": "东部",
+      "state": "新泽西",
+      "keywords_matched": [
+        "企台"
+      ],
+      "url": "https://uscanyin.com/en/community/jobs/224396-%e7%86%9f%e6%89%8b%e5%a5%b3%e4%bc%81%e5%8f%b0"
+    },
+    {
+      "id": "uscanyin_224395",
+      "platform": "uscanyin",
+      "title": "诚请企台学工，busgirl,法拉盛接送，有意请信息[电话]",
+      "date": "2026-05-26",
+      "region": "东部",
+      "state": "法拉盛",
+      "keywords_matched": [
+        "企台"
+      ],
+      "url": "https://uscanyin.com/en/community/jobs/224395-%e8%af%9a%e8%af%b7%e4%bc%81%e5%8f%b0%e5%ad%a6%e5%b7%a5%ef%bc%8cbusgirl%2c%e6%b3%95%e6%8b%89%e7%9b%9b%e6%8e%a5%e9%80%81%ef%bc%8c%e6%9c%89%e6%84%8f%e8%af%b7%e4%bf%a1%e6%81%af9737678887"
+    },
+    {
+      "id": "uscanyin_224393",
+      "platform": "uscanyin",
+      "title": "请炒锅师傅",
+      "date": "2026-05-26",
+      "region": "东部",
+      "state": "康州",
       "keywords_matched": [
         "炒锅",
         "师傅"
       ],
-      "url": "https://www.500work.com/page/455507"
+      "url": "https://uscanyin.com/en/community/jobs/224393-%e8%af%b7%e7%82%92%e9%94%85%e5%b8%88%e5%82%85"
     },
     {
-      "id": "500work_455497",
-      "platform": "500work",
-      "title": "招聘餐馆经理",
-      "date": "2026-05-19",
+      "id": "uscanyin_224392",
+      "platform": "uscanyin",
+      "title": "连锁奶茶店招聘员工",
+      "date": "2026-05-26",
+      "region": "东部",
+      "state": "纽约",
+      "keywords_matched": [
+        "奶茶",
+        "招聘"
+      ],
+      "url": "https://uscanyin.com/en/community/jobs/224392-%e8%bf%9e%e9%94%81%e5%a5%b6%e8%8c%b6%e5%ba%97%e6%8b%9b%e8%81%98%e5%91%98%e5%b7%a5"
+    },
+    {
+      "id": "uscanyin_224391",
+      "platform": "uscanyin",
+      "title": "康州2小时请sushi 寿司师傅和日厨 亚洲餐",
+      "date": "2026-05-26",
+      "region": "东部",
+      "state": "康州",
+      "keywords_matched": [
+        "餐",
+        "寿司",
+        "师傅"
+      ],
+      "url": "https://uscanyin.com/en/community/jobs/224391-%e5%ba%b7%e5%b7%9e2%e5%b0%8f%e6%97%b6%e8%af%b7sushi%20%e5%af%bf%e5%8f%b8%e5%b8%88%e5%82%85%e5%92%8c%e6%97%a5%e5%8e%a8%20%e4%ba%9a%e6%b4%b2%e9%a4%90"
+    },
+    {
+      "id": "uscanyin_224390",
+      "platform": "uscanyin",
+      "title": "寿司学徒🔥",
+      "date": "2026-05-26",
       "region": "南部",
-      "state": "亚特兰大",
+      "state": "维吉尼亚",
+      "keywords_matched": [
+        "寿司"
+      ],
+      "url": "https://uscanyin.com/en/community/jobs/224390-%e5%af%bf%e5%8f%b8%e5%ad%a6%e5%be%92%f0%9f%94%a5"
+    },
+    {
+      "id": "uscanyin_224389",
+      "platform": "uscanyin",
+      "title": "科罗拉多Aspen招寿司师傅，sushi助手，4800 5500",
+      "date": "2026-05-26",
+      "region": "西部",
+      "state": "科罗拉多",
+      "keywords_matched": [
+        "寿司",
+        "师傅"
+      ],
+      "url": "https://uscanyin.com/en/community/jobs/224389-%e7%a7%91%e7%bd%97%e6%8b%89%e5%a4%9aAspen%e6%8b%9b%e5%af%bf%e5%8f%b8%e5%b8%88%e5%82%85%ef%bc%8csushi%e5%8a%a9%e6%89%8b%ef%bc%8c4800-5500"
+    },
+    {
+      "id": "uscanyin_224386",
+      "platform": "uscanyin",
+      "title": "孰手炒锅",
+      "date": "2026-05-26",
+      "region": "东部",
+      "state": "新泽西",
+      "keywords_matched": [
+        "炒锅"
+      ],
+      "url": "https://uscanyin.com/en/community/jobs/224386-%e5%ad%b0%e6%89%8b%e7%82%92%e9%94%85"
+    },
+    {
+      "id": "uscanyin_224385",
+      "platform": "uscanyin",
+      "title": "全日餐寿司助手",
+      "date": "2026-05-26",
+      "region": "南部",
+      "state": "佛州",
+      "keywords_matched": [
+        "餐",
+        "日餐",
+        "寿司"
+      ],
+      "url": "https://uscanyin.com/en/community/jobs/224385-%e5%85%a8%e6%97%a5%e9%a4%90%e5%af%bf%e5%8f%b8%e5%8a%a9%e6%89%8b"
+    },
+    {
+      "id": "uscanyin_224383",
+      "platform": "uscanyin",
+      "title": "招聘 全職 企台",
+      "date": "2026-05-26",
+      "region": "中部",
+      "state": "伊州",
+      "keywords_matched": [
+        "企台",
+        "招聘"
+      ],
+      "url": "https://uscanyin.com/en/community/jobs/224383-%e6%8b%9b%e8%81%98%20%e5%85%a8%e8%81%b7%20%e4%bc%81%e5%8f%b0"
+    },
+    {
+      "id": "uscanyin_224381",
+      "platform": "uscanyin",
+      "title": "布菲店诚聘炒锅看台夫妻工",
+      "date": "2026-05-26",
+      "region": "南部",
+      "state": "阿拉巴马",
+      "keywords_matched": [
+        "炒锅"
+      ],
+      "url": "https://uscanyin.com/en/community/jobs/224381-%e5%b8%83%e8%8f%b2%e5%ba%97%e8%af%9a%e8%81%98%e7%82%92%e9%94%85%e7%9c%8b%e5%8f%b0%e5%a4%ab%e5%a6%bb%e5%b7%a5"
+    },
+    {
+      "id": "uscanyin_224380",
+      "platform": "uscanyin",
+      "title": "炒锅熟手",
+      "date": "2026-05-26",
+      "region": "东部",
+      "state": "纽约",
+      "keywords_matched": [
+        "炒锅"
+      ],
+      "url": "https://uscanyin.com/en/community/jobs/224380-%e7%82%92%e9%94%85%e7%86%9f%e6%89%8b"
+    },
+    {
+      "id": "uscanyin_224379",
+      "platform": "uscanyin",
+      "title": "饺子店请厨房学徒",
+      "date": "2026-05-26",
+      "region": "南部",
+      "state": "佛州",
+      "keywords_matched": [
+        "厨房"
+      ],
+      "url": "https://uscanyin.com/en/community/jobs/224379-%e9%a5%ba%e5%ad%90%e5%ba%97%e8%af%b7%e5%8e%a8%e6%88%bf%e5%ad%a6%e5%be%92"
+    },
+    {
+      "id": "uscanyin_224378",
+      "platform": "uscanyin",
+      "title": "中加州请中餐企台",
+      "date": "2026-05-26",
+      "region": "西部",
+      "state": "加州",
+      "keywords_matched": [
+        "餐",
+        "中餐",
+        "企台"
+      ],
+      "url": "https://uscanyin.com/en/community/jobs/224378-%e4%b8%ad%e5%8a%a0%e5%b7%9e%e8%af%b7%e4%b8%ad%e9%a4%90%e4%bc%81%e5%8f%b0"
+    },
+    {
+      "id": "uscanyin_224373",
+      "platform": "uscanyin",
+      "title": "烧烤店诚请熟手企台（底薪+小费，5000+）",
+      "date": "2026-05-26",
+      "region": "东部",
+      "state": "纽约",
+      "keywords_matched": [
+        "烧烤",
+        "企台"
+      ],
+      "url": "https://uscanyin.com/en/community/jobs/224373-%e7%83%a7%e7%83%a4%e5%ba%97%e8%af%9a%e8%af%b7%e7%86%9f%e6%89%8b%e4%bc%81%e5%8f%b0%ef%bc%88%e5%ba%95%e8%96%aa%2b%e5%b0%8f%e8%b4%b9%ef%bc%8c5000%2b%ef%bc%89"
+    },
+    {
+      "id": "uscanyin_224372",
+      "platform": "uscanyin",
+      "title": "纽约上州Albany 亚洲日歺请企台",
+      "date": "2026-05-26",
+      "region": "东部",
+      "state": "纽约",
+      "keywords_matched": [
+        "企台"
+      ],
+      "url": "https://uscanyin.com/en/community/jobs/224372-%e7%ba%bd%e7%ba%a6%e4%b8%8a%e5%b7%9eAlbany%20%e4%ba%9a%e6%b4%b2%e6%97%a5%e6%ad%ba%e8%af%b7%e4%bc%81%e5%8f%b0"
+    },
+    {
+      "id": "uscanyin_224371",
+      "platform": "uscanyin",
+      "title": "高薪聘请 美式中餐 师傅",
+      "date": "2026-05-26",
+      "region": "西部",
+      "state": "新墨西哥",
+      "keywords_matched": [
+        "餐",
+        "中餐",
+        "师傅"
+      ],
+      "url": "https://uscanyin.com/en/community/jobs/224371-%e9%ab%98%e8%96%aa%e8%81%98%e8%af%b7%20%e7%be%8e%e5%bc%8f%e4%b8%ad%e9%a4%90%20%e5%b8%88%e5%82%85"
+    },
+    {
+      "id": "uscanyin_224370",
+      "platform": "uscanyin",
+      "title": "NJ buffet 请炒锅一名",
+      "date": "2026-05-26",
+      "region": "东部",
+      "state": "NJ",
+      "keywords_matched": [
+        "炒锅"
+      ],
+      "url": "https://uscanyin.com/en/community/jobs/224370-NJ%20buffet%20%e8%af%b7%e7%82%92%e9%94%85%e4%b8%80%e5%90%8d"
+    },
+    {
+      "id": "uscanyin_224368",
+      "platform": "uscanyin",
+      "title": "熟手打杂",
+      "date": "2026-05-26",
+      "region": "东部",
+      "state": "纽约",
+      "keywords_matched": [
+        "打杂"
+      ],
+      "url": "https://uscanyin.com/en/community/jobs/224368-%e7%86%9f%e6%89%8b%e6%89%93%e6%9d%82"
+    },
+    {
+      "id": "uscanyin_224367",
+      "platform": "uscanyin",
+      "title": "请熟手炒锅 4900",
+      "date": "2026-05-26",
+      "region": "东部",
+      "state": "特拉华",
+      "keywords_matched": [
+        "炒锅"
+      ],
+      "url": "https://uscanyin.com/en/community/jobs/224367-%e8%af%b7%e7%86%9f%e6%89%8b%e7%82%92%e9%94%85%204900"
+    },
+    {
+      "id": "uscanyin_224365",
+      "platform": "uscanyin",
+      "title": "日餐企台",
+      "date": "2026-05-26",
+      "region": "南部",
+      "state": "乔治亚",
+      "keywords_matched": [
+        "餐",
+        "日餐",
+        "企台"
+      ],
+      "url": "https://uscanyin.com/en/community/jobs/224365-%e6%97%a5%e9%a4%90%e4%bc%81%e5%8f%b0"
+    },
+    {
+      "id": "uscanyin_224364",
+      "platform": "uscanyin",
+      "title": "烧烤店招全职企台",
+      "date": "2026-05-26",
+      "region": "南部",
+      "state": "德州",
+      "keywords_matched": [
+        "烧烤",
+        "企台"
+      ],
+      "url": "https://uscanyin.com/en/community/jobs/224364-%e7%83%a7%e7%83%a4%e5%ba%97%e6%8b%9b%e5%85%a8%e8%81%8c%e4%bc%81%e5%8f%b0"
+    },
+    {
+      "id": "uscanyin_224363",
+      "platform": "uscanyin",
+      "title": "佛州Jacksonville 诚请企台",
+      "date": "2026-05-26",
+      "region": "南部",
+      "state": "佛州",
+      "keywords_matched": [
+        "企台"
+      ],
+      "url": "https://uscanyin.com/en/community/jobs/224363-%e4%bd%9b%e5%b7%9eJacksonville%20%e8%af%9a%e8%af%b7%e4%bc%81%e5%8f%b0"
+    },
+    {
+      "id": "uscanyin_224362",
+      "platform": "uscanyin",
+      "title": "中餐外卖",
+      "date": "2026-05-26",
+      "region": "东部",
+      "state": "麻州",
+      "keywords_matched": [
+        "餐",
+        "中餐",
+        "外卖"
+      ],
+      "url": "https://uscanyin.com/en/community/jobs/224362-%e4%b8%ad%e9%a4%90%e5%a4%96%e5%8d%96"
+    },
+    {
+      "id": "uscanyin_224361",
+      "platform": "uscanyin",
+      "title": "厨房杂工",
+      "date": "2026-05-26",
+      "region": "西部",
+      "state": "亚利桑那",
+      "keywords_matched": [
+        "厨房"
+      ],
+      "url": "https://uscanyin.com/en/community/jobs/224361-%e5%8e%a8%e6%88%bf%e6%9d%82%e5%b7%a5"
+    },
+    {
+      "id": "uscanyin_224360",
+      "platform": "uscanyin",
+      "title": "洛杉矶90分钟oceanside美式中餐请企台",
+      "date": "2026-05-26",
+      "region": "西部",
+      "state": "洛杉矶",
+      "keywords_matched": [
+        "餐",
+        "中餐",
+        "企台"
+      ],
+      "url": "https://uscanyin.com/en/community/jobs/224360-%e6%b4%9b%e6%9d%89%e7%9f%b690%e5%88%86%e9%92%9foceanside%e7%be%8e%e5%bc%8f%e4%b8%ad%e9%a4%90%e8%af%b7%e4%bc%81%e5%8f%b0"
+    },
+    {
+      "id": "uscanyin_224359",
+      "platform": "uscanyin",
+      "title": "布菲油锅",
+      "date": "2026-05-26",
+      "region": "中部",
+      "state": "俄亥俄",
+      "keywords_matched": [
+        "油锅"
+      ],
+      "url": "https://uscanyin.com/en/community/jobs/224359-%e5%b8%83%e8%8f%b2%e6%b2%b9%e9%94%85"
+    },
+    {
+      "id": "uscanyin_224357",
+      "platform": "uscanyin",
+      "title": "请寿司师傅和熟手助手",
+      "date": "2026-05-26",
+      "region": "南部",
+      "state": "佛州",
+      "keywords_matched": [
+        "寿司",
+        "师傅"
+      ],
+      "url": "https://uscanyin.com/en/community/jobs/224357-%e8%af%b7%e5%af%bf%e5%8f%b8%e5%b8%88%e5%82%85%e5%92%8c%e7%86%9f%e6%89%8b%e5%8a%a9%e6%89%8b"
+    },
+    {
+      "id": "uscanyin_224354",
+      "platform": "uscanyin",
+      "title": "外卖送餐",
+      "date": "2026-05-26",
+      "region": "东部",
+      "state": "纽约",
+      "keywords_matched": [
+        "餐",
+        "外卖",
+        "送餐"
+      ],
+      "url": "https://uscanyin.com/en/community/jobs/224354-%e5%a4%96%e5%8d%96%e9%80%81%e9%a4%90"
+    },
+    {
+      "id": "uscanyin_224353",
+      "platform": "uscanyin",
+      "title": "中餐，江浙菜，上海菜 抓码",
+      "date": "2026-05-26",
+      "region": "中部",
+      "state": "密苏里",
+      "keywords_matched": [
+        "餐",
+        "中餐",
+        "抓码"
+      ],
+      "url": "https://uscanyin.com/en/community/jobs/224353-%e4%b8%ad%e9%a4%90%ef%bc%8c%e6%b1%9f%e6%b5%99%e8%8f%9c%ef%bc%8c%e4%b8%8a%e6%b5%b7%e8%8f%9c%20%e6%8a%93%e7%a0%81"
+    },
+    {
+      "id": "uscanyin_224352",
+      "platform": "uscanyin",
+      "title": "新泽西大西洋城请炒锅或帮炒",
+      "date": "2026-05-26",
+      "region": "东部",
+      "state": "新泽西",
+      "keywords_matched": [
+        "炒锅"
+      ],
+      "url": "https://uscanyin.com/en/community/jobs/224352-%e6%96%b0%e6%b3%bd%e8%a5%bf%e5%a4%a7%e8%a5%bf%e6%b4%8b%e5%9f%8e%e8%af%b7%e7%82%92%e9%94%85%e6%88%96%e5%b8%ae%e7%82%92"
+    },
+    {
+      "id": "uscanyin_224351",
+      "platform": "uscanyin",
+      "title": "招熟手打杂兼油锅",
+      "date": "2026-05-26",
+      "region": "南部",
+      "state": "路易斯安娜",
+      "keywords_matched": [
+        "油锅",
+        "打杂"
+      ],
+      "url": "https://uscanyin.com/en/community/jobs/224351-%e6%8b%9b%e7%86%9f%e6%89%8b%e6%89%93%e6%9d%82%e5%85%bc%e6%b2%b9%e9%94%85"
+    },
+    {
+      "id": "uscanyin_224350",
+      "platform": "uscanyin",
+      "title": "外卖店请熟手帮炒",
+      "date": "2026-05-26",
+      "region": "东部",
+      "state": "纽约",
+      "keywords_matched": [
+        "外卖"
+      ],
+      "url": "https://uscanyin.com/en/community/jobs/224350-%e5%a4%96%e5%8d%96%e5%ba%97%e8%af%b7%e7%86%9f%e6%89%8b%e5%b8%ae%e7%82%92"
+    },
+    {
+      "id": "uscanyin_224347",
+      "platform": "uscanyin",
+      "title": "中餐。油锅全职 或兼职",
+      "date": "2026-05-26",
+      "region": "东部",
+      "state": "纽约",
+      "keywords_matched": [
+        "餐",
+        "中餐",
+        "油锅"
+      ],
+      "url": "https://uscanyin.com/en/community/jobs/224347-%e4%b8%ad%e9%a4%90%e3%80%82%e6%b2%b9%e9%94%85%e5%85%a8%e8%81%8c%20%e6%88%96%e5%85%bc%e8%81%8c"
+    },
+    {
+      "id": "uscanyin_224343",
+      "platform": "uscanyin",
+      "title": "白区外卖店请炒锅",
+      "date": "2026-05-26",
+      "region": "中部",
+      "state": "密歇根",
+      "keywords_matched": [
+        "外卖",
+        "炒锅"
+      ],
+      "url": "https://uscanyin.com/en/community/jobs/224343-%e7%99%bd%e5%8c%ba%e5%a4%96%e5%8d%96%e5%ba%97%e8%af%b7%e7%82%92%e9%94%85"
+    },
+    {
+      "id": "uscanyin_224342",
+      "platform": "uscanyin",
+      "title": "寿司三手或熟手助手",
+      "date": "2026-05-26",
+      "region": "南部",
+      "state": "南卡",
+      "keywords_matched": [
+        "寿司"
+      ],
+      "url": "https://uscanyin.com/en/community/jobs/224342-%e5%af%bf%e5%8f%b8%e4%b8%89%e6%89%8b%e6%88%96%e7%86%9f%e6%89%8b%e5%8a%a9%e6%89%8b"
+    },
+    {
+      "id": "uscanyin_224341",
+      "platform": "uscanyin",
+      "title": "诚聘炒锅师父一名",
+      "date": "2026-05-26",
+      "region": "东部",
+      "state": "新罕布什尔",
+      "keywords_matched": [
+        "炒锅"
+      ],
+      "url": "https://uscanyin.com/en/community/jobs/224341-%e8%af%9a%e8%81%98%e7%82%92%e9%94%85%e5%b8%88%e7%88%b6%e4%b8%80%e5%90%8d"
+    },
+    {
+      "id": "uscanyin_224340",
+      "platform": "uscanyin",
+      "title": "21大道86街火锅店请前台、企台、传菜busboy",
+      "date": "2026-05-26",
+      "region": "东部",
+      "state": "纽约",
+      "keywords_matched": [
+        "火锅",
+        "企台",
+        "前台"
+      ],
+      "url": "https://uscanyin.com/en/community/jobs/224340-21%e5%a4%a7%e9%81%9386%e8%a1%97%e7%81%ab%e9%94%85%e5%ba%97%e8%af%b7%e5%89%8d%e5%8f%b0%e3%80%81%e4%bc%81%e5%8f%b0%e3%80%81%e4%bc%a0%e8%8f%9cbusboy"
+    },
+    {
+      "id": "uscanyin_224339",
+      "platform": "uscanyin",
+      "title": "急聘炒锅",
+      "date": "2026-05-26",
+      "region": "南部",
+      "state": "乔治亚",
+      "keywords_matched": [
+        "炒锅"
+      ],
+      "url": "https://uscanyin.com/en/community/jobs/224339-%e6%80%a5%e8%81%98%e7%82%92%e9%94%85"
+    },
+    {
+      "id": "uscanyin_224336",
+      "platform": "uscanyin",
+      "title": "厨房寿司",
+      "date": "2026-05-26",
+      "region": "南部",
+      "state": "维吉尼亚",
+      "keywords_matched": [
+        "寿司",
+        "厨房"
+      ],
+      "url": "https://uscanyin.com/en/community/jobs/224336-%e5%8e%a8%e6%88%bf%e5%af%bf%e5%8f%b8"
+    },
+    {
+      "id": "uscanyin_224335",
+      "platform": "uscanyin",
+      "title": "请寿司和企台夫妻工",
+      "date": "2026-05-26",
+      "region": "南部",
+      "state": "佛州",
+      "keywords_matched": [
+        "寿司",
+        "企台"
+      ],
+      "url": "https://uscanyin.com/en/community/jobs/224335-%e8%af%b7%e5%af%bf%e5%8f%b8%e5%92%8c%e4%bc%81%e5%8f%b0%e5%a4%ab%e5%a6%bb%e5%b7%a5"
+    },
+    {
+      "id": "uscanyin_224334",
+      "platform": "uscanyin",
+      "title": "寿司师傳 和 助手",
+      "date": "2026-05-26",
+      "region": "南部",
+      "state": "佛州",
+      "keywords_matched": [
+        "寿司"
+      ],
+      "url": "https://uscanyin.com/en/community/jobs/224334-%e5%af%bf%e5%8f%b8%e5%b8%88%e5%82%b3%20%e5%92%8c%20%e5%8a%a9%e6%89%8b"
+    },
+    {
+      "id": "uscanyin_224332",
+      "platform": "uscanyin",
+      "title": "外卖店誠請熟手炒鍋高薪",
+      "date": "2026-05-26",
+      "region": "东部",
+      "state": "纽约",
+      "keywords_matched": [
+        "外卖",
+        "炒鍋"
+      ],
+      "url": "https://uscanyin.com/en/community/jobs/224332-%e5%a4%96%e5%8d%96%e5%ba%97%e8%aa%a0%e8%ab%8b%e7%86%9f%e6%89%8b%e7%82%92%e9%8d%8b%e9%ab%98%e8%96%aa"
+    },
+    {
+      "id": "uscanyin_224331",
+      "platform": "uscanyin",
+      "title": "西餐/油锅",
+      "date": "2026-05-26",
+      "region": "东部",
+      "state": "纽约",
+      "keywords_matched": [
+        "餐",
+        "油锅"
+      ],
+      "url": "https://uscanyin.com/en/community/jobs/224331-%e8%a5%bf%e9%a4%90%2f%e6%b2%b9%e9%94%85"
+    },
+    {
+      "id": "uscanyin_224329",
+      "platform": "uscanyin",
+      "title": "日餐堂吃店诚招生手寿司",
+      "date": "2026-05-26",
+      "region": "南部",
+      "state": "德州",
+      "keywords_matched": [
+        "餐",
+        "日餐",
+        "寿司"
+      ],
+      "url": "https://uscanyin.com/en/community/jobs/224329-%e6%97%a5%e9%a4%90%e5%a0%82%e5%90%83%e5%ba%97%e8%af%9a%e6%8b%9b%e7%94%9f%e6%89%8b%e5%af%bf%e5%8f%b8"
+    },
+    {
+      "id": "uscanyin_224328",
+      "platform": "uscanyin",
+      "title": "马里兰海鲜店请炒锅、抓码",
+      "date": "2026-05-26",
+      "region": "南部",
+      "state": "马里兰",
+      "keywords_matched": [
+        "炒锅",
+        "抓码"
+      ],
+      "url": "https://uscanyin.com/en/community/jobs/224328-%e9%a9%ac%e9%87%8c%e5%85%b0%e6%b5%b7%e9%b2%9c%e5%ba%97%e8%af%b7%e7%82%92%e9%94%85%e3%80%81%e6%8a%93%e7%a0%81"
+    },
+    {
+      "id": "uscanyin_224327",
+      "platform": "uscanyin",
+      "title": "急聘有經驗的炒鍋二位",
+      "date": "2026-05-26",
+      "region": "南部",
+      "state": "乔治亚",
+      "keywords_matched": [
+        "炒鍋"
+      ],
+      "url": "https://uscanyin.com/en/community/jobs/224327-%e6%80%a5%e8%81%98%e6%9c%89%e7%b6%93%e9%a9%97%e7%9a%84%e7%82%92%e9%8d%8b%e4%ba%8c%e4%bd%8d"
+    },
+    {
+      "id": "uscanyin_224326",
+      "platform": "uscanyin",
+      "title": "寿司2手或助手",
+      "date": "2026-05-26",
+      "region": "东部",
+      "state": "纽约",
+      "keywords_matched": [
+        "寿司"
+      ],
+      "url": "https://uscanyin.com/en/community/jobs/224326-%e5%af%bf%e5%8f%b82%e6%89%8b%e6%88%96%e5%8a%a9%e6%89%8b"
+    },
+    {
+      "id": "uscanyin_224324",
+      "platform": "uscanyin",
+      "title": "中餐馆外卖店急招熟手炒锅",
+      "date": "2026-05-26",
+      "region": "南部",
+      "state": "维吉尼亚",
       "keywords_matched": [
         "餐馆",
         "餐",
-        "招聘"
+        "中餐",
+        "外卖",
+        "炒锅"
       ],
-      "url": "https://www.500work.com/page/455497"
+      "url": "https://uscanyin.com/en/community/jobs/224324-%e4%b8%ad%e9%a4%90%e9%a6%86%e5%a4%96%e5%8d%96%e5%ba%97%e6%80%a5%e6%8b%9b%e7%86%9f%e6%89%8b%e7%82%92%e9%94%85"
     },
     {
-      "id": "500work_455489",
-      "platform": "500work",
-      "title": "曼哈顿布鲁克林中餐店招店员$21W2 福利好晋升空间大",
-      "date": "2026-05-19",
-      "region": "东部",
-      "state": "布鲁克林",
+      "id": "uscanyin_224323",
+      "platform": "uscanyin",
+      "title": "南卡中餐外卖店招炒锅师傅",
+      "date": "2026-05-26",
+      "region": "南部",
+      "state": "南卡",
       "keywords_matched": [
         "餐",
-        "中餐"
+        "中餐",
+        "外卖",
+        "炒锅",
+        "师傅"
       ],
-      "url": "https://www.500work.com/page/455489"
+      "url": "https://uscanyin.com/en/community/jobs/224323-%e5%8d%97%e5%8d%a1%e4%b8%ad%e9%a4%90%e5%a4%96%e5%8d%96%e5%ba%97%e6%8b%9b%e7%82%92%e9%94%85%e5%b8%88%e5%82%85"
     },
     {
-      "id": "500work_454926",
-      "platform": "500work",
-      "title": "法拉盛北方餐馆招聘厨房打杂",
-      "date": "2026-05-19",
+      "id": "uscanyin_224322",
+      "platform": "uscanyin",
+      "title": "外卖店请帮杂",
+      "date": "2026-05-26",
       "region": "东部",
-      "state": "法拉盛",
+      "state": "宾州",
       "keywords_matched": [
-        "餐馆",
-        "餐",
-        "厨房",
-        "打杂",
-        "招聘"
+        "外卖"
       ],
-      "url": "https://www.500work.com/page/454926"
+      "url": "https://uscanyin.com/en/community/jobs/224322-%e5%a4%96%e5%8d%96%e5%ba%97%e8%af%b7%e5%b8%ae%e6%9d%82"
+    },
+    {
+      "id": "uscanyin_224321",
+      "platform": "uscanyin",
+      "title": "滨州厨房",
+      "date": "2026-05-26",
+      "region": "东部",
+      "state": "宾州",
+      "keywords_matched": [
+        "厨房"
+      ],
+      "url": "https://uscanyin.com/en/community/jobs/224321-%e6%bb%a8%e5%b7%9e%e5%8e%a8%e6%88%bf"
+    },
+    {
+      "id": "uscanyin_224320",
+      "platform": "uscanyin",
+      "title": "LIC 奶茶店徵調飲師",
+      "date": "2026-05-26",
+      "region": "东部",
+      "state": "纽约",
+      "keywords_matched": [
+        "奶茶"
+      ],
+      "url": "https://uscanyin.com/en/community/jobs/224320-LIC%20%e5%a5%b6%e8%8c%b6%e5%ba%97%e5%be%b5%e8%aa%bf%e9%a3%b2%e5%b8%ab"
+    },
+    {
+      "id": "uscanyin_224319",
+      "platform": "uscanyin",
+      "title": "招送餐",
+      "date": "2026-05-26",
+      "region": "南部",
+      "state": "乔治亚",
+      "keywords_matched": [
+        "餐",
+        "送餐"
+      ],
+      "url": "https://uscanyin.com/en/community/jobs/224319-%e6%8b%9b%e9%80%81%e9%a4%90"
+    },
+    {
+      "id": "uscanyin_224318",
+      "platform": "uscanyin",
+      "title": "请油锅",
+      "date": "2026-05-26",
+      "region": "西部",
+      "state": "加州",
+      "keywords_matched": [
+        "油锅"
+      ],
+      "url": "https://uscanyin.com/en/community/jobs/224318-%e8%af%b7%e6%b2%b9%e9%94%85"
     },
     {
       "id": "uscanyin_224315",
       "platform": "uscanyin",
       "title": "新泽西爱迪生中餐馆招聘兼职",
-      "date": "2026-05-25",
+      "date": "2026-05-26",
       "region": "东部",
       "state": "新泽西",
       "keywords_matched": [
@@ -1829,7 +2215,7 @@
       "id": "uscanyin_224314",
       "platform": "uscanyin",
       "title": "新泽西餐馆请打杂师傅，法拉盛接送。",
-      "date": "2026-05-25",
+      "date": "2026-05-26",
       "region": "东部",
       "state": "新泽西",
       "keywords_matched": [
@@ -1844,7 +2230,7 @@
       "id": "uscanyin_224313",
       "platform": "uscanyin",
       "title": "生手寿司学徒",
-      "date": "2026-05-25",
+      "date": "2026-05-26",
       "region": "东部",
       "state": "康州",
       "keywords_matched": [
@@ -1856,7 +2242,7 @@
       "id": "uscanyin_224312",
       "platform": "uscanyin",
       "title": "法拉盛餐厅招聘  男企台；纽约上州餐厅招聘  抓码兼帮炒",
-      "date": "2026-05-25",
+      "date": "2026-05-26",
       "region": "东部",
       "state": "法拉盛",
       "keywords_matched": [
@@ -1872,7 +2258,7 @@
       "id": "uscanyin_224311",
       "platform": "uscanyin",
       "title": "小buffet 请炒锅师傅、前台收银、夫妻工也可以、",
-      "date": "2026-05-25",
+      "date": "2026-05-26",
       "region": "中部",
       "state": "爱荷华",
       "keywords_matched": [
@@ -1887,7 +2273,7 @@
       "id": "uscanyin_224310",
       "platform": "uscanyin",
       "title": "饭团外卖招聘送餐员！时间灵活！多劳多得！顺路多单！稳定�%9",
-      "date": "2026-05-25",
+      "date": "2026-05-26",
       "region": "东部",
       "state": "纽约",
       "keywords_matched": [
@@ -1902,7 +2288,7 @@
       "id": "uscanyin_224309",
       "platform": "uscanyin",
       "title": "寿司/铁板店招人",
-      "date": "2026-05-25",
+      "date": "2026-05-26",
       "region": "东部",
       "state": "新泽西",
       "keywords_matched": [
@@ -1915,7 +2301,7 @@
       "id": "uscanyin_224307",
       "platform": "uscanyin",
       "title": "曼哈顿请熟手炒锅",
-      "date": "2026-05-25",
+      "date": "2026-05-26",
       "region": "东部",
       "state": "曼哈顿",
       "keywords_matched": [
@@ -1927,7 +2313,7 @@
       "id": "uscanyin_224305",
       "platform": "uscanyin",
       "title": "纽约招聘川湘菜主厨！纽约餐厅店长!",
-      "date": "2026-05-25",
+      "date": "2026-05-26",
       "region": "东部",
       "state": "纽约",
       "keywords_matched": [
@@ -1941,7 +2327,7 @@
       "id": "uscanyin_224304",
       "platform": "uscanyin",
       "title": "招聘炒锅师傅一名，烧烤师傅一名",
-      "date": "2026-05-25",
+      "date": "2026-05-26",
       "region": "东部",
       "state": "纽约",
       "keywords_matched": [
@@ -1956,7 +2342,7 @@
       "id": "uscanyin_224303",
       "platform": "uscanyin",
       "title": "史丹岛 中餐外卖 送餐员",
-      "date": "2026-05-25",
+      "date": "2026-05-26",
       "region": "东部",
       "state": "纽约",
       "keywords_matched": [
@@ -1971,7 +2357,7 @@
       "id": "uscanyin_224253",
       "platform": "uscanyin",
       "title": "曼哈顿中城餐馆招聘 接线生",
-      "date": "2026-05-25",
+      "date": "2026-05-26",
       "region": "东部",
       "state": "曼哈顿",
       "keywords_matched": [
@@ -1985,7 +2371,7 @@
       "id": "uscanyin_224252",
       "platform": "uscanyin",
       "title": "寿司师傅",
-      "date": "2026-05-25",
+      "date": "2026-05-26",
       "region": "南部",
       "state": "佛州",
       "keywords_matched": [
@@ -1998,7 +2384,7 @@
       "id": "uscanyin_224249",
       "platform": "uscanyin",
       "title": "请厨房帮杂",
-      "date": "2026-05-25",
+      "date": "2026-05-26",
       "region": "东部",
       "state": "新泽西",
       "keywords_matched": [
@@ -2010,7 +2396,7 @@
       "id": "uscanyin_224248",
       "platform": "uscanyin",
       "title": "密歇根日餐拉面店诚请经验sushi师傅",
-      "date": "2026-05-25",
+      "date": "2026-05-26",
       "region": "中部",
       "state": "密歇根",
       "keywords_matched": [
@@ -2024,7 +2410,7 @@
       "id": "uscanyin_224247",
       "platform": "uscanyin",
       "title": "堪萨斯洲市中心高尚白人区手抓海鲜请厨房师傅",
-      "date": "2026-05-25",
+      "date": "2026-05-26",
       "region": "中部",
       "state": "堪萨斯",
       "keywords_matched": [
@@ -2037,7 +2423,7 @@
       "id": "uscanyin_224246",
       "platform": "uscanyin",
       "title": "外卖店请熟手打杂",
-      "date": "2026-05-25",
+      "date": "2026-05-26",
       "region": "东部",
       "state": "罗得岛",
       "keywords_matched": [
@@ -2050,7 +2436,7 @@
       "id": "uscanyin_224245",
       "platform": "uscanyin",
       "title": "外卖店请熟手打杂",
-      "date": "2026-05-25",
+      "date": "2026-05-26",
       "region": "东部",
       "state": "罗得岛",
       "keywords_matched": [
@@ -2063,7 +2449,7 @@
       "id": "uscanyin_224244",
       "platform": "uscanyin",
       "title": "曼哈顿全职洗碗工，需要有经验，联系电话[电话]",
-      "date": "2026-05-25",
+      "date": "2026-05-26",
       "region": "东部",
       "state": "曼哈顿",
       "keywords_matched": [
@@ -2075,7 +2461,7 @@
       "id": "uscanyin_224243",
       "platform": "uscanyin",
       "title": "招兼职企台",
-      "date": "2026-05-25",
+      "date": "2026-05-26",
       "region": "南部",
       "state": "佛州",
       "keywords_matched": [
@@ -2087,7 +2473,7 @@
       "id": "uscanyin_224242",
       "platform": "uscanyin",
       "title": "诚请日餐企台",
-      "date": "2026-05-25",
+      "date": "2026-05-26",
       "region": "中部",
       "state": "印第安纳",
       "keywords_matched": [
@@ -2101,7 +2487,7 @@
       "id": "uscanyin_224241",
       "platform": "uscanyin",
       "title": "外卖店帮炒，帮杂都可以。",
-      "date": "2026-05-25",
+      "date": "2026-05-26",
       "region": "南部",
       "state": "田纳西",
       "keywords_matched": [
@@ -2113,7 +2499,7 @@
       "id": "uscanyin_224240",
       "platform": "uscanyin",
       "title": "NJ诚请寿司师傅",
-      "date": "2026-05-25",
+      "date": "2026-05-26",
       "region": "东部",
       "state": "新泽西",
       "keywords_matched": [
@@ -2126,7 +2512,7 @@
       "id": "uscanyin_224239",
       "platform": "uscanyin",
       "title": "饺子店请帮厨 （有小费分）",
-      "date": "2026-05-25",
+      "date": "2026-05-26",
       "region": "东部",
       "state": "纽约",
       "keywords_matched": [
@@ -2138,7 +2524,7 @@
       "id": "uscanyin_224237",
       "platform": "uscanyin",
       "title": "📢 曼哈顿招聘兼职后厨帮杂工 主要负责洗碗、打杂、后厨帮�%b",
-      "date": "2026-05-25",
+      "date": "2026-05-26",
       "region": "东部",
       "state": "曼哈顿",
       "keywords_matched": [
@@ -2153,7 +2539,7 @@
       "id": "uscanyin_224236",
       "platform": "uscanyin",
       "title": "诚聘熟手炒锅师傅一名",
-      "date": "2026-05-25",
+      "date": "2026-05-26",
       "region": "东部",
       "state": "纽约",
       "keywords_matched": [
@@ -2166,7 +2552,7 @@
       "id": "uscanyin_224235",
       "platform": "uscanyin",
       "title": "特拉华中餐Buffet请熟手女企台",
-      "date": "2026-05-25",
+      "date": "2026-05-26",
       "region": "东部",
       "state": "特拉华",
       "keywords_matched": [
@@ -2180,7 +2566,7 @@
       "id": "uscanyin_224234",
       "platform": "uscanyin",
       "title": "86街附近奶茶店招前台女生",
-      "date": "2026-05-25",
+      "date": "2026-05-26",
       "region": "东部",
       "state": "纽约",
       "keywords_matched": [
@@ -2193,7 +2579,7 @@
       "id": "uscanyin_224233",
       "platform": "uscanyin",
       "title": "中餐外卖店诚请熟手炒锅",
-      "date": "2026-05-25",
+      "date": "2026-05-26",
       "region": "南部",
       "state": "北卡",
       "keywords_matched": [
@@ -2208,7 +2594,7 @@
       "id": "uscanyin_224232",
       "platform": "uscanyin",
       "title": "日餐日厨",
-      "date": "2026-05-25",
+      "date": "2026-05-26",
       "region": "东部",
       "state": "新泽西",
       "keywords_matched": [
@@ -2221,7 +2607,7 @@
       "id": "uscanyin_224231",
       "platform": "uscanyin",
       "title": "海鲜店请抓码炒锅师傅",
-      "date": "2026-05-25",
+      "date": "2026-05-26",
       "region": "南部",
       "state": "佛州",
       "keywords_matched": [
@@ -2235,7 +2621,7 @@
       "id": "uscanyin_224230",
       "platform": "uscanyin",
       "title": "外卖店诚聘打杂一位",
-      "date": "2026-05-25",
+      "date": "2026-05-26",
       "region": "中部",
       "state": "印第安纳",
       "keywords_matched": [
@@ -2248,7 +2634,7 @@
       "id": "uscanyin_224228",
       "platform": "uscanyin",
       "title": "熟手打杂",
-      "date": "2026-05-25",
+      "date": "2026-05-26",
       "region": "东部",
       "state": "宾州",
       "keywords_matched": [
@@ -2260,7 +2646,7 @@
       "id": "uscanyin_224227",
       "platform": "uscanyin",
       "title": "沃斯堡兼职送餐人员",
-      "date": "2026-05-25",
+      "date": "2026-05-26",
       "region": "南部",
       "state": "德州",
       "keywords_matched": [
@@ -2273,7 +2659,7 @@
       "id": "uscanyin_224226",
       "platform": "uscanyin",
       "title": "打杂",
-      "date": "2026-05-25",
+      "date": "2026-05-26",
       "region": "东部",
       "state": "麻州",
       "keywords_matched": [
@@ -2285,7 +2671,7 @@
       "id": "uscanyin_224225",
       "platform": "uscanyin",
       "title": "企台",
-      "date": "2026-05-25",
+      "date": "2026-05-26",
       "region": "中部",
       "state": "爱荷华",
       "keywords_matched": [
@@ -2297,7 +2683,7 @@
       "id": "uscanyin_224224",
       "platform": "uscanyin",
       "title": "外卖店请熟手油锅和全职熟手帮炒",
-      "date": "2026-05-25",
+      "date": "2026-05-26",
       "region": "中部",
       "state": "明尼苏达",
       "keywords_matched": [
@@ -2310,7 +2696,7 @@
       "id": "uscanyin_224222",
       "platform": "uscanyin",
       "title": "招寿司工",
-      "date": "2026-05-25",
+      "date": "2026-05-26",
       "region": "东部",
       "state": "纽约",
       "keywords_matched": [
@@ -2322,7 +2708,7 @@
       "id": "uscanyin_224221",
       "platform": "uscanyin",
       "title": "熟手炒锅",
-      "date": "2026-05-25",
+      "date": "2026-05-26",
       "region": "西部",
       "state": "亚利桑那",
       "keywords_matched": [
@@ -2334,7 +2720,7 @@
       "id": "uscanyin_224220",
       "platform": "uscanyin",
       "title": "请part time熟手寿司",
-      "date": "2026-05-25",
+      "date": "2026-05-26",
       "region": "东部",
       "state": "纽约",
       "keywords_matched": [
@@ -2346,7 +2732,7 @@
       "id": "uscanyin_224219",
       "platform": "uscanyin",
       "title": "厨房铁板",
-      "date": "2026-05-25",
+      "date": "2026-05-26",
       "region": "南部",
       "state": "马里兰",
       "keywords_matched": [
@@ -2358,7 +2744,7 @@
       "id": "uscanyin_224218",
       "platform": "uscanyin",
       "title": "海鲜店请厨房师傅一名",
-      "date": "2026-05-25",
+      "date": "2026-05-26",
       "region": "南部",
       "state": "马里兰",
       "keywords_matched": [
@@ -2368,1070 +2754,111 @@
       "url": "https://uscanyin.com/en/community/jobs/224218-%e6%b5%b7%e9%b2%9c%e5%ba%97%e8%af%b7%e5%8e%a8%e6%88%bf%e5%b8%88%e5%82%85%e4%b8%80%e5%90%8d"
     },
     {
-      "id": "uscanyin_224215",
-      "platform": "uscanyin",
-      "title": "水饺面条馄饨店请厨房/近布鲁克林/威廉斯堡/长岛市",
-      "date": "2026-05-25",
+      "id": "niuyuegongzuo_137812",
+      "platform": "niuyuegongzuo",
+      "title": "长岛大型布菲店诚请炒锅师傅。有自助餐工作经验。熟手。法拉盛接送。可入住。也可夫妻工。胜任工作者一定高薪。特别是夫妻工，月收入必超过你现有的收入水平。 电话：[电话]",
+      "date": "2026-05-26",
       "region": "东部",
-      "state": "布鲁克林",
-      "keywords_matched": [
-        "厨房"
-      ],
-      "url": "https://uscanyin.com/en/community/jobs/224215-%e6%b0%b4%e9%a5%ba%e9%9d%a2%e6%9d%a1%e9%a6%84%e9%a5%a8%e5%ba%97%e8%af%b7%e5%8e%a8%e6%88%bf%2f%e8%bf%91%e5%b8%83%e9%b2%81%e5%85%8b%e6%9e%97%2f%e5%a8%81%e5%bb%89%e6%96%af%e5%a0%a1%2f%e9%95%bf%e5%b2%9b%e5%b8%82"
-    },
-    {
-      "id": "uscanyin_224214",
-      "platform": "uscanyin",
-      "title": "熟手打包， 企台各一名",
-      "date": "2026-05-25",
-      "region": "东部",
-      "state": "罗得岛",
-      "keywords_matched": [
-        "企台",
-        "打包"
-      ],
-      "url": "https://uscanyin.com/en/community/jobs/224214-%e7%86%9f%e6%89%8b%e6%89%93%e5%8c%85%ef%bc%8c%20%e4%bc%81%e5%8f%b0%e5%90%84%e4%b8%80%e5%90%8d"
-    },
-    {
-      "id": "uscanyin_224212",
-      "platform": "uscanyin",
-      "title": "日餐奇台",
-      "date": "2026-05-25",
-      "region": "南部",
-      "state": "佛州",
+      "state": "法拉盛",
       "keywords_matched": [
         "餐",
-        "日餐"
-      ],
-      "url": "https://uscanyin.com/en/community/jobs/224212-%e6%97%a5%e9%a4%90%e5%a5%87%e5%8f%b0"
-    },
-    {
-      "id": "uscanyin_224211",
-      "platform": "uscanyin",
-      "title": "外卖店請熟手油鍋打包",
-      "date": "2026-05-25",
-      "region": "东部",
-      "state": "新泽西",
-      "keywords_matched": [
-        "外卖",
-        "油鍋",
-        "打包"
-      ],
-      "url": "https://uscanyin.com/en/community/jobs/224211-%e5%a4%96%e5%8d%96%e5%ba%97%e8%ab%8b%e7%86%9f%e6%89%8b%e6%b2%b9%e9%8d%8b%e6%89%93%e5%8c%85"
-    },
-    {
-      "id": "uscanyin_224210",
-      "platform": "uscanyin",
-      "title": "南新泽西日餐外卖店请寿司师傅",
-      "date": "2026-05-25",
-      "region": "东部",
-      "state": "新泽西",
-      "keywords_matched": [
-        "餐",
-        "日餐",
-        "寿司",
-        "外卖",
-        "师傅"
-      ],
-      "url": "https://uscanyin.com/en/community/jobs/224210-%e5%8d%97%e6%96%b0%e6%b3%bd%e8%a5%bf%e6%97%a5%e9%a4%90%e5%a4%96%e5%8d%96%e5%ba%97%e8%af%b7%e5%af%bf%e5%8f%b8%e5%b8%88%e5%82%85"
-    },
-    {
-      "id": "uscanyin_224208",
-      "platform": "uscanyin",
-      "title": "奥兰多ucf附近诚请炒锅",
-      "date": "2026-05-25",
-      "region": "南部",
-      "state": "奥兰多",
-      "keywords_matched": [
-        "炒锅"
-      ],
-      "url": "https://uscanyin.com/en/community/jobs/224208-%e5%a5%a5%e5%85%b0%e5%a4%9aucf%e9%99%84%e8%bf%91%e8%af%9a%e8%af%b7%e7%82%92%e9%94%85"
-    },
-    {
-      "id": "uscanyin_224207",
-      "platform": "uscanyin",
-      "title": "中餐外卖店油锅",
-      "date": "2026-05-25",
-      "region": "中部",
-      "state": "威斯康星",
-      "keywords_matched": [
-        "餐",
-        "中餐",
-        "外卖",
-        "油锅"
-      ],
-      "url": "https://uscanyin.com/en/community/jobs/224207-%e4%b8%ad%e9%a4%90%e5%a4%96%e5%8d%96%e5%ba%97%e6%b2%b9%e9%94%85"
-    },
-    {
-      "id": "uscanyin_224206",
-      "platform": "uscanyin",
-      "title": "请寿司师傅",
-      "date": "2026-05-25",
-      "region": "东部",
-      "state": "新罕布什尔",
-      "keywords_matched": [
-        "寿司",
-        "师傅"
-      ],
-      "url": "https://uscanyin.com/en/community/jobs/224206-%e8%af%b7%e5%af%bf%e5%8f%b8%e5%b8%88%e5%82%85"
-    },
-    {
-      "id": "uscanyin_224205",
-      "platform": "uscanyin",
-      "title": "熟手企台",
-      "date": "2026-05-25",
-      "region": "东部",
-      "state": "麻州",
-      "keywords_matched": [
-        "企台"
-      ],
-      "url": "https://uscanyin.com/en/community/jobs/224205-%e7%86%9f%e6%89%8b%e4%bc%81%e5%8f%b0"
-    },
-    {
-      "id": "uscanyin_224204",
-      "platform": "uscanyin",
-      "title": "中餐堂吃炒锅或帮炒",
-      "date": "2026-05-25",
-      "region": "东部",
-      "state": "宾州",
-      "keywords_matched": [
-        "餐",
-        "中餐",
-        "炒锅"
-      ],
-      "url": "https://uscanyin.com/en/community/jobs/224204-%e4%b8%ad%e9%a4%90%e5%a0%82%e5%90%83%e7%82%92%e9%94%85%e6%88%96%e5%b8%ae%e7%82%92"
-    },
-    {
-      "id": "uscanyin_224203",
-      "platform": "uscanyin",
-      "title": "康州请企台",
-      "date": "2026-05-25",
-      "region": "东部",
-      "state": "康州",
-      "keywords_matched": [
-        "企台"
-      ],
-      "url": "https://uscanyin.com/en/community/jobs/224203-%e5%ba%b7%e5%b7%9e%e8%af%b7%e4%bc%81%e5%8f%b0"
-    },
-    {
-      "id": "uscanyin_224201",
-      "platform": "uscanyin",
-      "title": "上州一小时中餐企台 长工或周末短工",
-      "date": "2026-05-25",
-      "region": "东部",
-      "state": "上州",
-      "keywords_matched": [
-        "餐",
-        "中餐",
-        "企台"
-      ],
-      "url": "https://uscanyin.com/en/community/jobs/224201-%e4%b8%8a%e5%b7%9e%e4%b8%80%e5%b0%8f%e6%97%b6%e4%b8%ad%e9%a4%90%e4%bc%81%e5%8f%b0%20%e9%95%bf%e5%b7%a5%e6%88%96%e5%91%a8%e6%9c%ab%e7%9f%ad%e5%b7%a5"
-    },
-    {
-      "id": "uscanyin_224200",
-      "platform": "uscanyin",
-      "title": "Roswell 请 part time 企台",
-      "date": "2026-05-25",
-      "region": "南部",
-      "state": "乔治亚",
-      "keywords_matched": [
-        "企台"
-      ],
-      "url": "https://uscanyin.com/en/community/jobs/224200-Roswell%20%e8%af%b7%20part%20time%20%e4%bc%81%e5%8f%b0"
-    },
-    {
-      "id": "uscanyin_224199",
-      "platform": "uscanyin",
-      "title": "曼哈顿唐人街甜品后厨招",
-      "date": "2026-05-25",
-      "region": "东部",
-      "state": "曼哈顿",
-      "keywords_matched": [
-        "甜品",
-        "后厨"
-      ],
-      "url": "https://uscanyin.com/en/community/jobs/224199-%e6%9b%bc%e5%93%88%e9%a1%bf%e5%94%90%e4%ba%ba%e8%a1%97%e7%94%9c%e5%93%81%e5%90%8e%e5%8e%a8%e6%8b%9b"
-    },
-    {
-      "id": "uscanyin_224198",
-      "platform": "uscanyin",
-      "title": "日餐洗碗",
-      "date": "2026-05-25",
-      "region": "东部",
-      "state": "纽约",
-      "keywords_matched": [
-        "餐",
-        "日餐",
-        "洗碗"
-      ],
-      "url": "https://uscanyin.com/en/community/jobs/224198-%e6%97%a5%e9%a4%90%e6%b4%97%e7%a2%97"
-    },
-    {
-      "id": "uscanyin_224196",
-      "platform": "uscanyin",
-      "title": "中日亚餐炒锅",
-      "date": "2026-05-25",
-      "region": "东部",
-      "state": "新泽西",
-      "keywords_matched": [
-        "餐",
-        "炒锅"
-      ],
-      "url": "https://uscanyin.com/en/community/jobs/224196-%e4%b8%ad%e6%97%a5%e4%ba%9a%e9%a4%90%e7%82%92%e9%94%85"
-    },
-    {
-      "id": "uscanyin_224195",
-      "platform": "uscanyin",
-      "title": "NJ AYCE 请厨房铁板",
-      "date": "2026-05-25",
-      "region": "东部",
-      "state": "NJ",
-      "keywords_matched": [
-        "厨房"
-      ],
-      "url": "https://uscanyin.com/en/community/jobs/224195-NJ%20AYCE%20%e8%af%b7%e5%8e%a8%e6%88%bf%e9%93%81%e6%9d%bf"
-    },
-    {
-      "id": "uscanyin_224194",
-      "platform": "uscanyin",
-      "title": "高薪聘请寿司师傅和助手",
-      "date": "2026-05-25",
-      "region": "西部",
-      "state": "夏威夷",
-      "keywords_matched": [
-        "寿司",
-        "师傅"
-      ],
-      "url": "https://uscanyin.com/en/community/jobs/224194-%e9%ab%98%e8%96%aa%e8%81%98%e8%af%b7%e5%af%bf%e5%8f%b8%e5%b8%88%e5%82%85%e5%92%8c%e5%8a%a9%e6%89%8b"
-    },
-    {
-      "id": "uscanyin_224193",
-      "platform": "uscanyin",
-      "title": "请炒锅一名",
-      "date": "2026-05-25",
-      "region": "东部",
-      "state": "纽约",
-      "keywords_matched": [
-        "炒锅"
-      ],
-      "url": "https://uscanyin.com/en/community/jobs/224193-%e8%af%b7%e7%82%92%e9%94%85%e4%b8%80%e5%90%8d"
-    },
-    {
-      "id": "uscanyin_224191",
-      "platform": "uscanyin",
-      "title": "日餐请一名生手寿司学徒",
-      "date": "2026-05-25",
-      "region": "南部",
-      "state": "德州",
-      "keywords_matched": [
-        "餐",
-        "日餐",
-        "寿司"
-      ],
-      "url": "https://uscanyin.com/en/community/jobs/224191-%e6%97%a5%e9%a4%90%e8%af%b7%e4%b8%80%e5%90%8d%e7%94%9f%e6%89%8b%e5%af%bf%e5%8f%b8%e5%ad%a6%e5%be%92"
-    },
-    {
-      "id": "uscanyin_224190",
-      "platform": "uscanyin",
-      "title": "Ohio请熟手炒锅师傅",
-      "date": "2026-05-25",
-      "region": "中部",
-      "state": "俄亥俄",
-      "keywords_matched": [
         "炒锅",
         "师傅"
       ],
-      "url": "https://uscanyin.com/en/community/jobs/224190-Ohio%e8%af%b7%e7%86%9f%e6%89%8b%e7%82%92%e9%94%85%e5%b8%88%e5%82%85"
+      "url": "https://niuyuegongzuo.com/longisland/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/%E9%95%BF%E5%B2%9B%E5%A4%A7%E5%9E%8B%E5%B8%83%E8%8F%B2%E5%BA%97%E8%AF%9A%E8%AF%B7%E7%82%92%E9%94%85%E5%B8%88%E5%82%85%E6%9C%89%E8%87%AA%E5%8A%A9%E9%A4%90%E5%B7%A5%E4%BD%9C%E7%BB%8F%E9%AA%8C%E7%86%9F%E6%89%8B%E6%B3%95%E6%8B%89%E7%9B%9B%E6%8E%A5%E9%80%81%E5%8F%AF%E5%85%A5%E4%BD%8F%E4%B9%9F%E5%8F%AF%E5%A4%AB%E5%A6%BB%E5%B7%A5%E8%83%9C%E4%BB%BB%E5%B7%A5%E4%BD%9C%E8%80%85%E4%B8%80%E5%AE%9A%E9%AB%98%E8%96%AA%E7%89%B9%E5%88%AB%E6%98%AF%E5%A4%AB%E5%A6%BB%E5%B7%A5%E6%9C%88%E6%94%B6%E5%85%A5%E5%BF%85%E8%B6%85%E8%BF%87%E4%BD%A0%E7%8E%B0%E6%9C%89%E7%9A%84%E6%94%B6%E5%85%A5%E6%B0%B4%E5%B9%B3-%E7%94%B5%E8%AF%9D347-399-6080/137812"
     },
     {
-      "id": "uscanyin_224189",
-      "platform": "uscanyin",
-      "title": "滨洲白人区找接电话 中餐外卖",
-      "date": "2026-05-25",
+      "id": "niuyuegongzuo_137805",
+      "platform": "niuyuegongzuo",
+      "title": "长岛41出口外卖店请part- time熟手炒锅，法拉盛接送, 电[电话]",
+      "date": "2026-05-26",
       "region": "东部",
-      "state": "宾州",
+      "state": "法拉盛",
       "keywords_matched": [
-        "餐",
-        "中餐",
-        "外卖"
-      ],
-      "url": "https://uscanyin.com/en/community/jobs/224189-%e6%bb%a8%e6%b4%b2%e7%99%bd%e4%ba%ba%e5%8c%ba%e6%89%be%e6%8e%a5%e7%94%b5%e8%af%9d%20%e4%b8%ad%e9%a4%90%e5%a4%96%e5%8d%96"
-    },
-    {
-      "id": "uscanyin_224188",
-      "platform": "uscanyin",
-      "title": "明尼苏达全日餐请Sushi师傅",
-      "date": "2026-05-25",
-      "region": "中部",
-      "state": "明尼苏达",
-      "keywords_matched": [
-        "餐",
-        "日餐",
-        "师傅"
-      ],
-      "url": "https://uscanyin.com/en/community/jobs/224188-%e6%98%8e%e5%b0%bc%e8%8b%8f%e8%be%be%e5%85%a8%e6%97%a5%e9%a4%90%e8%af%b7Sushi%e5%b8%88%e5%82%85"
-    },
-    {
-      "id": "uscanyin_224186",
-      "platform": "uscanyin",
-      "title": "Buffet 请熟手炒锅",
-      "date": "2026-05-25",
-      "region": "南部",
-      "state": "密西西比",
-      "keywords_matched": [
+        "外卖",
         "炒锅"
       ],
-      "url": "https://uscanyin.com/en/community/jobs/224186-Buffet%20%e8%af%b7%e7%86%9f%e6%89%8b%e7%82%92%e9%94%85"
+      "url": "https://niuyuegongzuo.com/longisland/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/%E9%95%BF%E5%B2%9B41%E5%87%BA%E5%8F%A3%E5%A4%96%E5%8D%96%E5%BA%97%E8%AF%B7part-time%E7%86%9F%E6%89%8B%E7%82%92%E9%94%85%E6%B3%95%E6%8B%89%E7%9B%9B%E6%8E%A5%E9%80%81-%E7%94%B5646-335-5502/137805"
     },
     {
-      "id": "uscanyin_224185",
-      "platform": "uscanyin",
-      "title": "请熟手炒锅一名",
-      "date": "2026-05-25",
+      "id": "niuyuegongzuo_137802",
+      "platform": "niuyuegongzuo",
+      "title": "Elmhurst 奶茶店请人",
+      "date": "2026-05-26",
       "region": "东部",
-      "state": "纽约",
-      "keywords_matched": [
-        "炒锅"
-      ],
-      "url": "https://uscanyin.com/en/community/jobs/224185-%e8%af%b7%e7%86%9f%e6%89%8b%e7%82%92%e9%94%85%e4%b8%80%e5%90%8d"
-    },
-    {
-      "id": "uscanyin_224183",
-      "platform": "uscanyin",
-      "title": "纽约上州诚招一名全职熟手寿司师傅",
-      "date": "2026-05-25",
-      "region": "东部",
-      "state": "纽约",
-      "keywords_matched": [
-        "寿司",
-        "师傅"
-      ],
-      "url": "https://uscanyin.com/en/community/jobs/224183-%e7%ba%bd%e7%ba%a6%e4%b8%8a%e5%b7%9e%e8%af%9a%e6%8b%9b%e4%b8%80%e5%90%8d%e5%85%a8%e8%81%8c%e7%86%9f%e6%89%8b%e5%af%bf%e5%8f%b8%e5%b8%88%e5%82%85"
-    },
-    {
-      "id": "uscanyin_224182",
-      "platform": "uscanyin",
-      "title": "印第安纳州中餐堂吃店招熟手企台 慬英文",
-      "date": "2026-05-25",
-      "region": "中部",
-      "state": "印第安纳",
-      "keywords_matched": [
-        "餐",
-        "中餐",
-        "企台"
-      ],
-      "url": "https://uscanyin.com/en/community/jobs/224182-%e5%8d%b0%e7%ac%ac%e5%ae%89%e7%ba%b3%e5%b7%9e%e4%b8%ad%e9%a4%90%e5%a0%82%e5%90%83%e5%ba%97%e6%8b%9b%e7%86%9f%e6%89%8b%e4%bc%81%e5%8f%b0%20%e6%85%ac%e8%8b%b1%e6%96%87"
-    },
-    {
-      "id": "uscanyin_224181",
-      "platform": "uscanyin",
-      "title": "請一天短工打杂",
-      "date": "2026-05-25",
-      "region": "东部",
-      "state": "宾州",
-      "keywords_matched": [
-        "打杂"
-      ],
-      "url": "https://uscanyin.com/en/community/jobs/224181-%e8%ab%8b%e4%b8%80%e5%a4%a9%e7%9f%ad%e5%b7%a5%e6%89%93%e6%9d%82"
-    },
-    {
-      "id": "uscanyin_224294",
-      "platform": "uscanyin",
-      "title": "纽约布菲高薪炒锅",
-      "date": "2026-05-25",
-      "region": "东部",
-      "state": "纽约",
-      "keywords_matched": [
-        "炒锅"
-      ],
-      "url": "https://uscanyin.com/en/community/jobs/224294-%e7%ba%bd%e7%ba%a6%e5%b8%83%e8%8f%b2%e9%ab%98%e8%96%aa%e7%82%92%e9%94%85"
-    },
-    {
-      "id": "uscanyin_224293",
-      "platform": "uscanyin",
-      "title": "康州纽黑文ayce 中日餐企台",
-      "date": "2026-05-25",
-      "region": "东部",
-      "state": "康州",
-      "keywords_matched": [
-        "餐",
-        "日餐",
-        "企台"
-      ],
-      "url": "https://uscanyin.com/en/community/jobs/224293-%e5%ba%b7%e5%b7%9e%e7%ba%bd%e9%bb%91%e6%96%87ayce%20%e4%b8%ad%e6%97%a5%e9%a4%90%e4%bc%81%e5%8f%b0"
-    },
-    {
-      "id": "uscanyin_224291",
-      "platform": "uscanyin",
-      "title": "东村甜品店",
-      "date": "2026-05-25",
-      "region": "东部",
-      "state": "纽约",
-      "keywords_matched": [
-        "甜品"
-      ],
-      "url": "https://uscanyin.com/en/community/jobs/224291-%e4%b8%9c%e6%9d%91%e7%94%9c%e5%93%81%e5%ba%97"
-    },
-    {
-      "id": "uscanyin_224290",
-      "platform": "uscanyin",
-      "title": "中日餐散工肉器一名",
-      "date": "2026-05-25",
-      "region": "东部",
-      "state": "纽约",
-      "keywords_matched": [
-        "餐",
-        "日餐"
-      ],
-      "url": "https://uscanyin.com/en/community/jobs/224290-%e4%b8%ad%e6%97%a5%e9%a4%90%e6%95%a3%e5%b7%a5%e8%82%89%e5%99%a8%e4%b8%80%e5%90%8d"
-    },
-    {
-      "id": "uscanyin_224289",
-      "platform": "uscanyin",
-      "title": "熟手炒锅",
-      "date": "2026-05-25",
-      "region": "西部",
-      "state": "亚利桑那",
-      "keywords_matched": [
-        "炒锅"
-      ],
-      "url": "https://uscanyin.com/en/community/jobs/224289-%e7%86%9f%e6%89%8b%e7%82%92%e9%94%85"
-    },
-    {
-      "id": "uscanyin_224287",
-      "platform": "uscanyin",
-      "title": "中日餐请奇台",
-      "date": "2026-05-25",
-      "region": "东部",
-      "state": "麻州",
-      "keywords_matched": [
-        "餐",
-        "日餐"
-      ],
-      "url": "https://uscanyin.com/en/community/jobs/224287-%e4%b8%ad%e6%97%a5%e9%a4%90%e8%af%b7%e5%a5%87%e5%8f%b0"
-    },
-    {
-      "id": "uscanyin_224286",
-      "platform": "uscanyin",
-      "title": "曼哈顿中城奶茶店招聘",
-      "date": "2026-05-25",
-      "region": "东部",
-      "state": "曼哈顿",
+      "state": "皇后区",
       "keywords_matched": [
         "奶茶",
-        "招聘"
+        "请人"
       ],
-      "url": "https://uscanyin.com/en/community/jobs/224286-%e6%9b%bc%e5%93%88%e9%a1%bf%e4%b8%ad%e5%9f%8e%e5%a5%b6%e8%8c%b6%e5%ba%97%e6%8b%9b%e8%81%98"
+      "url": "https://niuyuegongzuo.com/queens/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/elmhurst-%E5%A5%B6%E8%8C%B6%E5%BA%97%E8%AF%B7%E4%BA%BA/137802"
     },
     {
-      "id": "uscanyin_224285",
-      "platform": "uscanyin",
-      "title": "夏威夷大岛 外卖店 请油锅， 打杂， 煎板",
-      "date": "2026-05-25",
-      "region": "西部",
-      "state": "夏威夷",
-      "keywords_matched": [
-        "外卖",
-        "油锅",
-        "打杂"
-      ],
-      "url": "https://uscanyin.com/en/community/jobs/224285-%e5%a4%8f%e5%a8%81%e5%a4%b7%e5%a4%a7%e5%b2%9b%20%e5%a4%96%e5%8d%96%e5%ba%97%20%e8%af%b7%e6%b2%b9%e9%94%85%ef%bc%8c%20%e6%89%93%e6%9d%82%ef%bc%8c%20%e7%85%8e%e6%9d%bf"
-    },
-    {
-      "id": "uscanyin_224284",
-      "platform": "uscanyin",
-      "title": "日餐",
-      "date": "2026-05-25",
-      "region": "南部",
-      "state": "佛州",
-      "keywords_matched": [
-        "餐",
-        "日餐"
-      ],
-      "url": "https://uscanyin.com/en/community/jobs/224284-%e6%97%a5%e9%a4%90"
-    },
-    {
-      "id": "uscanyin_224283",
-      "platform": "uscanyin",
-      "title": "外卖店打杂",
-      "date": "2026-05-25",
-      "region": "东部",
-      "state": "麻州",
-      "keywords_matched": [
-        "外卖",
-        "打杂"
-      ],
-      "url": "https://uscanyin.com/en/community/jobs/224283-%e5%a4%96%e5%8d%96%e5%ba%97%e6%89%93%e6%9d%82"
-    },
-    {
-      "id": "uscanyin_224282",
-      "platform": "uscanyin",
-      "title": "全日餐企台",
-      "date": "2026-05-25",
-      "region": "东部",
-      "state": "麻州",
-      "keywords_matched": [
-        "餐",
-        "日餐",
-        "企台"
-      ],
-      "url": "https://uscanyin.com/en/community/jobs/224282-%e5%85%a8%e6%97%a5%e9%a4%90%e4%bc%81%e5%8f%b0"
-    },
-    {
-      "id": "uscanyin_224280",
-      "platform": "uscanyin",
-      "title": "招炒锅",
-      "date": "2026-05-25",
-      "region": "南部",
-      "state": "德州",
-      "keywords_matched": [
-        "炒锅"
-      ],
-      "url": "https://uscanyin.com/en/community/jobs/224280-%e6%8b%9b%e7%82%92%e9%94%85"
-    },
-    {
-      "id": "uscanyin_224279",
-      "platform": "uscanyin",
-      "title": "🛎🛎👍👍密西西比州 髙级中自助餐厅  中午休息   诚请生熟�%8",
-      "date": "2026-05-25",
-      "region": "南部",
-      "state": "密西西比",
-      "keywords_matched": [
-        "餐厅",
-        "餐"
-      ],
-      "url": "https://uscanyin.com/en/community/jobs/224279-%f0%9f%9b%8e%f0%9f%9b%8e%f0%9f%91%8d%f0%9f%91%8d%e5%af%86%e8%a5%bf%e8%a5%bf%e6%af%94%e5%b7%9e-%e9%ab%99%e7%ba%a7%e4%b8%ad%e8%87%aa%e5%8a%a9%e9%a4%90%e5%8e%85--%e4%b8%ad%e5%8d%88%e4%bc%91%e6%81%af%20%20%20%e8%af%9a%e8%af%b7%e7%94%9f%e7%86%9f%e6%89%8"
-    },
-    {
-      "id": "uscanyin_224278",
-      "platform": "uscanyin",
-      "title": "6000寿司师傅一名",
-      "date": "2026-05-25",
-      "region": "南部",
-      "state": "佛州",
-      "keywords_matched": [
-        "寿司",
-        "师傅"
-      ],
-      "url": "https://uscanyin.com/en/community/jobs/224278-6000%e5%af%bf%e5%8f%b8%e5%b8%88%e5%82%85%e4%b8%80%e5%90%8d"
-    },
-    {
-      "id": "uscanyin_224276",
-      "platform": "uscanyin",
-      "title": "堂吃店请熟手企台同事好相处收入6500左右",
-      "date": "2026-05-25",
-      "region": "东部",
-      "state": "新罕布什尔",
-      "keywords_matched": [
-        "企台"
-      ],
-      "url": "https://uscanyin.com/en/community/jobs/224276-%e5%a0%82%e5%90%83%e5%ba%97%e8%af%b7%e7%86%9f%e6%89%8b%e4%bc%81%e5%8f%b0%e5%90%8c%e4%ba%8b%e5%a5%bd%e7%9b%b8%e5%a4%84%e6%94%b6%e5%85%a56500%e5%b7%a6%e5%8f%b3"
-    },
-    {
-      "id": "uscanyin_224275",
-      "platform": "uscanyin",
-      "title": "请企台",
-      "date": "2026-05-25",
-      "region": "东部",
-      "state": "宾州",
-      "keywords_matched": [
-        "企台"
-      ],
-      "url": "https://uscanyin.com/en/community/jobs/224275-%e8%af%b7%e4%bc%81%e5%8f%b0"
-    },
-    {
-      "id": "uscanyin_224274",
-      "platform": "uscanyin",
-      "title": "NJ外卖店请炒锅",
-      "date": "2026-05-25",
+      "id": "niuyuegongzuo_137794",
+      "platform": "niuyuegongzuo",
+      "title": "熊猫外卖招 爱迪生 送外卖",
+      "date": "2026-05-26",
       "region": "东部",
       "state": "新泽西",
       "keywords_matched": [
-        "外卖",
-        "炒锅"
+        "外卖"
       ],
-      "url": "https://uscanyin.com/en/community/jobs/224274-NJ%e5%a4%96%e5%8d%96%e5%ba%97%e8%af%b7%e7%82%92%e9%94%85"
+      "url": "https://niuyuegongzuo.com/newjersey/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/%E7%86%8A%E7%8C%AB%E5%A4%96%E5%8D%96%E6%8B%9B-%E7%88%B1%E8%BF%AA%E7%94%9F-%E9%80%81%E5%A4%96%E5%8D%96/137794"
     },
     {
-      "id": "uscanyin_224273",
-      "platform": "uscanyin",
-      "title": "诚请熟手寿司",
-      "date": "2026-05-25",
-      "region": "东部",
-      "state": "宾州",
-      "keywords_matched": [
-        "寿司"
-      ],
-      "url": "https://uscanyin.com/en/community/jobs/224273-%e8%af%9a%e8%af%b7%e7%86%9f%e6%89%8b%e5%af%bf%e5%8f%b8"
-    },
-    {
-      "id": "uscanyin_224272",
-      "platform": "uscanyin",
-      "title": "需要熟手洗碗 曼哈顿店",
-      "date": "2026-05-25",
-      "region": "东部",
-      "state": "曼哈顿",
-      "keywords_matched": [
-        "洗碗"
-      ],
-      "url": "https://uscanyin.com/en/community/jobs/224272-%e9%9c%80%e8%a6%81%e7%86%9f%e6%89%8b%e6%b4%97%e7%a2%97%20%e6%9b%bc%e5%93%88%e9%a1%bf%e5%ba%97"
-    },
-    {
-      "id": "uscanyin_224271",
-      "platform": "uscanyin",
-      "title": "亚洲餐馆，位于曼哈顿，招打包",
-      "date": "2026-05-25",
+      "id": "niuyuegongzuo_137761",
+      "platform": "niuyuegongzuo",
+      "title": "曼哈顿中餐馆需要炒锅专业师傅",
+      "date": "2026-05-26",
       "region": "东部",
       "state": "曼哈顿",
       "keywords_matched": [
         "餐馆",
         "餐",
-        "打包"
-      ],
-      "url": "https://uscanyin.com/en/community/jobs/224271-%e4%ba%9a%e6%b4%b2%e9%a4%90%e9%a6%86%ef%bc%8c%e4%bd%8d%e4%ba%8e%e6%9b%bc%e5%93%88%e9%a1%bf%ef%bc%8c%e6%8b%9b%e6%89%93%e5%8c%85"
-    },
-    {
-      "id": "uscanyin_224270",
-      "platform": "uscanyin",
-      "title": "全日餐铁板店",
-      "date": "2026-05-25",
-      "region": "南部",
-      "state": "佛州",
-      "keywords_matched": [
-        "餐",
-        "日餐"
-      ],
-      "url": "https://uscanyin.com/en/community/jobs/224270-%e5%85%a8%e6%97%a5%e9%a4%90%e9%93%81%e6%9d%bf%e5%ba%97"
-    },
-    {
-      "id": "uscanyin_224269",
-      "platform": "uscanyin",
-      "title": "外卖店炒锅",
-      "date": "2026-05-25",
-      "region": "东部",
-      "state": "纽约",
-      "keywords_matched": [
-        "外卖",
-        "炒锅"
-      ],
-      "url": "https://uscanyin.com/en/community/jobs/224269-%e5%a4%96%e5%8d%96%e5%ba%97%e7%82%92%e9%94%85"
-    },
-    {
-      "id": "uscanyin_224268",
-      "platform": "uscanyin",
-      "title": "西雅图市寿司学徒 助手 二手5500➕电议",
-      "date": "2026-05-25",
-      "region": "西部",
-      "state": "西雅图",
-      "keywords_matched": [
-        "寿司"
-      ],
-      "url": "https://uscanyin.com/en/community/jobs/224268-%e8%a5%bf%e9%9b%85%e5%9b%be%e5%b8%82%e5%af%bf%e5%8f%b8%e5%ad%a6%e5%be%92%20%e5%8a%a9%e6%89%8b%20%e4%ba%8c%e6%89%8b5500%e2%9e%95%e7%94%b5%e8%ae%ae"
-    },
-    {
-      "id": "uscanyin_224267",
-      "platform": "uscanyin",
-      "title": "Sushi 寿司",
-      "date": "2026-05-25",
-      "region": "南部",
-      "state": "乔治亚",
-      "keywords_matched": [
-        "寿司"
-      ],
-      "url": "https://uscanyin.com/en/community/jobs/224267-Sushi%20%e5%af%bf%e5%8f%b8"
-    },
-    {
-      "id": "uscanyin_224266",
-      "platform": "uscanyin",
-      "title": "亚利桑那凤凰城招寿司助手",
-      "date": "2026-05-25",
-      "region": "西部",
-      "state": "亚利桑那",
-      "keywords_matched": [
-        "寿司"
-      ],
-      "url": "https://uscanyin.com/en/community/jobs/224266-%e4%ba%9a%e5%88%a9%e6%a1%91%e9%82%a3%e5%87%a4%e5%87%b0%e5%9f%8e%e6%8b%9b%e5%af%bf%e5%8f%b8%e5%8a%a9%e6%89%8b"
-    },
-    {
-      "id": "uscanyin_224265",
-      "platform": "uscanyin",
-      "title": "日餐店请teiyaki师傅",
-      "date": "2026-05-25",
-      "region": "东部",
-      "state": "特拉华",
-      "keywords_matched": [
-        "餐",
-        "日餐",
-        "师傅"
-      ],
-      "url": "https://uscanyin.com/en/community/jobs/224265-%e6%97%a5%e9%a4%90%e5%ba%97%e8%af%b7teiyaki%e5%b8%88%e5%82%85"
-    },
-    {
-      "id": "uscanyin_224264",
-      "platform": "uscanyin",
-      "title": "1️⃣小時壽司",
-      "date": "2026-05-25",
-      "region": "东部",
-      "state": "纽约",
-      "keywords_matched": [
-        "壽司"
-      ],
-      "url": "https://uscanyin.com/en/community/jobs/224264-1%ef%b8%8f%e2%83%a3%e5%b0%8f%e6%99%82%e5%a3%bd%e5%8f%b8"
-    },
-    {
-      "id": "uscanyin_224263",
-      "platform": "uscanyin",
-      "title": "高薪聘请熟手帮炒兼打杂师傅",
-      "date": "2026-05-25",
-      "region": "东部",
-      "state": "纽约",
-      "keywords_matched": [
-        "打杂",
-        "师傅"
-      ],
-      "url": "https://uscanyin.com/en/community/jobs/224263-%e9%ab%98%e8%96%aa%e8%81%98%e8%af%b7%e7%86%9f%e6%89%8b%e5%b8%ae%e7%82%92%e5%85%bc%e6%89%93%e6%9d%82%e5%b8%88%e5%82%85"
-    },
-    {
-      "id": "uscanyin_224262",
-      "platform": "uscanyin",
-      "title": "诚聘熟手炒锅师傅，中餐堂吃店。弗吉尼亚近DC",
-      "date": "2026-05-25",
-      "region": "南部",
-      "state": "维吉尼亚",
-      "keywords_matched": [
-        "餐",
         "中餐",
         "炒锅",
         "师傅"
       ],
-      "url": "https://uscanyin.com/en/community/jobs/224262-%e8%af%9a%e8%81%98%e7%86%9f%e6%89%8b%e7%82%92%e9%94%85%e5%b8%88%e5%82%85%ef%bc%8c%e4%b8%ad%e9%a4%90%e5%a0%82%e5%90%83%e5%ba%97%e3%80%82%e5%bc%97%e5%90%89%e5%b0%bc%e4%ba%9a%e8%bf%91DC"
+      "url": "https://niuyuegongzuo.com/manhattan/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/%E6%9B%BC%E5%93%88%E9%A1%BF%E4%B8%AD%E9%A4%90%E9%A6%86%E9%9C%80%E8%A6%81%E7%82%92%E9%94%85%E4%B8%93%E4%B8%9A%E5%B8%88%E5%82%85/137761"
     },
     {
-      "id": "uscanyin_224261",
-      "platform": "uscanyin",
-      "title": "寿司师傅",
-      "date": "2026-05-25",
+      "id": "niuyuegongzuo_137760",
+      "platform": "niuyuegongzuo",
+      "title": "长岛城现招烧烤师傅和炒锅师傅",
+      "date": "2026-05-26",
       "region": "东部",
-      "state": "纽约",
+      "state": "长岛",
       "keywords_matched": [
-        "寿司",
-        "师傅"
-      ],
-      "url": "https://uscanyin.com/en/community/jobs/224261-%e5%af%bf%e5%8f%b8%e5%b8%88%e5%82%85"
-    },
-    {
-      "id": "uscanyin_224260",
-      "platform": "uscanyin",
-      "title": "招聘熟手炒锅",
-      "date": "2026-05-25",
-      "region": "东部",
-      "state": "康州",
-      "keywords_matched": [
-        "炒锅",
-        "招聘"
-      ],
-      "url": "https://uscanyin.com/en/community/jobs/224260-%e6%8b%9b%e8%81%98%e7%86%9f%e6%89%8b%e7%82%92%e9%94%85"
-    },
-    {
-      "id": "uscanyin_224259",
-      "platform": "uscanyin",
-      "title": "寿司或日厨",
-      "date": "2026-05-25",
-      "region": "中部",
-      "state": "印第安纳",
-      "keywords_matched": [
-        "寿司"
-      ],
-      "url": "https://uscanyin.com/en/community/jobs/224259-%e5%af%bf%e5%8f%b8%e6%88%96%e6%97%a5%e5%8e%a8"
-    },
-    {
-      "id": "uscanyin_224256",
-      "platform": "uscanyin",
-      "title": "中餐外卖店请炒锅",
-      "date": "2026-05-25",
-      "region": "南部",
-      "state": "佛州",
-      "keywords_matched": [
-        "餐",
-        "中餐",
-        "外卖",
-        "炒锅"
-      ],
-      "url": "https://uscanyin.com/en/community/jobs/224256-%e4%b8%ad%e9%a4%90%e5%a4%96%e5%8d%96%e5%ba%97%e8%af%b7%e7%82%92%e9%94%85"
-    },
-    {
-      "id": "uscanyin_224255",
-      "platform": "uscanyin",
-      "title": "诚招熟手sushi 和打杂师傅",
-      "date": "2026-05-25",
-      "region": "东部",
-      "state": "宾州",
-      "keywords_matched": [
-        "打杂",
-        "师傅"
-      ],
-      "url": "https://uscanyin.com/en/community/jobs/224255-%e8%af%9a%e6%8b%9b%e7%86%9f%e6%89%8bsushi%20%e5%92%8c%e6%89%93%e6%9d%82%e5%b8%88%e5%82%85"
-    },
-    {
-      "id": "uscanyin_224254",
-      "platform": "uscanyin",
-      "title": "请炒锅和煮面",
-      "date": "2026-05-25",
-      "region": "东部",
-      "state": "麻州",
-      "keywords_matched": [
-        "炒锅"
-      ],
-      "url": "https://uscanyin.com/en/community/jobs/224254-%e8%af%b7%e7%82%92%e9%94%85%e5%92%8c%e7%85%ae%e9%9d%a2"
-    },
-    {
-      "id": "uscanyin_224178",
-      "platform": "uscanyin",
-      "title": "✌️厨房铁板",
-      "date": "2026-05-25",
-      "region": "中部",
-      "state": "俄亥俄",
-      "keywords_matched": [
-        "厨房"
-      ],
-      "url": "https://uscanyin.com/en/community/jobs/224178-%e2%9c%8c%ef%b8%8f%e5%8e%a8%e6%88%bf%e9%93%81%e6%9d%bf"
-    },
-    {
-      "id": "uscanyin_224177",
-      "platform": "uscanyin",
-      "title": "近唐城百家诚招厨房助手",
-      "date": "2026-05-25",
-      "region": "南部",
-      "state": "德州",
-      "keywords_matched": [
-        "厨房"
-      ],
-      "url": "https://uscanyin.com/en/community/jobs/224177-%e8%bf%91%e5%94%90%e5%9f%8e%e7%99%be%e5%ae%b6%e8%af%9a%e6%8b%9b%e5%8e%a8%e6%88%bf%e5%8a%a9%e6%89%8b"
-    },
-    {
-      "id": "uscanyin_224176",
-      "platform": "uscanyin",
-      "title": "台湾餐厅中央厨房招餐饮助手",
-      "date": "2026-05-25",
-      "region": "东部",
-      "state": "纽约",
-      "keywords_matched": [
-        "餐厅",
-        "餐饮",
-        "餐",
-        "厨房"
-      ],
-      "url": "https://uscanyin.com/en/community/jobs/224176-%e5%8f%b0%e6%b9%be%e9%a4%90%e5%8e%85%e4%b8%ad%e5%a4%ae%e5%8e%a8%e6%88%bf%e6%8b%9b%e9%a4%90%e9%a5%ae%e5%8a%a9%e6%89%8b"
-    },
-    {
-      "id": "uscanyin_224173",
-      "platform": "uscanyin",
-      "title": "请寿司师傅",
-      "date": "2026-05-25",
-      "region": "东部",
-      "state": "纽约",
-      "keywords_matched": [
-        "寿司",
-        "师傅"
-      ],
-      "url": "https://uscanyin.com/en/community/jobs/224173-%e8%af%b7%e5%af%bf%e5%8f%b8%e5%b8%88%e5%82%85"
-    },
-    {
-      "id": "uscanyin_224172",
-      "platform": "uscanyin",
-      "title": "诚请全职打包，半职打包，半职中餐企台",
-      "date": "2026-05-25",
-      "region": "中部",
-      "state": "伊州",
-      "keywords_matched": [
-        "餐",
-        "中餐",
-        "企台",
-        "打包"
-      ],
-      "url": "https://uscanyin.com/en/community/jobs/224172-%e8%af%9a%e8%af%b7%e5%85%a8%e8%81%8c%e6%89%93%e5%8c%85%ef%bc%8c%e5%8d%8a%e8%81%8c%e6%89%93%e5%8c%85%ef%bc%8c%e5%8d%8a%e8%81%8c%e4%b8%ad%e9%a4%90%e4%bc%81%e5%8f%b0"
-    },
-    {
-      "id": "uscanyin_224171",
-      "platform": "uscanyin",
-      "title": "炒锅熟手师傅有堂食经验",
-      "date": "2026-05-25",
-      "region": "东部",
-      "state": "新泽西",
-      "keywords_matched": [
+        "烧烤",
         "炒锅",
         "师傅"
       ],
-      "url": "https://uscanyin.com/en/community/jobs/224171-%e7%82%92%e9%94%85%e7%86%9f%e6%89%8b%e5%b8%88%e5%82%85%e6%9c%89%e5%a0%82%e9%a3%9f%e7%bb%8f%e9%aa%8c"
+      "url": "https://niuyuegongzuo.com/longisland/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/%E9%95%BF%E5%B2%9B%E5%9F%8E%E7%8E%B0%E6%8B%9B%E7%83%A7%E7%83%A4%E5%B8%88%E5%82%85%E5%92%8C%E7%82%92%E9%94%85%E5%B8%88%E5%82%85/137760"
     },
     {
-      "id": "uscanyin_224170",
-      "platform": "uscanyin",
-      "title": "中餐堂吃二锅",
-      "date": "2026-05-25",
-      "region": "东部",
-      "state": "宾州",
-      "keywords_matched": [
-        "餐",
-        "中餐"
-      ],
-      "url": "https://uscanyin.com/en/community/jobs/224170-%e4%b8%ad%e9%a4%90%e5%a0%82%e5%90%83%e4%ba%8c%e9%94%85"
-    },
-    {
-      "id": "uscanyin_224168",
-      "platform": "uscanyin",
-      "title": "中歺舘請熟手接电話及 炒煱 油鍋 有意者电議[电话]",
-      "date": "2026-05-25",
-      "region": "南部",
-      "state": "乔治亚",
-      "keywords_matched": [
-        "油鍋"
-      ],
-      "url": "https://uscanyin.com/en/community/jobs/224168-%e4%b8%ad%e6%ad%ba%e8%88%98%e8%ab%8b%e7%86%9f%e6%89%8b%e6%8e%a5%e7%94%b5%e8%a9%b1%e5%8f%8a%20%e7%82%92%e7%85%b1%20%e6%b2%b9%e9%8d%8b%20%e6%9c%89%e6%84%8f%e8%80%85%e7%94%b5%e8%ad%b0%20678%20559%202850"
-    },
-    {
-      "id": "uscanyin_224167",
-      "platform": "uscanyin",
-      "title": "曼哈顿上东城请寿司师傅1050/5天",
-      "date": "2026-05-25",
-      "region": "东部",
-      "state": "曼哈顿",
-      "keywords_matched": [
-        "寿司",
-        "师傅"
-      ],
-      "url": "https://uscanyin.com/en/community/jobs/224167-%e6%9b%bc%e5%93%88%e9%a1%bf%e4%b8%8a%e4%b8%9c%e5%9f%8e%e8%af%b7%e5%af%bf%e5%8f%b8%e5%b8%88%e5%82%851050%2f5%e5%a4%a9"
-    },
-    {
-      "id": "uscanyin_224165",
-      "platform": "uscanyin",
-      "title": "请一周兼职2天或者3天的洗碗师傅",
-      "date": "2026-05-25",
-      "region": "东部",
-      "state": "纽约",
-      "keywords_matched": [
-        "洗碗",
-        "师傅"
-      ],
-      "url": "https://uscanyin.com/en/community/jobs/224165-%e8%af%b7%e4%b8%80%e5%91%a8%e5%85%bc%e8%81%8c2%e5%a4%a9%e6%88%96%e8%80%853%e5%a4%a9%e7%9a%84%e6%b4%97%e7%a2%97%e5%b8%88%e5%82%85"
-    },
-    {
-      "id": "uscanyin_224164",
-      "platform": "uscanyin",
-      "title": "外卖店炒锅和接电话",
-      "date": "2026-05-25",
-      "region": "南部",
-      "state": "西维吉尼亚",
-      "keywords_matched": [
-        "外卖",
-        "炒锅"
-      ],
-      "url": "https://uscanyin.com/en/community/jobs/224164-%e5%a4%96%e5%8d%96%e5%ba%97%e7%82%92%e9%94%85%e5%92%8c%e6%8e%a5%e7%94%b5%e8%af%9d"
-    },
-    {
-      "id": "uscanyin_224163",
-      "platform": "uscanyin",
-      "title": "招熟手女企台",
-      "date": "2026-05-25",
-      "region": "中部",
-      "state": "印第安纳",
-      "keywords_matched": [
-        "企台"
-      ],
-      "url": "https://uscanyin.com/en/community/jobs/224163-%e6%8b%9b%e7%86%9f%e6%89%8b%e5%a5%b3%e4%bc%81%e5%8f%b0"
-    },
-    {
-      "id": "uscanyin_224162",
-      "platform": "uscanyin",
-      "title": "芝加哥需要请有经验的湘菜炒锅师傅、抓码、洗碗工",
-      "date": "2026-05-25",
-      "region": "中部",
-      "state": "芝加哥",
-      "keywords_matched": [
-        "炒锅",
-        "洗碗",
-        "抓码",
-        "师傅"
-      ],
-      "url": "https://uscanyin.com/en/community/jobs/224162-%e8%8a%9d%e5%8a%a0%e5%93%a5%e9%9c%80%e8%a6%81%e8%af%b7%e6%9c%89%e7%bb%8f%e9%aa%8c%e7%9a%84%e6%b9%98%e8%8f%9c%e7%82%92%e9%94%85%e5%b8%88%e5%82%85%e3%80%81%e6%8a%93%e7%a0%81%e3%80%81%e6%b4%97%e7%a2%97%e5%b7%a5"
-    },
-    {
-      "id": "uscanyin_224160",
-      "platform": "uscanyin",
-      "title": "诚请寿司师傅和学徒",
-      "date": "2026-05-25",
-      "region": "南部",
-      "state": "佛州",
-      "keywords_matched": [
-        "寿司",
-        "师傅"
-      ],
-      "url": "https://uscanyin.com/en/community/jobs/224160-%e8%af%9a%e8%af%b7%e5%af%bf%e5%8f%b8%e5%b8%88%e5%82%85%e5%92%8c%e5%ad%a6%e5%be%92"
-    },
-    {
-      "id": "uscanyin_224158",
-      "platform": "uscanyin",
-      "title": "全日餐请甜不辣师傅法拉盛和白石镇接送",
-      "date": "2026-05-25",
+      "id": "niuyuegongzuo_137759",
+      "platform": "niuyuegongzuo",
+      "title": "法拉盛餐馆请凉菜出餐师父",
+      "date": "2026-05-26",
       "region": "东部",
       "state": "法拉盛",
       "keywords_matched": [
-        "餐",
-        "日餐",
-        "师傅"
+        "餐馆",
+        "餐"
       ],
-      "url": "https://uscanyin.com/en/community/jobs/224158-%e5%85%a8%e6%97%a5%e9%a4%90%e8%af%b7%e7%94%9c%e4%b8%8d%e8%be%a3%e5%b8%88%e5%82%85%e6%b3%95%e6%8b%89%e7%9b%9b%e5%92%8c%e7%99%bd%e7%9f%b3%e9%95%87%e6%8e%a5%e9%80%81"
+      "url": "https://niuyuegongzuo.com/flushing/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/%E6%B3%95%E6%8B%89%E7%9B%9B%E9%A4%90%E9%A6%86%E8%AF%B7%E5%87%89%E8%8F%9C%E5%87%BA%E9%A4%90%E5%B8%88%E7%88%B6/137759"
     },
     {
-      "id": "uscanyin_224157",
-      "platform": "uscanyin",
-      "title": "长𡷊外卖店炒锅，",
-      "date": "2026-05-25",
+      "id": "niuyuegongzuo_137757",
+      "platform": "niuyuegongzuo",
+      "title": "长岛new Hyde park外卖店请散工接外卖\n电话[电话]",
+      "date": "2026-05-26",
       "region": "东部",
-      "state": "纽约",
+      "state": "长岛",
       "keywords_matched": [
-        "外卖",
-        "炒锅"
+        "外卖"
       ],
-      "url": "https://uscanyin.com/en/community/jobs/224157-%e9%95%bf%f0%a1%b7%8a%e5%a4%96%e5%8d%96%e5%ba%97%e7%82%92%e9%94%85%ef%bc%8c"
-    },
-    {
-      "id": "uscanyin_224155",
-      "platform": "uscanyin",
-      "title": "熟手女企台",
-      "date": "2026-05-25",
-      "region": "东部",
-      "state": "新泽西",
-      "keywords_matched": [
-        "企台"
-      ],
-      "url": "https://uscanyin.com/en/community/jobs/224155-%e7%86%9f%e6%89%8b%e5%a5%b3%e4%bc%81%e5%8f%b0"
-    },
-    {
-      "id": "uscanyin_224154",
-      "platform": "uscanyin",
-      "title": "日餐生手或半熟手奇台或打包",
-      "date": "2026-05-25",
-      "region": "南部",
-      "state": "佛州",
-      "keywords_matched": [
-        "餐",
-        "日餐",
-        "打包"
-      ],
-      "url": "https://uscanyin.com/en/community/jobs/224154-%e6%97%a5%e9%a4%90%e7%94%9f%e6%89%8b%e6%88%96%e5%8d%8a%e7%86%9f%e6%89%8b%e5%a5%87%e5%8f%b0%e6%88%96%e6%89%93%e5%8c%85"
-    },
-    {
-      "id": "uscanyin_224153",
-      "platform": "uscanyin",
-      "title": "寿司助手",
-      "date": "2026-05-25",
-      "region": "东部",
-      "state": "新泽西",
-      "keywords_matched": [
-        "寿司"
-      ],
-      "url": "https://uscanyin.com/en/community/jobs/224153-%e5%af%bf%e5%8f%b8%e5%8a%a9%e6%89%8b"
+      "url": "https://niuyuegongzuo.com/longisland/%E5%85%B6%E4%BB%96%E5%90%84%E7%B1%BB%E6%8B%9B%E8%81%98/%E9%95%BF%E5%B2%9Bnew-hyde-park%E5%A4%96%E5%8D%96%E5%BA%97%E8%AF%B7%E6%95%A3%E5%B7%A5%E6%8E%A5%E5%A4%96%E5%8D%96-%E7%94%B5%E8%AF%9D917-375-8796/137757"
     },
     {
       "id": "niuyuegongzuo_137744",
@@ -4611,115 +4038,10 @@
       "url": "https://niuyuegongzuo.com/longisland/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/%E7%BB%8F%E9%AA%8C%E5%AF%BF%E5%8F%B8%E6%8A%80%E6%9C%AF%E4%B8%93%E5%91%98/137215"
     },
     {
-      "id": "niuyuegongzuo_137201",
-      "platform": "niuyuegongzuo",
-      "title": "法拉盛接送请熟手打包出餐",
-      "date": "2026-05-19",
-      "region": "东部",
-      "state": "法拉盛",
-      "keywords_matched": [
-        "餐",
-        "打包"
-      ],
-      "url": "https://niuyuegongzuo.com/flushing/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/%E6%B3%95%E6%8B%89%E7%9B%9B%E6%8E%A5%E9%80%81%E8%AF%B7%E7%86%9F%E6%89%8B%E6%89%93%E5%8C%85%E5%87%BA%E9%A4%90/137201"
-    },
-    {
-      "id": "niuyuegongzuo_137200",
-      "platform": "niuyuegongzuo",
-      "title": "长岛市面馆后厨打杂请人（可兼职）",
-      "date": "2026-05-19",
-      "region": "东部",
-      "state": "长岛",
-      "keywords_matched": [
-        "面馆",
-        "后厨",
-        "打杂",
-        "请人"
-      ],
-      "url": "https://niuyuegongzuo.com/queens/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/%E9%95%BF%E5%B2%9B%E5%B8%82%E9%9D%A2%E9%A6%86%E5%90%8E%E5%8E%A8%E6%89%93%E6%9D%82%E8%AF%B7%E4%BA%BA%E5%8F%AF%E5%85%BC%E8%81%8C/137200"
-    },
-    {
-      "id": "niuyuegongzuo_137198",
-      "platform": "niuyuegongzuo",
-      "title": "火锅店请后厨",
-      "date": "2026-05-19",
-      "region": "东部",
-      "state": "皇后区",
-      "keywords_matched": [
-        "火锅",
-        "后厨"
-      ],
-      "url": "https://niuyuegongzuo.com/queens/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/%E7%81%AB%E9%94%85%E5%BA%97%E8%AF%B7%E5%90%8E%E5%8E%A8/137198"
-    },
-    {
-      "id": "niuyuegongzuo_137190",
-      "platform": "niuyuegongzuo",
-      "title": "请烧烤师傅 （法拉盛）",
-      "date": "2026-05-19",
-      "region": "东部",
-      "state": "法拉盛",
-      "keywords_matched": [
-        "烧烤",
-        "师傅"
-      ],
-      "url": "https://niuyuegongzuo.com/flushing/%E5%85%B6%E4%BB%96%E5%90%84%E7%B1%BB%E6%8B%9B%E8%81%98/%E8%AF%B7%E7%83%A7%E7%83%A4%E5%B8%88%E5%82%85-%E6%B3%95%E6%8B%89%E7%9B%9B/137190"
-    },
-    {
-      "id": "niuyuegongzuo_137183",
-      "platform": "niuyuegongzuo",
-      "title": "长岛诚请炒锅",
-      "date": "2026-05-19",
-      "region": "东部",
-      "state": "长岛",
-      "keywords_matched": [
-        "炒锅"
-      ],
-      "url": "https://niuyuegongzuo.com/longisland/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/%E9%95%BF%E5%B2%9B%E8%AF%9A%E8%AF%B7%E7%82%92%E9%94%85/137183"
-    },
-    {
-      "id": "niuyuegongzuo_137182",
-      "platform": "niuyuegongzuo",
-      "title": "长岛外卖店请熟手前台",
-      "date": "2026-05-19",
-      "region": "东部",
-      "state": "长岛",
-      "keywords_matched": [
-        "外卖",
-        "前台"
-      ],
-      "url": "https://niuyuegongzuo.com/longisland/%E9%94%80%E5%94%AE%E5%8A%A9%E7%90%86%E6%96%87%E5%91%98/%E9%95%BF%E5%B2%9B%E5%A4%96%E5%8D%96%E5%BA%97%E8%AF%B7%E7%86%9F%E6%89%8B%E5%89%8D%E5%8F%B0/137182"
-    },
-    {
-      "id": "niuyuegongzuo_137181",
-      "platform": "niuyuegongzuo",
-      "title": "曼哈顿下城面店 招出餐师父",
-      "date": "2026-05-19",
-      "region": "东部",
-      "state": "曼哈顿",
-      "keywords_matched": [
-        "餐"
-      ],
-      "url": "https://niuyuegongzuo.com/manhattan/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/%E6%9B%BC%E5%93%88%E9%A1%BF%E4%B8%8B%E5%9F%8E%E9%9D%A2%E5%BA%97-%E6%8B%9B%E5%87%BA%E9%A4%90%E5%B8%88%E7%88%B6/137181"
-    },
-    {
-      "id": "niuyuegongzuo_137178",
-      "platform": "niuyuegongzuo",
-      "title": "長島餐館請人",
-      "date": "2026-05-19",
-      "region": "东部",
-      "state": "法拉盛",
-      "keywords_matched": [
-        "餐館",
-        "餐",
-        "請人"
-      ],
-      "url": "https://niuyuegongzuo.com/flushing/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/%E9%95%B7%E5%B3%B6%E9%A4%90%E9%A4%A8%E8%AB%8B%E4%BA%BA/137178"
-    },
-    {
       "id": "meiguogongzuo_240353",
       "platform": "meiguogongzuo",
       "title": "招聘 中餐 外卖店 (前台)",
-      "date": "2026-05-25",
+      "date": "2026-05-26",
       "region": "南部",
       "state": "乔治亚",
       "keywords_matched": [
@@ -4735,7 +4057,7 @@
       "id": "meiguogongzuo_231442",
       "platform": "meiguogongzuo",
       "title": "招聘 厨房员工 / 厨师 / 帮厨",
-      "date": "2026-05-25",
+      "date": "2026-05-26",
       "region": "南部",
       "state": "乔治亚",
       "keywords_matched": [
@@ -4750,7 +4072,7 @@
       "id": "meiguogongzuo_215165",
       "platform": "meiguogongzuo",
       "title": "长岛市餐馆高薪聘请",
-      "date": "2026-05-25",
+      "date": "2026-05-26",
       "region": "东部",
       "state": "长岛",
       "keywords_matched": [
@@ -4758,6 +4080,132 @@
         "餐"
       ],
       "url": "https://www.meiguogongzuo.com/new-york/%E9%95%BF%E5%B2%9B%E5%B8%82%E9%A4%90%E9%A6%86%E9%AB%98%E8%96%AA%E8%81%98%E8%AF%B7/215165/"
+    },
+    {
+      "id": "meiguogongzuo_245257",
+      "platform": "meiguogongzuo",
+      "title": "🌟曼哈顿42街高薪诚请经验寿司师傅",
+      "date": "2026-05-26",
+      "region": "东部",
+      "state": "曼哈顿",
+      "keywords_matched": [
+        "寿司",
+        "师傅"
+      ],
+      "url": "https://www.meiguogongzuo.com/new-york/%E6%9B%BC%E5%93%88%E9%A1%BF42%E8%A1%97%E9%AB%98%E8%96%AA%E8%AF%9A%E8%AF%B7%E7%BB%8F%E9%AA%8C%E5%AF%BF%E5%8F%B8%E5%B8%88%E5%82%85/245257/"
+    },
+    {
+      "id": "meiguogongzuo_245246",
+      "platform": "meiguogongzuo",
+      "title": "长岛41出口外卖店请part- time熟手炒锅，法拉盛接送。电[电话]",
+      "date": "2026-05-26",
+      "region": "东部",
+      "state": "法拉盛",
+      "keywords_matched": [
+        "外卖",
+        "炒锅"
+      ],
+      "url": "https://www.meiguogongzuo.com/new-york/%E9%95%BF%E5%B2%9B41%E5%87%BA%E5%8F%A3%E5%A4%96%E5%8D%96%E5%BA%97%E8%AF%B7part-time%E7%86%9F%E6%89%8B%E7%82%92%E9%94%85%E6%B3%95%E6%8B%89%E7%9B%9B%E6%8E%A5%E9%80%81%E7%94%B5646-335-5502/245246/"
+    },
+    {
+      "id": "meiguogongzuo_245242",
+      "platform": "meiguogongzuo",
+      "title": "麻州波士顿 湘菜餐厅诚招 帮厨 , 肉企 , 炒锅  , 抓码，头台",
+      "date": "2026-05-26",
+      "region": "东部",
+      "state": "波士顿",
+      "keywords_matched": [
+        "餐厅",
+        "餐",
+        "炒锅",
+        "帮厨",
+        "抓码"
+      ],
+      "url": "https://www.meiguogongzuo.com/massachusetts/%E9%BA%BB%E5%B7%9E%E6%B3%A2%E5%A3%AB%E9%A1%BF-%E6%B9%98%E8%8F%9C%E9%A4%90%E5%8E%85%E8%AF%9A%E6%8B%9B-%E5%B8%AE%E5%8E%A8-%E8%82%89%E4%BC%81-%E7%82%92%E9%94%85-%E6%8A%93%E7%A0%81%E5%A4%B4%E5%8F%B0/245242/"
+    },
+    {
+      "id": "meiguogongzuo_242991",
+      "platform": "meiguogongzuo",
+      "title": "纽约川湘菜主厨！纽约餐厅店长！波士顿餐厅店长！洛杉矶餐厅店长! 洛杉矶粤菜主厨",
+      "date": "2026-05-26",
+      "region": "东部",
+      "state": "波士顿",
+      "keywords_matched": [
+        "餐厅",
+        "餐"
+      ],
+      "url": "https://www.meiguogongzuo.com/new-york/%E7%BA%BD%E7%BA%A6%E5%B7%9D%E6%B9%98%E8%8F%9C%E4%B8%BB%E5%8E%A8%E7%BA%BD%E7%BA%A6%E9%A4%90%E5%8E%85%E5%BA%97%E9%95%BF%E6%B3%A2%E5%A3%AB%E9%A1%BF%E9%A4%90%E5%8E%85%E5%BA%97%E9%95%BF%E6%B4%9B%E6%9D%89%E7%9F%B6%E9%A4%90%E5%8E%85%E5%BA%97%E9%95%BF-%E6%B4%9B%E6%9D%89%E7%9F%B6%E7%B2%A4%E8%8F%9C%E4%B8%BB%E5%8E%A8/242991/"
+    },
+    {
+      "id": "meiguogongzuo_245223",
+      "platform": "meiguogongzuo",
+      "title": "北方餐馆招企台",
+      "date": "2026-05-26",
+      "region": "东部",
+      "state": "纽约",
+      "keywords_matched": [
+        "餐馆",
+        "餐",
+        "企台"
+      ],
+      "url": "https://www.meiguogongzuo.com/new-york/%E5%8C%97%E6%96%B9%E9%A4%90%E9%A6%86%E6%8B%9B%E4%BC%81%E5%8F%B0/245223/"
+    },
+    {
+      "id": "meiguogongzuo_245209",
+      "platform": "meiguogongzuo",
+      "title": "曼哈顿中餐馆需要炒锅师傅",
+      "date": "2026-05-26",
+      "region": "东部",
+      "state": "曼哈顿",
+      "keywords_matched": [
+        "餐馆",
+        "餐",
+        "中餐",
+        "炒锅",
+        "师傅"
+      ],
+      "url": "https://www.meiguogongzuo.com/new-york/%E6%9B%BC%E5%93%88%E9%A1%BF%E4%B8%AD%E9%A4%90%E9%A6%86%E9%9C%80%E8%A6%81%E7%82%92%E9%94%85%E5%B8%88%E5%82%85/245209/"
+    },
+    {
+      "id": "meiguogongzuo_245208",
+      "platform": "meiguogongzuo",
+      "title": "长岛城招聘烧烤师傅和炒锅师傅",
+      "date": "2026-05-26",
+      "region": "东部",
+      "state": "长岛",
+      "keywords_matched": [
+        "烧烤",
+        "炒锅",
+        "招聘",
+        "师傅"
+      ],
+      "url": "https://www.meiguogongzuo.com/new-york/%E9%95%BF%E5%B2%9B%E5%9F%8E%E6%8B%9B%E8%81%98%E7%83%A7%E7%83%A4%E5%B8%88%E5%82%85%E5%92%8C%E7%82%92%E9%94%85%E5%B8%88%E5%82%85/245208/"
+    },
+    {
+      "id": "meiguogongzuo_245207",
+      "platform": "meiguogongzuo",
+      "title": "法拉盛餐馆请凉菜出餐师傅",
+      "date": "2026-05-26",
+      "region": "东部",
+      "state": "法拉盛",
+      "keywords_matched": [
+        "餐馆",
+        "餐",
+        "师傅"
+      ],
+      "url": "https://www.meiguogongzuo.com/new-york/%E6%B3%95%E6%8B%89%E7%9B%9B%E9%A4%90%E9%A6%86%E8%AF%B7%E5%87%89%E8%8F%9C%E5%87%BA%E9%A4%90%E5%B8%88%E5%82%85/245207/"
+    },
+    {
+      "id": "meiguogongzuo_245206",
+      "platform": "meiguogongzuo",
+      "title": "请熟手炒锅\n会看电脑单",
+      "date": "2026-05-25",
+      "region": "南部",
+      "state": "南卡",
+      "keywords_matched": [
+        "炒锅"
+      ],
+      "url": "https://www.meiguogongzuo.com/south-carolina/%E8%AF%B7%E7%86%9F%E6%89%8B%E7%82%92%E9%94%85-%E4%BC%9A%E7%9C%8B%E7%94%B5%E8%84%91%E5%8D%95/245206/"
     },
     {
       "id": "meiguogongzuo_245204",
@@ -4867,19 +4315,6 @@
         "炒锅"
       ],
       "url": "https://www.meiguogongzuo.com/new-york/%E9%95%BF%E5%B2%9B%E4%B8%AD%E6%97%A5%E9%A4%90%E8%81%98%E8%AF%B7%E7%86%9F%E6%89%8B%E7%82%92%E9%94%85-%E6%B3%95%E6%8B%89%E7%9B%9B%E6%8E%A5%E9%80%81/245175/"
-    },
-    {
-      "id": "meiguogongzuo_245171",
-      "platform": "meiguogongzuo",
-      "title": "中餐阿姨",
-      "date": "2026-05-25",
-      "region": "东部",
-      "state": "纽约",
-      "keywords_matched": [
-        "餐",
-        "中餐"
-      ],
-      "url": "https://www.meiguogongzuo.com/new-york/%E4%B8%AD%E9%A4%90%E9%98%BF%E5%A7%A8/245171/"
     },
     {
       "id": "meiguogongzuo_245166",
@@ -5050,19 +4485,6 @@
         "请人"
       ],
       "url": "https://www.meiguogongzuo.com/new-york/teriyaki-%E5%BF%AB%E9%A4%90-%E8%AF%B7%E4%BA%BA-rockland-county/245120/"
-    },
-    {
-      "id": "meiguogongzuo_242991",
-      "platform": "meiguogongzuo",
-      "title": "纽约川湘菜主厨！纽约餐厅店长！波士顿餐厅店长！洛杉矶餐厅店长! 洛杉矶粤菜主厨",
-      "date": "2026-05-25",
-      "region": "东部",
-      "state": "波士顿",
-      "keywords_matched": [
-        "餐厅",
-        "餐"
-      ],
-      "url": "https://www.meiguogongzuo.com/new-york/%E7%BA%BD%E7%BA%A6%E5%B7%9D%E6%B9%98%E8%8F%9C%E4%B8%BB%E5%8E%A8%E7%BA%BD%E7%BA%A6%E9%A4%90%E5%8E%85%E5%BA%97%E9%95%BF%E6%B3%A2%E5%A3%AB%E9%A1%BF%E9%A4%90%E5%8E%85%E5%BA%97%E9%95%BF%E6%B4%9B%E6%9D%89%E7%9F%B6%E9%A4%90%E5%8E%85%E5%BA%97%E9%95%BF-%E6%B4%9B%E6%9D%89%E7%9F%B6%E7%B2%A4%E8%8F%9C%E4%B8%BB%E5%8E%A8/242991/"
     },
     {
       "id": "meiguogongzuo_245108",
@@ -6841,221 +6263,6 @@
         "洗碗"
       ],
       "url": "https://www.meiguogongzuo.com/massachusetts/%E9%BA%BB%E5%B7%9E%E6%B3%A2%E5%A3%AB%E9%A1%BF-%E6%B9%98%E8%8F%9C%E9%A4%90%E5%8E%85%E8%AF%9A%E6%8B%9B-%E8%82%89%E4%BC%81%E6%B4%97%E7%A2%97-%E7%82%92%E9%94%85/244084/"
-    },
-    {
-      "id": "meiguogongzuo_244058",
-      "platform": "meiguogongzuo",
-      "title": "森林小丘中餐外卖店請兼职幫炒師",
-      "date": "2026-05-19",
-      "region": "东部",
-      "state": "纽约",
-      "keywords_matched": [
-        "餐",
-        "中餐",
-        "外卖"
-      ],
-      "url": "https://www.meiguogongzuo.com/new-york/%E6%A3%AE%E6%9E%97%E5%B0%8F%E4%B8%98%E4%B8%AD%E9%A4%90%E5%A4%96%E5%8D%96%E5%BA%97%E8%AB%8B%E5%85%BC%E8%81%8C%E5%B9%AB%E7%82%92%E5%B8%AB/244058/"
-    },
-    {
-      "id": "meiguogongzuo_244057",
-      "platform": "meiguogongzuo",
-      "title": "法拉盛接送请熟手打包出餐",
-      "date": "2026-05-19",
-      "region": "东部",
-      "state": "法拉盛",
-      "keywords_matched": [
-        "餐",
-        "打包"
-      ],
-      "url": "https://www.meiguogongzuo.com/new-york/%E6%B3%95%E6%8B%89%E7%9B%9B%E6%8E%A5%E9%80%81%E8%AF%B7%E7%86%9F%E6%89%8B%E6%89%93%E5%8C%85%E5%87%BA%E9%A4%90/244057/"
-    },
-    {
-      "id": "meiguogongzuo_244056",
-      "platform": "meiguogongzuo",
-      "title": "长岛市面馆后厨打杂请人（可兼职）",
-      "date": "2026-05-19",
-      "region": "东部",
-      "state": "长岛",
-      "keywords_matched": [
-        "面馆",
-        "后厨",
-        "打杂",
-        "请人"
-      ],
-      "url": "https://www.meiguogongzuo.com/new-york/%E9%95%BF%E5%B2%9B%E5%B8%82%E9%9D%A2%E9%A6%86%E5%90%8E%E5%8E%A8%E6%89%93%E6%9D%82%E8%AF%B7%E4%BA%BA%E5%8F%AF%E5%85%BC%E8%81%8C/244056/"
-    },
-    {
-      "id": "meiguogongzuo_244050",
-      "platform": "meiguogongzuo",
-      "title": "品牌连锁火锅店招聘，切肉，打汤，初加工等岗位",
-      "date": "2026-05-19",
-      "region": "南部",
-      "state": "马里兰",
-      "keywords_matched": [
-        "火锅",
-        "招聘"
-      ],
-      "url": "https://www.meiguogongzuo.com/maryland/%E5%93%81%E7%89%8C%E8%BF%9E%E9%94%81%E7%81%AB%E9%94%85%E5%BA%97%E6%8B%9B%E8%81%98%E5%88%87%E8%82%89%E6%89%93%E6%B1%A4%E5%88%9D%E5%8A%A0%E5%B7%A5%E7%AD%89%E5%B2%97%E4%BD%8D/244050/"
-    },
-    {
-      "id": "meiguogongzuo_244049",
-      "platform": "meiguogongzuo",
-      "title": "火锅店请后厨",
-      "date": "2026-05-19",
-      "region": "东部",
-      "state": "纽约",
-      "keywords_matched": [
-        "火锅",
-        "后厨"
-      ],
-      "url": "https://www.meiguogongzuo.com/new-york/%E7%81%AB%E9%94%85%E5%BA%97%E8%AF%B7%E5%90%8E%E5%8E%A8/244049/"
-    },
-    {
-      "id": "meiguogongzuo_244042",
-      "platform": "meiguogongzuo",
-      "title": "诚聘炒锅专业师傅｜离大中华15分钟",
-      "date": "2026-05-19",
-      "region": "南部",
-      "state": "乔治亚",
-      "keywords_matched": [
-        "炒锅",
-        "师傅"
-      ],
-      "url": "https://www.meiguogongzuo.com/georgia/%E8%AF%9A%E8%81%98%E7%82%92%E9%94%85%E4%B8%93%E4%B8%9A%E5%B8%88%E5%82%85%E7%A6%BB%E5%A4%A7%E4%B8%AD%E5%8D%8E15%E5%88%86%E9%92%9F/244042/"
-    },
-    {
-      "id": "meiguogongzuo_244024",
-      "platform": "meiguogongzuo",
-      "title": "餐馆批发公司急需 仓库叉车人才",
-      "date": "2026-05-19",
-      "region": "东部",
-      "state": "纽约",
-      "keywords_matched": [
-        "餐馆",
-        "餐"
-      ],
-      "url": "https://www.meiguogongzuo.com/new-york/%E9%A4%90%E9%A6%86%E6%89%B9%E5%8F%91%E5%85%AC%E5%8F%B8%E6%80%A5%E9%9C%80-%E4%BB%93%E5%BA%93%E5%8F%89%E8%BD%A6%E4%BA%BA%E6%89%8D/244024/"
-    },
-    {
-      "id": "meiguogongzuo_244023",
-      "platform": "meiguogongzuo",
-      "title": "NJ超市中餐请炒锅part time",
-      "date": "2026-05-19",
-      "region": "东部",
-      "state": "新泽西",
-      "keywords_matched": [
-        "餐",
-        "中餐",
-        "炒锅"
-      ],
-      "url": "https://www.meiguogongzuo.com/new-jersey/nj%E8%B6%85%E5%B8%82%E4%B8%AD%E9%A4%90%E8%AF%B7%E7%82%92%E9%94%85part-time/244023/"
-    },
-    {
-      "id": "meiguogongzuo_244017",
-      "platform": "meiguogongzuo",
-      "title": "招人餐馆经理",
-      "date": "2026-05-19",
-      "region": "南部",
-      "state": "乔治亚",
-      "keywords_matched": [
-        "餐馆",
-        "餐",
-        "招人"
-      ],
-      "url": "https://www.meiguogongzuo.com/georgia/%E6%8B%9B%E4%BA%BA%E9%A4%90%E9%A6%86%E7%BB%8F%E7%90%86/244017/"
-    },
-    {
-      "id": "meiguogongzuo_244004",
-      "platform": "meiguogongzuo",
-      "title": "请烧烤师傅 （法拉盛）",
-      "date": "2026-05-19",
-      "region": "东部",
-      "state": "法拉盛",
-      "keywords_matched": [
-        "烧烤",
-        "师傅"
-      ],
-      "url": "https://www.meiguogongzuo.com/new-york/%E8%AF%B7%E7%83%A7%E7%83%A4%E5%B8%88%E5%82%85-%E6%B3%95%E6%8B%89%E7%9B%9B/244004/"
-    },
-    {
-      "id": "meiguogongzuo_243986",
-      "platform": "meiguogongzuo",
-      "title": "长岛诚请炒锅",
-      "date": "2026-05-19",
-      "region": "东部",
-      "state": "长岛",
-      "keywords_matched": [
-        "炒锅"
-      ],
-      "url": "https://www.meiguogongzuo.com/new-york/%E9%95%BF%E5%B2%9B%E8%AF%9A%E8%AF%B7%E7%82%92%E9%94%85/243986/"
-    },
-    {
-      "id": "meiguogongzuo_243985",
-      "platform": "meiguogongzuo",
-      "title": "长岛外卖店请熟手前台",
-      "date": "2026-05-19",
-      "region": "东部",
-      "state": "长岛",
-      "keywords_matched": [
-        "外卖",
-        "前台"
-      ],
-      "url": "https://www.meiguogongzuo.com/new-york/%E9%95%BF%E5%B2%9B%E5%A4%96%E5%8D%96%E5%BA%97%E8%AF%B7%E7%86%9F%E6%89%8B%E5%89%8D%E5%8F%B0/243985/"
-    },
-    {
-      "id": "meiguogongzuo_243983",
-      "platform": "meiguogongzuo",
-      "title": "長島餐館請人",
-      "date": "2026-05-19",
-      "region": "东部",
-      "state": "纽约",
-      "keywords_matched": [
-        "餐館",
-        "餐",
-        "請人"
-      ],
-      "url": "https://www.meiguogongzuo.com/new-york/%E9%95%B7%E5%B3%B6%E9%A4%90%E9%A4%A8%E8%AB%8B%E4%BA%BA/243983/"
-    },
-    {
-      "id": "meiguogongzuo_243980",
-      "platform": "meiguogongzuo",
-      "title": "曼哈顿面店 请出餐师傅",
-      "date": "2026-05-19",
-      "region": "东部",
-      "state": "曼哈顿",
-      "keywords_matched": [
-        "餐",
-        "师傅"
-      ],
-      "url": "https://www.meiguogongzuo.com/new-york/%E6%9B%BC%E5%93%88%E9%A1%BF%E9%9D%A2%E5%BA%97-%E8%AF%B7%E5%87%BA%E9%A4%90%E5%B8%88%E5%82%85/243980/"
-    },
-    {
-      "id": "meiguogongzuo_243962",
-      "platform": "meiguogongzuo",
-      "title": "法拉盛北方餐馆招人厨房打杂",
-      "date": "2026-05-19",
-      "region": "东部",
-      "state": "法拉盛",
-      "keywords_matched": [
-        "餐馆",
-        "餐",
-        "厨房",
-        "打杂",
-        "招人"
-      ],
-      "url": "https://www.meiguogongzuo.com/new-york/%E6%B3%95%E6%8B%89%E7%9B%9B%E5%8C%97%E6%96%B9%E9%A4%90%E9%A6%86%E6%8B%9B%E4%BA%BA%E5%8E%A8%E6%88%BF%E6%89%93%E6%9D%82/243962/"
-    },
-    {
-      "id": "meiguogongzuo_243933",
-      "platform": "meiguogongzuo",
-      "title": "芝加哥中国城奶茶店急招",
-      "date": "2026-05-19",
-      "region": "中部",
-      "state": "芝加哥",
-      "keywords_matched": [
-        "奶茶"
-      ],
-      "url": "https://www.meiguogongzuo.com/illinois/%E8%8A%9D%E5%8A%A0%E5%93%A5%E4%B8%AD%E5%9B%BD%E5%9F%8E%E5%A5%B6%E8%8C%B6%E5%BA%97%E6%80%A5%E6%8B%9B/243933/"
     }
   ]
 }

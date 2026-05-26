@@ -241,8 +241,11 @@ footer a:hover { color: var(--accent); }
   input[type=text] { width: 100%; }
   .filter-row select { flex: 1; min-width: 0; }
 
-  /* Posts feed: tighter */
-  .posts-feed { max-height: none; }
+  /* Posts feed: keep an internal scroll on mobile too so the page itself
+   * doesn't stretch to ~30000px tall with 300 posts. The container is
+   * still significantly taller than the chart cards so the data is the
+   * dominant feature; we just don't append the entire dataset inline. */
+  .posts-feed { max-height: 70vh; }
   .post-item { padding: 10px; }
   .post-title { font-size: 13px; }
 

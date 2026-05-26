@@ -73,6 +73,9 @@
       rising:     'rising',
       cooling:    'cooling',
       trendNew:   'new',
+      // Explicit window labels used inside the alert banner:
+      alertWindowFmt: '{prevFrom}~{prevTo}: {prev} → {curFrom}~{curTo}: {cur}',
+      coverageRamping: 'Newly tracked, trend not yet comparable: {names}',
       staleData:  'Data not updated for {days}d — check launchd schedule',
 
       footer:  'Monitors 5 US Chinese-language restaurant job boards · auto-refreshes Mon + Thu 09:00 local time',
@@ -140,6 +143,8 @@
       rising:     '升温',
       cooling:    '降温',
       trendNew:   '新',
+      alertWindowFmt: '{prevFrom}~{prevTo}: {prev} → {curFrom}~{curTo}: {cur}',
+      coverageRamping: '新接入平台，趋势对比尚不可靠：{names}',
       staleData:  '数据已 {days} 天未更新 — 请检查 launchd 调度',
 
       footer:  '监控 5 个美国华人餐馆招聘网站 · 每周一、周四 09:00 自动更新',

@@ -37,9 +37,13 @@ And four tabs below the KPI row:
 ### What it is NOT
 
 - Not a full labor-market index (no JOLTS/BLS data).
-- Not seasonally adjusted.
-- Not a comprehensive census — five boards skew **Chinese-American restaurant operators**. The signal generalizes to that segment well, but isn't representative of all US restaurants.
+- Not seasonally adjusted (weekends post ~30-50% fewer jobs).
+- Not a comprehensive census — six boards skew **Chinese-American restaurant operators**. The signal generalizes to that segment well, but isn't representative of all US restaurants.
 - A drop on **168worker.com** alone reflects platform attrition (their audience is migrating elsewhere), not necessarily a market change. Cross-check against the other boards.
+
+### What "rising / cooling" actually compares
+
+The Market Signal card and alert banner compare each platform's **last-7-day post-count** vs its **prior-7-day post-count**. Both windows must have **complete daily coverage** before a comparison fires — otherwise a newly-added platform would always look like it's "rising +200%" simply because its prior week had no recording yet. Platforms still ramping up are surfaced as `ℹ Newly tracked, trend not yet comparable: …` instead of as a `+X%` alert.
 
 ### Who this is for
 

@@ -251,16 +251,73 @@
     return `${arrow} ${Math.abs(pct).toFixed(1)}%`;
   }
 
+  // Count days within `dateKeys[sliceStart:sliceEnd]` that had >=1 post
+  // for the given platform. Used by computeAlerts to suppress alerts
+  // when the prior window has poor coverage (e.g., platform was newly
+  // added so its "prior 7 days" includes days with no recording).
+  // Platforms that have current-window data but incomplete prior-window
+  // coverage — these are "newly tracked" and we can't compute a trend
+  // for them yet. The dashboard surfaces this so users don't wonder why
+  // the rising/cooling list looks short during a coverage ramp.
+  function _platformsRamping() {
+    const days = state.daily && state.daily.days;
+    if (!days) return [];
+    const keys = Object.keys(days).sort();
+    if (keys.length < 7) return [];
+    const out = [];
+    for (const p of PLATFORMS) {
+      const cur = _platformCoverageDays(days, keys, p.id, -7, undefined);
+      const prev = _platformCoverageDays(days, keys, p.id, -14, -7);
+      if (cur >= 4 && prev < 7) out.push(platformName(p.id));
+    }
+    return out;
+  }
+
+  // Returns { cur: [from, to], prev: [from, to] } — the ISO date ranges
+  // of the two 7-day windows used by computeAlerts. Used to label the
+  // alert banner with explicit time anchors.
+  function _alertWindowDates() {
+    const days = state.daily && state.daily.days;
+    const keys = days ? Object.keys(days).sort() : [];
+    const cur = keys.slice(-7);
+    const prev = keys.slice(-14, -7);
+    return {
+      cur:  [cur[0] || '', cur[cur.length - 1] || ''],
+      prev: [prev[0] || '', prev[prev.length - 1] || ''],
+    };
+  }
+
+  function _platformCoverageDays(days, dateKeys, platform, sliceStart, sliceEnd) {
+    return dateKeys.slice(sliceStart, sliceEnd)
+      .filter(k => ((days[k] || {}).by_platform || {})[platform] > 0).length;
+  }
+
   function computeAlerts() {
     // Time-based: compare each platform's last-7-days total against
-    // its prior 7-day total. Independent of scrape-run cadence.
+    // its prior 7-day total. Suppress alerts when the prior window has
+    // <4 days of coverage for that platform (i.e. the platform was
+    // newly tracked, so a "+X%" comparison would be biased toward ↑).
+    const days = state.daily && state.daily.days;
+    if (!days) return { rising: [], falling: [] };
+    const dateKeys = Object.keys(days).sort();
+    if (dateKeys.length < 14) return { rising: [], falling: [] };
+
     const w = rollingWindows();
     if (!w || !w.prev7) return { rising: [], falling: [] };
+
     const rising = [], falling = [];
     for (const p of PLATFORMS) {
       const cur = w.last7.byPlatform[p.id] || 0;
       const prev = w.prev7.byPlatform[p.id] || 0;
-      if (prev < 10) continue;  // ignore noisy small bases
+      // Noise floor on absolute counts
+      if (prev < 10) continue;
+      // Coverage gate: require FULL 7/7 days of data in BOTH windows
+      // before a comparison is allowed. Anything less mixes "real
+      // change" with "we didn't have a scraper recording on day X" and
+      // produces spurious +50%-style alerts during ramp-up.
+      const prevCoverage = _platformCoverageDays(days, dateKeys, p.id, -14, -7);
+      const curCoverage = _platformCoverageDays(days, dateKeys, p.id, -7, undefined);
+      if (prevCoverage < 7 || curCoverage < 7) continue;
       const delta = (cur - prev) / prev;
       if (delta >= 0.20) rising.push({ platform: p, current: cur, prev: prev, pct: delta * 100 });
       else if (delta <= -0.20) falling.push({ platform: p, current: cur, prev: prev, pct: delta * 100 });
@@ -320,9 +377,23 @@
       const days = Math.floor((Date.now() - new Date(state.data.meta.last_updated).getTime()) / (24 * 3600 * 1000));
       messages.push('⏰ ' + t('staleData', { days }));
     }
+    // Coverage-ramp advisory: surface when some platforms are too new
+    // for the prior-7d comparison. Shown alongside fired alerts so the
+    // user knows there's MORE going on that we're refusing to compare.
+    const rampingPlatforms = _platformsRamping();
+    if (rampingPlatforms.length > 0) {
+      messages.push('ℹ ' + t('coverageRamping', { names: rampingPlatforms.join(', ') }));
+    }
     warnings.forEach(w => messages.push(`⚠ ${w}`));
-    rising.forEach(a => messages.push(`▲ ${a.platform.name} ${t('rising')} +${a.pct.toFixed(0)}% (${a.prev} → ${a.current})`));
-    falling.forEach(a => messages.push(`▼ ${a.platform.name} ${t('cooling')} ${a.pct.toFixed(0)}% (${a.prev} → ${a.current})`));
+    // Build the explicit date-range labels for the two 7-day windows
+    // so the comparison is unambiguous in the banner.
+    const winRange = _alertWindowDates();
+    rising.forEach(a => messages.push(
+      `▲ ${platformName(a.platform.id)} ${t('rising')} +${a.pct.toFixed(0)}% · ${t('alertWindowFmt', { prevFrom: winRange.prev[0], prevTo: winRange.prev[1], prev: a.prev, curFrom: winRange.cur[0], curTo: winRange.cur[1], cur: a.current })}`
+    ));
+    falling.forEach(a => messages.push(
+      `▼ ${platformName(a.platform.id)} ${t('cooling')} ${a.pct.toFixed(0)}% · ${t('alertWindowFmt', { prevFrom: winRange.prev[0], prevTo: winRange.prev[1], prev: a.prev, curFrom: winRange.cur[0], curTo: winRange.cur[1], cur: a.current })}`
+    ));
 
     if (messages.length === 0) {
       banner.classList.remove('shown');

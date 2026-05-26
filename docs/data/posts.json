@@ -1,12 +1,12 @@
 {
   "meta": {
-    "last_updated": "2026-05-25T17:20:18-07:00",
+    "last_updated": "2026-05-25T19:57:35-07:00",
     "scrape_days_back": 7,
     "date_from": "2026-05-18",
     "date_to": "2026-05-25",
     "total_posts": 369,
-    "unique_posts": 285,
-    "duplicate_count": 84,
+    "unique_posts": 310,
+    "duplicate_count": 59,
     "unclassified_region": 15,
     "warnings": [],
     "diagnostics": {
@@ -159,7 +159,8 @@
         "uscanyin": 99,
         "niuyuegongzuo": 119
       },
-      "total": 369
+      "total": 369,
+      "total_unique": 310
     }
   ],
   "posts": [

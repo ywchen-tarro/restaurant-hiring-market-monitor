@@ -49,6 +49,7 @@
       // by i18n.js itself; we only need to refresh JS-generated strings.
       if (state.data) {
         renderHeader(); renderKpis(); renderAlertBanner();
+        populateSelects();  // refreshes platform options
         renderOverview(); renderTrend(); renderRegion(); renderPosts();
       }
     });
@@ -240,8 +241,18 @@
   }
 
   function populateSelects() {
+    // Idempotent: clear and re-populate so a language change refreshes
+    // the "All platforms" option text. Other options are platform brand
+    // names that don't translate.
     const pp = document.getElementById('postPlatform');
     const rp = document.getElementById('regionPlatform');
+
+    // Keep first <option> (the data-i18n "all" one) — i18n.js handles
+    // its translation. Drop everything after it.
+    [pp, rp].forEach(sel => {
+      while (sel.children.length > 1) sel.removeChild(sel.lastChild);
+    });
+
     PLATFORMS.forEach(p => {
       const o1 = document.createElement('option');
       o1.value = p.id; o1.textContent = p.name; pp.appendChild(o1);
@@ -280,7 +291,7 @@
         trendTxt = (pct >= 0 ? '+' : '') + pct.toFixed(0) + '%';
         trendCls = pct > 0 ? 'up' : (pct < 0 ? 'down' : 'neu');
       } else if (h.length >= 2 && p.total > 0) {
-        trendTxt = 'new';
+        trendTxt = t('trendNew');
         trendCls = 'up';
       }
       const row = document.createElement('div');
@@ -299,7 +310,8 @@
     if (state.charts.pie) state.charts.pie.destroy();
     const ctx = document.getElementById('pieChart');
     if (sum === 0) {
-      ctx.parentElement.querySelector('#pieLegend').innerHTML = '<div class="empty-state">无数据</div>';
+      ctx.parentElement.querySelector('#pieLegend').innerHTML =
+        '<div class="empty-state">' + escapeHtml(t('noData')) + '</div>';
       return;
     }
     state.charts.pie = new Chart(ctx, {

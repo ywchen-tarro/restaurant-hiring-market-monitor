@@ -34,21 +34,31 @@ PREFIX_LINK = re.compile(r"view=prefix")
 # `<a href="...view=prefix&prefixi...">`. Map to a Chinese state token so the
 # region classifier picks it up.
 PREFIX_LABEL_MAP = {
+    # East
     "new york": "纽约", "new jersey": "新泽西",
     "boston": "波士顿", "massachusetts": "麻州", "connecticut": "康州",
-    "pennsylvania": "宾州", "virginia": "维吉尼亚",
+    "pennsylvania": "宾州", "vermont": "佛蒙特", "delaware": "特拉华",
+    "new hampshire": "新罕布什尔", "rhode island": "罗得岛", "maine": "缅因",
+    "washington dc": "华盛顿DC", "dc": "华盛顿DC",
+    # South
     "florida": "佛州", "georgia": "乔治亚", "texas": "德州",
     "maryland": "马里兰", "north carolina": "北卡", "south carolina": "南卡",
     "tennessee": "田纳西", "louisiana": "路易斯安娜", "mississippi": "密西西比",
+    "kentucky": "肯塔基", "alabama": "阿拉巴马", "virginia": "维吉尼亚",
+    "west virginia": "西维吉尼亚", "arkansas": "阿肯色",
+    "oklahoma": "俄克拉荷马",
+    # West
     "california": "加州", "washington": "华盛顿州", "oregon": "俄勒冈",
     "nevada": "内华达", "arizona": "亚利桑那", "colorado": "科罗拉多",
     "hawaii": "夏威夷", "utah": "犹他", "new mexico": "新墨西哥",
+    "alaska": "阿拉斯加", "idaho": "爱达荷", "montana": "蒙大拿",
+    "wyoming": "怀俄明",
+    # Midwest
     "illinois": "伊州", "michigan": "密歇根", "ohio": "俄亥俄",
     "indiana": "印第安纳", "wisconsin": "威斯康星", "minnesota": "明尼苏达",
-    "missouri": "密苏里",
-    "new hampshire": "新罕布什尔", "rhode island": "罗得岛", "vermont": "佛蒙特",
-    "maine": "缅因", "delaware": "特拉华", "west virginia": "西维吉尼亚",
-    "kentucky": "肯塔基", "alabama": "阿拉巴马",
+    "missouri": "密苏里", "iowa": "爱荷华", "kansas": "堪萨斯",
+    "nebraska": "内布拉斯加", "north dakota": "北达科他",
+    "south dakota": "南达科他",
 }
 REL_DATE = re.compile(
     r"\d+\s*(?:分钟|分鐘|小时|小時|天|日|周|週|月|年)前"

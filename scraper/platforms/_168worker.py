@@ -34,12 +34,13 @@ LOCATION_RE = re.compile(r"[（(]([^()）]+)[）)]")
 class Scraper(BasePlatformScraper):
     id = "168worker"
     name = "168worker"
+    base_url = BASE
     # Anti-bot is fronted by a TLS-fingerprint check — Chrome impersonation
     # via curl_cffi clears it. Plain `requests` gets a 403.
     impersonate = "chrome120"
 
     def page_url(self, page_num: int) -> str:
-        return f"{BASE}/list/{page_num}_0"
+        return f"{self.base_url}/list/{page_num}_0"
 
     def parse_page(self, html: str, page_num: int) -> List[Post]:
         soup = BeautifulSoup(html, "html.parser")
@@ -62,7 +63,7 @@ class Scraper(BasePlatformScraper):
         if not m:
             return None
         native_id = m.group(1)
-        full_url = urljoin(BASE, link["href"])
+        full_url = urljoin(self.base_url, link["href"])
         title = link.get_text(strip=True)
         if not title:
             return None
@@ -87,7 +88,9 @@ class Scraper(BasePlatformScraper):
             if tokens:
                 state = tokens[-1]
 
-        return Post(
+        # Save native_id on Post so subclasses (500work) can rebuild URL
+        # without string-splitting.
+        post = Post(
             id=post_id(self.id, native_id),
             platform=self.id,
             title=title,
@@ -97,3 +100,5 @@ class Scraper(BasePlatformScraper):
             keywords_matched=[],
             url=full_url,
         )
+        post._native_id = native_id  # ad-hoc; only used by _500work subclass
+        return post

@@ -70,10 +70,9 @@ PLATFORMS = [
         "url": "https://uscanyin.com/en/jobs",
         "pagination": "query",
         "enabled": True,
-        # Deeper paginated pages take ~17s to render server-side. Cap tight:
-        # ~16 posts per page × 8 pages = ~128 posts, far more than a 7-day
-        # restaurant window needs from this site.
-        "max_pages": 8,
+        # NOTE: actual page cap lives on the Scraper class as `max_pages`
+        # (see scraper/platforms/uscanyin.py). This config entry is for
+        # display only — base.py reads only the class attribute.
     },
     {
         "id": "niuyuegongzuo",

@@ -23,20 +23,53 @@ from typing import Dict, List, Optional
 from . import config
 from .platforms.base import Post
 
-# 168worker.com and 500work.com share a CMS and republish many of the same
-# job posts. Without dedup, the aggregate signal would be inflated. We
-# normalize titles (strip emoji, collapse whitespace, lowercase) and count
-# distinct posts in `meta.unique_posts`.
-_KEEP_RE = re.compile(r"[一-鿿A-Za-z0-9]+")
+# 168worker.com and 500work.com share a CMS and republish identical job
+# posts. We dedupe ONLY within such "mirror groups" — distinct restaurants
+# on an independent platform that happen to share a generic title
+# ("熟手炒锅") are different jobs and stay counted as 2.
+_KEEP_RE = re.compile(r"[一-鿿豈-﫿A-Za-z0-9]+")
+
+# Each set is a group of platforms that share an upstream database.
+# Posts whose normalized title is the same across platforms IN THE SAME
+# GROUP are collapsed; everything else stays counted as separate posts.
+MIRROR_GROUPS = [
+    frozenset({"168worker", "500work"}),
+]
 
 
 def _normalize_title(t: str) -> str:
     if not t:
         return ""
-    # Keep only CJK + ASCII alphanumerics. Drops emoji, punctuation,
-    # symbols, the redaction placeholder, and whitespace. The result is a
-    # tight signature that's robust to minor formatting differences.
+    # Keep CJK Unified Ideographs (U+4E00–U+9FFF) + CJK Compatibility
+    # Ideographs (U+F900–U+FAFF) + ASCII alphanumerics. Drops emoji,
+    # punctuation, symbols, the redaction placeholder, and whitespace.
     return "".join(_KEEP_RE.findall(t)).lower()
+
+
+def _mirror_group_id(platform: str):
+    for i, group in enumerate(MIRROR_GROUPS):
+        if platform in group:
+            return i
+    return None
+
+
+def _unique_post_count(posts: List[Post]) -> int:
+    """Count distinct posts, collapsing only mirror-group duplicates."""
+    counted = 0
+    seen_in_group = set()  # (group_id, normalized_title)
+    for p in posts:
+        nt = _normalize_title(p.title) if p.title else ""
+        gid = _mirror_group_id(p.platform)
+        if gid is None or not nt:
+            # Independent platform OR untitled: count every instance.
+            counted += 1
+            continue
+        key = (gid, nt)
+        if key in seen_in_group:
+            continue
+        seen_in_group.add(key)
+        counted += 1
+    return counted
 
 log = logging.getLogger(__name__)
 
@@ -106,10 +139,8 @@ def _aggregate(posts: List[Post], days_back: int) -> dict:
             kw_counter[kw] += 1
     by_keyword = dict(kw_counter.most_common(20))
 
-    # Cross-platform deduplication — 168worker / 500work overlap heavily.
-    unique_titles = {_normalize_title(p.title) for p in posts if p.title}
-    unique_titles.discard("")  # exclude untitled
-    unique_count = len(unique_titles)
+    # Cross-platform deduplication for mirror groups (168 ↔ 500work).
+    unique_count = _unique_post_count(posts)
 
     meta = {
         "last_updated": datetime.now().astimezone().isoformat(timespec="seconds"),
@@ -142,6 +173,7 @@ def _new_history_entry(posts: List[Post], days_back: int) -> dict:
             for plat in config.PLATFORMS
         },
         "total": len(posts),
+        "total_unique": _unique_post_count(posts),
     }
 
 
@@ -163,6 +195,9 @@ def _merge_history(existing: dict, new_entry: dict) -> List[dict]:
         return history
 
     prev = history[-1]
+    # Compare on raw `total` (always present on both entries). Higher total
+    # implies a healthier scrape (more pages parsed). total_unique is just
+    # informational; comparing mixed scales would yield false rejections.
     if new_entry.get("total", 0) >= prev.get("total", 0):
         history[-1] = new_entry
     return history
@@ -204,7 +239,9 @@ def _compute_warnings(
             else:
                 unparsed = diag.get("dropped_unparseable_date", 0)
                 rows = diag.get("rows_parsed", 0)
-                if rows > 0 and unparsed / rows > 0.10:
+                # Lowered from 10% to 5% — even a small fraction of
+                # unparseable dates usually indicates a real format change.
+                if rows >= 20 and unparsed / rows > 0.05:
                     warnings.append(
                         f"{pid}: {unparsed}/{rows} posts had unparseable dates — date format may have changed"
                     )

@@ -98,6 +98,35 @@ def test_post_outside_window_dropped():
     assert s.last_diagnostics["dropped_out_of_window"] == 1
 
 
+def test_future_dated_post_dropped():
+    """A post dated AFTER local-today should be dropped — happens when
+    the source site runs in a timezone east of us (e.g. ET vs PT) and
+    serves posts dated tomorrow late at night."""
+    today = date(2026, 5, 25)
+    # Post dated tomorrow (5/26), simulating an ET-dated listing
+    # appearing in our 22:30 PT scrape
+    posts = [_mk("a", "中日餐请炒锅", +1, today)]   # 2026-05-26
+    s = _StubScraper([posts])
+    with mock.patch("scraper.platforms.base.date") as fake_date:
+        fake_date.today.return_value = today
+        fake_date.fromisoformat = date.fromisoformat
+        result = s.run(days_back=7)
+    assert result == []
+    assert s.last_diagnostics["dropped_future_date"] == 1
+
+
+def test_post_dated_exactly_today_kept():
+    today = date(2026, 5, 25)
+    posts = [_mk("a", "中日餐请炒锅", 0, today)]   # 2026-05-25 == today
+    s = _StubScraper([posts])
+    with mock.patch("scraper.platforms.base.date") as fake_date:
+        fake_date.today.return_value = today
+        fake_date.fromisoformat = date.fromisoformat
+        result = s.run(days_back=7)
+    assert len(result) == 1
+    assert result[0].date == today.isoformat()
+
+
 def test_stop_paginating_after_window_boundary():
     """Once any post on a page falls outside the window, the scraper
     should NOT fetch the next page."""

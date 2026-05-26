@@ -347,11 +347,17 @@
       subEl.textContent = t('kpiTodayNone');
       return;
     }
-    const latest = dateKeys[dateKeys.length - 1];
-    const todayTotal = days[latest] ? days[latest].total : 0;
-    // Compare today against the AVERAGE OF THE 7 DAYS BEFORE TODAY
-    // (don't include today in its own benchmark).
-    const prior7 = dateKeys.slice(-8, -1).map(k => days[k].total || 0);
+    // Use the browser's LOCAL today, not "the most recent key in
+    // daily.json". A timezone-ahead source could produce a key for
+    // "tomorrow" that would otherwise be picked as "today".
+    const now = new Date(); now.setHours(0, 0, 0, 0);
+    const todayIso = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+    const todayTotal = (days[todayIso] || {}).total || 0;
+    // Compare today against the average of the 7 days BEFORE today.
+    const todayIdx = dateKeys.indexOf(todayIso);
+    const priorEnd = todayIdx >= 0 ? todayIdx : dateKeys.length;
+    const priorStart = Math.max(0, priorEnd - 7);
+    const prior7 = dateKeys.slice(priorStart, priorEnd).map(k => days[k].total || 0);
     const avg = prior7.length ? (prior7.reduce((s, n) => s + n, 0) / prior7.length) : 0;
     const avgRounded = avg.toFixed(1);
     let deltaTxt = '—';

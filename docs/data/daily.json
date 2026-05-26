@@ -1,10 +1,10 @@
 {
   "meta": {
     "schema_version": 1,
-    "last_updated": "2026-05-25T22:32:03-07:00",
-    "day_count": 32,
+    "last_updated": "2026-05-25T22:35:44-07:00",
+    "day_count": 31,
     "earliest": "2026-04-25",
-    "latest": "2026-05-26"
+    "latest": "2026-05-25"
   },
   "days": {
     "2026-04-25": {
@@ -383,19 +383,6 @@
         "南部": 33
       },
       "total": 216
-    },
-    "2026-05-26": {
-      "by_platform": {
-        "168worker": 4,
-        "500work": 4,
-        "niuyuegongzuo": 1
-      },
-      "by_region": {
-        "中部": 2,
-        "南部": 2,
-        "东部": 5
-      },
-      "total": 9
     }
   }
 }

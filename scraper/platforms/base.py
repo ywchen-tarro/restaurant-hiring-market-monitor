@@ -73,7 +73,8 @@ class BasePlatformScraper(ABC):
         # `days_back` = the number of calendar days the window should cover,
         # INCLUSIVE of today. Cutoff math: with days_back=7, we want today
         # + 6 prior = 7 days; cutoff is today-6 (inclusive).
-        cutoff = date.today() - timedelta(days=days_back - 1)
+        today = date.today()
+        cutoff = today - timedelta(days=days_back - 1)
         # Per-platform override, then config default
         page_cap = (
             self.max_pages
@@ -90,6 +91,7 @@ class BasePlatformScraper(ABC):
             "rows_parsed": 0,
             "dropped_unparseable_date": 0,
             "dropped_out_of_window": 0,
+            "dropped_future_date": 0,
             "dropped_not_restaurant": 0,
             "dropped_duplicate": 0,
             "fetch_failures": 0,
@@ -135,6 +137,18 @@ class BasePlatformScraper(ABC):
                     post_d = date.fromisoformat(p.date)
                 except (ValueError, TypeError):
                     diag["dropped_unparseable_date"] += 1
+                    continue
+
+                # Drop posts dated in the future (relative to local
+                # `today`). These appear when the source site runs in a
+                # timezone east of us (e.g. ET = UTC-5 while we're on PT
+                # = UTC-7) — at 22:32 PT it's already past midnight ET,
+                # and 168worker/500work serve posts dated tomorrow. Without
+                # this filter those posts land in a phantom "future day"
+                # bucket in daily.json that the dashboard then treats as
+                # "today" (since it's the latest date present).
+                if post_d > today:
+                    diag["dropped_future_date"] += 1
                     continue
 
                 if post_d < cutoff:

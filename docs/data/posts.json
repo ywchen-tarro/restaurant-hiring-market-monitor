@@ -1,12 +1,12 @@
 {
   "meta": {
-    "last_updated": "2026-05-25T22:32:03-07:00",
+    "last_updated": "2026-05-25T22:35:44-07:00",
     "scrape_days_back": 7,
     "date_from": "2026-05-19",
     "date_to": "2026-05-25",
-    "total_posts": 582,
-    "unique_posts": 531,
-    "duplicate_count": 51,
+    "total_posts": 573,
+    "unique_posts": 526,
+    "duplicate_count": 47,
     "unclassified_region": 14,
     "warnings": [],
     "diagnostics": {
@@ -74,24 +74,24 @@
   },
   "by_platform": {
     "168worker": {
-      "total": 51,
-      "daily_avg": 7.29
+      "total": 47,
+      "daily_avg": 6.71
     },
     "usahuarenjie": {
       "total": 32,
       "daily_avg": 4.57
     },
     "500work": {
-      "total": 51,
-      "daily_avg": 7.29
+      "total": 47,
+      "daily_avg": 6.71
     },
     "uscanyin": {
       "total": 130,
       "daily_avg": 18.57
     },
     "niuyuegongzuo": {
-      "total": 114,
-      "daily_avg": 16.29
+      "total": 113,
+      "daily_avg": 16.14
     },
     "meiguogongzuo": {
       "total": 204,
@@ -100,30 +100,30 @@
   },
   "by_region": {
     "东部": {
-      "total": 441,
+      "total": 436,
       "top_states": {
         "法拉盛": 119,
         "纽约": 104,
-        "长岛": 57,
+        "长岛": 54,
         "新泽西": 46,
-        "曼哈顿": 34
+        "曼哈顿": 32
       }
     },
     "南部": {
-      "total": 66,
+      "total": 64,
       "top_states": {
         "乔治亚": 12,
         "佛州": 12,
-        "亚特兰大": 11,
+        "亚特兰大": 9,
         "马里兰": 8,
         "德州": 6
       }
     },
     "中部": {
-      "total": 24,
+      "total": 22,
       "top_states": {
-        "芝加哥": 6,
         "印第安纳": 5,
+        "芝加哥": 4,
         "克利夫兰": 2,
         "爱荷华": 2,
         "明尼苏达": 2
@@ -141,20 +141,20 @@
     }
   },
   "by_keyword": {
-    "餐": 268,
-    "师傅": 135,
-    "炒锅": 102,
+    "餐": 264,
+    "师傅": 133,
+    "炒锅": 100,
     "日餐": 75,
-    "企台": 73,
-    "餐馆": 65,
-    "招聘": 65,
+    "企台": 71,
     "寿司": 65,
+    "餐馆": 63,
+    "招聘": 63,
     "中餐": 61,
-    "外卖": 53,
+    "外卖": 50,
     "打杂": 43,
     "餐厅": 30,
     "厨房": 29,
-    "打包": 26,
+    "打包": 24,
     "油锅": 24,
     "抓码": 22,
     "前台": 21,
@@ -179,61 +179,6 @@
     }
   ],
   "posts": [
-    {
-      "id": "168worker_358628",
-      "platform": "168worker",
-      "title": "请 经理 经验厨师 企台",
-      "date": "2026-05-26",
-      "region": "中部",
-      "state": "芝加哥",
-      "keywords_matched": [
-        "厨师",
-        "企台"
-      ],
-      "url": "https://www.168worker.com/page/358628"
-    },
-    {
-      "id": "168worker_454824",
-      "platform": "168worker",
-      "title": "电话接单 & 打包员 － 外卖餐馆",
-      "date": "2026-05-26",
-      "region": "南部",
-      "state": "亚特兰大",
-      "keywords_matched": [
-        "餐馆",
-        "餐",
-        "外卖",
-        "打包"
-      ],
-      "url": "https://www.168worker.com/page/454824"
-    },
-    {
-      "id": "168worker_386025",
-      "platform": "168worker",
-      "title": "连锁快餐米粉店招煮粉煮面员",
-      "date": "2026-05-26",
-      "region": "东部",
-      "state": "曼哈顿",
-      "keywords_matched": [
-        "餐"
-      ],
-      "url": "https://www.168worker.com/page/386025"
-    },
-    {
-      "id": "168worker_449926",
-      "platform": "168worker",
-      "title": "招聘炒锅师傅一名，烧烤师傅一名",
-      "date": "2026-05-26",
-      "region": "东部",
-      "state": "长岛",
-      "keywords_matched": [
-        "烧烤",
-        "炒锅",
-        "师傅",
-        "招聘"
-      ],
-      "url": "https://www.168worker.com/page/449926"
-    },
     {
       "id": "168worker_437669",
       "platform": "168worker",
@@ -1318,61 +1263,6 @@
         "师傅"
       ],
       "url": "https://www.usahuarenjie.com/city/Los-Angeles/information-id-275703.html"
-    },
-    {
-      "id": "500work_358628",
-      "platform": "500work",
-      "title": "请 经理 经验厨师 企台",
-      "date": "2026-05-26",
-      "region": "中部",
-      "state": "芝加哥",
-      "keywords_matched": [
-        "厨师",
-        "企台"
-      ],
-      "url": "https://www.500work.com/page/358628"
-    },
-    {
-      "id": "500work_454824",
-      "platform": "500work",
-      "title": "电话接单 & 打包员 － 外卖餐馆",
-      "date": "2026-05-26",
-      "region": "南部",
-      "state": "亚特兰大",
-      "keywords_matched": [
-        "餐馆",
-        "餐",
-        "外卖",
-        "打包"
-      ],
-      "url": "https://www.500work.com/page/454824"
-    },
-    {
-      "id": "500work_386025",
-      "platform": "500work",
-      "title": "连锁快餐米粉店招煮粉煮面员",
-      "date": "2026-05-26",
-      "region": "东部",
-      "state": "曼哈顿",
-      "keywords_matched": [
-        "餐"
-      ],
-      "url": "https://www.500work.com/page/386025"
-    },
-    {
-      "id": "500work_449926",
-      "platform": "500work",
-      "title": "招聘炒锅师傅一名，烧烤师傅一名",
-      "date": "2026-05-26",
-      "region": "东部",
-      "state": "长岛",
-      "keywords_matched": [
-        "烧烤",
-        "炒锅",
-        "师傅",
-        "招聘"
-      ],
-      "url": "https://www.500work.com/page/449926"
     },
     {
       "id": "500work_437669",
@@ -3707,18 +3597,6 @@
         "寿司"
       ],
       "url": "https://uscanyin.com/en/community/jobs/224153-%e5%af%bf%e5%8f%b8%e5%8a%a9%e6%89%8b"
-    },
-    {
-      "id": "niuyuegongzuo_137757",
-      "platform": "niuyuegongzuo",
-      "title": "长岛new Hyde park外卖店请散工接外卖\n电话[电话]",
-      "date": "2026-05-26",
-      "region": "东部",
-      "state": "长岛",
-      "keywords_matched": [
-        "外卖"
-      ],
-      "url": "https://niuyuegongzuo.com/longisland/%E5%85%B6%E4%BB%96%E5%90%84%E7%B1%BB%E6%8B%9B%E8%81%98/%E9%95%BF%E5%B2%9Bnew-hyde-park%E5%A4%96%E5%8D%96%E5%BA%97%E8%AF%B7%E6%95%A3%E5%B7%A5%E6%8E%A5%E5%A4%96%E5%8D%96-%E7%94%B5%E8%AF%9D917-375-8796/137757"
     },
     {
       "id": "niuyuegongzuo_137751",

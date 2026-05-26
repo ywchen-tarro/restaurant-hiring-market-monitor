@@ -1,13 +1,13 @@
 {
   "meta": {
-    "last_updated": "2026-05-25T20:54:45-07:00",
+    "last_updated": "2026-05-25T21:27:48-07:00",
     "scrape_days_back": 7,
-    "date_from": "2026-05-18",
+    "date_from": "2026-05-19",
     "date_to": "2026-05-25",
-    "total_posts": 369,
-    "unique_posts": 310,
-    "duplicate_count": 59,
-    "unclassified_region": 15,
+    "total_posts": 340,
+    "unique_posts": 288,
+    "duplicate_count": 52,
+    "unclassified_region": 13,
     "warnings": [],
     "diagnostics": {
       "168worker": {
@@ -64,55 +64,55 @@
   },
   "by_platform": {
     "168worker": {
-      "total": 59,
-      "daily_avg": 8.43
+      "total": 52,
+      "daily_avg": 7.43
     },
     "usahuarenjie": {
-      "total": 33,
-      "daily_avg": 4.71
+      "total": 31,
+      "daily_avg": 4.43
     },
     "500work": {
-      "total": 59,
-      "daily_avg": 8.43
+      "total": 52,
+      "daily_avg": 7.43
     },
     "uscanyin": {
       "total": 99,
       "daily_avg": 14.14
     },
     "niuyuegongzuo": {
-      "total": 119,
-      "daily_avg": 17.0
+      "total": 106,
+      "daily_avg": 15.14
     }
   },
   "by_region": {
     "东部": {
-      "total": 255,
+      "total": 233,
       "top_states": {
-        "法拉盛": 74,
-        "长岛": 36,
-        "纽约": 32,
-        "曼哈顿": 27,
-        "新泽西": 26
+        "法拉盛": 69,
+        "纽约": 31,
+        "长岛": 30,
+        "曼哈顿": 25,
+        "新泽西": 23
       }
     },
     "南部": {
-      "total": 49,
+      "total": 46,
       "top_states": {
         "亚特兰大": 11,
         "佛州": 10,
-        "马里兰": 6,
-        "休斯顿": 4,
-        "德州": 4
+        "马里兰": 5,
+        "德州": 4,
+        "乔治亚": 3
       }
     },
     "中部": {
-      "total": 18,
+      "total": 16,
       "top_states": {
         "印第安纳": 4,
         "芝加哥": 3,
-        "密歇根": 3,
         "克利夫兰": 2,
-        "明尼苏达": 2
+        "明尼苏达": 2,
+        "伊州": 2
       }
     },
     "西部": {
@@ -127,26 +127,26 @@
     }
   },
   "by_keyword": {
-    "餐": 163,
-    "炒锅": 73,
-    "师傅": 71,
-    "企台": 51,
-    "招聘": 51,
-    "餐馆": 44,
-    "日餐": 40,
-    "外卖": 39,
-    "中餐": 37,
-    "打杂": 34,
-    "寿司": 32,
-    "餐厅": 23,
+    "餐": 147,
+    "炒锅": 68,
+    "师傅": 68,
+    "招聘": 49,
+    "企台": 47,
+    "日餐": 39,
+    "餐馆": 36,
+    "外卖": 33,
+    "中餐": 31,
+    "寿司": 31,
+    "打杂": 30,
+    "餐厅": 20,
     "厨房": 18,
     "抓码": 17,
     "油锅": 17,
     "打包": 16,
     "前台": 14,
-    "后厨": 12,
     "送餐": 9,
-    "洗碗": 9
+    "洗碗": 9,
+    "帮厨": 8
   },
   "history": [
     {
@@ -873,102 +873,6 @@
       "url": "https://www.168worker.com/page/127369"
     },
     {
-      "id": "168worker_452717",
-      "platform": "168worker",
-      "title": "❤️   中餐馆l诚请外送员",
-      "date": "2026-05-18",
-      "region": "南部",
-      "state": "休斯顿",
-      "keywords_matched": [
-        "餐馆",
-        "餐",
-        "中餐"
-      ],
-      "url": "https://www.168worker.com/page/452717"
-    },
-    {
-      "id": "168worker_452522",
-      "platform": "168worker",
-      "title": "法拉盛餐馆请帮炒",
-      "date": "2026-05-18",
-      "region": "东部",
-      "state": "法拉盛",
-      "keywords_matched": [
-        "餐馆",
-        "餐"
-      ],
-      "url": "https://www.168worker.com/page/452522"
-    },
-    {
-      "id": "168worker_455442",
-      "platform": "168worker",
-      "title": "招请炒锅师傅",
-      "date": "2026-05-18",
-      "region": "中部",
-      "state": "密歇根",
-      "keywords_matched": [
-        "炒锅",
-        "师傅"
-      ],
-      "url": "https://www.168worker.com/page/455442"
-    },
-    {
-      "id": "168worker_444877",
-      "platform": "168worker",
-      "title": "Grove St 中餐厅招后厨备货（兼职）",
-      "date": "2026-05-18",
-      "region": null,
-      "state": "兼职",
-      "keywords_matched": [
-        "餐厅",
-        "餐",
-        "中餐",
-        "后厨"
-      ],
-      "url": "https://www.168worker.com/page/444877"
-    },
-    {
-      "id": "168worker_440217",
-      "platform": "168worker",
-      "title": "❤️❤️新泽西餐馆招后厨打杂，包吃住[电话]❤️❤️",
-      "date": "2026-05-18",
-      "region": "东部",
-      "state": "新泽西",
-      "keywords_matched": [
-        "餐馆",
-        "餐",
-        "后厨",
-        "打杂"
-      ],
-      "url": "https://www.168worker.com/page/440217"
-    },
-    {
-      "id": "168worker_455429",
-      "platform": "168worker",
-      "title": "波士顿奶茶店招人",
-      "date": "2026-05-18",
-      "region": "东部",
-      "state": "波士顿",
-      "keywords_matched": [
-        "奶茶",
-        "招人"
-      ],
-      "url": "https://www.168worker.com/page/455429"
-    },
-    {
-      "id": "168worker_454718",
-      "platform": "168worker",
-      "title": "长岛外卖店请熟手打杂",
-      "date": "2026-05-18",
-      "region": "东部",
-      "state": "长岛",
-      "keywords_matched": [
-        "外卖",
-        "打杂"
-      ],
-      "url": "https://www.168worker.com/page/454718"
-    },
-    {
       "id": "usahuarenjie_276023",
       "platform": "usahuarenjie",
       "title": "乔治亚中歺堂吃店急需 油锅",
@@ -1401,33 +1305,6 @@
         "师傅"
       ],
       "url": "https://www.usahuarenjie.com/city/Los-Angeles/information-id-275703.html"
-    },
-    {
-      "id": "usahuarenjie_275681",
-      "platform": "usahuarenjie",
-      "title": "【马里兰Baltimore country 外卖店】  🔎招聘岗位；熟手炒锅",
-      "date": "2026-05-18",
-      "region": "南部",
-      "state": "马里兰",
-      "keywords_matched": [
-        "外卖",
-        "炒锅",
-        "招聘"
-      ],
-      "url": "https://www.usahuarenjie.com/city/Qtcs/information-id-275681.html"
-    },
-    {
-      "id": "usahuarenjie_275740",
-      "platform": "usahuarenjie",
-      "title": "曼哈顿布鲁克林中餐店招店员$21W2 福利好晋升空间大",
-      "date": "2026-05-18",
-      "region": "东部",
-      "state": "布鲁克林",
-      "keywords_matched": [
-        "餐",
-        "中餐"
-      ],
-      "url": "https://www.usahuarenjie.com/city/New-York/information-id-275740.html"
     },
     {
       "id": "500work_358628",
@@ -2136,102 +2013,6 @@
         "师傅"
       ],
       "url": "https://www.500work.com/page/127369"
-    },
-    {
-      "id": "500work_452717",
-      "platform": "500work",
-      "title": "❤️   中餐馆l诚请外送员",
-      "date": "2026-05-18",
-      "region": "南部",
-      "state": "休斯顿",
-      "keywords_matched": [
-        "餐馆",
-        "餐",
-        "中餐"
-      ],
-      "url": "https://www.500work.com/page/452717"
-    },
-    {
-      "id": "500work_452522",
-      "platform": "500work",
-      "title": "法拉盛餐馆请帮炒",
-      "date": "2026-05-18",
-      "region": "东部",
-      "state": "法拉盛",
-      "keywords_matched": [
-        "餐馆",
-        "餐"
-      ],
-      "url": "https://www.500work.com/page/452522"
-    },
-    {
-      "id": "500work_455442",
-      "platform": "500work",
-      "title": "招请炒锅师傅",
-      "date": "2026-05-18",
-      "region": "中部",
-      "state": "密歇根",
-      "keywords_matched": [
-        "炒锅",
-        "师傅"
-      ],
-      "url": "https://www.500work.com/page/455442"
-    },
-    {
-      "id": "500work_444877",
-      "platform": "500work",
-      "title": "Grove St 中餐厅招后厨备货（兼职）",
-      "date": "2026-05-18",
-      "region": null,
-      "state": "兼职",
-      "keywords_matched": [
-        "餐厅",
-        "餐",
-        "中餐",
-        "后厨"
-      ],
-      "url": "https://www.500work.com/page/444877"
-    },
-    {
-      "id": "500work_440217",
-      "platform": "500work",
-      "title": "❤️❤️新泽西餐馆招后厨打杂，包吃住[电话]❤️❤️",
-      "date": "2026-05-18",
-      "region": "东部",
-      "state": "新泽西",
-      "keywords_matched": [
-        "餐馆",
-        "餐",
-        "后厨",
-        "打杂"
-      ],
-      "url": "https://www.500work.com/page/440217"
-    },
-    {
-      "id": "500work_455429",
-      "platform": "500work",
-      "title": "波士顿奶茶店招人",
-      "date": "2026-05-18",
-      "region": "东部",
-      "state": "波士顿",
-      "keywords_matched": [
-        "奶茶",
-        "招人"
-      ],
-      "url": "https://www.500work.com/page/455429"
-    },
-    {
-      "id": "500work_454718",
-      "platform": "500work",
-      "title": "长岛外卖店请熟手打杂",
-      "date": "2026-05-18",
-      "region": "东部",
-      "state": "长岛",
-      "keywords_matched": [
-        "外卖",
-        "打杂"
-      ],
-      "url": "https://www.500work.com/page/454718"
     },
     {
       "id": "uscanyin_224294",
@@ -4901,176 +4682,6 @@
         "請人"
       ],
       "url": "https://niuyuegongzuo.com/flushing/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/%E9%95%B7%E5%B3%B6%E9%A4%90%E9%A4%A8%E8%AB%8B%E4%BA%BA/137178"
-    },
-    {
-      "id": "niuyuegongzuo_137166",
-      "platform": "niuyuegongzuo",
-      "title": "餐馆请炒锅",
-      "date": "2026-05-18",
-      "region": "东部",
-      "state": "法拉盛",
-      "keywords_matched": [
-        "餐馆",
-        "餐",
-        "炒锅"
-      ],
-      "url": "https://niuyuegongzuo.com/flushing/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/%E9%A4%90%E9%A6%86%E8%AF%B7%E7%82%92%E9%94%85/137166"
-    },
-    {
-      "id": "niuyuegongzuo_137165",
-      "platform": "niuyuegongzuo",
-      "title": "新泽西诚请餐厅企台，联系电话[电话]",
-      "date": "2026-05-18",
-      "region": "东部",
-      "state": "新泽西",
-      "keywords_matched": [
-        "餐厅",
-        "餐",
-        "企台"
-      ],
-      "url": "https://niuyuegongzuo.com/newjersey/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/%E6%96%B0%E6%B3%BD%E8%A5%BF%E8%AF%9A%E8%AF%B7%E9%A4%90%E5%8E%85%E4%BC%81%E5%8F%B0%E8%81%94%E7%B3%BB%E7%94%B5%E8%AF%9D732-672-9992/137165"
-    },
-    {
-      "id": "niuyuegongzuo_137164",
-      "platform": "niuyuegongzuo",
-      "title": "长岛富人区日餐请全职企台一位以及半职店员一位",
-      "date": "2026-05-18",
-      "region": "东部",
-      "state": "长岛",
-      "keywords_matched": [
-        "餐",
-        "日餐",
-        "企台"
-      ],
-      "url": "https://niuyuegongzuo.com/longisland/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/%E9%95%BF%E5%B2%9B%E5%AF%8C%E4%BA%BA%E5%8C%BA%E6%97%A5%E9%A4%90%E8%AF%B7%E5%85%A8%E8%81%8C%E4%BC%81%E5%8F%B0%E4%B8%80%E4%BD%8D%E4%BB%A5%E5%8F%8A%E5%8D%8A%E8%81%8C%E5%BA%97%E5%91%98%E4%B8%80%E4%BD%8D/137164"
-    },
-    {
-      "id": "niuyuegongzuo_137163",
-      "platform": "niuyuegongzuo",
-      "title": "曼哈頓日本超市，誠請招聘一名長期兼職（一、二、四）的Sushi師傅",
-      "date": "2026-05-18",
-      "region": "东部",
-      "state": "曼哈顿",
-      "keywords_matched": [
-        "師傅",
-        "招聘"
-      ],
-      "url": "https://niuyuegongzuo.com/manhattan/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/%E6%9B%BC%E5%93%88%E9%A0%93%E6%97%A5%E6%9C%AC%E8%B6%85%E5%B8%82%E8%AA%A0%E8%AB%8B%E6%8B%9B%E8%81%98%E4%B8%80%E5%90%8D%E9%95%B7%E6%9C%9F%E5%85%BC%E8%81%B7%E4%B8%80%E4%BA%8C%E5%9B%9B%E7%9A%84sushi%E5%B8%AB%E5%82%85/137163"
-    },
-    {
-      "id": "niuyuegongzuo_137162",
-      "platform": "niuyuegongzuo",
-      "title": "上州超市寿司店",
-      "date": "2026-05-18",
-      "region": "东部",
-      "state": "上州",
-      "keywords_matched": [
-        "寿司"
-      ],
-      "url": "https://niuyuegongzuo.com/upstate/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/%E4%B8%8A%E5%B7%9E%E8%B6%85%E5%B8%82%E5%AF%BF%E5%8F%B8%E5%BA%97/137162"
-    },
-    {
-      "id": "niuyuegongzuo_137161",
-      "platform": "niuyuegongzuo",
-      "title": "曼哈顿请sushi企台",
-      "date": "2026-05-18",
-      "region": "东部",
-      "state": "曼哈顿",
-      "keywords_matched": [
-        "企台"
-      ],
-      "url": "https://niuyuegongzuo.com/manhattan/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/%E6%9B%BC%E5%93%88%E9%A1%BF%E8%AF%B7sushi%E4%BC%81%E5%8F%B0/137161"
-    },
-    {
-      "id": "niuyuegongzuo_137160",
-      "platform": "niuyuegongzuo",
-      "title": "纽约长岛快餐店聘请, 生熟手都可",
-      "date": "2026-05-18",
-      "region": "东部",
-      "state": "纽约",
-      "keywords_matched": [
-        "餐"
-      ],
-      "url": "https://niuyuegongzuo.com/longisland/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/%E7%BA%BD%E7%BA%A6%E9%95%BF%E5%B2%9B%E5%BF%AB%E9%A4%90%E5%BA%97%E8%81%98%E8%AF%B7-%E7%94%9F%E7%86%9F%E6%89%8B%E9%83%BD%E5%8F%AF/137160"
-    },
-    {
-      "id": "niuyuegongzuo_137157",
-      "platform": "niuyuegongzuo",
-      "title": "长岛亚洲餐请兼职汽车送外卖",
-      "date": "2026-05-18",
-      "region": "东部",
-      "state": "长岛",
-      "keywords_matched": [
-        "餐",
-        "外卖"
-      ],
-      "url": "https://niuyuegongzuo.com/longisland/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/%E9%95%BF%E5%B2%9B%E4%BA%9A%E6%B4%B2%E9%A4%90%E8%AF%B7%E5%85%BC%E8%81%8C%E6%B1%BD%E8%BD%A6%E9%80%81%E5%A4%96%E5%8D%96/137157"
-    },
-    {
-      "id": "niuyuegongzuo_137156",
-      "platform": "niuyuegongzuo",
-      "title": "法拉盛王子街餐馆急聘",
-      "date": "2026-05-18",
-      "region": "东部",
-      "state": "法拉盛",
-      "keywords_matched": [
-        "餐馆",
-        "餐"
-      ],
-      "url": "https://niuyuegongzuo.com/flushing/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/%E6%B3%95%E6%8B%89%E7%9B%9B%E7%8E%8B%E5%AD%90%E8%A1%97%E9%A4%90%E9%A6%86%E6%80%A5%E8%81%98/137156"
-    },
-    {
-      "id": "niuyuegongzuo_137127",
-      "platform": "niuyuegongzuo",
-      "title": "🌷长岛中餐外卖店请熟手炒锅师父",
-      "date": "2026-05-18",
-      "region": "东部",
-      "state": "长岛",
-      "keywords_matched": [
-        "餐",
-        "中餐",
-        "外卖",
-        "炒锅"
-      ],
-      "url": "https://niuyuegongzuo.com/longisland/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/%E9%95%BF%E5%B2%9B%E4%B8%AD%E9%A4%90%E5%A4%96%E5%8D%96%E5%BA%97%E8%AF%B7%E7%86%9F%E6%89%8B%E7%82%92%E9%94%85%E5%B8%88%E7%88%B6/137127"
-    },
-    {
-      "id": "niuyuegongzuo_137125",
-      "platform": "niuyuegongzuo",
-      "title": "请散工包外卖和散工企台",
-      "date": "2026-05-18",
-      "region": "东部",
-      "state": "长岛",
-      "keywords_matched": [
-        "外卖",
-        "企台"
-      ],
-      "url": "https://niuyuegongzuo.com/longisland/%E5%85%B6%E4%BB%96%E5%90%84%E7%B1%BB%E6%8B%9B%E8%81%98/%E8%AF%B7%E6%95%A3%E5%B7%A5%E5%8C%85%E5%A4%96%E5%8D%96%E5%92%8C%E6%95%A3%E5%B7%A5%E4%BC%81%E5%8F%B0/137125"
-    },
-    {
-      "id": "niuyuegongzuo_137120",
-      "platform": "niuyuegongzuo",
-      "title": "法拉盛请熟手安装台面和石头打磨师傅",
-      "date": "2026-05-18",
-      "region": "东部",
-      "state": "法拉盛",
-      "keywords_matched": [
-        "师傅"
-      ],
-      "url": "https://niuyuegongzuo.com/flushing/%E5%85%B6%E4%BB%96%E5%90%84%E7%B1%BB%E6%8B%9B%E8%81%98/%E6%B3%95%E6%8B%89%E7%9B%9B%E8%AF%B7%E7%86%9F%E6%89%8B%E5%AE%89%E8%A3%85%E5%8F%B0%E9%9D%A2%E5%92%8C%E7%9F%B3%E5%A4%B4%E6%89%93%E7%A3%A8%E5%B8%88%E5%82%85/137120"
-    },
-    {
-      "id": "niuyuegongzuo_137099",
-      "platform": "niuyuegongzuo",
-      "title": "Elmhurst 奶茶店请人",
-      "date": "2026-05-18",
-      "region": "东部",
-      "state": "皇后区",
-      "keywords_matched": [
-        "奶茶",
-        "请人"
-      ],
-      "url": "https://niuyuegongzuo.com/queens/%E9%A4%90%E9%A5%AE%E8%AF%B7%E4%BA%BA/elmhurst-%E5%A5%B6%E8%8C%B6%E5%BA%97%E8%AF%B7%E4%BA%BA/137099"
     }
   ]
 }

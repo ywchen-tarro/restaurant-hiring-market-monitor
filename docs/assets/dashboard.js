@@ -435,9 +435,152 @@
   }
 
   // ────────────────────────────────────────────────────────
+  // REGION MAP (choropleth)
+  // ────────────────────────────────────────────────────────
+  const MAP_DEPS_CDN = {
+    d3: 'https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js',
+    topojson: 'https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js',
+    usAtlas: 'https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json',
+  };
+  let _mapDepsPromise = null;
+  let _usTopo = null;
+
+  function _loadScript(src) {
+    return new Promise((resolve, reject) => {
+      // Idempotent: don't re-add if already present
+      if (document.querySelector(`script[src="${src}"]`)) {
+        resolve(); return;
+      }
+      const s = document.createElement('script');
+      s.src = src;
+      s.onload = () => resolve();
+      s.onerror = () => reject(new Error('Failed to load ' + src));
+      document.head.appendChild(s);
+    });
+  }
+
+  async function _ensureMapDeps() {
+    if (_mapDepsPromise) return _mapDepsPromise;
+    _mapDepsPromise = (async () => {
+      await _loadScript(MAP_DEPS_CDN.d3);
+      await _loadScript(MAP_DEPS_CDN.topojson);
+      if (!_usTopo) {
+        const r = await fetch(MAP_DEPS_CDN.usAtlas, { cache: 'force-cache' });
+        if (!r.ok) throw new Error('us-atlas fetch failed: ' + r.status);
+        _usTopo = await r.json();
+      }
+    })();
+    return _mapDepsPromise;
+  }
+
+  async function renderRegionMap() {
+    const container = document.getElementById('regionMap');
+    if (!container || !state.data) return;
+
+    // Filter posts by selected platform (same as renderRegion below)
+    const platformFilter = document.getElementById('regionPlatform').value;
+    let posts = state.data.posts || [];
+    if (platformFilter && platformFilter !== 'all') {
+      posts = posts.filter(p => p.platform === platformFilter);
+    }
+
+    // Aggregate by USPS state code
+    const counts = {};
+    posts.forEach(p => {
+      if (!p.state) return;
+      const usps = window.I18N && window.I18N.uspsFor(p.state);
+      if (!usps) return;
+      counts[usps] = (counts[usps] || 0) + 1;
+    });
+
+    try {
+      await _ensureMapDeps();
+    } catch (err) {
+      container.innerHTML = `<div class="empty-state">${escapeHtml(t('noData'))}</div>`;
+      console.warn('Map deps failed to load:', err);
+      return;
+    }
+
+    const d3 = window.d3;
+    const topojson = window.topojson;
+    if (!d3 || !topojson) return;
+
+    const states = topojson.feature(_usTopo, _usTopo.objects.states);
+    const max = Math.max(1, ...Object.values(counts));
+    // Custom interpolation: dark surface -> accent blue -> warm
+    const color = d3.scaleSequentialPow()
+      .exponent(0.5)
+      .domain([0, max])
+      .interpolator(d3.interpolateRgbBasis(['#1a1e28', '#1e3a8a', '#3d7fff', '#ff8c42']));
+
+    // Clear and rebuild
+    container.innerHTML = '';
+
+    const width = container.clientWidth;
+    const height = container.clientHeight;
+
+    const svg = d3.select(container).append('svg')
+      .attr('viewBox', `0 0 ${width} ${height}`)
+      .attr('preserveAspectRatio', 'xMidYMid meet');
+
+    const projection = d3.geoAlbersUsa().fitSize([width, height], states);
+    const path = d3.geoPath(projection);
+
+    const tooltip = document.getElementById('regionMapTooltip');
+    const showTip = (event, fips) => {
+      const usps = window.I18N.fipsToUsps(fips);
+      const fullName = window.I18N.uspsToFullName(usps);
+      const count = counts[usps] || 0;
+      tooltip.innerHTML = `
+        <div class="tt-name">${escapeHtml(fullName)} (${usps})</div>
+        <div class="tt-count">${count} ${count === 1 ? 'post' : 'posts'}</div>
+      `;
+      tooltip.classList.add('shown');
+      tooltip.style.left = (event.clientX + 12) + 'px';
+      tooltip.style.top = (event.clientY + 12) + 'px';
+    };
+    const hideTip = () => tooltip.classList.remove('shown');
+
+    svg.append('g')
+      .selectAll('path')
+      .data(states.features)
+      .join('path')
+      .attr('class', 'state')
+      .attr('d', path)
+      .attr('fill', d => {
+        const usps = window.I18N.fipsToUsps(d.id);
+        return color(counts[usps] || 0);
+      })
+      .on('mousemove', (e, d) => showTip(e, d.id))
+      .on('mouseleave', hideTip);
+
+    // Labels on states that have posts
+    const labels = svg.append('g');
+    states.features.forEach(d => {
+      const usps = window.I18N.fipsToUsps(d.id);
+      const count = counts[usps] || 0;
+      if (count === 0) return;
+      const [x, y] = path.centroid(d);
+      if (isNaN(x) || isNaN(y)) return;
+      labels.append('text')
+        .attr('class', 'state-count')
+        .attr('x', x)
+        .attr('y', y + 2)
+        .text(count);
+    });
+
+    // Legend
+    const legend = document.createElement('div');
+    legend.className = 'legend';
+    legend.innerHTML = `<span>0</span><span class="legend-bar"></span><span>${max}</span>`;
+    container.appendChild(legend);
+  }
+
+  // ────────────────────────────────────────────────────────
   // REGION TAB
   // ────────────────────────────────────────────────────────
   function renderRegion() {
+    renderRegionMap().catch(err => console.warn('region map render failed:', err));
     const d = state.data;
     if (!d) return;
     const platformFilter = document.getElementById('regionPlatform').value;

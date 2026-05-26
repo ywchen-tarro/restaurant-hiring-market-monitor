@@ -70,7 +70,10 @@ class BasePlatformScraper(ABC):
         via the instance attribute `last_diagnostics` after run() completes.
         """
         days_back = days_back if days_back is not None else config.SCRAPE_DAYS_BACK
-        cutoff = date.today() - timedelta(days=days_back)
+        # `days_back` = the number of calendar days the window should cover,
+        # INCLUSIVE of today. Cutoff math: with days_back=7, we want today
+        # + 6 prior = 7 days; cutoff is today-6 (inclusive).
+        cutoff = date.today() - timedelta(days=days_back - 1)
         # Per-platform override, then config default
         page_cap = (
             self.max_pages

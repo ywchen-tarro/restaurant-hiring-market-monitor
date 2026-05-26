@@ -159,6 +159,133 @@
 
   // Chinese state/city → English. Missing entries fall back to the original
   // (the dashboard still renders, just bilingually inconsistent for that one).
+  // Chinese city/state name OR English fallback → 2-letter US postal code.
+  // Used by the choropleth in dashboard.js to color states.
+  const STATE_TO_USPS = {
+    // NY
+    '纽约': 'NY', '上州': 'NY', '长岛': 'NY', '曼哈顿': 'NY',
+    '布鲁克林': 'NY', '布鲁伦': 'NY', '皇后区': 'NY', '法拉盛': 'NY',
+    'New York': 'NY', 'Manhattan': 'NY', 'Brooklyn': 'NY',
+    'Queens': 'NY', 'Long Island': 'NY', 'Flushing': 'NY',
+    // NJ
+    '新泽西': 'NJ', '纽瓦克': 'NJ', '泽西市': 'NJ',
+    'New Jersey': 'NJ', 'Newark': 'NJ',
+    // East
+    '麻州': 'MA', '波士顿': 'MA', 'Massachusetts': 'MA', 'Boston': 'MA',
+    '康州': 'CT', 'Connecticut': 'CT',
+    '宾州': 'PA', '费城': 'PA', 'Pennsylvania': 'PA', 'Philadelphia': 'PA',
+    '维吉尼亚': 'VA', 'Virginia': 'VA',
+    '佛蒙特': 'VT', 'Vermont': 'VT',
+    '特拉华': 'DE', 'Delaware': 'DE',
+    '新罕布什尔': 'NH', 'New Hampshire': 'NH',
+    '罗得岛': 'RI', 'Rhode Island': 'RI',
+    '缅因': 'ME', 'Maine': 'ME',
+    '马里兰': 'MD', 'Maryland': 'MD',
+    '华盛顿DC': 'DC', 'Washington DC': 'DC',
+    // South
+    '佛州': 'FL', '迈阿密': 'FL', '奥兰多': 'FL', '坦帕': 'FL',
+    'Florida': 'FL', 'Miami': 'FL', 'Orlando': 'FL', 'Tampa': 'FL',
+    '德州': 'TX', '休斯顿': 'TX', '达拉斯': 'TX',
+    'Texas': 'TX', 'Houston': 'TX', 'Dallas': 'TX',
+    '乔治亚': 'GA', '亚特兰大': 'GA', 'Georgia': 'GA', 'Atlanta': 'GA',
+    '北卡': 'NC', '夏洛特': 'NC', '罗利': 'NC',
+    'North Carolina': 'NC', 'Charlotte': 'NC', 'Raleigh': 'NC',
+    '南卡': 'SC', 'South Carolina': 'SC',
+    '田纳西': 'TN', '纳什维尔': 'TN', '孟菲斯': 'TN',
+    'Tennessee': 'TN', 'Nashville': 'TN', 'Memphis': 'TN',
+    '阿拉巴马': 'AL', 'Alabama': 'AL',
+    '路易斯安娜': 'LA', '新奥尔良': 'LA', 'Louisiana': 'LA', 'New Orleans': 'LA',
+    '密西西比': 'MS', 'Mississippi': 'MS',
+    '阿肯色': 'AR', 'Arkansas': 'AR',
+    '肯塔基': 'KY', 'Kentucky': 'KY',
+    '西维吉尼亚': 'WV', 'West Virginia': 'WV',
+    '俄克拉荷马': 'OK', 'Oklahoma': 'OK',
+    // Midwest
+    '伊州': 'IL', '芝加哥': 'IL', 'Illinois': 'IL', 'Chicago': 'IL',
+    '密歇根': 'MI', '底特律': 'MI', 'Michigan': 'MI', 'Detroit': 'MI',
+    '俄亥俄': 'OH', '克利夫兰': 'OH', '哥伦布': 'OH', '辛辛那提': 'OH',
+    'Ohio': 'OH', 'Cleveland': 'OH', 'Columbus': 'OH', 'Cincinnati': 'OH',
+    '印第安纳': 'IN', '印第安纳波利斯': 'IN',
+    'Indiana': 'IN', 'Indianapolis': 'IN',
+    '威斯康星': 'WI', '密尔沃基': 'WI', 'Wisconsin': 'WI', 'Milwaukee': 'WI',
+    '明尼苏达': 'MN', '明尼阿波利斯': 'MN',
+    'Minnesota': 'MN', 'Minneapolis': 'MN',
+    '密苏里': 'MO', '圣路易斯': 'MO', '堪萨斯城': 'MO',
+    'Missouri': 'MO', 'St. Louis': 'MO', 'Kansas City': 'MO',
+    '爱荷华': 'IA', 'Iowa': 'IA',
+    '堪萨斯': 'KS', 'Kansas': 'KS',
+    '内布拉斯加': 'NE', 'Nebraska': 'NE',
+    '南达科他': 'SD', 'South Dakota': 'SD',
+    '北达科他': 'ND', 'North Dakota': 'ND',
+    // West — CA gets many cities
+    '加州': 'CA', 'California': 'CA',
+    '洛杉矶': 'CA', '旧金山': 'CA', '圣地亚哥': 'CA', '圣何塞': 'CA',
+    '湾区': 'CA', '尔湾': 'CA', '奥克兰': 'CA',
+    '圣盖博': 'CA', '蒙特利公园': 'CA', '蒙市': 'CA',
+    '阿罕布拉': 'CA', '阿罕布拉市': 'CA',
+    '罗兰岗': 'CA', '钻石吧': 'CA', '钻石吧市': 'CA',
+    '核桃': 'CA', '核桃市': 'CA',
+    '哈仙达': 'CA', '哈仙达岗': 'CA',
+    '阿凯迪亚': 'CA', '阿凯迪亚市': 'CA',
+    '罗斯密': 'CA', '圣马利诺': 'CA', '天普市': 'CA',
+    '都柏林': 'CA', '弗里蒙特': 'CA', '库柏蒂诺': 'CA',
+    '圣塔克拉拉': 'CA', '圣马刁': 'CA',
+    'Los Angeles': 'CA', 'San Francisco': 'CA', 'San Diego': 'CA',
+    'San Jose': 'CA', 'Bay Area': 'CA', 'Irvine': 'CA',
+    'Oakland': 'CA', 'San Gabriel': 'CA', 'Monterey Park': 'CA',
+    'Alhambra': 'CA', 'Rowland Heights': 'CA', 'Diamond Bar': 'CA',
+    'Walnut': 'CA', 'Hacienda Heights': 'CA',
+    'Arcadia': 'CA', 'Rosemead': 'CA',
+    'San Marino': 'CA', 'Temple City': 'CA', 'Dublin': 'CA',
+    'Fremont': 'CA', 'Cupertino': 'CA', 'Santa Clara': 'CA',
+    'San Mateo': 'CA', 'Sunnyvale': 'CA', 'Gardena': 'CA',
+    // WA / OR
+    '华盛顿州': 'WA', '西雅图': 'WA',
+    'Washington': 'WA', 'Washington State': 'WA', 'Seattle': 'WA', 'Bellevue': 'WA',
+    '俄勒冈': 'OR', '波特兰': 'OR', 'Oregon': 'OR', 'Portland': 'OR', 'Beaverton': 'OR',
+    // AZ / NV / CO / UT
+    '亚利桑那': 'AZ', '凤凰城': 'AZ', 'Arizona': 'AZ', 'Phoenix': 'AZ',
+    '科罗拉多': 'CO', '丹佛': 'CO', 'Colorado': 'CO', 'Denver': 'CO',
+    '内华达': 'NV', '拉斯维加斯': 'NV', 'Nevada': 'NV', 'Las Vegas': 'NV',
+    '犹他': 'UT', '盐湖城': 'UT', 'Utah': 'UT', 'Salt Lake City': 'UT',
+    // HI / AK / NM / WY / MT / ID
+    '夏威夷': 'HI', '檀香山': 'HI', 'Hawaii': 'HI', 'Honolulu': 'HI',
+    '阿拉斯加': 'AK', 'Alaska': 'AK',
+    '新墨西哥': 'NM', 'New Mexico': 'NM',
+    '怀俄明': 'WY', 'Wyoming': 'WY',
+    '蒙大拿': 'MT', 'Montana': 'MT',
+    '爱达荷': 'ID', 'Idaho': 'ID',
+  };
+
+  // us-atlas states-10m.json uses FIPS codes as ids — map to USPS.
+  const FIPS_TO_USPS = {
+    "01":"AL","02":"AK","04":"AZ","05":"AR","06":"CA","08":"CO",
+    "09":"CT","10":"DE","11":"DC","12":"FL","13":"GA","15":"HI",
+    "16":"ID","17":"IL","18":"IN","19":"IA","20":"KS","21":"KY",
+    "22":"LA","23":"ME","24":"MD","25":"MA","26":"MI","27":"MN",
+    "28":"MS","29":"MO","30":"MT","31":"NE","32":"NV","33":"NH",
+    "34":"NJ","35":"NM","36":"NY","37":"NC","38":"ND","39":"OH",
+    "40":"OK","41":"OR","42":"PA","44":"RI","45":"SC","46":"SD",
+    "47":"TN","48":"TX","49":"UT","50":"VT","51":"VA","53":"WA",
+    "54":"WV","55":"WI","56":"WY",
+  };
+
+  // USPS code → full English name (for tooltips and hover labels).
+  const USPS_FULL_NAMES = {
+    AL:"Alabama", AK:"Alaska", AZ:"Arizona", AR:"Arkansas", CA:"California",
+    CO:"Colorado", CT:"Connecticut", DE:"Delaware", DC:"Washington DC",
+    FL:"Florida", GA:"Georgia", HI:"Hawaii", ID:"Idaho", IL:"Illinois",
+    IN:"Indiana", IA:"Iowa", KS:"Kansas", KY:"Kentucky", LA:"Louisiana",
+    ME:"Maine", MD:"Maryland", MA:"Massachusetts", MI:"Michigan",
+    MN:"Minnesota", MS:"Mississippi", MO:"Missouri", MT:"Montana",
+    NE:"Nebraska", NV:"Nevada", NH:"New Hampshire", NJ:"New Jersey",
+    NM:"New Mexico", NY:"New York", NC:"North Carolina", ND:"North Dakota",
+    OH:"Ohio", OK:"Oklahoma", OR:"Oregon", PA:"Pennsylvania",
+    RI:"Rhode Island", SC:"South Carolina", SD:"South Dakota",
+    TN:"Tennessee", TX:"Texas", UT:"Utah", VT:"Vermont", VA:"Virginia",
+    WA:"Washington", WV:"West Virginia", WI:"Wisconsin", WY:"Wyoming",
+  };
+
   const STATE_LABELS = {
     // East
     '纽约': 'New York', '上州': 'Upstate NY', '长岛': 'Long Island',
@@ -252,6 +379,16 @@
       // 'Rosemead'), try a reverse lookup; otherwise return as-is.
       return name;
     },
+
+    // Map a Chinese city/state name (or English fallback) → 2-letter US
+    // postal code. Returns null if no mapping. Used by the choropleth.
+    uspsFor(name) {
+      if (!name) return null;
+      return STATE_TO_USPS[name] || null;
+    },
+
+    fipsToUsps(fips) { return FIPS_TO_USPS[fips] || null; },
+    uspsToFullName(usps) { return USPS_FULL_NAMES[usps] || usps; },
 
     getLang() { return currentLang; },
 

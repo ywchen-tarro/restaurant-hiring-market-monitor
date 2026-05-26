@@ -106,7 +106,10 @@ def _load_existing(path: Path) -> dict:
 
 def _aggregate(posts: List[Post], days_back: int) -> dict:
     today = date.today()
-    date_from = (today - timedelta(days=days_back)).isoformat()
+    # days_back includes today (see base.py for the same convention) so
+    # the window spans `today - (days_back-1)` … `today`, i.e. days_back
+    # calendar days inclusive.
+    date_from = (today - timedelta(days=days_back - 1)).isoformat()
     date_to = today.isoformat()
 
     plats_counter = Counter(p.platform for p in posts)
@@ -163,7 +166,7 @@ def _aggregate(posts: List[Post], days_back: int) -> dict:
 
 def _new_history_entry(posts: List[Post], days_back: int) -> dict:
     today = date.today()
-    date_from = (today - timedelta(days=days_back)).isoformat()
+    date_from = (today - timedelta(days=days_back - 1)).isoformat()
     plats_counter = Counter(p.platform for p in posts)
     return {
         "run_date": today.isoformat(),
@@ -296,32 +299,28 @@ def _merge_daily(
 
     `existing` is the prior daily.json contents (or {} on first run).
     `new_days` is what this run computed.
-    `window_start` is `today - SCRAPE_DAYS_BACK + 1` as an ISO date.
+    `window_start` is the ISO date of the first day in the current
+    lookback window (inclusive).
 
-    Days >= window_start are overwritten by `new_days` (subsequent runs
-    have the most-complete view of that day's posts). Days < window_start
-    are kept as previously recorded — we've already moved past their
-    scrape window.
+    - Days < window_start are kept verbatim (frozen — we've moved past
+      their scrape window so we can't refresh them anyway).
+    - Days >= window_start come EXCLUSIVELY from the new scrape. If a
+      prior in-window day disappeared from new_days, that means the
+      current scrape legitimately found zero matching posts for that
+      day — preserving the old count would overstate activity (e.g.
+      after a keyword-filter correction). The schema-drift warning
+      system catches the genuine-failure case where the whole platform
+      dropped to 0.
     """
     prior_days = (existing or {}).get("days", {})
     merged_days: Dict[str, dict] = {}
 
-    # Keep frozen historical days
     for d, info in prior_days.items():
         if d < window_start:
             merged_days[d] = info
 
-    # Overwrite/append in-window days with the new snapshot
     for d, info in new_days.items():
         merged_days[d] = info
-
-    # Also keep prior in-window days that didn't show up in this run
-    # (e.g. day had 0 matching posts in this run but had posts earlier).
-    # Otherwise the chart would gain "gaps" at days that previously
-    # rendered non-zero.
-    for d, info in prior_days.items():
-        if d >= window_start and d not in merged_days:
-            merged_days[d] = info
 
     return merged_days
 
@@ -334,7 +333,7 @@ def write_daily_json(
     """Write/refresh the per-day time series."""
     out_path = out_path or config.DAILY_JSON
     today = date.today()
-    window_start = (today - timedelta(days=days_back)).isoformat()
+    window_start = (today - timedelta(days=days_back - 1)).isoformat()
 
     existing = _load_existing(out_path) if out_path.exists() else {}
     new_days = _compute_daily(posts)

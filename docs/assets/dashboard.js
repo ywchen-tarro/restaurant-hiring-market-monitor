@@ -31,9 +31,11 @@
     charts: { pie: null, trend: null },
   };
 
-  // i18n helper — falls back to identity if i18n.js failed to load.
+  // i18n helpers — fall back to identity if i18n.js failed to load.
   const t = (k, p) => (window.I18N ? window.I18N.t(k, p) : k);
   const regionName = (c) => (window.I18N ? window.I18N.region(c) : c);
+  const stateName = (s) => (window.I18N ? window.I18N.state(s) : s);
+  const platformName = (id) => (window.I18N ? window.I18N.platform(id) : id);
 
   // ────────────────────────────────────────────────────────
   // ENTRY POINT
@@ -158,7 +160,7 @@
       .map(p => ({ ...p, total: (d.by_platform[p.id] || {}).total || 0 }))
       .sort((a, b) => b.total - a.total);
     const top = platRanked[0];
-    document.getElementById('kpiTopPlatform').textContent = top.name;
+    document.getElementById('kpiTopPlatform').textContent = platformName(top.id);
     document.getElementById('kpiTopPlatformSub').textContent = `${top.total}`;
 
     // Top region
@@ -170,7 +172,7 @@
     const topStates = (d.by_region[topReg.r] || {}).top_states || {};
     const topStateName = Object.keys(topStates)[0] || '';
     document.getElementById('kpiTopRegionSub').textContent =
-      t('kpiTopRegionSub', { total: topReg.total, state: topStateName || '—' });
+      t('kpiTopRegionSub', { total: topReg.total, state: stateName(topStateName) || '—' });
 
     // Rising alerts: count platforms with notable Δ vs previous history entry
     const { rising, falling } = computeAlerts();
@@ -254,10 +256,11 @@
     });
 
     PLATFORMS.forEach(p => {
+      const label = platformName(p.id);
       const o1 = document.createElement('option');
-      o1.value = p.id; o1.textContent = p.name; pp.appendChild(o1);
+      o1.value = p.id; o1.textContent = label; pp.appendChild(o1);
       const o2 = document.createElement('option');
-      o2.value = p.id; o2.textContent = p.name; rp.appendChild(o2);
+      o2.value = p.id; o2.textContent = label; rp.appendChild(o2);
     });
   }
 
@@ -298,10 +301,10 @@
       row.className = 'platform-row';
       row.innerHTML = `
         <span class="p-dot" style="background:${p.color}"></span>
-        <span class="p-name">${p.name}</span>
+        <span class="p-name">${escapeHtml(platformName(p.id))}</span>
         <div class="p-bar-wrap"><div class="p-bar" style="width:${(p.total / max) * 100}%; background:${p.color}"></div></div>
         <span class="p-count">${p.total}</span>
-        <span class="p-trend ${trendCls}">${trendTxt}</span>
+        <span class="p-trend ${trendCls}">${escapeHtml(trendTxt)}</span>
       `;
       list.appendChild(row);
     });
@@ -317,7 +320,7 @@
     state.charts.pie = new Chart(ctx, {
       type: 'doughnut',
       data: {
-        labels: totals.map(p => p.name),
+        labels: totals.map(p => platformName(p.id)),
         datasets: [{
           data: totals.map(p => p.total),
           backgroundColor: totals.map(p => p.color),
@@ -341,7 +344,7 @@
       row.style.cssText = 'display:flex; align-items:center; gap:8px; font-size:12px;';
       row.innerHTML = `
         <span style="width:10px; height:10px; background:${p.color}; border-radius:2px; display:inline-block;"></span>
-        <span style="flex:1; color:var(--text)">${p.name}</span>
+        <span style="flex:1; color:var(--text)">${escapeHtml(platformName(p.id))}</span>
         <span style="font-family:var(--mono); color:var(--muted)">${pct}%</span>
       `;
       legend.appendChild(row);
@@ -370,7 +373,7 @@
 
     const labels = history.map(h => h.run_date);
     const datasets = PLATFORMS.map(p => ({
-      label: p.name,
+      label: platformName(p.id),
       data: history.map(h => (h.by_platform || {})[p.id] || 0),
       borderColor: p.color,
       backgroundColor: p.color + '33',
@@ -466,7 +469,7 @@
       const stateRows = states.length
         ? states.map(([n, c], i) => `
             <div class="state-row">
-              <span class="state-name">${escapeHtml(n)}</span>
+              <span class="state-name">${escapeHtml(stateName(n))}</span>
               <div class="state-bar-wrap"><div class="state-bar ${i === 0 ? 'peak' : ''}" style="width:${(c / maxState) * 100}%"></div></div>
               <span class="state-count">${c}</span>
             </div>`).join('')
@@ -530,11 +533,11 @@
       el.className = 'post-item';
       el.innerHTML = `
         <div class="post-meta">
-          <span class="post-platform" style="background:${platMeta.color}33; color:${platMeta.color}">${escapeHtml(platMeta.name)}</span>
+          <span class="post-platform" style="background:${platMeta.color}33; color:${platMeta.color}">${escapeHtml(platformName(p.platform))}</span>
           <span class="post-time">${escapeHtml(p.date || '—')}</span>
         </div>
         <div class="post-title">${titleEl}</div>
-        <div class="post-region">${escapeHtml(regionName(p.region) || t('unknownRegion'))} · ${escapeHtml(p.state || '—')} ${(p.keywords_matched || []).map(k => `<span class="kw-tag">${escapeHtml(k)}</span>`).join('')}</div>
+        <div class="post-region">${escapeHtml(regionName(p.region) || t('unknownRegion'))} · ${escapeHtml(stateName(p.state) || '—')} ${(p.keywords_matched || []).map(k => `<span class="kw-tag">${escapeHtml(k)}</span>`).join('')}</div>
       `;
       feed.appendChild(el);
     });

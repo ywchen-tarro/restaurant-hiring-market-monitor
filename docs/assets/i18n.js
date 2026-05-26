@@ -148,6 +148,76 @@
   // For passthrough values (state names, etc.), returns as-is.
   const REGION_TO_KEY = { '东部': 'east', '南部': 'south', '中部': 'midwest', '西部': 'west' };
 
+  // Platform display names — id → { en, zh }
+  const PLATFORM_LABELS = {
+    '168worker':     { en: '168Worker',    zh: '168worker' },
+    'usahuarenjie':  { en: 'USAhuarenjie', zh: '华人街生活网' },
+    '500work':       { en: '500Work',      zh: '500work' },
+    'uscanyin':      { en: 'USCanyin',     zh: '北美餐饮通' },
+    'niuyuegongzuo': { en: 'NYgongzuo',    zh: '纽约工作网' },
+  };
+
+  // Chinese state/city → English. Missing entries fall back to the original
+  // (the dashboard still renders, just bilingually inconsistent for that one).
+  const STATE_LABELS = {
+    // East
+    '纽约': 'New York', '上州': 'Upstate NY', '长岛': 'Long Island',
+    '曼哈顿': 'Manhattan', '布鲁克林': 'Brooklyn', '布鲁伦': 'Brooklyn',
+    '皇后区': 'Queens', '法拉盛': 'Flushing',
+    '新泽西': 'New Jersey', '纽瓦克': 'Newark', '泽西市': 'Jersey City',
+    '康州': 'Connecticut', '麻州': 'Massachusetts', '波士顿': 'Boston',
+    '宾州': 'Pennsylvania', '费城': 'Philadelphia',
+    '华盛顿DC': 'Washington DC',
+    '维吉尼亚': 'Virginia', '佛蒙特': 'Vermont', '特拉华': 'Delaware',
+    '新罕布什尔': 'New Hampshire', '罗得岛': 'Rhode Island', '缅因': 'Maine',
+    // South
+    '佛州': 'Florida', '德州': 'Texas', '乔治亚': 'Georgia',
+    '北卡': 'North Carolina', '南卡': 'South Carolina', '田纳西': 'Tennessee',
+    '马里兰': 'Maryland', '阿拉巴马': 'Alabama', '路易斯安娜': 'Louisiana',
+    '阿肯色': 'Arkansas', '密西西比': 'Mississippi', '肯塔基': 'Kentucky',
+    '俄克拉荷马': 'Oklahoma', '西维吉尼亚': 'West Virginia',
+    '亚特兰大': 'Atlanta', '休斯顿': 'Houston', '达拉斯': 'Dallas',
+    '迈阿密': 'Miami', '奥兰多': 'Orlando', '坦帕': 'Tampa',
+    '夏洛特': 'Charlotte', '罗利': 'Raleigh', '纳什维尔': 'Nashville',
+    '新奥尔良': 'New Orleans', '孟菲斯': 'Memphis',
+    // Midwest
+    '伊州': 'Illinois', '芝加哥': 'Chicago',
+    '密歇根': 'Michigan', '底特律': 'Detroit',
+    '俄亥俄': 'Ohio', '克利夫兰': 'Cleveland', '哥伦布': 'Columbus',
+    '辛辛那提': 'Cincinnati',
+    '印第安纳': 'Indiana', '印第安纳波利斯': 'Indianapolis',
+    '威斯康星': 'Wisconsin', '密尔沃基': 'Milwaukee',
+    '明尼苏达': 'Minnesota', '明尼阿波利斯': 'Minneapolis',
+    '密苏里': 'Missouri', '圣路易斯': 'St. Louis', '堪萨斯城': 'Kansas City',
+    '爱荷华': 'Iowa', '堪萨斯': 'Kansas',
+    '内布拉斯加': 'Nebraska', '南达科他': 'South Dakota',
+    '北达科他': 'North Dakota',
+    // West
+    '加州': 'California',
+    '洛杉矶': 'Los Angeles', '旧金山': 'San Francisco',
+    '圣地亚哥': 'San Diego', '圣何塞': 'San Jose',
+    '湾区': 'Bay Area', '尔湾': 'Irvine', '奥克兰': 'Oakland',
+    '圣盖博': 'San Gabriel', '蒙特利公园': 'Monterey Park', '蒙市': 'Monterey Park',
+    '阿罕布拉': 'Alhambra', '阿罕布拉市': 'Alhambra',
+    '罗兰岗': 'Rowland Heights', '钻石吧': 'Diamond Bar',
+    '核桃': 'Walnut', '核桃市': 'Walnut',
+    '哈仙达': 'Hacienda Heights', '哈仙达岗': 'Hacienda Heights',
+    '阿凯迪亚': 'Arcadia', '阿凯迪亚市': 'Arcadia',
+    '罗斯密': 'Rosemead',
+    '圣马利诺': 'San Marino', '天普市': 'Temple City', '都柏林': 'Dublin',
+    '弗里蒙特': 'Fremont', '库柏蒂诺': 'Cupertino',
+    '圣塔克拉拉': 'Santa Clara', '圣马刁': 'San Mateo',
+    '华盛顿州': 'Washington', '西雅图': 'Seattle',
+    '俄勒冈': 'Oregon', '波特兰': 'Portland',
+    '亚利桑那': 'Arizona', '凤凰城': 'Phoenix',
+    '科罗拉多': 'Colorado', '丹佛': 'Denver',
+    '内华达': 'Nevada', '拉斯维加斯': 'Las Vegas',
+    '犹他': 'Utah', '盐湖城': 'Salt Lake City',
+    '夏威夷': 'Hawaii', '檀香山': 'Honolulu',
+    '阿拉斯加': 'Alaska', '新墨西哥': 'New Mexico',
+    '怀俄明': 'Wyoming', '蒙大拿': 'Montana', '爱达荷': 'Idaho',
+  };
+
   window.I18N = {
     t(key, params) {
       const dict = STRINGS[currentLang] || STRINGS.en;
@@ -160,6 +230,27 @@
     region(code) {
       const k = REGION_TO_KEY[code];
       return k ? this.t(k) : code;
+    },
+
+    // Platform name in the active language. Falls back to the id (no-op
+    // for already-English ids like '168worker').
+    platform(id) {
+      const entry = PLATFORM_LABELS[id];
+      if (!entry) return id;
+      return entry[currentLang] || entry.en || id;
+    },
+
+    // State/city name in the active language. Falls back to the original
+    // input — that way an unmapped city (e.g. a rare CA suburb) still
+    // renders, just stays in Chinese in EN mode.
+    state(name) {
+      if (!name) return '';
+      if (currentLang === 'en') {
+        return STATE_LABELS[name] || name;
+      }
+      // For zh mode, if input is already English (city slug fallback like
+      // 'Rosemead'), try a reverse lookup; otherwise return as-is.
+      return name;
     },
 
     getLang() { return currentLang; },

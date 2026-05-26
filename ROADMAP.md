@@ -130,31 +130,23 @@ This is the option mentioned by the user. Recommended path: **only fall to this 
 
 ## Per-platform plan
 
-### 168worker.com (priority 1)
+### 168worker.com — ✅ DONE
 
-1. Capture the exact failure: hit https://www.168worker.com/list/1_0 with `curl -v` and save the 403 body. Inspect for Cloudflare markers (`__cf_bm` cookie hint, `cf-ray` header).
-2. Try Level 1 headers. If still 403 → Level 2.
-3. Once a page returns 200, build `scraper/platforms/_168worker.py`. Pagination from the PRD says `path` style — confirm against a real fetch.
-4. Set `"enabled": true` in `config.PLATFORMS`.
+Level 2 (curl_cffi with chrome120 impersonation) cleared the 403 on the first try. Scraper at `scraper/platforms/_168worker.py`.
 
-### 500work.com (priority 2)
+### 500work.com — ✅ DONE
 
-Same playbook as 168worker. Both came back 403 in the same probe; they may be on the same anti-bot product. If Level 2 fixes one it likely fixes both.
+Same fix as 168worker. **Note**: 500work and 168worker share the same CMS and post database — they republish identical posts. Mirror-dedup runs in `output.py:_unique_post_count` via `MIRROR_GROUPS`.
 
-### uscanyin.com (priority 3)
+### uscanyin.com — ✅ DONE
 
-Plain GET works (confirmed in probes). The issue is scale: ~4,593 pages × ~50 listings/page is ~225k posts to iterate before hitting the 7-day cutoff if the listing isn't strictly date-sorted. Two options:
+Plain GET works; the issue was just slow deeper pagination (~17s per page past page 4). Capped at `max_pages = 8` on the Scraper class, with `REQUEST_TIMEOUT = 30s` for the platform. Caveat: relative date format ("1 hour ago", "yesterday") collapses everything ≤24h to today — accepted for now, see follow-up.
 
-- Hope it's date-sorted (most listing sites are) — let `MAX_PAGES_PER_PLATFORM` cap it. Likely fine since restaurant-only volume is probably modest.
-- Find a sort or filter parameter to apply (`?sort=newest`, etc.) — read the page source.
+### meiguogongzuo.com (priority 1 of remaining)
 
-The pagination is `query`-style; URL likely `/en/community/jobs/paged/<N>`.
+Similarweb rank #4,783 (much higher than 168worker's #685,532). Worth adding because higher traffic likely correlates with higher post volume. No structure investigation done yet.
 
-### meiguogongzuo.com (priority 4 — new platform)
-
-Similarweb rank #4,783 (much higher than 168worker's #685,532). Worth adding once the existing 3 are unblocked because its higher traffic likely correlates with higher post volume. No structure investigation done yet.
-
-### us168168.com (priority 5 — new platform)
+### us168168.com (priority 2 of remaining)
 
 Similarweb rank #4,518. Likely similar to meiguogongzuo. Same status — uninvestigated.
 
@@ -162,13 +154,17 @@ Similarweb rank #4,518. Likely similar to meiguogongzuo. Same status — uninves
 
 ## Other follow-ups from review
 
-### Correctness / robustness (P1)
+### Correctness / robustness
 
-- [ ] **Cross-platform deduplication** (HIGH — promoted to P0 after enabling 168+500work): track normalized-title hashes across platforms; expose `meta.unique_posts` distinct from `meta.total_posts`; dashboard headline should use unique. Without this the aggregate signal is inflated by the 168/500work overlap.
-- [ ] **Add tests**: pytest fixtures with saved HTML pages per platform; unit tests for `date_parser`, `regions.classify`, `keywords.is_restaurant`, `output._merge_history`. The MVP currently relies on manual smoke tests — first DOM change is silent breakage.
+- [x] **Cross-platform deduplication** — restricted to MIRROR_GROUPS (168 ↔ 500work); independent platforms aren't deduped (avoids merging distinct restaurants that share a generic title).
+- [x] **Stale-data alerting** — done. Watchdog plist + macOS Notification Center.
+- [x] **launchd commits daily.json** — both `posts.json` and `daily.json` staged in `run.sh`.
+- [x] **7-day window off-by-one fix** — `days_back - 1` math everywhere; date_from / date_to now span 7 calendar days inclusive.
+- [x] **_merge_daily** no longer preserves stale in-window days that disappear from a fresh scrape (overstated activity bug).
+- [ ] **Add tests**: pytest fixtures with saved HTML pages per platform; unit tests for `date_parser`, `regions.classify`, `keywords.is_restaurant`, `output._merge_history`, `output._merge_daily`, `output._unique_post_count`. The dashboard still relies on manual smoke tests — first DOM change is silent breakage.
 - [ ] **English 2-letter state code matching**: require word boundaries for `NY`/`NJ`/`MA`/`CT`/`PA`/`VA` to avoid `SUNNYVALE → NY` false matches.
 - [ ] **launchd missed-run catch-up**: if the Mac was asleep on a scheduled run, fire a catch-up on next wake. (Watchdog notification is in place; actual catch-up scrape on wake is not.)
-- [x] **Stale-data alerting** — done. Watchdog plist + macOS Notification Center.
+- [ ] **Detail-page date fetch for uscanyin** to recover absolute dates for posts <24h old.
 
 ### Signal quality (P2)
 
@@ -176,15 +172,23 @@ Similarweb rank #4,518. Likely similar to meiguogongzuo. Same status — uninves
 - [ ] **Weekday-adjusted aggregates**: weekends post 30-50% less; raw WoW deltas at the run level mix this signal in.
 - [ ] **Platform-mix decomposition**: when 168worker comes back online, the total will jump from a *source* change, not a *market* change. Report `share_of_signal` per platform so consumers can see this. Consider a chained index (Laspeyres or geometric) on per-platform daily counts.
 
-### UX (P2)
+### UX
 
+- [x] **Choropleth state map on the region tab** — D3 + us-atlas, lazy-loaded.
+- [x] **Heatmap calendar on Overview** — 35-day GitHub-style grid.
+- [x] **Today vs 7-day avg KPI** — replaces the old "Coverage" card.
+- [x] **Daily trend chart** — Trend tab now plots from `daily.json` with a 7-day MA overlay (was per-run snapshots).
+- [x] **Date filter on Posts tab** — Today / Yesterday / Last 7 days.
+- [x] **Bilingual EN/zh** with persisted toggle; default EN.
 - [ ] **CSV export from the posts tab** — Growth/BDR will want to hand a region-filtered list to a campaign tool.
-- [ ] **Choropleth state map on the region tab** — much higher signal density than the current top-5 mini-bars.
 - [ ] **A one-sentence "headline" at the top of the page** — auto-generated summary like "本周招聘市场 ▲ 增长 18%，东部最活跃" before the KPI cards.
 - [ ] **Screenshot in the README** — replace the sample-JSON snippet with an actual rendered image.
 
 ### Operational
 
+- [x] **`gh auth setup-git`** baked into `install_schedule.sh`. launchd-context git push works.
+- [x] **macOS Notification Center alerts** on success/failure + daily watchdog plist.
+- [x] **`check-health.sh`** one-screen status command.
 - [ ] **Branch protection on `main`** — block `--force` push on the public repo.
 - [ ] **Dependabot + secret-scanning** — free on public repos; turn on.
-- [ ] **`gh auth setup-git` documented in install_schedule.sh** — without it, launchd push will fail silently.
+- [ ] **Off-device alerts** (Pushover / Slack webhook) for when you're away from the Mac.

@@ -10,15 +10,24 @@ Twice a week, this project counts how many restaurant-job posts appear on the fi
 
 ## How to read it
 
+Top of page is a row of five KPI cards (English / 中文 labels swap with the language toggle):
+
 | Card | What it tells you |
 |---|---|
-| **本期总帖数** | Total restaurant-job posts in the trailing 7 days, plus the % delta vs. the previous run. |
-| **招聘最活跃地区** | Region (East/South/Midwest/West) with the highest volume, and its top state/city. Where outbound efforts will land warmest right now. |
-| **最活跃平台** | Which board carried the most posts this period. Useful when a platform's audience shifts. |
-| **市场信号** | Count of platforms with ≥20% week-over-week change. Green = rising, orange = cooling. |
-| **趋势 tab** | Multi-line chart of each platform's weekly count. The story is in the slopes. |
-| **地区分布 tab** | Per-region cards with top-5 state breakdowns. |
-| **帖子详情 tab** | Filterable list of the individual posts the count comes from. |
+| **Posts this period / 本期总帖数** | Total restaurant-job posts in the trailing 7 days (unique, after 168↔500work mirror dedup). Sub-line shows the % delta vs. the previous run. |
+| **Today's posts / 今日帖数** | Posts dated today (per their source listing date), compared to the 7-day average. Green when at/above average; orange when below. |
+| **Most active platform / 最活跃平台** | Which board carried the most posts this period. Useful when a platform's audience shifts. |
+| **Most active region / 招聘最活跃地区** | Region (East / South / Midwest / West) with the highest volume, and its top state/city. Where outbound efforts will land warmest right now. |
+| **Market signal / 市场信号** | Count of platforms with ≥20% week-over-week change. Green when more are rising than cooling; orange when more are cooling. |
+
+And four tabs below the KPI row:
+
+| Tab | What's there |
+|---|---|
+| **Overview / 概览** | GitHub-style 35-day heatmap of post dates; platform list with per-platform deltas; platform-share donut. |
+| **Trend / 趋势** | Daily post-volume chart (one line per platform) with a 7-day moving-average overlay on the total. Drives off `daily.json`. |
+| **Regions / 地区分布** | US choropleth map (D3 + us-atlas) colored by per-state post count, plus per-region cards with top-5 state breakdowns. |
+| **Posts / 帖子详情** | Filterable post list — search by title, filter by platform, region, keyword, and date (Today / Yesterday / Last 7 days). Each row links to the source listing. |
 
 ### What it is NOT
 
@@ -68,28 +77,41 @@ Full schemas and loading examples: see [`docs/data/README.md`](./docs/data/READM
 ```json
 {
   "meta": {
-    "last_updated": "2026-05-25T15:23:14-07:00",
-    "date_from": "2026-05-18",
-    "date_to": "2026-05-25",
-    "total_posts": 150,
+    "last_updated": "2026-05-25T21:27:00-07:00",
+    "scrape_days_back": 7,
+    "date_from": "2026-05-19",
+    "date_to":   "2026-05-25",
+    "total_posts":  340,
+    "unique_posts": 285,
+    "duplicate_count": 55,
     "warnings": []
   },
   "by_platform": {
-    "usahuarenjie":  { "total": 32,  "daily_avg": 4.57 },
-    "niuyuegongzuo": { "total": 118, "daily_avg": 16.86 }
+    "168worker":     { "total": 59, "daily_avg": 8.43 },
+    "usahuarenjie":  { "total": 33, "daily_avg": 4.71 },
+    "500work":       { "total": 59, "daily_avg": 8.43 },
+    "uscanyin":      { "total": 70, "daily_avg": 10.00 },
+    "niuyuegongzuo": { "total": 119, "daily_avg": 17.00 }
   },
   "by_region": {
-    "东部": { "total": 131, "top_states": { "法拉盛": 38, "长岛": 26, "上州": 19 } },
-    "西部": { "total":  14, "top_states": { "洛杉矶": 4, "旧金山": 4, "圣何塞": 2 } }
+    "东部": { "total": 213, "top_states": { "法拉盛": 51, ... } },
+    "南部": { "total":  22, "top_states": { "亚特兰大": 5, ... } },
+    "中部": { "total":  10, "top_states": { "芝加哥": 3 } },
+    "西部": { "total":  29, "top_states": { "洛杉矶": 8, ... } }
   },
   "history": [
-    { "run_date": "2026-05-25", "total": 150, "by_platform": { "usahuarenjie": 32, "niuyuegongzuo": 118 } }
+    {
+      "run_date":  "2026-05-25",
+      "by_platform": { "168worker": 59, "usahuarenjie": 33, "500work": 59, "uscanyin": 70, "niuyuegongzuo": 119 },
+      "total":        340,
+      "total_unique": 285
+    }
   ],
-  "posts": [ /* … one entry per matched post … */ ]
+  "posts": [ /* … one entry per matched post in the current 7-day window … */ ]
 }
 ```
 
-The dashboard reads this file at load time. The trend chart uses the `history` array, which **accumulates over runs** (it isn't overwritten).
+The dashboard reads `posts.json` for the current window + per-run history, and `daily.json` (which **accumulates over runs**) for the per-day Trend chart and the 35-day heatmap.
 
 ---
 

@@ -654,6 +654,19 @@
       else sliced = dateKeys;
 
       labels = sliced;
+      // Update the window-hint subtitle so the user can see which
+      // date range this chart actually covers (distinct from the top
+      // schedule bar's current-7d window).
+      const hintEl = document.getElementById('trendWindowHint');
+      if (hintEl && sliced.length > 0) {
+        hintEl.textContent = t('trendWindowHint', {
+          n: sliced.length,
+          from: sliced[0],
+          to: sliced[sliced.length - 1],
+        });
+      } else if (hintEl) {
+        hintEl.textContent = '';
+      }
       datasets = PLATFORMS.map(p => ({
         label: platformName(p.id),
         data: sliced.map(k => ((days[k] || {}).by_platform || {})[p.id] || 0),
@@ -928,6 +941,15 @@
   // REGION TAB
   // ────────────────────────────────────────────────────────
   function renderRegion() {
+    // Window hint — Region tab uses posts.json's current 7-day window
+    // (same scope as the KPI cards), NOT the longer daily.json history.
+    const hintEl = document.getElementById('regionWindowHint');
+    if (hintEl && state.data && state.data.meta) {
+      hintEl.textContent = t('regionWindowHint', {
+        from: state.data.meta.date_from,
+        to:   state.data.meta.date_to,
+      });
+    }
     renderRegionMap().catch(err => console.warn('region map render failed:', err));
     const d = state.data;
     if (!d) return;

@@ -95,4 +95,8 @@ def platform_by_id(pid: str) -> Optional[dict]:
 # ── Paths ─────────────────────────────────────────────────────
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 OUTPUT_JSON = PROJECT_ROOT / "docs" / "data" / "posts.json"
+# Per-day time series, accumulated across runs. Each scrape refreshes only
+# the days inside the current SCRAPE_DAYS_BACK window; older days freeze
+# as recorded.
+DAILY_JSON = PROJECT_ROOT / "docs" / "data" / "daily.json"
 LOG_DIR = PROJECT_ROOT / "logs"

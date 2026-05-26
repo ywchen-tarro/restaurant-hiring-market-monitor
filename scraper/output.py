@@ -263,6 +263,98 @@ def _atomic_write(path: Path, content: str) -> None:
                 pass
 
 
+def _compute_daily(posts: List[Post]) -> Dict[str, dict]:
+    """Aggregate posts by ISO date string → per-platform / per-region counts.
+
+    Note: platforms whose source dates are relative (e.g. uscanyin's
+    "1 hour ago") all collapse to today, so the daily breakdown for those
+    platforms is approximate. The aggregate per-day total is still useful
+    as a smoothed signal across platforms with absolute dates.
+    """
+    days: Dict[str, dict] = {}
+    for p in posts:
+        if not p.date:
+            continue
+        bucket = days.setdefault(p.date, {
+            "by_platform": {},
+            "by_region": {},
+            "total": 0,
+        })
+        bucket["by_platform"][p.platform] = bucket["by_platform"].get(p.platform, 0) + 1
+        if p.region:
+            bucket["by_region"][p.region] = bucket["by_region"].get(p.region, 0) + 1
+        bucket["total"] += 1
+    return days
+
+
+def _merge_daily(
+    existing: dict,
+    new_days: Dict[str, dict],
+    window_start: str,
+) -> dict:
+    """Refresh days inside the current window; preserve older frozen days.
+
+    `existing` is the prior daily.json contents (or {} on first run).
+    `new_days` is what this run computed.
+    `window_start` is `today - SCRAPE_DAYS_BACK + 1` as an ISO date.
+
+    Days >= window_start are overwritten by `new_days` (subsequent runs
+    have the most-complete view of that day's posts). Days < window_start
+    are kept as previously recorded — we've already moved past their
+    scrape window.
+    """
+    prior_days = (existing or {}).get("days", {})
+    merged_days: Dict[str, dict] = {}
+
+    # Keep frozen historical days
+    for d, info in prior_days.items():
+        if d < window_start:
+            merged_days[d] = info
+
+    # Overwrite/append in-window days with the new snapshot
+    for d, info in new_days.items():
+        merged_days[d] = info
+
+    # Also keep prior in-window days that didn't show up in this run
+    # (e.g. day had 0 matching posts in this run but had posts earlier).
+    # Otherwise the chart would gain "gaps" at days that previously
+    # rendered non-zero.
+    for d, info in prior_days.items():
+        if d >= window_start and d not in merged_days:
+            merged_days[d] = info
+
+    return merged_days
+
+
+def write_daily_json(
+    posts: List[Post],
+    days_back: int,
+    out_path: Optional[Path] = None,
+) -> Path:
+    """Write/refresh the per-day time series."""
+    out_path = out_path or config.DAILY_JSON
+    today = date.today()
+    window_start = (today - timedelta(days=days_back)).isoformat()
+
+    existing = _load_existing(out_path) if out_path.exists() else {}
+    new_days = _compute_daily(posts)
+    merged = _merge_daily(existing, new_days, window_start)
+
+    output = {
+        "meta": {
+            "schema_version": 1,
+            "last_updated": datetime.now().astimezone().isoformat(timespec="seconds"),
+            "day_count": len(merged),
+            "earliest": min(merged) if merged else None,
+            "latest": max(merged) if merged else None,
+        },
+        "days": dict(sorted(merged.items())),
+    }
+    _atomic_write(out_path, json.dumps(output, ensure_ascii=False, indent=2))
+    log.info("Wrote daily aggregation to %s (%d days)", out_path, len(merged))
+    return out_path
+
+
 def write_posts_json(
     posts: List[Post],
     days_back: int,
@@ -293,4 +385,8 @@ def write_posts_json(
         "Wrote %d posts to %s (history: %d entries, warnings: %d)",
         len(posts), out_path, len(new_history), len(aggregated["meta"]["warnings"]),
     )
+
+    # Also update the per-day time series alongside posts.json. This is
+    # the file that grows linearly over time — analytics-friendly.
+    write_daily_json(posts, days_back)
     return out_path

@@ -54,6 +54,15 @@ A post is counted as a restaurant job when its title matches at least one **stro
 
 Each post is classified into one of four US regions: 东部 / 南部 / 中部 / 西部, by state-token match against ~150 city/state names (Simplified + Traditional Chinese + English).
 
+### Data files
+
+| File | Purpose |
+|---|---|
+| [`docs/data/posts.json`](./docs/data/posts.json) | Current 7-day window: aggregate counts, per-run history log, full list of posts. The dashboard reads this. |
+| [`docs/data/daily.json`](./docs/data/daily.json) | Per-day time series that grows across runs. Analytics-friendly (load into pandas / a notebook for moving averages, regressions, etc.). |
+
+Full schemas and loading examples: see [`docs/data/README.md`](./docs/data/README.md).
+
 ### Sample output (`docs/data/posts.json`)
 
 ```json

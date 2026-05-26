@@ -175,6 +175,7 @@
     '500work':       { en: '500Work',      zh: '500work' },
     'uscanyin':      { en: 'USCanyin',     zh: '北美餐饮通' },
     'niuyuegongzuo': { en: 'NYgongzuo',    zh: '纽约工作网' },
+    'meiguogongzuo': { en: 'MGgongzuo',    zh: '美国工作网' },
   };
 
   // Chinese state/city → English. Missing entries fall back to the original

@@ -142,13 +142,19 @@ Same fix as 168worker. **Note**: 500work and 168worker share the same CMS and po
 
 Plain GET works; the issue was just slow deeper pagination (~17s per page past page 4). Capped at `max_pages = 8` on the Scraper class, with `REQUEST_TIMEOUT = 30s` for the platform. Caveat: relative date format ("1 hour ago", "yesterday") collapses everything ≤24h to today — accepted for now, see follow-up.
 
-### meiguogongzuo.com (priority 1 of remaining)
+### meiguogongzuo.com — ✅ DONE
 
-Similarweb rank #4,783 (much higher than 168worker's #685,532). Worth adding because higher traffic likely correlates with higher post volume. No structure investigation done yet.
+Plain GET returns 403; curl_cffi (chrome120) clears it. URL pattern is `/<state-slug>/<title-slug>/<id>/`, pagination is `?page=N`, dates are MM/DD/YY inline in the row text. Scraper at `scraper/platforms/meiguogongzuo.py`. State extraction from the URL slug yields >80% resolution rate.
 
-### us168168.com (priority 2 of remaining)
+### us168168.com — ⚠ DEFERRED (Nuxt SPA)
 
-Similarweb rank #4,518. Likely similar to meiguogongzuo. Same status — uninvestigated.
+us168168.com is a Nuxt 3 single-page application: the homepage HTML is essentially empty (`/_nuxt/*.js` bundles + a mount point); job content is fetched by JS from `/serverapi/...` after page load. The API endpoints return 500 without authentication and the auth scheme isn't documented externally.
+
+Two paths to revisit:
+1. **Reverse-engineer the API auth** — inspect the browser's network tab to capture the Authorization header / token format, then replay from Python. May be brittle (rotating tokens) and is ToS-grey.
+2. **Playwright headless** — run a real Chromium, let it render, scrape the rendered DOM. ~300MB browser, +5-10× scrape time per page, but works regardless of auth scheme. Already documented in this file as Level 4.
+
+Either path adds ≥4 hours of work for a single platform. Deferred until we know us168168's actual restaurant-job volume matters vs the 6 currently active platforms.
 
 ---
 

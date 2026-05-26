@@ -21,6 +21,7 @@ PLATFORM_MODULE = {
     "500work": "_500work",
     "uscanyin": "uscanyin",
     "niuyuegongzuo": "niuyuegongzuo",
+    "meiguogongzuo": "meiguogongzuo",
 }
 
 

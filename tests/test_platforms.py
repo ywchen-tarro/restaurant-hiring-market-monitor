@@ -177,12 +177,44 @@ def test_niuyuegongzuo_dates_parsed():
 
 
 # ─────────────────────────────────────────────────────────────
+# meiguogongzuo
+# ─────────────────────────────────────────────────────────────
+
+def test_meiguogongzuo_parse():
+    from scraper.platforms.meiguogongzuo import Scraper
+    html = _load("meiguogongzuo_page1.html")
+    posts = Scraper().parse_page(html, 1)
+    assert posts
+    assert len(posts) >= 30  # ~68 raw posts on page 1
+    for p in posts:
+        _assert_post_shape(p)
+        assert p.platform == "meiguogongzuo"
+        assert "meiguogongzuo.com" in p.url
+    _assert_unique_ids(posts)
+
+
+def test_meiguogongzuo_state_from_slug():
+    """meiguogongzuo embeds the state slug in the URL path. Most posts
+    should have a non-empty .state from that mapping."""
+    from scraper.platforms.meiguogongzuo import Scraper
+    html = _load("meiguogongzuo_page1.html")
+    posts = Scraper().parse_page(html, 1)
+    have_state = sum(1 for p in posts if p.state)
+    assert have_state / len(posts) >= 0.80, \
+        f"expected ≥80% to resolve a state from URL slug, got {have_state}/{len(posts)}"
+
+
+# ─────────────────────────────────────────────────────────────
 # Defensive: empty / malformed HTML doesn't crash
 # ─────────────────────────────────────────────────────────────
 
-@pytest.mark.parametrize("module_name", [
-    "_168worker", "_500work", "usahuarenjie", "uscanyin", "niuyuegongzuo",
-])
+ALL_MODULES = [
+    "_168worker", "_500work", "usahuarenjie", "uscanyin",
+    "niuyuegongzuo", "meiguogongzuo",
+]
+
+
+@pytest.mark.parametrize("module_name", ALL_MODULES)
 def test_empty_html_returns_empty_list(module_name):
     import importlib
     mod = importlib.import_module(f"scraper.platforms.{module_name}")
@@ -190,9 +222,7 @@ def test_empty_html_returns_empty_list(module_name):
     assert posts == []
 
 
-@pytest.mark.parametrize("module_name", [
-    "_168worker", "_500work", "usahuarenjie", "uscanyin", "niuyuegongzuo",
-])
+@pytest.mark.parametrize("module_name", ALL_MODULES)
 def test_malformed_html_does_not_crash(module_name):
     import importlib
     mod = importlib.import_module(f"scraper.platforms.{module_name}")

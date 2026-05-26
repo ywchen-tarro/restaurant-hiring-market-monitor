@@ -82,6 +82,16 @@ PLATFORMS = [
         "pagination": "query",
         "enabled": True,
     },
+    {
+        "id": "meiguogongzuo",
+        "name": "美国工作网",
+        "color": "#0891B2",
+        "url": "https://www.meiguogongzuo.com/",
+        "pagination": "query",
+        "enabled": True,
+        # Note: Similarweb US rank #4,783 — much higher traffic than the
+        # other 4 platforms. Expect this to become a dominant source.
+    },
 ]
 
 

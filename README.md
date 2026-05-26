@@ -59,8 +59,9 @@ A Growth team uses this to:
 | 500work | https://www.500work.com/ | `curl_cffi` (chrome120 TLS) |
 | 北美餐饮通 | https://uscanyin.com/en/jobs | `requests` (30s timeout) |
 | 纽约工作网 | https://niuyuegongzuo.com/ | `requests` |
+| 美国工作网 (meiguogongzuo) | https://www.meiguogongzuo.com/ | `curl_cffi` (chrome120 TLS) |
 
-All five platforms are active. **168worker and 500work share the same CMS / post database** — identical post IDs cross-listed on both. The aggregate `total_posts` overcounts because of this; see [ROADMAP.md](./ROADMAP.md) for the cross-platform deduplication follow-up. Per-platform breakdowns on the dashboard are accurate.
+All six platforms are active. **168worker and 500work share the same CMS / post database** — identical post IDs cross-listed on both. The `meta.unique_posts` count collapses these duplicates; `meta.total_posts` still shows the raw sum so per-platform totals stay accurate.
 
 For the anti-bot strategy (TLS fingerprinting via `curl_cffi`, why it was needed, and what to try next) and how to add new platforms — see [ROADMAP.md](./ROADMAP.md).
 

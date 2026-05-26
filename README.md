@@ -10,15 +10,20 @@ Twice a week, this project counts how many restaurant-job posts appear on the fi
 
 ## How to read it
 
+> **Everything user-facing is time-based.** Counts, deltas, and the
+> rising/cooling signal all bucket posts by their **post date** (the date
+> on the source listing), not by which scrape batch found them. The Mon/Thu
+> scrape cadence is an implementation detail.
+
 Top of page is a row of five KPI cards (English / 中文 labels swap with the language toggle):
 
 | Card | What it tells you |
 |---|---|
-| **Posts this period / 本期总帖数** | Total restaurant-job posts in the trailing 7 days (unique, after 168↔500work mirror dedup). Sub-line shows the % delta vs. the previous run. |
-| **Today's posts / 今日帖数** | Posts dated today (per their source listing date), compared to the 7-day average. Green when at/above average; orange when below. |
-| **Most active platform / 最活跃平台** | Which board carried the most posts this period. Useful when a platform's audience shifts. |
-| **Most active region / 招聘最活跃地区** | Region (East / South / Midwest / West) with the highest volume, and its top state/city. Where outbound efforts will land warmest right now. |
-| **Market signal / 市场信号** | Count of platforms with ≥20% week-over-week change. Green when more are rising than cooling; orange when more are cooling. |
+| **Posts this period / 本期总帖数** | Restaurant-job posts dated in the last 7 calendar days (unique, after 168↔500work mirror dedup). Sub-line: % vs. **prior 7 days**. |
+| **Today's posts / 今日帖数** | Posts dated today (per the source listing's date), compared to the **7-day rolling average**. Green when at/above; orange when below. |
+| **Most active platform / 最活跃平台** | Which board carried the most posts in the current 7-day window. |
+| **Most active region / 招聘最活跃地区** | Region (East / South / Midwest / West) with the highest 7-day volume, and its top state/city. |
+| **Market signal / 市场信号** | Count of platforms whose **last-7-day total** differs from their **prior-7-day total** by ≥ 20%. Green when more platforms are rising, orange when more are cooling. |
 
 And four tabs below the KPI row:
 
@@ -275,12 +280,25 @@ local.restaurant-hiring-monitor.plist  ← the launchd job
 ## How a run works
 
 1. `launchd` fires `run.sh` at 09:00 on Mon/Thu.
-2. `scraper.scrape` iterates enabled platforms. Each `Scraper.run()` paginates from page 1 until either (a) a post date falls outside `SCRAPE_DAYS_BACK`, (b) two consecutive empty pages, or (c) `MAX_PAGES_PER_PLATFORM`.
+2. `scraper.scrape` iterates enabled platforms. Each `Scraper.run()` paginates from page 1 until either (a) a post date falls outside `SCRAPE_DAYS_BACK`, (b) two consecutive empty pages, or (c) the per-platform `max_pages` cap.
 3. For each parsed post: drop if date doesn't parse, drop if outside the window, drop if no strong keyword. Otherwise sanitize the title, classify the region, and add to the output set.
-4. `output.write_posts_json` aggregates by platform/region/keyword, **atomically** replaces `docs/data/posts.json`, and **appends** a new entry to `history[]`.
-5. `run.sh` commits and pushes the JSON. GitHub Pages auto-rebuilds within ~1 minute.
+4. `output.write_posts_json` aggregates by platform/region/keyword, **atomically** writes both `docs/data/posts.json` (current 7-day window + run-audit log) AND `docs/data/daily.json` (per-day time series — accumulates across runs, days outside the current window are frozen).
+5. `run.sh` commits and pushes both JSON files. GitHub Pages auto-rebuilds within ~1 minute.
 
 If a platform raises an exception, the other platforms still produce their portion of the JSON. Per-platform health, error states, and drop diagnostics are written to `meta.diagnostics`. Schema drift (e.g., 0 posts when previous run had ≥5) emits an entry in `meta.warnings`, which the dashboard surfaces as a banner.
+
+### Time-based vs. batch-based — which is which
+
+The dashboard always presents **time-based** views (post date is the X axis, the window is rolling calendar days). `history[]` in `posts.json` is the only **batch** artifact — it logs each scrape's roll-up for audit / schema-drift detection. Users don't see it.
+
+| Surface | Source | Semantics |
+|---|---|---|
+| All KPI cards | `posts.json` aggregates + `daily.json` | Time-based (last 7d, today, etc.) |
+| Trend chart | `daily.json` | Per-day series with 7d moving average |
+| Heatmap calendar | `daily.json` | Per-day, last 35 days |
+| Regions / choropleth | `posts.json` posts[] (current window) | Time-based (last 7d by post date) |
+| Posts feed | `posts.json` posts[] | Time-based, filterable by date |
+| `meta.warnings` | `posts.json` history (batch-vs-batch) | **Batch** — for catching scraper failures (a platform dropping to 0 between scrapes) |
 
 ---
 

@@ -30,7 +30,7 @@
       kpiTopPlatform:     'Most active platform',
       kpiTopRegion:       'Most active region',
       kpiAlerts:          'Market signal',
-      kpiAlertsSub:       '±20% vs last run',
+      kpiAlertsSub:       '±20% vs prior 7 days',
       kpiAlertsBreakdown: 'rising {rising} · cooling {falling}',
       kpiTopRegionSub:    '{total} posts · centered in {state}',
 
@@ -97,7 +97,7 @@
       kpiTopPlatform:     '最活跃平台',
       kpiTopRegion:       '招聘最活跃地区',
       kpiAlerts:          '市场信号',
-      kpiAlertsSub:       '较上次变化 ±20% 以上',
+      kpiAlertsSub:       '本 7 天 vs 上 7 天变化 ±20%',
       kpiAlertsBreakdown: '升温 {rising} · 降温 {falling}',
       kpiTopRegionSub:    '{total} 帖 · 集中于 {state}',
 

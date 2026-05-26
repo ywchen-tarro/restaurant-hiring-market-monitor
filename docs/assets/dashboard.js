@@ -206,30 +206,63 @@
     if (sub) sub.textContent = t('kpiAlertsBreakdown', { rising: rising.length, falling: falling.length });
   }
 
+  // Time-based rolling-window helpers. The user-facing trend signal
+  // compares the last 7 calendar days of posts against the prior 7,
+  // independent of how many scrape runs happened in that period.
+  function _sumWindow(days, dateKeys, sliceStart, sliceEnd) {
+    const slice = dateKeys.slice(sliceStart, sliceEnd);
+    let total = 0;
+    const byPlatform = {};
+    slice.forEach(k => {
+      const info = days[k] || {};
+      total += info.total || 0;
+      for (const [p, n] of Object.entries(info.by_platform || {})) {
+        byPlatform[p] = (byPlatform[p] || 0) + n;
+      }
+    });
+    return { total, byPlatform, days: slice.length };
+  }
+
+  // Return { last7, prev7 } — both objects with .total + .byPlatform.
+  // If daily.json doesn't cover 14 days, returns null windows.
+  function rollingWindows() {
+    const days = state.daily && state.daily.days;
+    if (!days) return null;
+    const dateKeys = Object.keys(days).sort();
+    if (dateKeys.length < 14) {
+      // Not enough history yet — only return the most recent window if any
+      return {
+        last7: _sumWindow(days, dateKeys, -7, undefined),
+        prev7: null,
+      };
+    }
+    return {
+      last7: _sumWindow(days, dateKeys, -7, undefined),
+      prev7: _sumWindow(days, dateKeys, -14, -7),
+    };
+  }
+
   function totalDeltaText() {
-    const h = state.data.history || [];
-    if (h.length < 2) return t('kpiTotalSubFirst');
-    const cur = h[h.length - 1].total;
-    const prev = h[h.length - 2].total;
-    if (prev === 0) return '—';
-    const pct = ((cur - prev) / prev) * 100;
+    const w = rollingWindows();
+    if (!w || !w.prev7 || w.prev7.total === 0) return t('kpiTotalSubFirst');
+    const pct = ((w.last7.total - w.prev7.total) / w.prev7.total) * 100;
     const arrow = pct >= 0 ? '▲' : '▼';
     return `${arrow} ${Math.abs(pct).toFixed(1)}%`;
   }
 
   function computeAlerts() {
-    const h = state.data.history || [];
-    if (h.length < 2) return { rising: [], falling: [] };
-    const cur = h[h.length - 1].by_platform;
-    const prev = h[h.length - 2].by_platform;
+    // Time-based: compare each platform's last-7-days total against
+    // its prior 7-day total. Independent of scrape-run cadence.
+    const w = rollingWindows();
+    if (!w || !w.prev7) return { rising: [], falling: [] };
     const rising = [], falling = [];
     for (const p of PLATFORMS) {
-      const c = cur[p.id] || 0;
-      const v = prev[p.id] || 0;
-      if (v < 10) continue;  // ignore noisy small bases
-      const delta = (c - v) / v;
-      if (delta >= 0.20) rising.push({ platform: p, current: c, prev: v, pct: delta * 100 });
-      else if (delta <= -0.20) falling.push({ platform: p, current: c, prev: v, pct: delta * 100 });
+      const cur = w.last7.byPlatform[p.id] || 0;
+      const prev = w.prev7.byPlatform[p.id] || 0;
+      if (prev < 10) continue;  // ignore noisy small bases
+      const delta = (cur - prev) / prev;
+      if (delta >= 0.20) rising.push({ platform: p, current: cur, prev: prev, pct: delta * 100 });
+      else if (delta <= -0.20) falling.push({ platform: p, current: cur, prev: prev, pct: delta * 100 });
     }
     return { rising, falling };
   }
@@ -442,22 +475,25 @@
     const sum = totals.reduce((s, p) => s + p.total, 0);
     const max = Math.max(...totals.map(p => p.total), 1);
 
-    // Per-platform deltas from history
-    const h = d.history || [];
-    const prev = h.length >= 2 ? h[h.length - 2].by_platform : {};
+    // Per-platform deltas: last 7 days vs prior 7 days (time-based,
+    // independent of how many scrape batches the data was collected in).
+    const w = rollingWindows();
+    const last7Plat = w && w.last7 ? w.last7.byPlatform : {};
+    const prev7Plat = w && w.prev7 ? w.prev7.byPlatform : null;
 
     // Platform list
     const list = document.getElementById('platformList');
     list.innerHTML = '';
     totals.sort((a, b) => b.total - a.total).forEach(p => {
-      const prevCount = prev[p.id] || 0;
+      const curWindow = last7Plat[p.id] || 0;
+      const prevWindow = prev7Plat ? (prev7Plat[p.id] || 0) : null;
       let trendTxt = '—';
       let trendCls = 'neu';
-      if (prevCount > 0) {
-        const pct = ((p.total - prevCount) / prevCount) * 100;
+      if (prevWindow != null && prevWindow > 0) {
+        const pct = ((curWindow - prevWindow) / prevWindow) * 100;
         trendTxt = (pct >= 0 ? '+' : '') + pct.toFixed(0) + '%';
         trendCls = pct > 0 ? 'up' : (pct < 0 ? 'down' : 'neu');
-      } else if (h.length >= 2 && p.total > 0) {
+      } else if (prevWindow === 0 && curWindow > 0) {
         trendTxt = t('trendNew');
         trendCls = 'up';
       }

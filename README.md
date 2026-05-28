@@ -1,10 +1,25 @@
 # Restaurant Hiring Market Monitor
 
+> **Moved:** active development has moved to
+> [`kjt01/growth-marketing/yawei`](https://github.com/kjt01/growth-marketing/tree/main/yawei).
+> Keep this original repo for reference only; make future updates in the shared
+> team repo.
+
+**New repo path:** https://github.com/kjt01/growth-marketing/tree/main/yawei  
+**New live dashboard:** https://kjt01.github.io/growth-marketing/restaurant-hiring-market-monitor/
+
+To continue development:
+
+```bash
+git clone https://github.com/kjt01/growth-marketing.git
+cd growth-marketing/yawei
+```
+
 > Is the US restaurant market expanding or cooling right now?
 
 Every day, this project counts how many restaurant-job posts appear on the six largest Chinese-language US job boards. More posts → restaurants are growing → more demand in the market. Fewer posts → cooling. The number is a fast, free, daily read on a market segment that no public dataset tracks at this resolution.
 
-**Live dashboard:** https://ywchen-tarro.github.io/restaurant-hiring-market-monitor/
+**Live dashboard:** https://kjt01.github.io/growth-marketing/restaurant-hiring-market-monitor/
 
 ---
 
@@ -62,7 +77,7 @@ A Growth team uses this to:
 | 华人街生活网 | https://www.usahuarenjie.com/category-catid-251.html | `requests` |
 | 500work | https://www.500work.com/ | `curl_cffi` (chrome120 TLS) |
 | 北美餐饮通 | https://uscanyin.com/en/jobs | `requests` (30s timeout) |
-| 纽约工作网 | https://niuyuegongzuo.com/ | `requests` |
+| 华人168 | https://us168.com/ | `requests` |
 | 美国工作网 (meiguogongzuo) | https://www.meiguogongzuo.com/ | `curl_cffi` (chrome120 TLS) |
 
 All six platforms are active. **168worker and 500work share the same CMS / post database** — identical post IDs cross-listed on both. The `meta.unique_posts` count collapses these duplicates; `meta.total_posts` still shows the raw sum so per-platform totals stay accurate.
@@ -116,7 +131,7 @@ Full schemas and loading examples: see [`docs/data/README.md`](./docs/data/READM
     "usahuarenjie":  { "total": 33, "daily_avg": 4.71 },
     "500work":       { "total": 59, "daily_avg": 8.43 },
     "uscanyin":      { "total": 70, "daily_avg": 10.00 },
-    "niuyuegongzuo": { "total": 119, "daily_avg": 17.00 }
+    "us168":         { "total": 119, "daily_avg": 17.00 }
   },
   "by_region": {
     "东部": { "total": 213, "top_states": { "法拉盛": 51, ... } },
@@ -127,7 +142,7 @@ Full schemas and loading examples: see [`docs/data/README.md`](./docs/data/READM
   "history": [
     {
       "run_date":  "2026-05-25",
-      "by_platform": { "168worker": 59, "usahuarenjie": 33, "500work": 59, "uscanyin": 70, "niuyuegongzuo": 119 },
+      "by_platform": { "168worker": 59, "usahuarenjie": 33, "500work": 59, "uscanyin": 70, "us168": 119 },
       "total":        340,
       "total_unique": 285
     }
@@ -145,8 +160,8 @@ The dashboard reads `posts.json` for the current window + per-run history, and `
 **Requirements:** macOS, Python 3.9+, git, [`gh` CLI](https://cli.github.com/) authenticated to a GitHub account.
 
 ```bash
-git clone https://github.com/<your-username>/restaurant-hiring-market-monitor.git
-cd restaurant-hiring-market-monitor
+git clone https://github.com/kjt01/growth-marketing.git
+cd growth-marketing/yawei
 
 # Install pinned Python dependencies
 python3 -m pip install -r scraper/requirements.txt
@@ -156,6 +171,41 @@ gh auth setup-git
 
 # First run — manual
 bash run.sh
+```
+
+### Teammate / agent handoff
+
+Send teammates or their coding agent this README link:
+`https://github.com/kjt01/growth-marketing/tree/main/yawei`
+
+Use this workflow to refresh the crawler data and update the dashboard:
+
+```bash
+git clone https://github.com/kjt01/growth-marketing.git
+cd growth-marketing/yawei
+git checkout -b yawei-data-$(date +%Y-%m-%d)
+
+python3 -m pip install -r scraper/requirements.txt
+gh auth login          # if gh is not already authenticated
+gh auth setup-git
+
+bash run.sh            # crawls, updates docs/data/*.json, commits, pushes this branch
+bash run-tests.sh      # optional but recommended before opening the PR
+
+gh pr create --base main --fill
+```
+
+`main` is protected in the shared repo, so data refreshes land through a PR.
+After the PR is merged, the GitHub Pages workflow deploys the refreshed
+dashboard at
+`https://kjt01.github.io/growth-marketing/restaurant-hiring-market-monitor/`.
+
+If an agent is doing the update, the instruction can be:
+
+```text
+Read README.md in kjt01/growth-marketing/yawei, run the restaurant hiring
+market crawler, commit the updated docs/data JSON files on a branch, open a PR
+to main, and report the PR URL.
 ```
 
 ### Install the schedule (daily at 09:00 local time)
@@ -307,10 +357,10 @@ scraper/
 ├── output.py              Atomic write of posts.json, history append, schema-drift warnings
 └── platforms/
     ├── base.py            BasePlatformScraper, Post dataclass
-    ├── niuyuegongzuo.py
+    ├── us168.py
     └── usahuarenjie.py
 
-docs/                      GitHub Pages source
+docs/                      GitHub Pages source, deployed from yawei/docs in the shared repo
 ├── index.html
 ├── assets/
 │   ├── styles.css
@@ -330,7 +380,8 @@ local.restaurant-hiring-monitor.plist  ← the launchd job
 2. `scraper.scrape` iterates enabled platforms. Each `Scraper.run()` paginates from page 1 until either (a) a post date falls outside `SCRAPE_DAYS_BACK`, (b) two consecutive empty pages, or (c) the per-platform `max_pages` cap.
 3. For each parsed post: drop if date doesn't parse, drop if outside the window, drop if no strong keyword. Otherwise sanitize the title, classify the region, and add to the output set.
 4. `output.write_posts_json` aggregates by platform/region/keyword, **atomically** writes both `docs/data/posts.json` (current 7-day window + run-audit log) AND `docs/data/daily.json` (per-day time series — accumulates across runs, days outside the current window are frozen).
-5. `run.sh` commits and pushes both JSON files. GitHub Pages auto-rebuilds within ~1 minute.
+5. In the shared repo, `run.sh` commits and pushes both JSON files to `main`.
+   GitHub Pages deploys `yawei/docs` within ~1 minute.
 
 If a platform raises an exception, the other platforms still produce their portion of the JSON. Per-platform health, error states, and drop diagnostics are written to `meta.diagnostics`. Schema drift (e.g., 0 posts when previous run had ≥5) emits an entry in `meta.warnings`, which the dashboard surfaces as a banner.
 

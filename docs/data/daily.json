@@ -1,10 +1,10 @@
 {
   "meta": {
     "schema_version": 1,
-    "last_updated": "2026-05-27T09:44:19-07:00",
-    "day_count": 33,
+    "last_updated": "2026-05-28T10:40:47-07:00",
+    "day_count": 34,
     "earliest": "2026-04-25",
-    "latest": "2026-05-27"
+    "latest": "2026-05-28"
   },
   "days": {
     "2026-04-25": {
@@ -323,93 +323,93 @@
     },
     "2026-05-22": {
       "by_platform": {
-        "168worker": 5,
-        "usahuarenjie": 4,
         "500work": 5,
         "meiguogongzuo": 15
       },
       "by_region": {
-        "东部": 19,
-        "南部": 4,
-        "西部": 3
+        "东部": 16,
+        "南部": 2,
+        "西部": 1
       },
-      "total": 29
+      "total": 20
     },
     "2026-05-23": {
       "by_platform": {
-        "168worker": 6,
-        "usahuarenjie": 1,
-        "500work": 6,
+        "500work": 5,
         "meiguogongzuo": 22
       },
       "by_region": {
-        "西部": 5,
-        "东部": 26
+        "西部": 3,
+        "东部": 22
       },
-      "total": 35
+      "total": 27
     },
     "2026-05-24": {
       "by_platform": {
-        "168worker": 6,
-        "usahuarenjie": 3,
-        "500work": 6,
+        "500work": 5,
         "meiguogongzuo": 20
       },
       "by_region": {
-        "南部": 3,
-        "东部": 30,
+        "南部": 2,
+        "东部": 21,
         "西部": 2
       },
-      "total": 35
+      "total": 25
     },
     "2026-05-25": {
       "by_platform": {
-        "168worker": 8,
-        "usahuarenjie": 3,
-        "500work": 8,
+        "500work": 6,
         "meiguogongzuo": 28,
         "uscanyin": 1
       },
       "by_region": {
-        "南部": 4,
-        "东部": 31,
-        "西部": 6
+        "南部": 2,
+        "西部": 3,
+        "东部": 26
       },
-      "total": 48
+      "total": 35
     },
     "2026-05-26": {
       "by_platform": {
-        "168worker": 10,
-        "usahuarenjie": 7,
-        "500work": 10,
-        "us168": 109,
-        "meiguogongzuo": 31,
-        "uscanyin": 105
+        "500work": 8,
+        "uscanyin": 10,
+        "meiguogongzuo": 30
       },
       "by_region": {
-        "东部": 85,
-        "南部": 36,
-        "西部": 10,
-        "中部": 17
+        "东部": 43,
+        "南部": 5
       },
-      "total": 272
+      "total": 48
     },
     "2026-05-27": {
       "by_platform": {
-        "168worker": 11,
-        "usahuarenjie": 4,
-        "500work": 11,
-        "uscanyin": 119,
-        "us168": 107,
-        "meiguogongzuo": 8
+        "500work": 15,
+        "uscanyin": 6,
+        "us168": 102,
+        "meiguogongzuo": 31
       },
       "by_region": {
-        "中部": 16,
-        "南部": 55,
-        "东部": 153,
-        "西部": 14
+        "东部": 66,
+        "南部": 41,
+        "西部": 11,
+        "中部": 15
       },
-      "total": 260
+      "total": 154
+    },
+    "2026-05-28": {
+      "by_platform": {
+        "500work": 11,
+        "uscanyin": 100,
+        "us168": 118,
+        "meiguogongzuo": 10
+      },
+      "by_region": {
+        "中部": 19,
+        "南部": 51,
+        "东部": 139,
+        "西部": 7
+      },
+      "total": 239
     }
   }
 }

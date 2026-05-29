@@ -149,6 +149,15 @@ def test_uscanyin_state_extraction():
         f"low state-extraction rate: {have_state}/{len(posts)}"
 
 
+def test_uscanyin_page_cap_covers_high_volume_days():
+    from scraper.platforms.uscanyin import Scraper
+
+    # A busy current day can push prior-day posts beyond page 15.
+    # The platform needs enough headroom to let the date cutoff, not the
+    # page cap, decide when the 7-day window has been fully covered.
+    assert Scraper.max_pages >= 40
+
+
 # ─────────────────────────────────────────────────────────────
 # niuyuegongzuo
 # ─────────────────────────────────────────────────────────────

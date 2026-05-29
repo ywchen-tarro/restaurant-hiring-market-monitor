@@ -7,7 +7,8 @@ Structure observed (May 2026):
     title link, "read more") — dedupe by id
   - Date sits in a sibling text node: "发布者: 匿名用户, 7小时前" or similar
   - Listing pages are huge (4,500+ pages site-wide) but date-sorted
-    descending, so the standard 7-day cutoff stops pagination early.
+    descending, so the standard 7-day cutoff stops pagination once the
+    run reaches posts outside the current window.
 """
 
 from __future__ import annotations
@@ -72,8 +73,10 @@ REL_DATE = re.compile(
 class Scraper(BasePlatformScraper):
     id = "uscanyin"
     name = "北美餐饮通"
-    # Deeper pages render server-side at ~17s each; bound pagination tight.
-    max_pages = 8
+    # High-volume days can push yesterday's posts well past page 15.
+    # Keep the cap high enough for a 7-day window and let BasePlatformScraper
+    # stop as soon as it sees posts older than the cutoff.
+    max_pages = 80
 
     def page_url(self, page_num: int) -> str:
         if page_num == 1:

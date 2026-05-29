@@ -36,6 +36,13 @@ MIRROR_GROUPS = [
     frozenset({"168worker", "500work"}),
 ]
 
+# Platforms whose listing pages expose unstable post dates. uscanyin uses
+# relative timestamps ("46 minutes ago", "yesterday"), and us168 refreshes
+# older jobs so its listing date can move forward. Preserve their recorded
+# per-day counts unless the new scrape explicitly supplies a replacement for
+# that same day.
+RELATIVE_DATE_PLATFORMS = frozenset({"uscanyin", "us168"})
+
 # Self-dedup platforms: sites that repost the same job under new IDs
 # within a single window (meiguogongzuo observed ~10% repost rate).
 # Posts on these platforms with identical normalized titles collapse to
@@ -327,6 +334,7 @@ def _merge_daily(
     existing: dict,
     new_days: Dict[str, dict],
     window_start: str,
+    relative_platforms=RELATIVE_DATE_PLATFORMS,
 ) -> dict:
     """Refresh days inside the current window; preserve older frozen days.
 
@@ -337,13 +345,13 @@ def _merge_daily(
 
     - Days < window_start are kept verbatim (frozen — we've moved past
       their scrape window so we can't refresh them anyway).
-    - Days >= window_start come EXCLUSIVELY from the new scrape. If a
-      prior in-window day disappeared from new_days, that means the
-      current scrape legitimately found zero matching posts for that
-      day — preserving the old count would overstate activity (e.g.
-      after a keyword-filter correction). The schema-drift warning
-      system catches the genuine-failure case where the whole platform
-      dropped to 0.
+    - Days >= window_start mostly come from the new scrape. If a prior
+      in-window day disappeared from new_days, we drop it for normal
+      platforms so keyword/parser corrections can remove stale counts.
+    - Exception: platforms in `relative_platforms` are preserved per day
+      unless the new scrape has an explicit replacement for that platform
+      on that day. These sources don't provide stable absolute dates, so
+      tomorrow's scrape cannot reliably reconstruct yesterday's bucket.
     """
     prior_days = (existing or {}).get("days", {})
     merged_days: Dict[str, dict] = {}
@@ -352,8 +360,38 @@ def _merge_daily(
         if d < window_start:
             merged_days[d] = info
 
-    for d, info in new_days.items():
-        merged_days[d] = info
+    in_window_days = {
+        d for d in set(prior_days) | set(new_days)
+        if d >= window_start
+    }
+
+    for d in sorted(in_window_days):
+        new_info = new_days.get(d)
+        prior_info = prior_days.get(d, {})
+        by_platform = dict((new_info or {}).get("by_platform", {}))
+
+        # Preserve relative-date platforms from the prior snapshot when the
+        # current scrape cannot reconstruct that day for that platform.
+        prior_platforms = prior_info.get("by_platform", {})
+        for pid in relative_platforms:
+            if pid not in by_platform and pid in prior_platforms:
+                by_platform[pid] = prior_platforms[pid]
+
+        by_platform = {pid: count for pid, count in by_platform.items() if count}
+
+        if not by_platform:
+            # Some unit tests and older hand-authored fixtures only carry a
+            # day-level total. Preserve that legacy shape when it represents
+            # positive new data; real scraper output includes by_platform.
+            if new_info and not new_info.get("by_platform") and new_info.get("total", 0) > 0:
+                merged_days[d] = new_info
+            continue
+
+        merged_days[d] = {
+            "by_platform": by_platform,
+            "by_region": dict((new_info or {}).get("by_region", {})),
+            "total": sum(by_platform.values()),
+        }
 
     return merged_days
 

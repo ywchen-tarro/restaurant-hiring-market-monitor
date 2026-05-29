@@ -11,6 +11,7 @@ Run with:
 
 from __future__ import annotations
 
+import json
 from pathlib import Path
 
 import pytest
@@ -177,6 +178,45 @@ def test_niuyuegongzuo_dates_parsed():
 
 
 # ─────────────────────────────────────────────────────────────
+# us168
+# ─────────────────────────────────────────────────────────────
+
+def test_us168_parse_nuxt_payload():
+    from scraper.platforms.us168 import Scraper
+
+    payload = [
+        ["ShallowReactive", 1],
+        {"data": 2},
+        {"recruitment": 3},
+        {"data": 4},
+        {"records": 5},
+        [6],
+        {"id": 7, "title": 8, "bizUpdateTime": 9, "areaName": 10},
+        "abc123",
+        "法拉盛餐馆请炒锅",
+        1779710400000,
+        "法拉盛",
+    ]
+    html = (
+        '<script type="application/json" data-nuxt-data="nuxt-app" '
+        'data-ssr="true" id="__NUXT_DATA__">'
+        + json.dumps(payload, ensure_ascii=False)
+        + "</script>"
+    )
+
+    posts = Scraper().parse_page(html, 1)
+    assert len(posts) == 1
+    p = posts[0]
+    _assert_post_shape(p)
+    assert p.platform == "us168"
+    assert p.id == "us168_abc123"
+    assert p.date == "2026-05-25"
+    assert p.region == "东部"
+    assert p.state == "法拉盛"
+    assert p.url == "https://us168.com/job#abc123"
+
+
+# ─────────────────────────────────────────────────────────────
 # meiguogongzuo
 # ─────────────────────────────────────────────────────────────
 
@@ -210,7 +250,7 @@ def test_meiguogongzuo_state_from_slug():
 
 ALL_MODULES = [
     "_168worker", "_500work", "usahuarenjie", "uscanyin",
-    "niuyuegongzuo", "meiguogongzuo",
+    "us168", "meiguogongzuo",
 ]
 
 

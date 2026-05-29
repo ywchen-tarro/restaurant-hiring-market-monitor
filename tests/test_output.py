@@ -232,10 +232,10 @@ def test_merge_daily_freezes_older_days():
 
 def test_merge_daily_drops_stale_in_window_days():
     """If a prior in-window day disappears from new_days, drop it (don't
-    overstate activity by keeping stale data)."""
+    overstate activity by keeping stale data for normal platforms)."""
     existing = {"days": {
-        "2026-05-20": {"total": 10, "by_platform": {}, "by_region": {}},
-        "2026-05-21": {"total": 8, "by_platform": {}, "by_region": {}},
+        "2026-05-20": {"total": 10, "by_platform": {"168worker": 10}, "by_region": {}},
+        "2026-05-21": {"total": 8, "by_platform": {"168worker": 8}, "by_region": {}},
     }}
     new_days = {
         "2026-05-21": {"total": 0, "by_platform": {}, "by_region": {}},
@@ -243,7 +243,60 @@ def test_merge_daily_drops_stale_in_window_days():
     }
     merged = output._merge_daily(existing, new_days, window_start="2026-05-19")
     assert "2026-05-20" not in merged
-    assert merged["2026-05-21"]["total"] == 0
+    assert "2026-05-21" not in merged
+
+
+def test_merge_daily_preserves_relative_date_platforms_in_window():
+    """uscanyin exposes relative timestamps, so tomorrow's scrape cannot
+    reconstruct yesterday's bucket. Preserve that platform's prior count
+    while still refreshing normal platforms from the new scrape."""
+    existing = {"days": {
+        "2026-05-25": {
+            "total": 150,
+            "by_platform": {"uscanyin": 120, "168worker": 30},
+            "by_region": {"东部": 150},
+        },
+    }}
+    new_days = {
+        "2026-05-25": {
+            "total": 25,
+            "by_platform": {"168worker": 25},
+            "by_region": {"东部": 25},
+        },
+        "2026-05-26": {
+            "total": 130,
+            "by_platform": {"uscanyin": 110, "168worker": 20},
+            "by_region": {"东部": 130},
+        },
+    }
+    merged = output._merge_daily(existing, new_days, window_start="2026-05-20")
+    assert merged["2026-05-25"]["by_platform"] == {
+        "168worker": 25,
+        "uscanyin": 120,
+    }
+    assert merged["2026-05-25"]["total"] == 145
+    assert merged["2026-05-26"]["by_platform"]["uscanyin"] == 110
+
+
+def test_merge_daily_drops_relative_platform_when_explicitly_replaced_by_zero():
+    """If the new scrape explicitly contains the relative platform with 0
+    for a day, trust the new data."""
+    existing = {"days": {
+        "2026-05-25": {
+            "total": 120,
+            "by_platform": {"uscanyin": 120},
+            "by_region": {},
+        },
+    }}
+    new_days = {
+        "2026-05-25": {
+            "total": 0,
+            "by_platform": {"uscanyin": 0},
+            "by_region": {},
+        },
+    }
+    merged = output._merge_daily(existing, new_days, window_start="2026-05-20")
+    assert "2026-05-25" not in merged
 
 
 def test_merge_daily_empty_new():

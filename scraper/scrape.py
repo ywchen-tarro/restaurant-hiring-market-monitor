@@ -20,7 +20,7 @@ PLATFORM_MODULE = {
     "usahuarenjie": "usahuarenjie",
     "500work": "_500work",
     "uscanyin": "uscanyin",
-    "niuyuegongzuo": "niuyuegongzuo",
+    "us168": "us168",
     "meiguogongzuo": "meiguogongzuo",
 }
 

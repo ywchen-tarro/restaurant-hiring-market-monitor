@@ -185,7 +185,7 @@
     'usahuarenjie':  { en: 'USAhuarenjie', zh: '华人街生活网' },
     '500work':       { en: '500Work',      zh: '500work' },
     'uscanyin':      { en: 'USCanyin',     zh: '北美餐饮通' },
-    'niuyuegongzuo': { en: 'NYgongzuo',    zh: '纽约工作网' },
+    'us168':         { en: 'US168',        zh: '华人168' },
     'meiguogongzuo': { en: 'MGgongzuo',    zh: '美国工作网' },
   };
 

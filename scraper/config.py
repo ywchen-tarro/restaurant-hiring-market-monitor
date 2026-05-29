@@ -79,10 +79,10 @@ PLATFORMS = [
         # display only — base.py reads only the class attribute.
     },
     {
-        "id": "niuyuegongzuo",
-        "name": "纽约工作网",
+        "id": "us168",
+        "name": "华人168",
         "color": "#5B21B6",
-        "url": "https://niuyuegongzuo.com/",
+        "url": "https://us168.com/",
         "pagination": "query",
         "enabled": True,
     },

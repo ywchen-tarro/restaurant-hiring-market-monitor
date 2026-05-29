@@ -373,13 +373,16 @@
       "by_platform": {
         "500work": 8,
         "uscanyin": 10,
+        "us168": 109,
         "meiguogongzuo": 30
       },
       "by_region": {
-        "东部": 43,
-        "南部": 5
+        "东部": 77,
+        "南部": 36,
+        "西部": 9,
+        "中部": 16
       },
-      "total": 48
+      "total": 157
     },
     "2026-05-27": {
       "by_platform": {

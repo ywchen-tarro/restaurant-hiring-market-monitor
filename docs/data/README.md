@@ -27,7 +27,7 @@ The dashboard's source of truth. Holds the **current** scrape window
     "usahuarenjie":  { "total": 33,  "daily_avg": 4.71 },
     "500work":       { "total": 59,  "daily_avg": 8.43 },
     "uscanyin":      { "total": 99,  "daily_avg": 14.14 },
-    "niuyuegongzuo": { "total": 119, "daily_avg": 17.00 }
+    "us168":         { "total": 119, "daily_avg": 17.00 }
   },
 
   "by_region": {
@@ -93,7 +93,7 @@ records, ~50 bytes each — small enough to commit + load in the browser.
   },
   "days": {
     "2026-05-18": {
-      "by_platform": { "168worker": 7, "usahuarenjie": 2, "500work": 7, "niuyuegongzuo": 13 },
+      "by_platform": { "168worker": 7, "usahuarenjie": 2, "500work": 7, "us168": 13 },
       "by_region":   { "东部": 22, "西部": 5, "南部": 2 },
       "total":       29
     },

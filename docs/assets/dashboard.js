@@ -16,7 +16,7 @@
     { id: 'usahuarenjie',  name: '华人街生活网',  color: '#3D6B21' },
     { id: '500work',       name: '500work',      color: '#B45309' },
     { id: 'uscanyin',      name: '北美餐饮通',    color: '#9D174D' },
-    { id: 'niuyuegongzuo', name: '纽约工作网',    color: '#5B21B6' },
+    { id: 'us168',         name: '华人168',      color: '#5B21B6' },
     { id: 'meiguogongzuo', name: '美国工作网',    color: '#0891B2' },
   ];
   const PLATFORM_BY_ID = Object.fromEntries(PLATFORMS.map(p => [p.id, p]));

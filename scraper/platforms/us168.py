@@ -39,7 +39,10 @@ class Scraper(BasePlatformScraper):
     id = "us168"
     name = "华人168"
     base_url = BASE
-    max_pages = 30
+    # US168 has very high volume and many refreshed listings. As of
+    # 2026-05-29, the 7-day cutoff was around page 360; keep headroom and
+    # let BasePlatformScraper stop once it sees older-than-window posts.
+    max_pages = 450
 
     def page_url(self, page_num: int) -> str:
         return f"{self.base_url}/job?{urlencode({'page': page_num})}"

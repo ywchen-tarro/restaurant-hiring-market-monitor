@@ -377,6 +377,23 @@ def test_warning_on_scraper_exception():
     assert any("TimeoutError" in w or "168worker" in w for w in warnings)
 
 
+def test_warning_on_page_cap_before_window_boundary():
+    diagnostics = {
+        "us168": {
+            "status": "ok",
+            "pages_fetched": 30,
+            "hit_page_cap": True,
+            "dropped_out_of_window": 0,
+            "fetch_failures": 0,
+            "rows_parsed": 600,
+            "dropped_unparseable_date": 0,
+        }
+    }
+    history = [{"run_date": "2026-05-25", "by_platform": {"us168": 200}}]
+    warnings = output._compute_warnings(history, diagnostics=diagnostics)
+    assert any("us168" in w and "page cap" in w for w in warnings)
+
+
 # ─────────────────────────────────────────────────────────────
 # Atomic write
 # ─────────────────────────────────────────────────────────────

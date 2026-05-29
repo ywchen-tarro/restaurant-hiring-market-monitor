@@ -95,6 +95,7 @@ class BasePlatformScraper(ABC):
             "dropped_not_restaurant": 0,
             "dropped_duplicate": 0,
             "fetch_failures": 0,
+            "hit_page_cap": False,
         }
 
         for page_num in range(1, page_cap + 1):
@@ -192,6 +193,9 @@ class BasePlatformScraper(ABC):
                     self.id, days_back,
                 )
                 break
+
+        if diag["pages_fetched"] >= page_cap:
+            diag["hit_page_cap"] = True
 
         log.info("[%s] total kept: %d", self.id, len(collected))
         self.last_diagnostics = diag

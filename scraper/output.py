@@ -282,6 +282,16 @@ def _compute_warnings(
             else:
                 unparsed = diag.get("dropped_unparseable_date", 0)
                 rows = diag.get("rows_parsed", 0)
+                if (
+                    diag.get("hit_page_cap")
+                    and diag.get("dropped_out_of_window", 0) == 0
+                    and diag.get("fetch_failures", 0) == 0
+                ):
+                    pages = diag.get("pages_fetched", "unknown")
+                    warnings.append(
+                        f"{pid}: reached page cap ({pages} pages) before seeing older-than-window posts — "
+                        f"increase max_pages or add source filters"
+                    )
                 # Lowered from 10% to 5% — even a small fraction of
                 # unparseable dates usually indicates a real format change.
                 if rows >= 20 and unparsed / rows > 0.05:

@@ -158,6 +158,14 @@ def test_uscanyin_page_cap_covers_high_volume_days():
     assert Scraper.max_pages >= 40
 
 
+def test_us168_page_cap_covers_high_volume_days():
+    from scraper.platforms.us168 import Scraper
+
+    # US168 needed ~360 pages to reach the 7-day cutoff during a high-volume
+    # refresh period, so keep meaningful headroom.
+    assert Scraper.max_pages >= 400
+
+
 # ─────────────────────────────────────────────────────────────
 # niuyuegongzuo
 # ─────────────────────────────────────────────────────────────

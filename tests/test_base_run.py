@@ -225,6 +225,19 @@ def test_fetch_failure_stops_pagination():
     assert len(result) == 1
 
 
+def test_hit_page_cap_diagnostic():
+    today = date(2026, 5, 25)
+    page = [_mk("a", "中日餐请炒锅", 0, today)]
+    s = _StubScraper([page, page, page])
+    s.max_pages = 2
+    with mock.patch("scraper.platforms.base.date") as fake_date:
+        fake_date.today.return_value = today
+        fake_date.fromisoformat = date.fromisoformat
+        s.run(days_back=7)
+    assert s.last_diagnostics["pages_fetched"] == 2
+    assert s.last_diagnostics["hit_page_cap"] is True
+
+
 # ─────────────────────────────────────────────────────────────
 # Per-page exception isolation
 # ─────────────────────────────────────────────────────────────
@@ -274,7 +287,7 @@ def test_diagnostics_keys_present():
     # Keys consumed by output._compute_warnings
     for key in ["pages_fetched", "rows_parsed", "dropped_unparseable_date",
                 "dropped_out_of_window", "dropped_not_restaurant",
-                "dropped_duplicate", "fetch_failures"]:
+                "dropped_duplicate", "fetch_failures", "hit_page_cap"]:
         assert key in d, f"missing diagnostics key: {key}"
 
 

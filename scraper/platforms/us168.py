@@ -5,9 +5,9 @@ The `/job` page is server-rendered by Nuxt and includes a devalue-style
 instead of relying on the private POST API.
 
 Important date note: us168 heavily refreshes / tops older jobs. The listing
-order follows its business refresh time, not the original publish time, so we
-use `bizUpdateTime` with sensible fallbacks. That makes the signal represent
-active jobs currently resurfaced on the board.
+order follows its business refresh time, not the original publish time. We
+publish `publishTime` as the dashboard date, while retaining the refresh time
+only as the pagination stop signal.
 """
 
 from __future__ import annotations
@@ -59,22 +59,23 @@ class Scraper(BasePlatformScraper):
                 continue
 
             seen_ids.add(native_id)
-            date_iso = _date_from_record(rec)
+            date_iso = _published_date_from_record(rec)
+            pagination_date = _active_date_from_record(rec)
             area = str(rec.get("areaName") or "").strip() or None
             region, state = regions.classify(area or "")
 
-            posts.append(
-                Post(
-                    id=post_id(self.id, native_id),
-                    platform=self.id,
-                    title=title,
-                    date=date_iso,
-                    region=region,
-                    state=state or area,
-                    keywords_matched=[],
-                    url=f"{self.base_url}/job#{native_id}",
-                )
+            post = Post(
+                id=post_id(self.id, native_id),
+                platform=self.id,
+                title=title,
+                date=date_iso,
+                region=region,
+                state=state or area,
+                keywords_matched=[],
+                url=f"{self.base_url}/job#{native_id}",
             )
+            post._pagination_date = pagination_date or date_iso
+            posts.append(post)
 
         return posts
 
@@ -135,7 +136,15 @@ def _revive_devalue(values: list[Any]) -> Any:
     return revive_idx(0)
 
 
-def _date_from_record(rec: dict) -> str:
+def _published_date_from_record(rec: dict) -> str:
+    for field in ("publishTime", "createTime", "bizUpdateTime", "refreshUpdateTime", "updateTime"):
+        parsed = _date_from_ms(rec.get(field))
+        if parsed:
+            return parsed
+    return ""
+
+
+def _active_date_from_record(rec: dict) -> str:
     for field in ("bizUpdateTime", "refreshUpdateTime", "updateTime", "publishTime"):
         parsed = _date_from_ms(rec.get(field))
         if parsed:

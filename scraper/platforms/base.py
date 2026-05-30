@@ -63,6 +63,15 @@ class BasePlatformScraper(ABC):
     # Subclass may override to cap pagination shorter than the default.
     max_pages: Optional[int] = None
 
+    def pagination_date(self, post: Post) -> str:
+        """Date used only to decide when a sorted listing can stop paginating.
+
+        Most sources sort by the same date we publish as `post.date`, so the
+        default is the post date. Sources that sort by a different timestamp
+        can attach `_pagination_date` in parse_page().
+        """
+        return getattr(post, "_pagination_date", post.date)
+
     def run(self, days_back: int = None) -> List[Post]:
         """Paginate until posts fall outside the lookback window or max pages.
 
@@ -154,7 +163,12 @@ class BasePlatformScraper(ABC):
 
                 if post_d < cutoff:
                     diag["dropped_out_of_window"] += 1
-                    stop_paginating = True
+                    try:
+                        page_sort_d = date.fromisoformat(self.pagination_date(p))
+                    except (ValueError, TypeError):
+                        page_sort_d = post_d
+                    if page_sort_d < cutoff:
+                        stop_paginating = True
                     continue
 
                 # Sanitize the title (strips PII before publication)

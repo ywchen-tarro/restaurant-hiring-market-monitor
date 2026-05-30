@@ -208,10 +208,11 @@ def test_us168_parse_nuxt_payload():
         {"data": 4},
         {"records": 5},
         [6],
-        {"id": 7, "title": 8, "bizUpdateTime": 9, "areaName": 10},
+        {"id": 7, "title": 8, "publishTime": 9, "bizUpdateTime": 10, "areaName": 11},
         "abc123",
         "法拉盛餐馆请炒锅",
         1779710400000,
+        1780063200000,
         "法拉盛",
     ]
     html = (
@@ -228,6 +229,7 @@ def test_us168_parse_nuxt_payload():
     assert p.platform == "us168"
     assert p.id == "us168_abc123"
     assert p.date == "2026-05-25"
+    assert Scraper().pagination_date(p) == "2026-05-29"
     assert p.region == "东部"
     assert p.state == "法拉盛"
     assert p.url == "https://us168.com/job#abc123"

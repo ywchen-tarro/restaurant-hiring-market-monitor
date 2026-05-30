@@ -37,11 +37,10 @@ MIRROR_GROUPS = [
 ]
 
 # Platforms whose listing pages expose unstable post dates. uscanyin uses
-# relative timestamps ("46 minutes ago", "yesterday"), and us168 refreshes
-# older jobs so its listing date can move forward. Preserve their recorded
+# relative timestamps ("46 minutes ago", "yesterday"). Preserve recorded
 # per-day counts unless the new scrape explicitly supplies a replacement for
 # that same day.
-RELATIVE_DATE_PLATFORMS = frozenset({"uscanyin", "us168"})
+RELATIVE_DATE_PLATFORMS = frozenset({"uscanyin"})
 
 # Self-dedup platforms: sites that repost the same job under new IDs
 # within a single window (meiguogongzuo observed ~10% repost rate).

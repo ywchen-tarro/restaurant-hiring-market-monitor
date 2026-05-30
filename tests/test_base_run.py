@@ -144,6 +144,20 @@ def test_stop_paginating_after_window_boundary():
     assert all(p.id != "stub_never" for p in result)
 
 
+def test_out_of_window_post_with_current_pagination_date_does_not_stop():
+    today = date(2026, 5, 25)
+    old_refreshed = _mk("old", "中日餐请炒锅", -20, today)
+    old_refreshed._pagination_date = today.isoformat()
+    current = _mk("current", "中日餐请炒锅", 0, today)
+    s = _StubScraper([[old_refreshed], [current]])
+    with mock.patch("scraper.platforms.base.date") as fake_date:
+        fake_date.today.return_value = today
+        fake_date.fromisoformat = date.fromisoformat
+        result = s.run(days_back=7)
+    assert s.last_diagnostics["pages_fetched"] == 2
+    assert [p.id for p in result] == ["stub_current"]
+
+
 # ─────────────────────────────────────────────────────────────
 # Restaurant keyword filter integration
 # ─────────────────────────────────────────────────────────────

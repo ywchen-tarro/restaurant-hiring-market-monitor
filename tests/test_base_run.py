@@ -192,6 +192,21 @@ def test_unparseable_date_dropped():
     assert s.last_diagnostics["dropped_unparseable_date"] == 1
 
 
+def test_invalid_duplicate_id_does_not_hide_later_valid_copy():
+    today = date(2026, 5, 25)
+    bad = _mk("a", "中日餐请炒锅", 0, today)
+    bad.date = "not-a-date"
+    good = _mk("a", "中日餐请炒锅", 0, today)
+    s = _StubScraper([[bad], [good]])
+    with mock.patch("scraper.platforms.base.date") as fake_date:
+        fake_date.today.return_value = today
+        fake_date.fromisoformat = date.fromisoformat
+        result = s.run(days_back=7)
+    assert [p.id for p in result] == ["stub_a"]
+    assert s.last_diagnostics["dropped_unparseable_date"] == 1
+    assert s.last_diagnostics["dropped_duplicate"] == 0
+
+
 # ─────────────────────────────────────────────────────────────
 # Per-page dedup
 # ─────────────────────────────────────────────────────────────

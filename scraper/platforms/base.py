@@ -75,8 +75,8 @@ class BasePlatformScraper(ABC):
     def run(self, days_back: int = None) -> List[Post]:
         """Paginate until posts fall outside the lookback window or max pages.
 
-        Returns a tuple of (kept_posts, diagnostics) — diagnostics is exposed
-        via the instance attribute `last_diagnostics` after run() completes.
+        Returns kept posts. Diagnostics are exposed via the instance attribute
+        `last_diagnostics` after run() completes.
         """
         days_back = days_back if days_back is not None else config.SCRAPE_DAYS_BACK
         # `days_back` = the number of calendar days the window should cover,
@@ -137,7 +137,6 @@ class BasePlatformScraper(ABC):
                 if p.id in seen_ids:
                     diag["dropped_duplicate"] += 1
                     continue
-                seen_ids.add(p.id)
 
                 # Drop posts whose date didn't parse — silently re-dating them
                 # to today inflates today's bucket and disables the lookback
@@ -193,6 +192,11 @@ class BasePlatformScraper(ABC):
                     p.region = regions.region_for(p.state)
                 # else: leaves region=None — surfaced as 'unknown'
 
+                # Mark an ID as seen only after the record is valid enough to
+                # publish. Some sources can repeat the same native ID through
+                # multiple link variants; a malformed/old/non-restaurant copy
+                # should not suppress a later valid copy.
+                seen_ids.add(p.id)
                 collected.append(p)
                 kept += 1
 

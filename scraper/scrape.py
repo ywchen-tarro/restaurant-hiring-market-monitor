@@ -14,21 +14,12 @@ from .platforms.base import Post
 log = logging.getLogger("scrape")
 
 
-# Map platform id → module name under scraper.platforms
-PLATFORM_MODULE = {
-    "168worker": "_168worker",
-    "usahuarenjie": "usahuarenjie",
-    "500work": "_500work",
-    "uscanyin": "uscanyin",
-    "us168": "us168",
-    "meiguogongzuo": "meiguogongzuo",
-}
-
-
-def _load_scraper(platform_id: str):
+def _load_scraper(platform: dict):
     """Dynamically import scraper.platforms.<module>:Scraper."""
-    mod_name = PLATFORM_MODULE.get(platform_id)
+    platform_id = platform["id"]
+    mod_name = platform.get("module")
     if not mod_name:
+        log.info("Platform %s has no module configured", platform_id)
         return None
     try:
         mod = importlib.import_module(f"scraper.platforms.{mod_name}")
@@ -56,7 +47,7 @@ def main() -> int:
 
     for plat in enabled:
         pid = plat["id"]
-        ScraperCls = _load_scraper(pid)
+        ScraperCls = _load_scraper(plat)
         if not ScraperCls:
             log.warning("Skipping %s (no scraper class)", pid)
             summary_lines.append(f"  {pid:<16} SKIPPED (not implemented)")

@@ -16,6 +16,7 @@ from pathlib import Path
 
 import pytest
 
+from scraper import config
 from scraper.platforms.base import Post
 
 FIXTURES = Path(__file__).resolve().parent / "fixtures"
@@ -288,3 +289,15 @@ def test_malformed_html_does_not_crash(module_name):
     # Half-finished tags should not raise — parser must be tolerant
     posts = mod.Scraper().parse_page("<html><body><div", 1)
     assert isinstance(posts, list)
+
+
+def test_enabled_platforms_have_importable_scraper_modules():
+    import importlib
+
+    for platform in config.PLATFORMS:
+        if not platform.get("enabled"):
+            continue
+        module_name = platform.get("module")
+        assert module_name, f"{platform['id']} missing module"
+        mod = importlib.import_module(f"scraper.platforms.{module_name}")
+        assert hasattr(mod, "Scraper"), f"{platform['id']} module missing Scraper"

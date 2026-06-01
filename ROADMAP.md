@@ -140,7 +140,7 @@ Same fix as 168worker. **Note**: 500work and 168worker share the same CMS and po
 
 ### uscanyin.com — ✅ DONE
 
-Plain GET works; the issue was just slow deeper pagination (~17s per page past page 4). Capped at `max_pages = 8` on the Scraper class, with `REQUEST_TIMEOUT = 30s` for the platform. Caveat: relative date format ("1 hour ago", "yesterday") collapses everything ≤24h to today — accepted for now, see follow-up.
+Plain GET works; the issue was slow deeper pagination (~17s per page past page 4) plus high-volume days pushing same-day posts deep into the listing. Capped at `max_pages = 80` on the Scraper class, with `REQUEST_TIMEOUT = 30s`; the base scraper stops earlier once it reaches the date cutoff. Caveat: relative date format ("1 hour ago", "yesterday") collapses everything ≤24h to today — accepted for now, see follow-up.
 
 ### meiguogongzuo.com — ✅ DONE
 

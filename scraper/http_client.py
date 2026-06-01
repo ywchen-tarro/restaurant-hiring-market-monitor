@@ -8,10 +8,10 @@ Two transports are supported:
   HTTP/2 frame ordering that exactly matches a real Chrome browser.
   Required for sites fronted by Cloudflare-class anti-bot.
 
-A platform opts into curl_cffi by setting `"impersonate": "chrome120"`
-(or another browser tag) in its `PLATFORMS` entry. `polite_get` reads
-that and routes accordingly. The polite-retry / UA-rotation / delay
-behavior is the same for both transports.
+A platform opts into curl_cffi by setting `impersonate = "chrome120"`
+(or another browser tag) on its Scraper class. `BasePlatformScraper`
+passes that into `polite_get`; retry / UA-rotation / delay behavior is
+the same for both transports.
 """
 
 from __future__ import annotations

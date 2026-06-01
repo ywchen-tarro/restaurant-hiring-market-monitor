@@ -45,6 +45,7 @@ USER_AGENTS = [
 PLATFORMS = [
     {
         "id": "168worker",
+        "module": "_168worker",
         "name": "168worker",
         "color": "#2563EB",
         "url": "https://www.168worker.com/list/1_0",
@@ -53,6 +54,7 @@ PLATFORMS = [
     },
     {
         "id": "usahuarenjie",
+        "module": "usahuarenjie",
         "name": "华人街生活网",
         "color": "#3D6B21",
         "url": "https://www.usahuarenjie.com/category-catid-251.html",
@@ -61,6 +63,7 @@ PLATFORMS = [
     },
     {
         "id": "500work",
+        "module": "_500work",
         "name": "500work",
         "color": "#B45309",
         "url": "https://www.500work.com/",
@@ -69,6 +72,7 @@ PLATFORMS = [
     },
     {
         "id": "uscanyin",
+        "module": "uscanyin",
         "name": "北美餐饮通",
         "color": "#9D174D",
         "url": "https://uscanyin.com/en/jobs",
@@ -80,6 +84,7 @@ PLATFORMS = [
     },
     {
         "id": "us168",
+        "module": "us168",
         "name": "华人168",
         "color": "#5B21B6",
         "url": "https://us168.com/",
@@ -88,6 +93,7 @@ PLATFORMS = [
     },
     {
         "id": "meiguogongzuo",
+        "module": "meiguogongzuo",
         "name": "美国工作网",
         "color": "#0891B2",
         "url": "https://www.meiguogongzuo.com/",

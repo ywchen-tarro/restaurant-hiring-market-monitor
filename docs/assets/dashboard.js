@@ -37,6 +37,7 @@
   const t = (k, p) => (window.I18N ? window.I18N.t(k, p) : k);
   const regionName = (c) => (window.I18N ? window.I18N.region(c) : c);
   const stateName = (s) => (window.I18N ? window.I18N.state(s) : s);
+  const cityName = (s) => (window.I18N && window.I18N.city ? window.I18N.city(s) : s);
   const platformName = (id) => (window.I18N ? window.I18N.platform(id) : id);
 
   // ────────────────────────────────────────────────────────
@@ -803,6 +804,49 @@
     topojson: 'https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js',
     usAtlas: 'https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json',
   };
+  const CITY_POINTS = {
+    '纽约': [-74.0060, 40.7128],
+    '洛杉矶': [-118.2437, 34.0522],
+    '布鲁克林': [-73.9442, 40.6782],
+    '旧金山-奥克兰-圣何塞': [-122.1500, 37.6000],
+    '休斯顿': [-95.3698, 29.7604],
+    '芝加哥': [-87.6298, 41.8781],
+    '费城': [-75.1652, 39.9526],
+    '拉斯维加斯': [-115.1398, 36.1699],
+    '奥兰多-代托纳海滩-墨尔本': [-81.3792, 28.5383],
+    '西雅图-塔科马': [-122.3321, 47.6062],
+    '迈阿密-劳德代尔堡': [-80.1918, 25.7617],
+    '波特兰': [-122.6784, 45.5152],
+    '圣地亚哥': [-117.1611, 32.7157],
+    '布朗克斯': [-73.8648, 40.8448],
+    '奥斯汀': [-97.7431, 30.2672],
+    '亚特兰大': [-84.3880, 33.7490],
+    '圣安东尼奥': [-98.4936, 29.4241],
+    '凤凰城': [-112.0740, 33.4484],
+    '达拉斯-沃思堡': [-96.7970, 32.7767],
+    '杰克逊维尔': [-81.6557, 30.3322],
+    '夏洛特': [-80.8431, 35.2271],
+    '萨克拉门托-斯托克顿-莫德斯托': [-121.4944, 38.5816],
+    '法拉盛': [-73.8331, 40.7675],
+    '圣何塞': [-121.8863, 37.3382],
+    '坦帕-圣彼得堡（萨拉索塔）': [-82.4572, 27.9506],
+    '华盛顿特区（黑格斯敦）': [-77.0369, 38.9072],
+    '印第安纳波利斯': [-86.1581, 39.7684],
+    '丹佛': [-104.9903, 39.7392],
+    '巴尔的摩': [-76.6122, 39.2904],
+    '圣路易斯': [-90.1994, 38.6270],
+    '弗吉尼亚海滩': [-75.9780, 36.8529],
+    '奥克兰': [-122.2711, 37.8044],
+    '埃尔帕索': [-106.4850, 31.7619],
+    '哥伦布': [-82.9988, 39.9612],
+    '路易斯维尔': [-85.7585, 38.2527],
+    '俄克拉何马城': [-97.5164, 35.4676],
+    '弗雷斯诺-维萨利亚': [-119.7871, 36.7378],
+    '图森（塞拉维斯塔）': [-110.9747, 32.2226],
+    '波士顿-曼彻斯特': [-71.0589, 42.3601],
+    '斯塔滕岛': [-74.1502, 40.5795],
+    '阿尔伯克基-圣菲': [-106.6504, 35.0844],
+  };
   let _mapDepsPromise = null;
   let _usTopo = null;
 
@@ -847,11 +891,15 @@
 
     // Aggregate by USPS state code
     const counts = {};
+    const cityCounts = {};
     posts.forEach(p => {
       if (!p.state) return;
       const usps = window.I18N && window.I18N.uspsFor(p.state);
       if (!usps) return;
       counts[usps] = (counts[usps] || 0) + 1;
+      if (p.city && CITY_POINTS[p.city]) {
+        cityCounts[p.city] = (cityCounts[p.city] || 0) + 1;
+      }
     });
 
     try {
@@ -901,6 +949,15 @@
       tooltip.style.top = (event.clientY + 12) + 'px';
     };
     const hideTip = () => tooltip.classList.remove('shown');
+    const showCityTip = (event, city, count) => {
+      tooltip.innerHTML = `
+        <div class="tt-name">${escapeHtml(cityName(city))}</div>
+        <div class="tt-count">${count} ${escapeHtml(t('cityPosts'))}</div>
+      `;
+      tooltip.classList.add('shown');
+      tooltip.style.left = (event.clientX + 12) + 'px';
+      tooltip.style.top = (event.clientY + 12) + 'px';
+    };
 
     svg.append('g')
       .selectAll('path')
@@ -930,10 +987,34 @@
         .text(count);
     });
 
+    const cityEntries = Object.entries(cityCounts)
+      .map(([city, count]) => ({ city, count, coord: CITY_POINTS[city] }))
+      .filter(d => d.coord && projection(d.coord))
+      .sort((a, b) => b.count - a.count);
+    const maxCity = Math.max(1, ...cityEntries.map(d => d.count));
+    const radius = d3.scaleSqrt().domain([1, maxCity]).range([5, 18]);
+    const cityLayer = svg.append('g').attr('class', 'city-layer');
+    cityLayer.selectAll('circle')
+      .data(cityEntries)
+      .join('circle')
+      .attr('class', 'city-dot')
+      .attr('cx', d => projection(d.coord)[0])
+      .attr('cy', d => projection(d.coord)[1])
+      .attr('r', d => radius(d.count))
+      .on('mousemove', (e, d) => showCityTip(e, d.city, d.count))
+      .on('mouseleave', hideTip);
+    cityLayer.selectAll('text')
+      .data(cityEntries.filter(d => d.count >= Math.max(2, maxCity * 0.12)).slice(0, 18))
+      .join('text')
+      .attr('class', 'city-count')
+      .attr('x', d => projection(d.coord)[0])
+      .attr('y', d => projection(d.coord)[1] + 3)
+      .text(d => d.count);
+
     // Legend
     const legend = document.createElement('div');
     legend.className = 'legend';
-    legend.innerHTML = `<span>0</span><span class="legend-bar"></span><span>${max}</span>`;
+    legend.innerHTML = `<span>0</span><span class="legend-bar"></span><span>${max}</span><span class="city-legend-dot"></span><span>${escapeHtml(t('cityPosts'))}</span>`;
     container.appendChild(legend);
   }
 
@@ -965,9 +1046,12 @@
       REGIONS.forEach(r => {
         const rp = filtered.filter(p => p.region === r);
         const sCounts = {};
+        const cCounts = {};
         rp.forEach(p => { if (p.state) sCounts[p.state] = (sCounts[p.state] || 0) + 1; });
+        rp.forEach(p => { if (p.city) cCounts[p.city] = (cCounts[p.city] || 0) + 1; });
         const top = Object.entries(sCounts).sort((a, b) => b[1] - a[1]).slice(0, 5);
-        byRegion[r] = { total: rp.length, top_states: Object.fromEntries(top) };
+        const topCities = Object.entries(cCounts).sort((a, b) => b[1] - a[1]).slice(0, 8);
+        byRegion[r] = { total: rp.length, top_states: Object.fromEntries(top), top_cities: Object.fromEntries(topCities) };
       });
     }
 
@@ -975,14 +1059,17 @@
     grid.innerHTML = '';
     REGIONS.forEach(r => {
       const info = byRegion[r] || { total: 0, top_states: {} };
-      const states = Object.entries(info.top_states || {});
-      const maxState = Math.max(1, ...states.map(([, c]) => c));
+      const places = Object.entries(info.top_cities || {}).length
+        ? Object.entries(info.top_cities || {})
+        : Object.entries(info.top_states || {});
+      const usingCities = Boolean(Object.entries(info.top_cities || {}).length);
+      const maxState = Math.max(1, ...places.map(([, c]) => c));
       const block = document.createElement('div');
       block.className = 'region-block';
-      const stateRows = states.length
-        ? states.map(([n, c], i) => `
+      const stateRows = places.length
+        ? places.map(([n, c], i) => `
             <div class="state-row">
-              <span class="state-name">${escapeHtml(stateName(n))}</span>
+              <span class="state-name">${escapeHtml(usingCities ? cityName(n) : stateName(n))}</span>
               <div class="state-bar-wrap"><div class="state-bar ${i === 0 ? 'peak' : ''}" style="width:${(c / maxState) * 100}%"></div></div>
               <span class="state-count">${c}</span>
             </div>`).join('')
@@ -1066,13 +1153,16 @@
         : titleHtml;
       const el = document.createElement('div');
       el.className = 'post-item';
+      const placeText = p.city
+        ? `${regionName(p.region) || t('unknownRegion')} · ${cityName(p.city)} · ${stateName(p.state) || '—'}`
+        : `${regionName(p.region) || t('unknownRegion')} · ${stateName(p.state) || '—'}`;
       el.innerHTML = `
         <div class="post-meta">
           <span class="post-platform" style="background:${platMeta.color}33; color:${platMeta.color}">${escapeHtml(platformName(p.platform))}</span>
           <span class="post-time">${escapeHtml(p.date || '—')}</span>
         </div>
         <div class="post-title">${titleEl}</div>
-        <div class="post-region">${escapeHtml(regionName(p.region) || t('unknownRegion'))} · ${escapeHtml(stateName(p.state) || '—')} ${(p.keywords_matched || []).map(k => `<span class="kw-tag">${escapeHtml(k)}</span>`).join('')}</div>
+        <div class="post-region">${escapeHtml(placeText)} ${(p.keywords_matched || []).map(k => `<span class="kw-tag">${escapeHtml(k)}</span>`).join('')}</div>
       `;
       feed.appendChild(el);
     });

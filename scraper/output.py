@@ -20,7 +20,7 @@ from datetime import date, datetime, timedelta
 from pathlib import Path
 from typing import Dict, List, Optional
 
-from . import config
+from . import config, regions
 from .platforms.base import Post
 
 # 168worker.com and 500work.com share a CMS and republish identical job
@@ -154,12 +154,25 @@ def _aggregate(posts: List[Post], days_back: int) -> dict:
     for region in REGIONS_ORDER:
         region_posts = [p for p in posts if p.region == region]
         states = Counter(p.state for p in region_posts if p.state)
+        cities = Counter(p.city for p in region_posts if getattr(p, "city", None))
         by_region[region] = {
             "total": len(region_posts),
             "top_states": dict(states.most_common(5)),
+            "top_cities": dict(cities.most_common(8)),
         }
     # surface posts that didn't classify
     unclassified = sum(1 for p in posts if not p.region)
+
+    city_counter = Counter(p.city for p in posts if getattr(p, "city", None))
+    by_city = {}
+    for city_name, total in city_counter.most_common():
+        info = regions.city_info(city_name) or {}
+        by_city[city_name] = {
+            "total": total,
+            "region": info.get("region"),
+            "state": info.get("state"),
+            "en": info.get("en"),
+        }
 
     kw_counter = Counter()
     for p in posts:
@@ -185,6 +198,7 @@ def _aggregate(posts: List[Post], days_back: int) -> dict:
         "meta": meta,
         "by_platform": by_platform,
         "by_region": by_region,
+        "by_city": by_city,
         "by_keyword": by_keyword,
     }
 
@@ -330,11 +344,14 @@ def _compute_daily(posts: List[Post]) -> Dict[str, dict]:
         bucket = days.setdefault(p.date, {
             "by_platform": {},
             "by_region": {},
+            "by_city": {},
             "total": 0,
         })
         bucket["by_platform"][p.platform] = bucket["by_platform"].get(p.platform, 0) + 1
         if p.region:
             bucket["by_region"][p.region] = bucket["by_region"].get(p.region, 0) + 1
+        if getattr(p, "city", None):
+            bucket["by_city"][p.city] = bucket["by_city"].get(p.city, 0) + 1
         bucket["total"] += 1
     return days
 
@@ -399,6 +416,7 @@ def _merge_daily(
         merged_days[d] = {
             "by_platform": by_platform,
             "by_region": dict((new_info or {}).get("by_region", {})),
+            "by_city": dict((new_info or {}).get("by_city", {})),
             "total": sum(by_platform.values()),
         }
 

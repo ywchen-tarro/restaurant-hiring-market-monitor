@@ -18,7 +18,7 @@ from scraper import output
 from scraper.platforms.base import Post
 
 
-def _mk(post_id, platform, title, date_iso="2026-05-25", region=None, state=None):
+def _mk(post_id, platform, title, date_iso="2026-05-25", region=None, state=None, city=None):
     return Post(
         id=post_id,
         platform=platform,
@@ -28,6 +28,7 @@ def _mk(post_id, platform, title, date_iso="2026-05-25", region=None, state=None
         state=state,
         keywords_matched=[],
         url=f"https://example.com/{post_id}",
+        city=city,
     )
 
 
@@ -447,7 +448,7 @@ def test_write_posts_json_end_to_end(tmp_path: Path):
     posts_path = tmp_path / "posts.json"
     daily_path = tmp_path / "daily.json"
     posts = [
-        _mk("a", "niuyuegongzuo", "中日餐请炒锅",  region="东部", state="法拉盛"),
+        _mk("a", "niuyuegongzuo", "中日餐请炒锅",  region="东部", state="法拉盛", city="法拉盛"),
         _mk("b", "168worker",     "请师傅",         region="东部", state="纽约"),
     ]
     # Patch the config defaults to point at tmp paths
@@ -458,8 +459,11 @@ def test_write_posts_json_end_to_end(tmp_path: Path):
     assert posts_path.exists()
     d = json.loads(posts_path.read_text(encoding="utf-8"))
     # Documented schema
-    for key in ("meta", "by_platform", "by_region", "by_keyword", "history", "posts"):
+    for key in ("meta", "by_platform", "by_region", "by_city", "by_keyword", "history", "posts"):
         assert key in d, f"missing top-level key: {key}"
+    assert d["by_city"]["法拉盛"]["total"] == 1
+    assert d["by_region"]["东部"]["top_cities"]["法拉盛"] == 1
+    assert d["posts"][0]["city"] == "法拉盛"
     assert d["meta"]["total_posts"] == 2
     assert d["meta"]["unique_posts"] >= 1
     assert d["meta"]["scrape_days_back"] == 7

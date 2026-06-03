@@ -201,6 +201,25 @@ input[type=text] {
   pointer-events: none;
   text-anchor: middle;
 }
+.region-map circle.city-dot {
+  fill: rgba(255, 140, 66, .82);
+  stroke: var(--text);
+  stroke-width: .8;
+  cursor: pointer;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,.45));
+}
+.region-map circle.city-dot:hover {
+  fill: var(--danger);
+  stroke-width: 1.4;
+}
+.region-map text.city-count {
+  font-family: var(--mono);
+  font-size: 8px;
+  font-weight: 700;
+  fill: #fff;
+  pointer-events: none;
+  text-anchor: middle;
+}
 .region-map .legend {
   position: absolute;
   bottom: 8px;
@@ -217,6 +236,14 @@ input[type=text] {
   height: 8px;
   background: linear-gradient(90deg, #1a1e28, #3d7fff, #ff8c42);
   border-radius: 2px;
+}
+.region-map .city-legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--danger);
+  border: 1px solid var(--text);
+  display: inline-block;
 }
 .region-map .empty-state {
   position: absolute;
@@ -248,6 +275,7 @@ input[type=text] {
   .region-map { height: 260px; }
   .region-map text.state-label { font-size: 6px; }
   .region-map text.state-count { font-size: 7px; }
+  .region-map text.city-count { font-size: 7px; }
 }
 
 /* REGION GRID */

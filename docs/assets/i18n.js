@@ -72,6 +72,7 @@
       noData:            'No data yet',
       noDataHelp:        'Run <code>bash run.sh</code> to generate <code>docs/data/posts.json</code>',
       noRecentData:      'Need at least 2 runs for a trend line. After the next scrape, this chart will fill in.',
+      cityPosts:         'city posts',
 
       rising:     'rising',
       cooling:    'cooling',
@@ -145,6 +146,7 @@
       noData:            '尚无数据',
       noDataHelp:        '请运行 <code>bash run.sh</code> 生成 <code>docs/data/posts.json</code>',
       noRecentData:      '趋势图需要至少 2 次运行。下次抓取后将自动填充。',
+      cityPosts:         '城市帖数',
 
       rising:     '升温',
       cooling:    '降温',
@@ -217,6 +219,7 @@
     // South
     '佛州': 'FL', '迈阿密': 'FL', '奥兰多': 'FL', '坦帕': 'FL',
     'Florida': 'FL', 'Miami': 'FL', 'Orlando': 'FL', 'Tampa': 'FL',
+    '杰克逊维尔': 'FL',
     '德州': 'TX', '休斯顿': 'TX', '达拉斯': 'TX',
     'Texas': 'TX', 'Houston': 'TX', 'Dallas': 'TX',
     '乔治亚': 'GA', '亚特兰大': 'GA', 'Georgia': 'GA', 'Atlanta': 'GA',
@@ -287,6 +290,50 @@
     '怀俄明': 'WY', 'Wyoming': 'WY',
     '蒙大拿': 'MT', 'Montana': 'MT',
     '爱达荷': 'ID', 'Idaho': 'ID',
+  };
+
+  const CITY_LABELS = {
+    '纽约': 'New York, NY',
+    '洛杉矶': 'Los Angeles, CA',
+    '布鲁克林': 'Brooklyn, New York',
+    '旧金山-奥克兰-圣何塞': 'San Francisco-Oakland-San Jose, CA',
+    '休斯顿': 'Houston, TX',
+    '芝加哥': 'Chicago, IL',
+    '费城': 'Philadelphia, PA',
+    '拉斯维加斯': 'Las Vegas, NV',
+    '奥兰多-代托纳海滩-墨尔本': 'Orlando-Daytona Beach-Melbourne, FL',
+    '西雅图-塔科马': 'Seattle-Tacoma, WA',
+    '迈阿密-劳德代尔堡': 'Miami-Ft. Lauderdale, FL',
+    '波特兰': 'Portland, OR',
+    '圣地亚哥': 'San Diego, CA',
+    '布朗克斯': 'The Bronx, New York',
+    '奥斯汀': 'Austin, TX',
+    '亚特兰大': 'Atlanta, GA',
+    '圣安东尼奥': 'San Antonio, TX',
+    '凤凰城': 'Phoenix, AZ',
+    '达拉斯-沃思堡': 'Dallas-Ft. Worth, TX',
+    '杰克逊维尔': 'Jacksonville, FL',
+    '夏洛特': 'Charlotte, NC',
+    '萨克拉门托-斯托克顿-莫德斯托': 'Sacramento-Stockton-Modesto, CA',
+    '法拉盛': 'Flushing, New York',
+    '圣何塞': 'San Jose, CA',
+    '坦帕-圣彼得堡（萨拉索塔）': 'Tampa-St. Petersburg (Sarasota), FL',
+    '华盛顿特区（黑格斯敦）': 'Washington DC (Hagerstown MD)',
+    '印第安纳波利斯': 'Indianapolis, IN',
+    '丹佛': 'Denver, CO',
+    '巴尔的摩': 'Baltimore, MD',
+    '圣路易斯': 'St. Louis, MO',
+    '弗吉尼亚海滩': 'Virginia Beach, VA',
+    '奥克兰': 'Oakland, CA',
+    '埃尔帕索': 'El Paso, TX',
+    '哥伦布': 'Columbus, OH',
+    '路易斯维尔': 'Louisville, KY',
+    '俄克拉何马城': 'Oklahoma City, OK',
+    '弗雷斯诺-维萨利亚': 'Fresno-Visalia, CA',
+    '图森（塞拉维斯塔）': 'Tucson (Sierra Vista), AZ',
+    '波士顿-曼彻斯特': 'Boston MA-Manchester NH',
+    '斯塔滕岛': 'Staten Island, New York',
+    '阿尔伯克基-圣菲': 'Albuquerque-Santa Fe, NM',
   };
 
   // us-atlas states-10m.json uses FIPS codes as ids — map to USPS.
@@ -409,6 +456,12 @@
       }
       // For zh mode, if input is already English (city slug fallback like
       // 'Rosemead'), try a reverse lookup; otherwise return as-is.
+      return name;
+    },
+
+    city(name) {
+      if (!name) return '';
+      if (currentLang === 'en') return CITY_LABELS[name] || name;
       return name;
     },
 

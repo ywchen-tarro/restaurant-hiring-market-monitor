@@ -25,6 +25,7 @@ class Post:
     state: Optional[str]    # matched token (Chinese name preferred)
     keywords_matched: List[str]
     url: str
+    city: Optional[str] = None
 
     def to_dict(self) -> dict:
         return asdict(self)
@@ -191,6 +192,12 @@ class BasePlatformScraper(ABC):
                 elif p.state:
                     p.region = regions.region_for(p.state)
                 # else: leaves region=None — surfaced as 'unknown'
+
+                city = regions.classify_city(p.title) or regions.classify_city(p.state or "")
+                if city:
+                    p.city = city["name"]
+                    p.region = city["region"]
+                    p.state = city["state"]
 
                 # Mark an ID as seen only after the record is valid enough to
                 # publish. Some sources can repeat the same native ID through

@@ -104,6 +104,22 @@ def test_san_francisco_beats_bare_san():
     assert state == "San Francisco"
 
 
+def test_classify_city_requested_market():
+    city = regions.classify_city("法拉盛餐馆请busboys")
+    assert city["name"] == "法拉盛"
+    assert city["region"] == "东部"
+
+
+def test_classify_city_ascii_boundary():
+    assert regions.classify_city("SUNNYVALE restaurant hiring") is None
+    city = regions.classify_city("San Jose sushi chef")
+    assert city["name"] == "圣何塞"
+
+
+def test_classify_city_upstate_not_new_york_city():
+    assert regions.classify_city("纽约上州日餐请师傅") is None
+
+
 # ─────────────────────────────────────────────────────────────
 # region_for inverse lookup
 # ─────────────────────────────────────────────────────────────

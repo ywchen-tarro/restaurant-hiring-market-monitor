@@ -133,6 +133,11 @@ def test_classify_city_major_market_expansion():
     assert regions.classify_city("Milpitas中餐馆诚招炒锅")["name"] == "米尔皮塔斯"
 
 
+def test_city_catalog_has_coordinates_for_all_markets():
+    missing = [c["name"] for c in regions.city_catalog() if c.get("lon") is None or c.get("lat") is None]
+    assert missing == []
+
+
 # ─────────────────────────────────────────────────────────────
 # region_for inverse lookup
 # ─────────────────────────────────────────────────────────────

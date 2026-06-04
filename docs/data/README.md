@@ -1,6 +1,6 @@
 # Data files
 
-Two files live here. Both are committed to git and refreshed on every scrape.
+Three files live here. All are committed to git and refreshed on every scrape.
 
 ## `posts.json`
 
@@ -103,6 +103,38 @@ records, ~50 bytes each — small enough to commit + load in the browser.
 }
 ```
 
+## `cities.json`
+
+City metadata for the regional map. It is regenerated on every scrape from
+the scraper's city catalog and the current `posts[]` window, so the front-end
+map can use newly recognized cities without hardcoding every point in JS.
+
+```jsonc
+{
+  "meta": {
+    "schema_version": 1,
+    "last_updated": "2026-06-04T11:07:34-07:00",
+    "city_count": 92,
+    "observed_city_count": 18
+  },
+  "cities": {
+    "法拉盛": {
+      "en": "Flushing, New York",
+      "region": "东部",
+      "state": "法拉盛",
+      "lon": -73.8331,
+      "lat": 40.7675,
+      "total": 25
+    }
+  }
+}
+```
+
+Notes:
+- `city_count` is the number of geocoded city/metro markets available to the scraper.
+- `observed_city_count` is how many of those had posts in the current scrape window.
+- `total` is the current-window count for that city. Zero-count cities stay in the catalog so future posts can render immediately on the map.
+
 ### Caveats for analytics
 
 - **uscanyin's daily distribution is approximate.** uscanyin lists dates as "1 hour ago" / "5 hours ago" / "yesterday"; anything ≤24h resolves to today. The aggregate per-day total for uscanyin is therefore right at the day boundary but flat within a day.
@@ -134,6 +166,6 @@ const series = Object.entries(daily.days).map(([d, info]) => ({
 
 ## File hygiene
 
-- Both files are written atomically (`tmp + os.replace`) — a crash during write can't leave a corrupt file.
+- All generated files are written atomically (`tmp + os.replace`) — a crash during write can't leave a corrupt file.
 - If `posts.json` is found unparseable on the next run, it's preserved as `posts.json.corrupt-<timestamp>` rather than silently overwritten.
-- Both are committed to git. The current size is ~150 KB total; estimated growth ~1 KB per daily scrape (~365 KB/year).
+- The files are committed to git. The current size is small enough for GitHub Pages; estimated daily-series growth is ~1 KB per scrape.

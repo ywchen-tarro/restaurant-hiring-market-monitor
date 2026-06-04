@@ -447,13 +447,15 @@ def test_write_posts_json_end_to_end(tmp_path: Path):
     import json
     posts_path = tmp_path / "posts.json"
     daily_path = tmp_path / "daily.json"
+    city_path = tmp_path / "cities.json"
     posts = [
         _mk("a", "niuyuegongzuo", "中日餐请炒锅",  region="东部", state="法拉盛", city="法拉盛"),
         _mk("b", "168worker",     "请师傅",         region="东部", state="纽约"),
     ]
     # Patch the config defaults to point at tmp paths
     with mock.patch.object(output.config, "OUTPUT_JSON", posts_path), \
-         mock.patch.object(output.config, "DAILY_JSON", daily_path):
+         mock.patch.object(output.config, "DAILY_JSON", daily_path), \
+         mock.patch.object(output.config, "CITY_JSON", city_path):
         output.write_posts_json(posts, days_back=7, diagnostics={"168worker": {"status": "ok"}})
 
     assert posts_path.exists()
@@ -462,6 +464,8 @@ def test_write_posts_json_end_to_end(tmp_path: Path):
     for key in ("meta", "by_platform", "by_region", "by_city", "by_keyword", "history", "posts"):
         assert key in d, f"missing top-level key: {key}"
     assert d["by_city"]["法拉盛"]["total"] == 1
+    assert d["by_city"]["法拉盛"]["lon"] is not None
+    assert d["by_city"]["法拉盛"]["lat"] is not None
     assert d["by_region"]["东部"]["top_cities"]["法拉盛"] == 1
     assert d["posts"][0]["city"] == "法拉盛"
     assert d["meta"]["total_posts"] == 2
@@ -478,6 +482,11 @@ def test_write_posts_json_end_to_end(tmp_path: Path):
     assert "days" in daily
     assert "meta" in daily and "schema_version" in daily["meta"]
 
+    assert city_path.exists()
+    cities = json.loads(city_path.read_text(encoding="utf-8"))
+    assert cities["cities"]["法拉盛"]["total"] == 1
+    assert cities["cities"]["法拉盛"]["lon"] is not None
+
 
 def test_write_posts_json_empty_posts_still_produces_valid_file(tmp_path: Path):
     """All platforms returned 0 today: writer should still produce a
@@ -485,8 +494,10 @@ def test_write_posts_json_empty_posts_still_produces_valid_file(tmp_path: Path):
     import json
     posts_path = tmp_path / "posts.json"
     daily_path = tmp_path / "daily.json"
+    city_path = tmp_path / "cities.json"
     with mock.patch.object(output.config, "OUTPUT_JSON", posts_path), \
-         mock.patch.object(output.config, "DAILY_JSON", daily_path):
+         mock.patch.object(output.config, "DAILY_JSON", daily_path), \
+         mock.patch.object(output.config, "CITY_JSON", city_path):
         output.write_posts_json([], days_back=7)
     d = json.loads(posts_path.read_text(encoding="utf-8"))
     assert d["meta"]["total_posts"] == 0
@@ -502,8 +513,10 @@ def test_write_posts_json_history_accumulates_across_days(tmp_path: Path):
     import json
     posts_path = tmp_path / "posts.json"
     daily_path = tmp_path / "daily.json"
+    city_path = tmp_path / "cities.json"
     with mock.patch.object(output.config, "OUTPUT_JSON", posts_path), \
-         mock.patch.object(output.config, "DAILY_JSON", daily_path):
+         mock.patch.object(output.config, "DAILY_JSON", daily_path), \
+         mock.patch.object(output.config, "CITY_JSON", city_path):
         output.write_posts_json([_mk("a", "niuyuegongzuo", "中日餐请炒锅")], days_back=7)
         d1 = json.loads(posts_path.read_text(encoding="utf-8"))
         # Patch the run_date of the first entry to look like yesterday so
@@ -518,8 +531,10 @@ def test_write_posts_json_history_accumulates_across_days(tmp_path: Path):
 def test_write_posts_json_atomic_write_no_tmp_left(tmp_path: Path):
     posts_path = tmp_path / "posts.json"
     daily_path = tmp_path / "daily.json"
+    city_path = tmp_path / "cities.json"
     with mock.patch.object(output.config, "OUTPUT_JSON", posts_path), \
-         mock.patch.object(output.config, "DAILY_JSON", daily_path):
+         mock.patch.object(output.config, "DAILY_JSON", daily_path), \
+         mock.patch.object(output.config, "CITY_JSON", city_path):
         output.write_posts_json([_mk("a", "niuyuegongzuo", "中日餐请炒锅")], days_back=7)
     tmps = list(tmp_path.glob("*.tmp"))
     assert tmps == [], f"left-over tmp files: {tmps}"
@@ -531,8 +546,10 @@ def test_write_posts_json_meiguogongzuo_listed_in_by_platform_even_when_empty(tm
     import json
     posts_path = tmp_path / "posts.json"
     daily_path = tmp_path / "daily.json"
+    city_path = tmp_path / "cities.json"
     with mock.patch.object(output.config, "OUTPUT_JSON", posts_path), \
-         mock.patch.object(output.config, "DAILY_JSON", daily_path):
+         mock.patch.object(output.config, "DAILY_JSON", daily_path), \
+         mock.patch.object(output.config, "CITY_JSON", city_path):
         output.write_posts_json([_mk("a", "niuyuegongzuo", "中日餐请炒锅")], days_back=7)
     d = json.loads(posts_path.read_text(encoding="utf-8"))
     for plat in output.config.PLATFORMS:

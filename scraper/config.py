@@ -119,4 +119,5 @@ OUTPUT_JSON = PROJECT_ROOT / "docs" / "data" / "posts.json"
 # the days inside the current SCRAPE_DAYS_BACK window; older days freeze
 # as recorded.
 DAILY_JSON = PROJECT_ROOT / "docs" / "data" / "daily.json"
+CITY_JSON = PROJECT_ROOT / "docs" / "data" / "cities.json"
 LOG_DIR = PROJECT_ROOT / "logs"

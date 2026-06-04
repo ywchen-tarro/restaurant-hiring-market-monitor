@@ -1,0 +1,746 @@
+{
+  "meta": {
+    "schema_version": 1,
+    "last_updated": "2026-06-04T11:07:34-07:00",
+    "city_count": 92,
+    "observed_city_count": 18
+  },
+  "cities": {
+    "纽约": {
+      "en": "New York, NY",
+      "region": "东部",
+      "state": "纽约",
+      "lon": -74.006,
+      "lat": 40.7128,
+      "total": 51
+    },
+    "洛杉矶": {
+      "en": "Los Angeles, CA",
+      "region": "西部",
+      "state": "洛杉矶",
+      "lon": -118.2437,
+      "lat": 34.0522,
+      "total": 2
+    },
+    "布鲁克林": {
+      "en": "Brooklyn, New York",
+      "region": "东部",
+      "state": "布鲁克林",
+      "lon": -73.9442,
+      "lat": 40.6782,
+      "total": 21
+    },
+    "旧金山-奥克兰-圣何塞": {
+      "en": "San Francisco-Oakland-San Jose, CA",
+      "region": "西部",
+      "state": "旧金山",
+      "lon": -122.15,
+      "lat": 37.6,
+      "total": 1
+    },
+    "休斯顿": {
+      "en": "Houston, TX",
+      "region": "南部",
+      "state": "休斯顿",
+      "lon": -95.3698,
+      "lat": 29.7604,
+      "total": 3
+    },
+    "芝加哥": {
+      "en": "Chicago, IL",
+      "region": "中部",
+      "state": "芝加哥",
+      "lon": -87.6298,
+      "lat": 41.8781,
+      "total": 3
+    },
+    "费城": {
+      "en": "Philadelphia, PA",
+      "region": "东部",
+      "state": "费城",
+      "lon": -75.1652,
+      "lat": 39.9526,
+      "total": 3
+    },
+    "拉斯维加斯": {
+      "en": "Las Vegas, NV",
+      "region": "西部",
+      "state": "拉斯维加斯",
+      "lon": -115.1398,
+      "lat": 36.1699,
+      "total": 0
+    },
+    "奥兰多-代托纳海滩-墨尔本": {
+      "en": "Orlando-Daytona Beach-Melbourne, FL",
+      "region": "南部",
+      "state": "奥兰多",
+      "lon": -81.3792,
+      "lat": 28.5383,
+      "total": 3
+    },
+    "西雅图-塔科马": {
+      "en": "Seattle-Tacoma, WA",
+      "region": "西部",
+      "state": "西雅图",
+      "lon": -122.3321,
+      "lat": 47.6062,
+      "total": 0
+    },
+    "迈阿密-劳德代尔堡": {
+      "en": "Miami-Ft. Lauderdale, FL",
+      "region": "南部",
+      "state": "迈阿密",
+      "lon": -80.1918,
+      "lat": 25.7617,
+      "total": 0
+    },
+    "波特兰": {
+      "en": "Portland, OR",
+      "region": "西部",
+      "state": "波特兰",
+      "lon": -122.6784,
+      "lat": 45.5152,
+      "total": 1
+    },
+    "圣地亚哥": {
+      "en": "San Diego, CA",
+      "region": "西部",
+      "state": "圣地亚哥",
+      "lon": -117.1611,
+      "lat": 32.7157,
+      "total": 1
+    },
+    "布朗克斯": {
+      "en": "The Bronx, New York",
+      "region": "东部",
+      "state": "纽约",
+      "lon": -73.8648,
+      "lat": 40.8448,
+      "total": 0
+    },
+    "奥斯汀": {
+      "en": "Austin, TX",
+      "region": "南部",
+      "state": "德州",
+      "lon": -97.7431,
+      "lat": 30.2672,
+      "total": 0
+    },
+    "亚特兰大": {
+      "en": "Atlanta, GA",
+      "region": "南部",
+      "state": "亚特兰大",
+      "lon": -84.388,
+      "lat": 33.749,
+      "total": 4
+    },
+    "圣安东尼奥": {
+      "en": "San Antonio, TX",
+      "region": "南部",
+      "state": "德州",
+      "lon": -98.4936,
+      "lat": 29.4241,
+      "total": 0
+    },
+    "凤凰城": {
+      "en": "Phoenix, AZ",
+      "region": "西部",
+      "state": "凤凰城",
+      "lon": -112.074,
+      "lat": 33.4484,
+      "total": 1
+    },
+    "达拉斯-沃思堡": {
+      "en": "Dallas-Ft. Worth, TX",
+      "region": "南部",
+      "state": "达拉斯",
+      "lon": -96.797,
+      "lat": 32.7767,
+      "total": 4
+    },
+    "杰克逊维尔": {
+      "en": "Jacksonville, FL",
+      "region": "南部",
+      "state": "杰克逊维尔",
+      "lon": -81.6557,
+      "lat": 30.3322,
+      "total": 0
+    },
+    "夏洛特": {
+      "en": "Charlotte, NC",
+      "region": "南部",
+      "state": "夏洛特",
+      "lon": -80.8431,
+      "lat": 35.2271,
+      "total": 0
+    },
+    "萨克拉门托-斯托克顿-莫德斯托": {
+      "en": "Sacramento-Stockton-Modesto, CA",
+      "region": "西部",
+      "state": "加州",
+      "lon": -121.4944,
+      "lat": 38.5816,
+      "total": 0
+    },
+    "法拉盛": {
+      "en": "Flushing, New York",
+      "region": "东部",
+      "state": "法拉盛",
+      "lon": -73.8331,
+      "lat": 40.7675,
+      "total": 25
+    },
+    "圣何塞": {
+      "en": "San Jose, CA",
+      "region": "西部",
+      "state": "圣何塞",
+      "lon": -121.8863,
+      "lat": 37.3382,
+      "total": 0
+    },
+    "坦帕-圣彼得堡（萨拉索塔）": {
+      "en": "Tampa-St. Petersburg (Sarasota), FL",
+      "region": "南部",
+      "state": "坦帕",
+      "lon": -82.4572,
+      "lat": 27.9506,
+      "total": 1
+    },
+    "华盛顿特区（黑格斯敦）": {
+      "en": "Washington DC (Hagerstown MD)",
+      "region": "东部",
+      "state": "华盛顿DC",
+      "lon": -77.0369,
+      "lat": 38.9072,
+      "total": 2
+    },
+    "印第安纳波利斯": {
+      "en": "Indianapolis, IN",
+      "region": "中部",
+      "state": "印第安纳波利斯",
+      "lon": -86.1581,
+      "lat": 39.7684,
+      "total": 0
+    },
+    "丹佛": {
+      "en": "Denver, CO",
+      "region": "西部",
+      "state": "丹佛",
+      "lon": -104.9903,
+      "lat": 39.7392,
+      "total": 2
+    },
+    "巴尔的摩": {
+      "en": "Baltimore, MD",
+      "region": "南部",
+      "state": "马里兰",
+      "lon": -76.6122,
+      "lat": 39.2904,
+      "total": 0
+    },
+    "圣路易斯": {
+      "en": "St. Louis, MO",
+      "region": "中部",
+      "state": "圣路易斯",
+      "lon": -90.1994,
+      "lat": 38.627,
+      "total": 0
+    },
+    "弗吉尼亚海滩": {
+      "en": "Virginia Beach, VA",
+      "region": "南部",
+      "state": "维吉尼亚",
+      "lon": -75.978,
+      "lat": 36.8529,
+      "total": 0
+    },
+    "奥克兰": {
+      "en": "Oakland, CA",
+      "region": "西部",
+      "state": "奥克兰",
+      "lon": -122.2711,
+      "lat": 37.8044,
+      "total": 0
+    },
+    "埃尔帕索": {
+      "en": "El Paso, TX",
+      "region": "南部",
+      "state": "德州",
+      "lon": -106.485,
+      "lat": 31.7619,
+      "total": 0
+    },
+    "哥伦布": {
+      "en": "Columbus, OH",
+      "region": "中部",
+      "state": "哥伦布",
+      "lon": -82.9988,
+      "lat": 39.9612,
+      "total": 0
+    },
+    "路易斯维尔": {
+      "en": "Louisville, KY",
+      "region": "南部",
+      "state": "肯塔基",
+      "lon": -85.7585,
+      "lat": 38.2527,
+      "total": 0
+    },
+    "俄克拉何马城": {
+      "en": "Oklahoma City, OK",
+      "region": "南部",
+      "state": "俄克拉荷马",
+      "lon": -97.5164,
+      "lat": 35.4676,
+      "total": 0
+    },
+    "弗雷斯诺-维萨利亚": {
+      "en": "Fresno-Visalia, CA",
+      "region": "西部",
+      "state": "加州",
+      "lon": -119.7871,
+      "lat": 36.7378,
+      "total": 0
+    },
+    "图森（塞拉维斯塔）": {
+      "en": "Tucson (Sierra Vista), AZ",
+      "region": "西部",
+      "state": "亚利桑那",
+      "lon": -110.9747,
+      "lat": 32.2226,
+      "total": 0
+    },
+    "波士顿-曼彻斯特": {
+      "en": "Boston MA-Manchester NH",
+      "region": "东部",
+      "state": "波士顿",
+      "lon": -71.0589,
+      "lat": 42.3601,
+      "total": 3
+    },
+    "斯塔滕岛": {
+      "en": "Staten Island, New York",
+      "region": "东部",
+      "state": "纽约",
+      "lon": -74.1502,
+      "lat": 40.5795,
+      "total": 0
+    },
+    "阿尔伯克基-圣菲": {
+      "en": "Albuquerque-Santa Fe, NM",
+      "region": "西部",
+      "state": "新墨西哥",
+      "lon": -106.6504,
+      "lat": 35.0844,
+      "total": 0
+    },
+    "曼哈顿": {
+      "en": "Manhattan, New York",
+      "region": "东部",
+      "state": "曼哈顿",
+      "lon": -73.9712,
+      "lat": 40.7831,
+      "total": 0
+    },
+    "皇后区": {
+      "en": "Queens, New York",
+      "region": "东部",
+      "state": "皇后区",
+      "lon": -73.7949,
+      "lat": 40.7282,
+      "total": 0
+    },
+    "长岛": {
+      "en": "Long Island, New York",
+      "region": "东部",
+      "state": "长岛",
+      "lon": -73.4129,
+      "lat": 40.7891,
+      "total": 0
+    },
+    "泽西市": {
+      "en": "Jersey City, NJ",
+      "region": "东部",
+      "state": "泽西市",
+      "lon": -74.0431,
+      "lat": 40.7178,
+      "total": 0
+    },
+    "纽瓦克": {
+      "en": "Newark, NJ",
+      "region": "东部",
+      "state": "纽瓦克",
+      "lon": -74.1724,
+      "lat": 40.7357,
+      "total": 0
+    },
+    "爱迪生": {
+      "en": "Edison, NJ",
+      "region": "东部",
+      "state": "新泽西",
+      "lon": -74.4121,
+      "lat": 40.5187,
+      "total": 0
+    },
+    "昆西": {
+      "en": "Quincy, MA",
+      "region": "东部",
+      "state": "麻州",
+      "lon": -71.0023,
+      "lat": 42.2529,
+      "total": 0
+    },
+    "罗克维尔": {
+      "en": "Rockville, MD",
+      "region": "南部",
+      "state": "马里兰",
+      "lon": -77.1528,
+      "lat": 39.084,
+      "total": 0
+    },
+    "匹兹堡": {
+      "en": "Pittsburgh, PA",
+      "region": "东部",
+      "state": "宾州",
+      "lon": -79.9959,
+      "lat": 40.4406,
+      "total": 0
+    },
+    "尔湾": {
+      "en": "Irvine, CA",
+      "region": "西部",
+      "state": "尔湾",
+      "lon": -117.8265,
+      "lat": 33.6846,
+      "total": 0
+    },
+    "圣盖博": {
+      "en": "San Gabriel, CA",
+      "region": "西部",
+      "state": "圣盖博",
+      "lon": -118.108,
+      "lat": 34.0961,
+      "total": 0
+    },
+    "蒙特利公园": {
+      "en": "Monterey Park, CA",
+      "region": "西部",
+      "state": "蒙特利公园",
+      "lon": -118.127,
+      "lat": 34.0625,
+      "total": 0
+    },
+    "阿罕布拉": {
+      "en": "Alhambra, CA",
+      "region": "西部",
+      "state": "阿罕布拉",
+      "lon": -118.127,
+      "lat": 34.0953,
+      "total": 0
+    },
+    "罗兰岗": {
+      "en": "Rowland Heights, CA",
+      "region": "西部",
+      "state": "罗兰岗",
+      "lon": -117.9053,
+      "lat": 33.9761,
+      "total": 0
+    },
+    "钻石吧": {
+      "en": "Diamond Bar, CA",
+      "region": "西部",
+      "state": "钻石吧",
+      "lon": -117.8103,
+      "lat": 34.0286,
+      "total": 0
+    },
+    "核桃": {
+      "en": "Walnut, CA",
+      "region": "西部",
+      "state": "核桃",
+      "lon": -117.8653,
+      "lat": 34.0203,
+      "total": 0
+    },
+    "哈仙达岗": {
+      "en": "Hacienda Heights, CA",
+      "region": "西部",
+      "state": "哈仙达岗",
+      "lon": -117.9687,
+      "lat": 33.9931,
+      "total": 0
+    },
+    "阿凯迪亚": {
+      "en": "Arcadia, CA",
+      "region": "西部",
+      "state": "阿凯迪亚",
+      "lon": -118.0353,
+      "lat": 34.1397,
+      "total": 0
+    },
+    "罗斯密": {
+      "en": "Rosemead, CA",
+      "region": "西部",
+      "state": "罗斯密",
+      "lon": -118.0728,
+      "lat": 34.0806,
+      "total": 0
+    },
+    "加迪纳": {
+      "en": "Gardena, CA",
+      "region": "西部",
+      "state": "加迪纳",
+      "lon": -118.3089,
+      "lat": 33.8883,
+      "total": 0
+    },
+    "弗里蒙特": {
+      "en": "Fremont, CA",
+      "region": "西部",
+      "state": "弗里蒙特",
+      "lon": -121.9886,
+      "lat": 37.5485,
+      "total": 0
+    },
+    "库比蒂诺": {
+      "en": "Cupertino, CA",
+      "region": "西部",
+      "state": "库柏蒂诺",
+      "lon": -122.0322,
+      "lat": 37.3229,
+      "total": 0
+    },
+    "森尼韦尔": {
+      "en": "Sunnyvale, CA",
+      "region": "西部",
+      "state": "圣塔克拉拉",
+      "lon": -122.0363,
+      "lat": 37.3688,
+      "total": 0
+    },
+    "圣塔克拉拉": {
+      "en": "Santa Clara, CA",
+      "region": "西部",
+      "state": "圣塔克拉拉",
+      "lon": -121.9552,
+      "lat": 37.3541,
+      "total": 0
+    },
+    "圣马刁": {
+      "en": "San Mateo, CA",
+      "region": "西部",
+      "state": "圣马刁",
+      "lon": -122.3255,
+      "lat": 37.563,
+      "total": 0
+    },
+    "米尔皮塔斯": {
+      "en": "Milpitas, CA",
+      "region": "西部",
+      "state": "加州",
+      "lon": -121.8996,
+      "lat": 37.4323,
+      "total": 0
+    },
+    "都柏林": {
+      "en": "Dublin, CA",
+      "region": "西部",
+      "state": "都柏林",
+      "lon": -121.9358,
+      "lat": 37.7022,
+      "total": 0
+    },
+    "伯克利": {
+      "en": "Berkeley, CA",
+      "region": "西部",
+      "state": "加州",
+      "lon": -122.273,
+      "lat": 37.8715,
+      "total": 0
+    },
+    "圣拉蒙": {
+      "en": "San Ramon, CA",
+      "region": "西部",
+      "state": "加州",
+      "lon": -121.978,
+      "lat": 37.7799,
+      "total": 0
+    },
+    "橙县": {
+      "en": "Orange County, CA",
+      "region": "西部",
+      "state": "加州",
+      "lon": -117.8311,
+      "lat": 33.7175,
+      "total": 0
+    },
+    "安纳海姆": {
+      "en": "Anaheim, CA",
+      "region": "西部",
+      "state": "加州",
+      "lon": -117.9145,
+      "lat": 33.8366,
+      "total": 0
+    },
+    "圣塔安娜": {
+      "en": "Santa Ana, CA",
+      "region": "西部",
+      "state": "加州",
+      "lon": -117.8677,
+      "lat": 33.7455,
+      "total": 0
+    },
+    "河滨": {
+      "en": "Riverside, CA",
+      "region": "西部",
+      "state": "加州",
+      "lon": -117.3961,
+      "lat": 33.9533,
+      "total": 0
+    },
+    "安大略": {
+      "en": "Ontario, CA",
+      "region": "西部",
+      "state": "加州",
+      "lon": -117.6509,
+      "lat": 34.0633,
+      "total": 0
+    },
+    "贝尔维尤": {
+      "en": "Bellevue, WA",
+      "region": "西部",
+      "state": "华盛顿州",
+      "lon": -122.2007,
+      "lat": 47.6101,
+      "total": 0
+    },
+    "比弗顿": {
+      "en": "Beaverton, OR",
+      "region": "西部",
+      "state": "波特兰",
+      "lon": -122.8037,
+      "lat": 45.4871,
+      "total": 0
+    },
+    "普莱诺": {
+      "en": "Plano, TX",
+      "region": "南部",
+      "state": "德州",
+      "lon": -96.6989,
+      "lat": 33.0198,
+      "total": 0
+    },
+    "凯蒂": {
+      "en": "Katy, TX",
+      "region": "南部",
+      "state": "德州",
+      "lon": -95.8244,
+      "lat": 29.7858,
+      "total": 0
+    },
+    "糖城": {
+      "en": "Sugar Land, TX",
+      "region": "南部",
+      "state": "德州",
+      "lon": -95.6349,
+      "lat": 29.6197,
+      "total": 0
+    },
+    "罗利": {
+      "en": "Raleigh, NC",
+      "region": "南部",
+      "state": "罗利",
+      "lon": -78.6382,
+      "lat": 35.7796,
+      "total": 0
+    },
+    "纳什维尔": {
+      "en": "Nashville, TN",
+      "region": "南部",
+      "state": "纳什维尔",
+      "lon": -86.7816,
+      "lat": 36.1627,
+      "total": 0
+    },
+    "孟菲斯": {
+      "en": "Memphis, TN",
+      "region": "南部",
+      "state": "孟菲斯",
+      "lon": -90.049,
+      "lat": 35.1495,
+      "total": 0
+    },
+    "新奥尔良": {
+      "en": "New Orleans, LA",
+      "region": "南部",
+      "state": "新奥尔良",
+      "lon": -90.0715,
+      "lat": 29.9511,
+      "total": 0
+    },
+    "底特律": {
+      "en": "Detroit, MI",
+      "region": "中部",
+      "state": "底特律",
+      "lon": -83.0458,
+      "lat": 42.3314,
+      "total": 0
+    },
+    "克利夫兰": {
+      "en": "Cleveland, OH",
+      "region": "中部",
+      "state": "克利夫兰",
+      "lon": -81.6944,
+      "lat": 41.4993,
+      "total": 0
+    },
+    "辛辛那提": {
+      "en": "Cincinnati, OH",
+      "region": "中部",
+      "state": "辛辛那提",
+      "lon": -84.512,
+      "lat": 39.1031,
+      "total": 0
+    },
+    "密尔沃基": {
+      "en": "Milwaukee, WI",
+      "region": "中部",
+      "state": "密尔沃基",
+      "lon": -87.9065,
+      "lat": 43.0389,
+      "total": 0
+    },
+    "明尼阿波利斯": {
+      "en": "Minneapolis, MN",
+      "region": "中部",
+      "state": "明尼阿波利斯",
+      "lon": -93.265,
+      "lat": 44.9778,
+      "total": 0
+    },
+    "堪萨斯城": {
+      "en": "Kansas City, MO",
+      "region": "中部",
+      "state": "堪萨斯城",
+      "lon": -94.5786,
+      "lat": 39.0997,
+      "total": 0
+    },
+    "盐湖城": {
+      "en": "Salt Lake City, UT",
+      "region": "西部",
+      "state": "盐湖城",
+      "lon": -111.891,
+      "lat": 40.7608,
+      "total": 0
+    },
+    "檀香山": {
+      "en": "Honolulu, HI",
+      "region": "西部",
+      "state": "檀香山",
+      "lon": -157.8583,
+      "lat": 21.3069,
+      "total": 0
+    }
+  }
+}

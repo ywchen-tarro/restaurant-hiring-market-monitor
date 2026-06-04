@@ -28,6 +28,7 @@
   const state = {
     data: null,        // parsed posts.json
     daily: null,       // parsed daily.json (per-day time series)
+    cityCatalog: null, // parsed cities.json (map city metadata)
     benchmark: null,   // optional local-only overlay
     filters: { search: '', platform: '', region: '', keyword: '', date: '' },
     charts: { pie: null, trend: null },
@@ -37,7 +38,15 @@
   const t = (k, p) => (window.I18N ? window.I18N.t(k, p) : k);
   const regionName = (c) => (window.I18N ? window.I18N.region(c) : c);
   const stateName = (s) => (window.I18N ? window.I18N.state(s) : s);
-  const cityName = (s) => (window.I18N && window.I18N.city ? window.I18N.city(s) : s);
+  const cityName = (s) => {
+    if (!s) return '';
+    const translated = window.I18N && window.I18N.city ? window.I18N.city(s) : s;
+    if (translated !== s) return translated;
+    const lang = window.I18N && window.I18N.getLang ? window.I18N.getLang() : 'zh';
+    const catalogEntry = state.cityCatalog && state.cityCatalog.cities && state.cityCatalog.cities[s];
+    if (lang === 'en' && catalogEntry && catalogEntry.en) return catalogEntry.en;
+    return s;
+  };
   const platformName = (id) => (window.I18N ? window.I18N.platform(id) : id);
 
   // ────────────────────────────────────────────────────────
@@ -63,6 +72,8 @@
     const benchmarkUrl = window.DASHBOARD_BENCHMARK_URL || './benchmark.json';
     const dailyUrl = window.DASHBOARD_DAILY_URL ||
       (dataUrl.endsWith('posts.json') ? dataUrl.replace('posts.json', 'daily.json') : './data/daily.json');
+    const cityUrl = window.DASHBOARD_CITY_URL ||
+      (dataUrl.endsWith('posts.json') ? dataUrl.replace('posts.json', 'cities.json') : './data/cities.json');
     try {
       const r = await fetch(dataUrl, { cache: 'no-store' });
       if (!r.ok) throw new Error(dataUrl + ' fetch failed: ' + r.status);
@@ -76,6 +87,10 @@
       const r = await fetch(dailyUrl, { cache: 'no-store' });
       if (r.ok) state.daily = await r.json();
     } catch (_) { /* daily.json is optional; tolerate absence */ }
+    try {
+      const r = await fetch(cityUrl, { cache: 'no-store' });
+      if (r.ok) state.cityCatalog = await r.json();
+    } catch (_) { /* cities.json is optional; fallback to static map points */ }
     try {
       const r = await fetch(benchmarkUrl, { cache: 'no-store' });
       if (r.ok) state.benchmark = await r.json();
@@ -898,6 +913,22 @@
     '盐湖城': [-111.8910, 40.7608],
     '檀香山': [-157.8583, 21.3069],
   };
+
+  function cityPoints() {
+    const points = { ...CITY_POINTS };
+    const cities = state.cityCatalog && state.cityCatalog.cities;
+    if (cities) {
+      Object.entries(cities).forEach(([name, info]) => {
+        const lon = Number(info && info.lon);
+        const lat = Number(info && info.lat);
+        if (Number.isFinite(lon) && Number.isFinite(lat)) {
+          points[name] = [lon, lat];
+        }
+      });
+    }
+    return points;
+  }
+
   let _mapDepsPromise = null;
   let _usTopo = null;
 
@@ -941,6 +972,7 @@
     }
 
     // Aggregate by USPS state code
+    const points = cityPoints();
     const counts = {};
     const cityCounts = {};
     posts.forEach(p => {
@@ -948,7 +980,7 @@
       const usps = window.I18N && window.I18N.uspsFor(p.state);
       if (!usps) return;
       counts[usps] = (counts[usps] || 0) + 1;
-      if (p.city && CITY_POINTS[p.city]) {
+      if (p.city && points[p.city]) {
         cityCounts[p.city] = (cityCounts[p.city] || 0) + 1;
       }
     });
@@ -1039,7 +1071,7 @@
     });
 
     const cityEntries = Object.entries(cityCounts)
-      .map(([city, count]) => ({ city, count, coord: CITY_POINTS[city] }))
+      .map(([city, count]) => ({ city, count, coord: points[city] }))
       .filter(d => d.coord && projection(d.coord))
       .sort((a, b) => b.count - a.count);
     const maxCity = Math.max(1, ...cityEntries.map(d => d.count));

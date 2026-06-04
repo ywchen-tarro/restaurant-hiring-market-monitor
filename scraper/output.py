@@ -172,6 +172,8 @@ def _aggregate(posts: List[Post], days_back: int) -> dict:
             "region": info.get("region"),
             "state": info.get("state"),
             "en": info.get("en"),
+            "lon": info.get("lon"),
+            "lat": info.get("lat"),
         }
 
     kw_counter = Counter()
@@ -452,6 +454,43 @@ def write_daily_json(
     return out_path
 
 
+def write_city_catalog_json(
+    posts: List[Post],
+    out_path: Optional[Path] = None,
+) -> Path:
+    """Write city metadata consumed by the dashboard map.
+
+    The catalog is regenerated on each scrape so front-end map granularity can
+    follow the scraper's city matcher without duplicating the city list in JS.
+    """
+    out_path = out_path or config.CITY_JSON
+    observed = Counter(p.city for p in posts if getattr(p, "city", None))
+    cities = {}
+    for city in regions.city_catalog():
+        name = city["name"]
+        cities[name] = {
+            "en": city.get("en"),
+            "region": city.get("region"),
+            "state": city.get("state"),
+            "lon": city.get("lon"),
+            "lat": city.get("lat"),
+            "total": observed.get(name, 0),
+        }
+
+    output = {
+        "meta": {
+            "schema_version": 1,
+            "last_updated": datetime.now().astimezone().isoformat(timespec="seconds"),
+            "city_count": len(cities),
+            "observed_city_count": sum(1 for info in cities.values() if info.get("total", 0) > 0),
+        },
+        "cities": cities,
+    }
+    _atomic_write(out_path, json.dumps(output, ensure_ascii=False, indent=2))
+    log.info("Wrote city catalog to %s (%d cities)", out_path, len(cities))
+    return out_path
+
+
 def write_posts_json(
     posts: List[Post],
     days_back: int,
@@ -486,4 +525,5 @@ def write_posts_json(
     # Also update the per-day time series alongside posts.json. This is
     # the file that grows linearly over time — analytics-friendly.
     write_daily_json(posts, days_back)
+    write_city_catalog_json(posts)
     return out_path

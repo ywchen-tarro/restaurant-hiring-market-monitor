@@ -176,6 +176,19 @@ def test_unique_count_handles_blank_title():
     assert output._unique_post_count(posts) == 1
 
 
+def test_city_aggregation_uses_unique_posts_for_mirror_duplicates():
+    posts = [
+        _mk("a", "168worker", "法拉盛请炒锅师傅", region="东部", state="法拉盛", city="法拉盛"),
+        _mk("b", "500work", "法拉盛请炒锅师傅", region="东部", state="法拉盛", city="法拉盛"),
+        _mk("c", "uscanyin", "法拉盛请炒锅师傅", region="东部", state="法拉盛", city="法拉盛"),
+    ]
+    aggregated = output._aggregate(posts, days_back=7)
+    assert aggregated["meta"]["total_posts"] == 3
+    assert aggregated["meta"]["unique_posts"] == 2
+    assert aggregated["by_city"]["法拉盛"]["total"] == 2
+    assert aggregated["by_region"]["东部"]["top_cities"]["法拉盛"] == 2
+
+
 # ─────────────────────────────────────────────────────────────
 # _merge_history (same-day handling)
 # ─────────────────────────────────────────────────────────────
@@ -205,6 +218,18 @@ def test_merge_history_same_day_lower_rejected():
     assert merged[0]["total"] == 100  # old kept
 
 
+def test_merge_history_drops_partial_future_entries():
+    existing = {"history": [
+        {"run_date": "2026-06-02", "total": 100},
+        {"run_date": "2026-06-03", "total": 200},
+        {"run_date": "2026-06-04", "total": 50},
+    ]}
+    new_entry = {"run_date": "2026-06-03", "total": 250}
+    merged = output._merge_history(existing, new_entry)
+    assert [h["run_date"] for h in merged] == ["2026-06-02", "2026-06-03"]
+    assert merged[-1]["total"] == 250
+
+
 def test_merge_history_first_run():
     existing = {}
     new_entry = {"run_date": "2026-05-25", "total": 100}
@@ -225,7 +250,9 @@ def test_merge_daily_freezes_older_days():
         "2026-05-20": {"total": 12, "by_platform": {}, "by_region": {}},  # refreshed
         "2026-05-25": {"total": 8, "by_platform": {}, "by_region": {}},   # new
     }
-    merged = output._merge_daily(existing, new_days, window_start="2026-05-19")
+    merged = output._merge_daily(
+        existing, new_days, window_start="2026-05-19", window_end="2026-05-25"
+    )
     assert merged["2026-05-15"]["total"] == 5    # frozen (before window)
     assert merged["2026-05-20"]["total"] == 12   # refreshed (was 10)
     assert merged["2026-05-25"]["total"] == 8    # new
@@ -242,7 +269,9 @@ def test_merge_daily_drops_stale_in_window_days():
         "2026-05-21": {"total": 0, "by_platform": {}, "by_region": {}},
         # 2026-05-20 NOT in new_days — should be dropped
     }
-    merged = output._merge_daily(existing, new_days, window_start="2026-05-19")
+    merged = output._merge_daily(
+        existing, new_days, window_start="2026-05-19", window_end="2026-05-21"
+    )
     assert "2026-05-20" not in merged
     assert "2026-05-21" not in merged
 
@@ -270,7 +299,9 @@ def test_merge_daily_preserves_relative_date_platforms_in_window():
             "by_region": {"东部": 130},
         },
     }
-    merged = output._merge_daily(existing, new_days, window_start="2026-05-20")
+    merged = output._merge_daily(
+        existing, new_days, window_start="2026-05-20", window_end="2026-05-26"
+    )
     assert merged["2026-05-25"]["by_platform"] == {
         "168worker": 25,
         "uscanyin": 120,
@@ -296,20 +327,41 @@ def test_merge_daily_drops_relative_platform_when_explicitly_replaced_by_zero():
             "by_region": {},
         },
     }
-    merged = output._merge_daily(existing, new_days, window_start="2026-05-20")
+    merged = output._merge_daily(
+        existing, new_days, window_start="2026-05-20", window_end="2026-05-25"
+    )
     assert "2026-05-25" not in merged
+
+
+def test_merge_daily_drops_days_after_window_end():
+    existing = {"days": {
+        "2026-06-03": {"total": 12, "by_platform": {"uscanyin": 12}, "by_region": {}},
+        "2026-06-04": {"total": 9, "by_platform": {"uscanyin": 9}, "by_region": {}},
+    }}
+    new_days = {
+        "2026-06-03": {"total": 8, "by_platform": {"168worker": 8}, "by_region": {}},
+    }
+    merged = output._merge_daily(
+        existing, new_days, window_start="2026-05-28", window_end="2026-06-03"
+    )
+    assert "2026-06-03" in merged
+    assert "2026-06-04" not in merged
 
 
 def test_merge_daily_empty_new():
     existing = {"days": {"2026-05-10": {"total": 5, "by_platform": {}, "by_region": {}}}}
-    merged = output._merge_daily(existing, {}, window_start="2026-05-19")
+    merged = output._merge_daily(
+        existing, {}, window_start="2026-05-19", window_end="2026-05-25"
+    )
     # Only the old frozen day
     assert merged == {"2026-05-10": {"total": 5, "by_platform": {}, "by_region": {}}}
 
 
 def test_merge_daily_empty_existing():
     new_days = {"2026-05-25": {"total": 7, "by_platform": {}, "by_region": {}}}
-    merged = output._merge_daily({}, new_days, window_start="2026-05-19")
+    merged = output._merge_daily(
+        {}, new_days, window_start="2026-05-19", window_end="2026-05-25"
+    )
     assert merged == new_days
 
 

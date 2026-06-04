@@ -96,6 +96,32 @@ def _unique_post_count(posts: List[Post]) -> int:
         counted += 1
     return counted
 
+
+def _unique_posts(posts: List[Post]) -> List[Post]:
+    """Return posts with mirror/self duplicates removed.
+
+    Uses the same keys as _unique_post_count(). This is appropriate for
+    geographic counts, where mirror-board duplicates would otherwise inflate
+    city bubbles on the map.
+    """
+    result: List[Post] = []
+    seen = set()
+    for p in posts:
+        nt = _normalize_title(p.title) if p.title else ""
+        gid = _mirror_group_id(p.platform)
+        if gid is not None and nt:
+            key = ("mirror", gid, nt)
+        elif p.platform in SELF_DEDUP_PLATFORMS and nt:
+            key = ("self", p.platform, nt)
+        else:
+            result.append(p)
+            continue
+        if key in seen:
+            continue
+        seen.add(key)
+        result.append(p)
+    return result
+
 log = logging.getLogger(__name__)
 
 REGIONS_ORDER = ["东部", "南部", "中部", "西部"]
@@ -104,6 +130,10 @@ REGIONS_ORDER = ["东部", "南部", "中部", "西部"]
 _DROP_RATIO_WARN = 0.30          # current < 30% of prior
 _PRIOR_MIN_FOR_DROP_WARN = 20    # only when prior was meaningful
 _PRIOR_MIN_FOR_ZERO_WARN = 5     # warn on 0 only if prior had ≥ this
+
+
+def _effective_today() -> date:
+    return date.today() - timedelta(days=getattr(config, "SCRAPE_END_LAG_DAYS", 0))
 
 
 def _load_existing(path: Path) -> dict:
@@ -130,7 +160,7 @@ def _load_existing(path: Path) -> dict:
 
 
 def _aggregate(posts: List[Post], days_back: int) -> dict:
-    today = date.today()
+    today = _effective_today()
     # days_back includes today (see base.py for the same convention) so
     # the window spans `today - (days_back-1)` … `today`, i.e. days_back
     # calendar days inclusive.
@@ -150,11 +180,13 @@ def _aggregate(posts: List[Post], days_back: int) -> dict:
             "daily_avg": round(total / max(days_back, 1), 2),
         }
 
+    place_posts = _unique_posts(posts)
     by_region = {}
     for region in REGIONS_ORDER:
         region_posts = [p for p in posts if p.region == region]
+        region_place_posts = [p for p in place_posts if p.region == region]
         states = Counter(p.state for p in region_posts if p.state)
-        cities = Counter(p.city for p in region_posts if getattr(p, "city", None))
+        cities = Counter(p.city for p in region_place_posts if getattr(p, "city", None))
         by_region[region] = {
             "total": len(region_posts),
             "top_states": dict(states.most_common(5)),
@@ -163,7 +195,7 @@ def _aggregate(posts: List[Post], days_back: int) -> dict:
     # surface posts that didn't classify
     unclassified = sum(1 for p in posts if not p.region)
 
-    city_counter = Counter(p.city for p in posts if getattr(p, "city", None))
+    city_counter = Counter(p.city for p in place_posts if getattr(p, "city", None))
     by_city = {}
     for city_name, total in city_counter.most_common():
         info = regions.city_info(city_name) or {}
@@ -190,6 +222,7 @@ def _aggregate(posts: List[Post], days_back: int) -> dict:
         "scrape_days_back": days_back,
         "date_from": date_from,
         "date_to": date_to,
+        "scrape_end_lag_days": getattr(config, "SCRAPE_END_LAG_DAYS", 0),
         "total_posts": len(posts),
         "unique_posts": unique_count,
         "duplicate_count": max(0, len(posts) - unique_count),
@@ -206,7 +239,7 @@ def _aggregate(posts: List[Post], days_back: int) -> dict:
 
 
 def _new_history_entry(posts: List[Post], days_back: int) -> dict:
-    today = date.today()
+    today = _effective_today()
     date_from = (today - timedelta(days=days_back - 1)).isoformat()
     plats_counter = Counter(p.platform for p in posts)
     return {
@@ -222,8 +255,8 @@ def _new_history_entry(posts: List[Post], days_back: int) -> dict:
 
 
 def _merge_history(existing: dict, new_entry: dict) -> List[dict]:
-    """Append the new entry, OR replace the same-day entry only when the
-    new run is at least as healthy. "Healthy" = higher total.
+    """Append the new entry, OR replace the same-day entry when the new
+    run is at least as healthy. "Healthy" = higher total.
 
     Why: a partially-failed re-run could otherwise overwrite a good entry
     with a smaller number, silently corrupting the trend. Conversely, if
@@ -232,19 +265,25 @@ def _merge_history(existing: dict, new_entry: dict) -> List[dict]:
     history point a real, internally-consistent snapshot — unlike the
     earlier per-platform max-merge which could synthesize a total that
     no single run produced.
-    """
-    history = list(existing.get("history", []))
-    if not history or history[-1].get("run_date") != new_entry["run_date"]:
-        history.append(new_entry)
-        return history
 
-    prev = history[-1]
+    Runs publish the last complete day, so a prior bad same-day run may
+    have left a history point newer than `new_entry["run_date"]`. Drop those
+    partial/future points instead of keeping them in the trend.
+    """
+    run_date = new_entry["run_date"]
+    older = [h for h in existing.get("history", []) if h.get("run_date") < run_date]
+    same_day = [h for h in existing.get("history", []) if h.get("run_date") == run_date]
+    prev = max(same_day, key=lambda h: h.get("total", 0), default=None)
+
+    if prev is None:
+        return older + [new_entry]
+
     # Compare on raw `total` (always present on both entries). Higher total
     # implies a healthier scrape (more pages parsed). total_unique is just
     # informational; comparing mixed scales would yield false rejections.
     if new_entry.get("total", 0) >= prev.get("total", 0):
-        history[-1] = new_entry
-    return history
+        return older + [new_entry]
+    return older + [prev]
 
 
 def _compute_warnings(
@@ -352,9 +391,17 @@ def _compute_daily(posts: List[Post]) -> Dict[str, dict]:
         bucket["by_platform"][p.platform] = bucket["by_platform"].get(p.platform, 0) + 1
         if p.region:
             bucket["by_region"][p.region] = bucket["by_region"].get(p.region, 0) + 1
-        if getattr(p, "city", None):
-            bucket["by_city"][p.city] = bucket["by_city"].get(p.city, 0) + 1
         bucket["total"] += 1
+    for p in _unique_posts(posts):
+        if not p.date or not getattr(p, "city", None):
+            continue
+        bucket = days.setdefault(p.date, {
+            "by_platform": {},
+            "by_region": {},
+            "by_city": {},
+            "total": 0,
+        })
+        bucket["by_city"][p.city] = bucket["by_city"].get(p.city, 0) + 1
     return days
 
 
@@ -362,6 +409,7 @@ def _merge_daily(
     existing: dict,
     new_days: Dict[str, dict],
     window_start: str,
+    window_end: str,
     relative_platforms=RELATIVE_DATE_PLATFORMS,
 ) -> dict:
     """Refresh days inside the current window; preserve older frozen days.
@@ -370,6 +418,8 @@ def _merge_daily(
     `new_days` is what this run computed.
     `window_start` is the ISO date of the first day in the current
     lookback window (inclusive).
+    `window_end` is the ISO date of the last complete day this run should
+    publish.
 
     - Days < window_start are kept verbatim (frozen — we've moved past
       their scrape window so we can't refresh them anyway).
@@ -380,6 +430,9 @@ def _merge_daily(
       unless the new scrape has an explicit replacement for that platform
       on that day. These sources don't provide stable absolute dates, so
       tomorrow's scrape cannot reliably reconstruct yesterday's bucket.
+    - Days > window_end are always dropped; they are partial/future days
+      relative to the current scrape cutoff and may be leftovers from a
+      previous same-day run.
     """
     prior_days = (existing or {}).get("days", {})
     merged_days: Dict[str, dict] = {}
@@ -390,7 +443,7 @@ def _merge_daily(
 
     in_window_days = {
         d for d in set(prior_days) | set(new_days)
-        if d >= window_start
+        if window_start <= d <= window_end
     }
 
     for d in sorted(in_window_days):
@@ -432,12 +485,13 @@ def write_daily_json(
 ) -> Path:
     """Write/refresh the per-day time series."""
     out_path = out_path or config.DAILY_JSON
-    today = date.today()
+    today = _effective_today()
     window_start = (today - timedelta(days=days_back - 1)).isoformat()
+    window_end = today.isoformat()
 
     existing = _load_existing(out_path) if out_path.exists() else {}
     new_days = _compute_daily(posts)
-    merged = _merge_daily(existing, new_days, window_start)
+    merged = _merge_daily(existing, new_days, window_start, window_end)
 
     output = {
         "meta": {
@@ -464,7 +518,7 @@ def write_city_catalog_json(
     follow the scraper's city matcher without duplicating the city list in JS.
     """
     out_path = out_path or config.CITY_JSON
-    observed = Counter(p.city for p in posts if getattr(p, "city", None))
+    observed = Counter(p.city for p in _unique_posts(posts) if getattr(p, "city", None))
     cities = {}
     for city in regions.city_catalog():
         name = city["name"]

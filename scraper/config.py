@@ -5,6 +5,9 @@ from typing import Optional
 
 # ── Scrape window ─────────────────────────────────────────────
 SCRAPE_DAYS_BACK = 7
+# Publish only completed calendar days. A run on 2026-06-04 updates the
+# window ending 2026-06-03; this avoids publishing partial same-day counts.
+SCRAPE_END_LAG_DAYS = 1
 
 # ── Schedule (informational; real schedule lives in launchd plist) ──
 # Daily at 09:00 local time. Daily cadence is required so uscanyin's

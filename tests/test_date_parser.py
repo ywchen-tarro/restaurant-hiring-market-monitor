@@ -7,7 +7,7 @@ deterministic.
 
 from __future__ import annotations
 
-from datetime import date, timedelta
+from datetime import date, datetime, timedelta
 from unittest import mock
 
 from scraper import date_parser
@@ -128,6 +128,17 @@ def test_en_minutes_hours_ago():
     assert _parse("5 minutes ago") == TODAY
     assert _parse("1 hour ago") == TODAY
     assert _parse("23 hours ago") == TODAY
+
+
+def test_en_hours_ago_can_cross_midnight():
+    now = datetime(2026, 6, 4, 11, 30)
+    assert date_parser.parse("23 hours ago", now=now) == date(2026, 6, 3)
+    assert date_parser.parse("1 hour ago", now=now) == date(2026, 6, 4)
+
+
+def test_zh_hours_ago_can_cross_midnight():
+    now = datetime(2026, 6, 4, 0, 30)
+    assert date_parser.parse("1小时前", now=now) == date(2026, 6, 3)
 
 
 def test_en_n_days_ago():

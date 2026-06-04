@@ -23,7 +23,7 @@ _REL_EN_RE = re.compile(
 )
 
 
-def parse(text: str, today: Optional[date] = None) -> Optional[date]:
+def parse(text: str, today: Optional[date] = None, now: Optional[datetime] = None) -> Optional[date]:
     """Parse a date string in any of the formats job-boards use.
 
     Supports:
@@ -44,7 +44,10 @@ def parse(text: str, today: Optional[date] = None) -> Optional[date]:
     if not text:
         return None
     s = text.strip()
-    today = today or date.today()
+    if now is None and today is not None:
+        now = datetime.combine(today, datetime.max.time())
+    now = now or datetime.now()
+    today = today or now.date()
 
     s_lower = s.lower()
     if s in ("刚刚", "剛剛", "今天") or s_lower in ("just now", "now", "today"):
@@ -58,8 +61,10 @@ def parse(text: str, today: Optional[date] = None) -> Optional[date]:
     if m:
         n = int(m.group("n"))
         unit = m.group("unit")
-        if unit in ("分钟", "分鐘", "小时", "小時"):
-            return today
+        if unit in ("分钟", "分鐘"):
+            return (now - timedelta(minutes=n)).date()
+        if unit in ("小时", "小時"):
+            return (now - timedelta(hours=n)).date()
         if unit in ("天", "日"):
             return today - timedelta(days=n)
         if unit in ("周", "週"):
@@ -73,8 +78,10 @@ def parse(text: str, today: Optional[date] = None) -> Optional[date]:
     if m:
         n = int(m.group("n"))
         unit = m.group("unit").lower()
-        if unit in ("minute", "hour"):
-            return today
+        if unit == "minute":
+            return (now - timedelta(minutes=n)).date()
+        if unit == "hour":
+            return (now - timedelta(hours=n)).date()
         if unit == "day":
             return today - timedelta(days=n)
         if unit == "week":

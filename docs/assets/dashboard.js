@@ -21,6 +21,10 @@
   ];
   const PLATFORM_BY_ID = Object.fromEntries(PLATFORMS.map(p => [p.id, p]));
   const REGIONS = ['东部', '南部', '中部', '西部'];
+  const MIRROR_GROUPS = [
+    new Set(['168worker', '500work']),
+  ];
+  const SELF_DEDUP_PLATFORMS = new Set(['meiguogongzuo']);
 
   // ────────────────────────────────────────────────────────
   // STATE
@@ -48,6 +52,37 @@
     return s;
   };
   const platformName = (id) => (window.I18N ? window.I18N.platform(id) : id);
+
+  function normalizedTitle(title) {
+    return String(title || '').match(/[\u4e00-\u9fff\uf900-\ufaffA-Za-z0-9]+/g)?.join('').toLowerCase() || '';
+  }
+
+  function mirrorGroupId(platform) {
+    for (let i = 0; i < MIRROR_GROUPS.length; i += 1) {
+      if (MIRROR_GROUPS[i].has(platform)) return i;
+    }
+    return null;
+  }
+
+  function uniquePostsForPlaceCounts(posts) {
+    const seen = new Set();
+    const out = [];
+    (posts || []).forEach(p => {
+      const nt = normalizedTitle(p.title);
+      const gid = mirrorGroupId(p.platform);
+      let key = null;
+      if (gid !== null && nt) key = `mirror:${gid}:${nt}`;
+      else if (SELF_DEDUP_PLATFORMS.has(p.platform) && nt) key = `self:${p.platform}:${nt}`;
+      if (!key) {
+        out.push(p);
+        return;
+      }
+      if (seen.has(key)) return;
+      seen.add(key);
+      out.push(p);
+    });
+    return out;
+  }
 
   // ────────────────────────────────────────────────────────
   // ENTRY POINT
@@ -980,6 +1015,8 @@
       const usps = window.I18N && window.I18N.uspsFor(p.state);
       if (!usps) return;
       counts[usps] = (counts[usps] || 0) + 1;
+    });
+    uniquePostsForPlaceCounts(posts).forEach(p => {
       if (p.city && points[p.city]) {
         cityCounts[p.city] = (cityCounts[p.city] || 0) + 1;
       }
@@ -1128,10 +1165,11 @@
       byRegion = {};
       REGIONS.forEach(r => {
         const rp = filtered.filter(p => p.region === r);
+        const placePosts = uniquePostsForPlaceCounts(rp);
         const sCounts = {};
         const cCounts = {};
         rp.forEach(p => { if (p.state) sCounts[p.state] = (sCounts[p.state] || 0) + 1; });
-        rp.forEach(p => { if (p.city) cCounts[p.city] = (cCounts[p.city] || 0) + 1; });
+        placePosts.forEach(p => { if (p.city) cCounts[p.city] = (cCounts[p.city] || 0) + 1; });
         const top = Object.entries(sCounts).sort((a, b) => b[1] - a[1]).slice(0, 5);
         const topCities = Object.entries(cCounts).sort((a, b) => b[1] - a[1]).slice(0, 8);
         byRegion[r] = { total: rp.length, top_states: Object.fromEntries(top), top_cities: Object.fromEntries(topCities) };

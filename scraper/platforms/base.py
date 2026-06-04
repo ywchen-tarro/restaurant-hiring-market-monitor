@@ -83,7 +83,7 @@ class BasePlatformScraper(ABC):
         # `days_back` = the number of calendar days the window should cover,
         # INCLUSIVE of today. Cutoff math: with days_back=7, we want today
         # + 6 prior = 7 days; cutoff is today-6 (inclusive).
-        today = date.today()
+        today = date.today() - timedelta(days=getattr(config, "SCRAPE_END_LAG_DAYS", 0))
         cutoff = today - timedelta(days=days_back - 1)
         # Per-platform override, then config default
         page_cap = (

@@ -16,6 +16,12 @@ from scraper import config
 from scraper.platforms.base import BasePlatformScraper, Post, post_id
 
 
+@pytest.fixture(autouse=True)
+def _no_scrape_end_lag_for_legacy_window_tests():
+    with mock.patch.object(config, "SCRAPE_END_LAG_DAYS", 0):
+        yield
+
+
 def _mk(native_id: str, title: str, day_offset: int, today: date) -> Post:
     """Build a raw Post (pre-filter) dated `day_offset` days before today."""
     d = today + timedelta(days=day_offset)
@@ -125,6 +131,22 @@ def test_post_dated_exactly_today_kept():
         result = s.run(days_back=7)
     assert len(result) == 1
     assert result[0].date == today.isoformat()
+
+
+def test_scrape_end_lag_drops_partial_current_day():
+    run_day = date(2026, 6, 4)
+    posts = [
+        _mk("today", "中日餐请炒锅", 0, run_day),
+        _mk("yesterday", "中日餐请炒锅", -1, run_day),
+    ]
+    s = _StubScraper([posts])
+    with mock.patch.object(config, "SCRAPE_END_LAG_DAYS", 1), \
+         mock.patch("scraper.platforms.base.date") as fake_date:
+        fake_date.today.return_value = run_day
+        fake_date.fromisoformat = date.fromisoformat
+        result = s.run(days_back=7)
+    assert [p.id for p in result] == ["stub_yesterday"]
+    assert s.last_diagnostics["dropped_future_date"] == 1
 
 
 def test_stop_paginating_after_window_boundary():

@@ -259,6 +259,211 @@ CITY_MARKETS = [
         "name": "阿尔伯克基-圣菲", "en": "Albuquerque-Santa Fe, NM", "region": "西部", "state": "新墨西哥",
         "tokens": ["Albuquerque-Santa Fe", "Albuquerque", "Santa Fe", "阿尔伯克基-圣菲", "阿尔伯克基", "圣菲"],
     },
+    # Additional high-signal city markets and common Chinese community aliases.
+    {
+        "name": "曼哈顿", "en": "Manhattan, New York", "region": "东部", "state": "曼哈顿",
+        "tokens": ["Manhattan", "曼哈顿"],
+    },
+    {
+        "name": "皇后区", "en": "Queens, New York", "region": "东部", "state": "皇后区",
+        "tokens": ["Queens", "Queen's", "皇后区", "皇后"],
+    },
+    {
+        "name": "长岛", "en": "Long Island, New York", "region": "东部", "state": "长岛",
+        "tokens": ["Long Island", "Great Neck", "大颈", "长岛"],
+    },
+    {
+        "name": "泽西市", "en": "Jersey City, NJ", "region": "东部", "state": "泽西市",
+        "tokens": ["Jersey City", "泽西市"],
+    },
+    {
+        "name": "纽瓦克", "en": "Newark, NJ", "region": "东部", "state": "纽瓦克",
+        "tokens": ["Newark NJ", "Newark, NJ", "纽瓦克"],
+    },
+    {
+        "name": "爱迪生", "en": "Edison, NJ", "region": "东部", "state": "新泽西",
+        "tokens": ["Edison NJ", "Edison, NJ", "爱迪生"],
+    },
+    {
+        "name": "昆西", "en": "Quincy, MA", "region": "东部", "state": "麻州",
+        "tokens": ["Quincy MA", "Quincy, MA", "昆西"],
+    },
+    {
+        "name": "罗克维尔", "en": "Rockville, MD", "region": "南部", "state": "马里兰",
+        "tokens": ["Rockville", "罗克维尔"],
+    },
+    {
+        "name": "匹兹堡", "en": "Pittsburgh, PA", "region": "东部", "state": "宾州",
+        "tokens": ["Pittsburgh", "匹兹堡"],
+    },
+    {
+        "name": "尔湾", "en": "Irvine, CA", "region": "西部", "state": "尔湾",
+        "tokens": ["Irvine", "尔湾", "爾灣"],
+    },
+    {
+        "name": "圣盖博", "en": "San Gabriel, CA", "region": "西部", "state": "圣盖博",
+        "tokens": ["San Gabriel", "圣盖博", "聖蓋博"],
+    },
+    {
+        "name": "蒙特利公园", "en": "Monterey Park, CA", "region": "西部", "state": "蒙特利公园",
+        "tokens": ["Monterey Park", "蒙特利公园", "蒙特利公園", "蒙市"],
+    },
+    {
+        "name": "阿罕布拉", "en": "Alhambra, CA", "region": "西部", "state": "阿罕布拉",
+        "tokens": ["Alhambra", "阿罕布拉", "阿市"],
+    },
+    {
+        "name": "罗兰岗", "en": "Rowland Heights, CA", "region": "西部", "state": "罗兰岗",
+        "tokens": ["Rowland Heights", "罗兰岗", "罗兰岡"],
+    },
+    {
+        "name": "钻石吧", "en": "Diamond Bar, CA", "region": "西部", "state": "钻石吧",
+        "tokens": ["Diamond Bar", "钻石吧"],
+    },
+    {
+        "name": "核桃", "en": "Walnut, CA", "region": "西部", "state": "核桃",
+        "tokens": ["Walnut CA", "Walnut, CA", "核桃市", "核桃"],
+    },
+    {
+        "name": "哈仙达岗", "en": "Hacienda Heights, CA", "region": "西部", "state": "哈仙达岗",
+        "tokens": ["Hacienda Heights", "哈仙达岗", "哈仙达"],
+    },
+    {
+        "name": "阿凯迪亚", "en": "Arcadia, CA", "region": "西部", "state": "阿凯迪亚",
+        "tokens": ["Arcadia", "阿凯迪亚"],
+    },
+    {
+        "name": "罗斯密", "en": "Rosemead, CA", "region": "西部", "state": "罗斯密",
+        "tokens": ["Rosemead", "罗斯密"],
+    },
+    {
+        "name": "加迪纳", "en": "Gardena, CA", "region": "西部", "state": "加迪纳",
+        "tokens": ["Gardena", "加迪纳"],
+    },
+    {
+        "name": "弗里蒙特", "en": "Fremont, CA", "region": "西部", "state": "弗里蒙特",
+        "tokens": ["Fremont", "弗里蒙特"],
+    },
+    {
+        "name": "库比蒂诺", "en": "Cupertino, CA", "region": "西部", "state": "库柏蒂诺",
+        "tokens": ["Cupertino", "库比蒂诺", "库柏蒂诺"],
+    },
+    {
+        "name": "森尼韦尔", "en": "Sunnyvale, CA", "region": "西部", "state": "圣塔克拉拉",
+        "tokens": ["Sunnyvale", "森尼韦尔", "森尼维尔"],
+    },
+    {
+        "name": "圣塔克拉拉", "en": "Santa Clara, CA", "region": "西部", "state": "圣塔克拉拉",
+        "tokens": ["Santa Clara", "圣塔克拉拉"],
+    },
+    {
+        "name": "圣马刁", "en": "San Mateo, CA", "region": "西部", "state": "圣马刁",
+        "tokens": ["San Mateo", "圣马刁"],
+    },
+    {
+        "name": "米尔皮塔斯", "en": "Milpitas, CA", "region": "西部", "state": "加州",
+        "tokens": ["Milpitas", "米尔皮塔斯"],
+    },
+    {
+        "name": "都柏林", "en": "Dublin, CA", "region": "西部", "state": "都柏林",
+        "tokens": ["Dublin CA", "Dublin, CA", "都柏林"],
+    },
+    {
+        "name": "伯克利", "en": "Berkeley, CA", "region": "西部", "state": "加州",
+        "tokens": ["Berkeley", "伯克利"],
+    },
+    {
+        "name": "圣拉蒙", "en": "San Ramon, CA", "region": "西部", "state": "加州",
+        "tokens": ["San Ramon", "Sanramon", "圣拉蒙"],
+    },
+    {
+        "name": "橙县", "en": "Orange County, CA", "region": "西部", "state": "加州",
+        "tokens": ["Orange County CA", "Orange County, CA", "OC CA", "橙县", "橙縣"],
+    },
+    {
+        "name": "安纳海姆", "en": "Anaheim, CA", "region": "西部", "state": "加州",
+        "tokens": ["Anaheim", "安纳海姆"],
+    },
+    {
+        "name": "圣塔安娜", "en": "Santa Ana, CA", "region": "西部", "state": "加州",
+        "tokens": ["Santa Ana", "圣塔安娜"],
+    },
+    {
+        "name": "河滨", "en": "Riverside, CA", "region": "西部", "state": "加州",
+        "tokens": ["Riverside CA", "Riverside, CA", "河滨"],
+    },
+    {
+        "name": "安大略", "en": "Ontario, CA", "region": "西部", "state": "加州",
+        "tokens": ["Ontario CA", "Ontario, CA", "安大略"],
+    },
+    {
+        "name": "贝尔维尤", "en": "Bellevue, WA", "region": "西部", "state": "华盛顿州",
+        "tokens": ["Bellevue", "贝尔维尤"],
+    },
+    {
+        "name": "比弗顿", "en": "Beaverton, OR", "region": "西部", "state": "波特兰",
+        "tokens": ["Beaverton", "比弗顿"],
+    },
+    {
+        "name": "普莱诺", "en": "Plano, TX", "region": "南部", "state": "德州",
+        "tokens": ["Plano", "普莱诺"],
+    },
+    {
+        "name": "凯蒂", "en": "Katy, TX", "region": "南部", "state": "德州",
+        "tokens": ["Katy TX", "Katy, TX", "凯蒂"],
+    },
+    {
+        "name": "糖城", "en": "Sugar Land, TX", "region": "南部", "state": "德州",
+        "tokens": ["Sugar Land", "糖城"],
+    },
+    {
+        "name": "罗利", "en": "Raleigh, NC", "region": "南部", "state": "罗利",
+        "tokens": ["Raleigh", "罗利"],
+    },
+    {
+        "name": "纳什维尔", "en": "Nashville, TN", "region": "南部", "state": "纳什维尔",
+        "tokens": ["Nashville", "纳什维尔"],
+    },
+    {
+        "name": "孟菲斯", "en": "Memphis, TN", "region": "南部", "state": "孟菲斯",
+        "tokens": ["Memphis", "孟菲斯"],
+    },
+    {
+        "name": "新奥尔良", "en": "New Orleans, LA", "region": "南部", "state": "新奥尔良",
+        "tokens": ["New Orleans", "新奥尔良"],
+    },
+    {
+        "name": "底特律", "en": "Detroit, MI", "region": "中部", "state": "底特律",
+        "tokens": ["Detroit", "底特律"],
+    },
+    {
+        "name": "克利夫兰", "en": "Cleveland, OH", "region": "中部", "state": "克利夫兰",
+        "tokens": ["Cleveland", "克利夫兰"],
+    },
+    {
+        "name": "辛辛那提", "en": "Cincinnati, OH", "region": "中部", "state": "辛辛那提",
+        "tokens": ["Cincinnati", "辛辛那提"],
+    },
+    {
+        "name": "密尔沃基", "en": "Milwaukee, WI", "region": "中部", "state": "密尔沃基",
+        "tokens": ["Milwaukee", "密尔沃基"],
+    },
+    {
+        "name": "明尼阿波利斯", "en": "Minneapolis, MN", "region": "中部", "state": "明尼阿波利斯",
+        "tokens": ["Minneapolis", "明尼阿波利斯"],
+    },
+    {
+        "name": "堪萨斯城", "en": "Kansas City, MO", "region": "中部", "state": "堪萨斯城",
+        "tokens": ["Kansas City", "堪萨斯城"],
+    },
+    {
+        "name": "盐湖城", "en": "Salt Lake City, UT", "region": "西部", "state": "盐湖城",
+        "tokens": ["Salt Lake City", "盐湖城"],
+    },
+    {
+        "name": "檀香山", "en": "Honolulu, HI", "region": "西部", "state": "檀香山",
+        "tokens": ["Honolulu", "檀香山"],
+    },
 ]
 
 
@@ -277,7 +482,7 @@ for _region, _tokens in REGION_MAP.items():
     for _t in _tokens:
         pattern = None
         if _is_ascii_token(_t):
-            pattern = re.compile(r'\b' + re.escape(_t) + r'\b', re.IGNORECASE)
+            pattern = re.compile(r'\b' + re.escape(_t) + r'\b', re.IGNORECASE | re.ASCII)
         _TOKENS.append((_t, _t, _region, pattern))
 _TOKENS.sort(key=lambda x: len(x[0]), reverse=True)
 
@@ -286,7 +491,7 @@ for _city in CITY_MARKETS:
     for _t in _city["tokens"]:
         pattern = None
         if _is_ascii_token(_t):
-            pattern = re.compile(r'\b' + re.escape(_t) + r'\b', re.IGNORECASE)
+            pattern = re.compile(r'\b' + re.escape(_t) + r'\b', re.IGNORECASE | re.ASCII)
         _CITY_TOKENS.append((_t, _city, pattern))
 _CITY_TOKENS.sort(key=lambda x: len(x[0]), reverse=True)
 

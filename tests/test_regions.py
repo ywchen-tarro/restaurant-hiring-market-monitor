@@ -111,13 +111,26 @@ def test_classify_city_requested_market():
 
 
 def test_classify_city_ascii_boundary():
-    assert regions.classify_city("SUNNYVALE restaurant hiring") is None
+    assert regions.classify_city("SUNNYVALERESTAURANT hiring") is None
+    assert regions.classify_city("SUNNYVALE restaurant hiring")["name"] == "森尼韦尔"
     city = regions.classify_city("San Jose sushi chef")
     assert city["name"] == "圣何塞"
 
 
 def test_classify_city_upstate_not_new_york_city():
     assert regions.classify_city("纽约上州日餐请师傅") is None
+
+
+def test_classify_city_chinese_community_aliases():
+    assert regions.classify_city("尔湾轻食餐厅招后厨")["name"] == "尔湾"
+    assert regions.classify_city("蒙市中餐馆请炒锅")["name"] == "蒙特利公园"
+    assert regions.classify_city("Great Neck餐厅请企台")["name"] == "长岛"
+
+
+def test_classify_city_major_market_expansion():
+    assert regions.classify_city("Plano sushi restaurant hiring")["name"] == "普莱诺"
+    assert regions.classify_city("Rockville 马里兰诚请熟手男企台")["name"] == "罗克维尔"
+    assert regions.classify_city("Milpitas中餐馆诚招炒锅")["name"] == "米尔皮塔斯"
 
 
 # ─────────────────────────────────────────────────────────────

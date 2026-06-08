@@ -24,6 +24,11 @@
         <key>Minute</key><integer>0</integer>
     </dict>
 
+    <!-- Fallback every 6 hours. run.sh skips quickly when data is already
+         current, so this catches missed calendar triggers caused by sleep. -->
+    <key>StartInterval</key>
+    <integer>21600</integer>
+
     <key>StandardOutPath</key>
     <string>__PROJECT_PATH__/logs/scraper.log</string>
     <key>StandardErrorPath</key>

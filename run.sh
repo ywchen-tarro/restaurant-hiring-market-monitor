@@ -29,6 +29,11 @@ notify() {
     osascript -e "display notification \"$message\" with title \"$title\"$sound_clause" 2>/dev/null || true
 }
 
+mark_success() {
+    # Heartbeat — the watchdog reads this file's mtime
+    date +%s > logs/last_success
+}
+
 on_error() {
     local code=$?
     notify "Hiring Monitor: FAIL" "Scrape failed (exit $code). See logs/scraper_error.log." "Basso"
@@ -48,10 +53,31 @@ for f in CLAUDE.md local; do
     fi
 done
 
-python3 -m scraper.scrape
+TARGET_DATE=$(python3 - <<'PY'
+from datetime import date, timedelta
+from scraper import config
+print((date.today() - timedelta(days=getattr(config, "SCRAPE_END_LAG_DAYS", 1))).isoformat())
+PY
+)
+CURRENT_DATE=$(python3 - <<'PY'
+import json
+try:
+    with open("docs/data/posts.json", encoding="utf-8") as f:
+        print(json.load(f).get("meta", {}).get("date_to", ""))
+except Exception:
+    print("")
+PY
+)
 
-# Heartbeat — the watchdog reads this file's mtime
-date +%s > logs/last_success
+if [ "${RHMM_FORCE:-0}" != "1" ] && [ "$CURRENT_DATE" = "$TARGET_DATE" ]; then
+    echo "[$(date '+%Y-%m-%d %H:%M:%S')] already current through ${TARGET_DATE}; skipping scrape."
+    mark_success
+    notify "Hiring Monitor: OK (current)" "Data current through ${TARGET_DATE}"
+    echo "[$(date '+%Y-%m-%d %H:%M:%S')] === scrape complete ==="
+    exit 0
+fi
+
+python3 -m scraper.scrape
 
 # Pull the headline number out of the JSON for the success notification
 TOTAL=$(python3 -c "import json; print(json.load(open('docs/data/posts.json'))['meta']['total_posts'])" 2>/dev/null || echo "?")
@@ -61,16 +87,19 @@ WARN_COUNT=$(python3 -c "import json; print(len(json.load(open('docs/data/posts.
 DATA_FILES="docs/data/posts.json docs/data/daily.json docs/data/cities.json"
 if git diff --quiet -- $DATA_FILES 2>/dev/null; then
     echo "[$(date '+%Y-%m-%d %H:%M:%S')] data files unchanged; skipping commit."
+    mark_success
     notify "Hiring Monitor: OK (no change)" "${TOTAL} posts · ${WARN_COUNT} warnings"
 else
     git add -- $DATA_FILES
     git commit -m "data: update $(date '+%Y-%m-%d %H:%M')" || {
         echo "[$(date '+%Y-%m-%d %H:%M:%S')] git commit failed (maybe nothing staged)"
+        mark_success
         notify "Hiring Monitor: commit skipped" "Nothing to commit"
         exit 0
     }
     if git remote get-url origin >/dev/null 2>&1; then
         if git push origin main; then
+            mark_success
             notify "Hiring Monitor: OK" "${TOTAL} posts · ${WARN_COUNT} warnings · pushed"
         else
             notify "Hiring Monitor: push FAILED" "Commit landed locally; check 'git push' auth." "Basso"
@@ -78,6 +107,7 @@ else
         fi
     else
         echo "[$(date '+%Y-%m-%d %H:%M:%S')] no 'origin' remote configured; commit kept locally."
+        mark_success
         notify "Hiring Monitor: OK (no remote)" "${TOTAL} posts · committed locally"
     fi
 fi

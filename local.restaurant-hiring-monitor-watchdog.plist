@@ -23,6 +23,11 @@
         <key>Minute</key><integer>0</integer>
     </dict>
 
+    <!-- Fallback every 6 hours so stale-data alerts are not missed if the
+         calendar trigger is skipped while the Mac is asleep. -->
+    <key>StartInterval</key>
+    <integer>21600</integer>
+
     <key>StandardOutPath</key>
     <string>__PROJECT_PATH__/logs/watchdog.log</string>
     <key>StandardErrorPath</key>

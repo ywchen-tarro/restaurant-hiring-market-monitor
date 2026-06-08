@@ -1,6 +1,6 @@
 #!/bin/bash
 # Watchdog — runs once a day and notifies if the scraper hasn't succeeded
-# recently. Catches the case where the Mac was asleep through the Mon/Thu
+# recently. Catches the case where the Mac was asleep through the daily
 # 09:00 window and missed the run, or where every run since the last good
 # one has failed.
 

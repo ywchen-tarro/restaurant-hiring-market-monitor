@@ -76,7 +76,7 @@ class Scraper(BasePlatformScraper):
     # High-volume days can push yesterday's posts well past page 15.
     # Keep the cap high enough for a 7-day window and let BasePlatformScraper
     # stop as soon as it sees posts older than the cutoff.
-    max_pages = 80
+    max_pages = 120
     # This site intermittently rate-limits deeper pagination. A single failed
     # page can hide older days in the rolling window, so be more patient here.
     request_retries = 8

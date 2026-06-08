@@ -400,30 +400,28 @@
       subEl.textContent = t('kpiTodayNone');
       return;
     }
-    // Use the browser's LOCAL today, not "the most recent key in
-    // daily.json". A timezone-ahead source could produce a key for
-    // "tomorrow" that would otherwise be picked as "today".
-    const now = new Date(); now.setHours(0, 0, 0, 0);
-    const todayIso = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
-    const todayTotal = (days[todayIso] || {}).total || 0;
-    // Compare today against the average of the 7 days BEFORE today.
-    const todayIdx = dateKeys.indexOf(todayIso);
-    const priorEnd = todayIdx >= 0 ? todayIdx : dateKeys.length;
+    const latestIso = dateKeys[dateKeys.length - 1];
+    const latestTotal = (days[latestIso] || {}).total || 0;
+    // Compare the latest complete day against the average of the 7 days
+    // before it. The scraper intentionally publishes yesterday's complete
+    // data, so browser-local "today" would be a partial empty bucket.
+    const latestIdx = dateKeys.indexOf(latestIso);
+    const priorEnd = latestIdx >= 0 ? latestIdx : dateKeys.length;
     const priorStart = Math.max(0, priorEnd - 7);
     const prior7 = dateKeys.slice(priorStart, priorEnd).map(k => days[k].total || 0);
     const avg = prior7.length ? (prior7.reduce((s, n) => s + n, 0) / prior7.length) : 0;
     const avgRounded = avg.toFixed(1);
     let deltaTxt = '—';
     if (avg > 0) {
-      const pct = ((todayTotal - avg) / avg) * 100;
+      const pct = ((latestTotal - avg) / avg) * 100;
       const arrow = pct >= 0 ? '▲' : '▼';
       deltaTxt = `${arrow} ${Math.abs(pct).toFixed(0)}%`;
     }
-    valEl.textContent = todayTotal;
+    valEl.textContent = latestTotal;
     valEl.style.color = avg > 0
-      ? (todayTotal >= avg ? 'var(--accent2)' : 'var(--warn)')
+      ? (latestTotal >= avg ? 'var(--accent2)' : 'var(--warn)')
       : 'var(--text)';
-    subEl.textContent = t('kpiTodaySub', { avg: avgRounded, delta: deltaTxt });
+    subEl.textContent = t('kpiTodaySub', { date: latestIso, avg: avgRounded, delta: deltaTxt });
   }
 
   function renderAlertBanner() {
@@ -1235,11 +1233,11 @@
       return `${y}-${m}-${day}`;
     };
     const now = new Date(); now.setHours(0, 0, 0, 0);
-    const isoNow = fmtLocalIso(now);
     const yesterday = new Date(now); yesterday.setDate(yesterday.getDate() - 1);
     const isoYesterday = fmtLocalIso(yesterday);
     const last7Cutoff = new Date(now); last7Cutoff.setDate(last7Cutoff.getDate() - 6);
     const isoLast7 = fmtLocalIso(last7Cutoff);
+    const latestCompleteIso = (d.meta && d.meta.date_to) || (state.daily && state.daily.meta && state.daily.meta.latest) || isoYesterday;
 
     const filtered = posts.filter(p => {
       if (f.search && !p.title.toLowerCase().includes(f.search.toLowerCase())) return false;
@@ -1248,7 +1246,7 @@
       if (f.keyword && !(p.keywords_matched || []).includes(f.keyword)) return false;
       if (f.date) {
         const pd = p.date || '';
-        if (f.date === 'today' && pd !== isoNow) return false;
+        if (f.date === 'today' && pd !== latestCompleteIso) return false;
         else if (f.date === 'yesterday' && pd !== isoYesterday) return false;
         else if (f.date === '7' && pd < isoLast7) return false;
       }

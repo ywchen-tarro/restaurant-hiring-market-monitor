@@ -57,8 +57,8 @@ date +%s > logs/last_success
 TOTAL=$(python3 -c "import json; print(json.load(open('docs/data/posts.json'))['meta']['total_posts'])" 2>/dev/null || echo "?")
 WARN_COUNT=$(python3 -c "import json; print(len(json.load(open('docs/data/posts.json'))['meta'].get('warnings', [])))" 2>/dev/null || echo 0)
 
-# Only commit if either data file actually changed.
-DATA_FILES="docs/data/posts.json docs/data/daily.json"
+# Only commit if any generated dashboard data file changed.
+DATA_FILES="docs/data/posts.json docs/data/daily.json docs/data/cities.json"
 if git diff --quiet -- $DATA_FILES 2>/dev/null; then
     echo "[$(date '+%Y-%m-%d %H:%M:%S')] data files unchanged; skipping commit."
     notify "Hiring Monitor: OK (no change)" "${TOTAL} posts · ${WARN_COUNT} warnings"

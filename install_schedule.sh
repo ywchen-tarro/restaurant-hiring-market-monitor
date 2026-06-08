@@ -1,11 +1,19 @@
 #!/bin/bash
-# Install the launchd schedule (Mon + Thu 09:00 scrape, daily 10:00 watchdog).
+# Install the launchd schedule (daily 09:00 scrape, daily 10:00 watchdog).
 # Idempotent: re-running unloads previous copies first.
 
 set -e
 
 PROJECT_DIR="$(cd "$(dirname "$0")" && pwd)"
 LAUNCH_AGENTS="${HOME}/Library/LaunchAgents"
+PROJECT_BASENAME="$(basename "${PROJECT_DIR}")"
+WORKSPACE_LINK="${HOME}/Workspace/${PROJECT_BASENAME}"
+LAUNCHD_PROJECT_DIR="${PROJECT_DIR}"
+if [ -d "${WORKSPACE_LINK}" ] && [ "$(cd "${WORKSPACE_LINK}" && pwd -P)" = "$(cd "${PROJECT_DIR}" && pwd -P)" ]; then
+    # launchd is less fragile with a no-space path; ~/Workspace is a symlink
+    # to the same iCloud Drive project directory on this machine.
+    LAUNCHD_PROJECT_DIR="${WORKSPACE_LINK}"
+fi
 
 mkdir -p "${PROJECT_DIR}/logs"
 mkdir -p "${LAUNCH_AGENTS}"
@@ -36,7 +44,7 @@ install_plist() {
         return 1
     fi
 
-    sed "s|__PROJECT_PATH__|${PROJECT_DIR}|g" "$template" > "$installed"
+    sed "s|__PROJECT_PATH__|${LAUNCHD_PROJECT_DIR}|g" "$template" > "$installed"
     launchctl unload "$installed" 2>/dev/null || true
     launchctl load "$installed"
     echo "  installed: $installed"

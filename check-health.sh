@@ -67,15 +67,19 @@ echo ""
 
 # 3) launchd status
 echo -e "${cyan}--- launchd jobs ---${reset}"
-if launchctl list local.restaurant-hiring-monitor >/dev/null 2>&1; then
-    launchctl list local.restaurant-hiring-monitor 2>/dev/null \
-        | grep -E '"PID"|"LastExitStatus"|"Label"' | sed 's/^/  /'
+LAUNCHD_DOMAIN="gui/$(id -u)"
+if launchctl print "$LAUNCHD_DOMAIN/local.restaurant-hiring-monitor" >/dev/null 2>&1; then
+    echo -e "  ${green}scrape job installed${reset}"
+    launchctl print "$LAUNCHD_DOMAIN/local.restaurant-hiring-monitor" 2>/dev/null \
+        | grep -E 'state =|runs =|last exit code =|run interval =' | sed 's/^/  /'
 else
     echo -e "  ${yellow}scrape job NOT installed${reset} — run: bash install_schedule.sh"
 fi
 echo ""
-if launchctl list local.restaurant-hiring-monitor-watchdog >/dev/null 2>&1; then
+if launchctl print "$LAUNCHD_DOMAIN/local.restaurant-hiring-monitor-watchdog" >/dev/null 2>&1; then
     echo -e "  ${green}watchdog installed${reset}"
+    launchctl print "$LAUNCHD_DOMAIN/local.restaurant-hiring-monitor-watchdog" 2>/dev/null \
+        | grep -E 'state =|runs =|last exit code =|run interval =' | sed 's/^/  /'
 else
     echo -e "  ${yellow}watchdog NOT installed${reset} — run: bash install_schedule.sh"
 fi

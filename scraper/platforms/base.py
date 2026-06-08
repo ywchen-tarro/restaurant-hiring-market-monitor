@@ -51,12 +51,18 @@ class BasePlatformScraper(ABC):
     # ── default driver ────────────────────────────────────────
     # Subclass can override to pass impersonate="chrome120" etc.
     impersonate: Optional[str] = None
+    request_retries: Optional[int] = None
 
     def fetch_page(self, page_num: int) -> Optional[str]:
         from ..http_client import polite_get
         url = self.page_url(page_num)
         log.info("[%s] GET page %d: %s", self.id, page_num, url)
-        r = polite_get(url, session=self.session, impersonate=self.impersonate)
+        r = polite_get(
+            url,
+            session=self.session,
+            retries=self.request_retries,
+            impersonate=self.impersonate,
+        )
         if r is None:
             return None
         return r.text

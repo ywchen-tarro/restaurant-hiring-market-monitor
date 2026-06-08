@@ -77,6 +77,9 @@ class Scraper(BasePlatformScraper):
     # Keep the cap high enough for a 7-day window and let BasePlatformScraper
     # stop as soon as it sees posts older than the cutoff.
     max_pages = 80
+    # This site intermittently rate-limits deeper pagination. A single failed
+    # page can hide older days in the rolling window, so be more patient here.
+    request_retries = 8
 
     def page_url(self, page_num: int) -> str:
         if page_num == 1:

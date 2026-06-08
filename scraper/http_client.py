@@ -99,6 +99,21 @@ def polite_get(
             r = get(url)
             if r.status_code == 200:
                 return r
+            if r.status_code == 429:
+                retry_after = r.headers.get("Retry-After")
+                try:
+                    wait = (
+                        min(max(float(retry_after), 15.0), 180.0)
+                        if retry_after
+                        else min(30.0 * (attempt + 1), 180.0)
+                    )
+                except ValueError:
+                    wait = min(30.0 * (attempt + 1), 180.0)
+                log.warning(
+                    "GET %s rate limited (429); sleeping %.0fs before retry %d/%d",
+                    url, wait, attempt + 1, retries,
+                )
+                time.sleep(wait)
             log.warning(
                 "GET %s returned %s (attempt %d/%d, impersonate=%s)",
                 url, r.status_code, attempt + 1, retries, impersonate or "off",

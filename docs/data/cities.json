@@ -1,9 +1,9 @@
 {
   "meta": {
     "schema_version": 1,
-    "last_updated": "2026-06-08T12:35:39-07:00",
+    "last_updated": "2026-06-08T15:31:29-07:00",
     "city_count": 92,
-    "observed_city_count": 49
+    "observed_city_count": 52
   },
   "cities": {
     "纽约": {
@@ -12,7 +12,7 @@
       "state": "纽约",
       "lon": -74.006,
       "lat": 40.7128,
-      "total": 117
+      "total": 341
     },
     "洛杉矶": {
       "en": "Los Angeles, CA",
@@ -20,7 +20,7 @@
       "state": "洛杉矶",
       "lon": -118.2437,
       "lat": 34.0522,
-      "total": 10
+      "total": 11
     },
     "布鲁克林": {
       "en": "Brooklyn, New York",
@@ -28,7 +28,7 @@
       "state": "布鲁克林",
       "lon": -73.9442,
       "lat": 40.6782,
-      "total": 76
+      "total": 79
     },
     "旧金山-奥克兰-圣何塞": {
       "en": "San Francisco-Oakland-San Jose, CA",
@@ -44,7 +44,7 @@
       "state": "休斯顿",
       "lon": -95.3698,
       "lat": 29.7604,
-      "total": 22
+      "total": 25
     },
     "芝加哥": {
       "en": "Chicago, IL",
@@ -52,7 +52,7 @@
       "state": "芝加哥",
       "lon": -87.6298,
       "lat": 41.8781,
-      "total": 21
+      "total": 22
     },
     "费城": {
       "en": "Philadelphia, PA",
@@ -60,7 +60,7 @@
       "state": "费城",
       "lon": -75.1652,
       "lat": 39.9526,
-      "total": 29
+      "total": 35
     },
     "拉斯维加斯": {
       "en": "Las Vegas, NV",
@@ -76,7 +76,7 @@
       "state": "奥兰多",
       "lon": -81.3792,
       "lat": 28.5383,
-      "total": 24
+      "total": 28
     },
     "西雅图-塔科马": {
       "en": "Seattle-Tacoma, WA",
@@ -84,7 +84,7 @@
       "state": "西雅图",
       "lon": -122.3321,
       "lat": 47.6062,
-      "total": 5
+      "total": 6
     },
     "迈阿密-劳德代尔堡": {
       "en": "Miami-Ft. Lauderdale, FL",
@@ -92,7 +92,7 @@
       "state": "迈阿密",
       "lon": -80.1918,
       "lat": 25.7617,
-      "total": 8
+      "total": 11
     },
     "波特兰": {
       "en": "Portland, OR",
@@ -132,7 +132,7 @@
       "state": "亚特兰大",
       "lon": -84.388,
       "lat": 33.749,
-      "total": 30
+      "total": 34
     },
     "圣安东尼奥": {
       "en": "San Antonio, TX",
@@ -156,7 +156,7 @@
       "state": "达拉斯",
       "lon": -96.797,
       "lat": 32.7767,
-      "total": 21
+      "total": 31
     },
     "杰克逊维尔": {
       "en": "Jacksonville, FL",
@@ -172,7 +172,7 @@
       "state": "夏洛特",
       "lon": -80.8431,
       "lat": 35.2271,
-      "total": 1
+      "total": 3
     },
     "萨克拉门托-斯托克顿-莫德斯托": {
       "en": "Sacramento-Stockton-Modesto, CA",
@@ -188,7 +188,7 @@
       "state": "法拉盛",
       "lon": -73.8331,
       "lat": 40.7675,
-      "total": 134
+      "total": 170
     },
     "圣何塞": {
       "en": "San Jose, CA",
@@ -204,7 +204,7 @@
       "state": "坦帕",
       "lon": -82.4572,
       "lat": 27.9506,
-      "total": 18
+      "total": 19
     },
     "华盛顿特区（黑格斯敦）": {
       "en": "Washington DC (Hagerstown MD)",
@@ -228,7 +228,7 @@
       "state": "丹佛",
       "lon": -104.9903,
       "lat": 39.7392,
-      "total": 14
+      "total": 15
     },
     "巴尔的摩": {
       "en": "Baltimore, MD",
@@ -236,7 +236,7 @@
       "state": "马里兰",
       "lon": -76.6122,
       "lat": 39.2904,
-      "total": 1
+      "total": 2
     },
     "圣路易斯": {
       "en": "St. Louis, MO",
@@ -316,7 +316,7 @@
       "state": "波士顿",
       "lon": -71.0589,
       "lat": 42.3601,
-      "total": 24
+      "total": 29
     },
     "斯塔滕岛": {
       "en": "Staten Island, New York",
@@ -324,7 +324,7 @@
       "state": "纽约",
       "lon": -74.1502,
       "lat": 40.5795,
-      "total": 0
+      "total": 2
     },
     "阿尔伯克基-圣菲": {
       "en": "Albuquerque-Santa Fe, NM",
@@ -340,7 +340,7 @@
       "state": "曼哈顿",
       "lon": -73.9712,
       "lat": 40.7831,
-      "total": 91
+      "total": 128
     },
     "皇后区": {
       "en": "Queens, New York",
@@ -356,7 +356,7 @@
       "state": "长岛",
       "lon": -73.4129,
       "lat": 40.7891,
-      "total": 35
+      "total": 49
     },
     "泽西市": {
       "en": "Jersey City, NJ",
@@ -364,7 +364,7 @@
       "state": "泽西市",
       "lon": -74.0431,
       "lat": 40.7178,
-      "total": 4
+      "total": 11
     },
     "纽瓦克": {
       "en": "Newark, NJ",
@@ -380,7 +380,7 @@
       "state": "新泽西",
       "lon": -74.4121,
       "lat": 40.5187,
-      "total": 2
+      "total": 4
     },
     "昆西": {
       "en": "Quincy, MA",
@@ -540,7 +540,7 @@
       "state": "加州",
       "lon": -121.8996,
       "lat": 37.4323,
-      "total": 1
+      "total": 2
     },
     "都柏林": {
       "en": "Dublin, CA",
@@ -572,7 +572,7 @@
       "state": "加州",
       "lon": -117.8311,
       "lat": 33.7175,
-      "total": 0
+      "total": 1
     },
     "安纳海姆": {
       "en": "Anaheim, CA",
@@ -628,7 +628,7 @@
       "state": "德州",
       "lon": -96.6989,
       "lat": 33.0198,
-      "total": 3
+      "total": 4
     },
     "凯蒂": {
       "en": "Katy, TX",
@@ -652,7 +652,7 @@
       "state": "罗利",
       "lon": -78.6382,
       "lat": 35.7796,
-      "total": 1
+      "total": 2
     },
     "纳什维尔": {
       "en": "Nashville, TN",
@@ -676,7 +676,7 @@
       "state": "新奥尔良",
       "lon": -90.0715,
       "lat": 29.9511,
-      "total": 1
+      "total": 2
     },
     "底特律": {
       "en": "Detroit, MI",
@@ -692,7 +692,7 @@
       "state": "克利夫兰",
       "lon": -81.6944,
       "lat": 41.4993,
-      "total": 0
+      "total": 1
     },
     "辛辛那提": {
       "en": "Cincinnati, OH",
@@ -732,7 +732,7 @@
       "state": "盐湖城",
       "lon": -111.891,
       "lat": 40.7608,
-      "total": 2
+      "total": 4
     },
     "檀香山": {
       "en": "Honolulu, HI",

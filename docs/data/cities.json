@@ -1,9 +1,9 @@
 {
   "meta": {
     "schema_version": 1,
-    "last_updated": "2026-06-19T11:22:29-07:00",
+    "last_updated": "2026-06-20T12:19:06-07:00",
     "city_count": 92,
-    "observed_city_count": 43
+    "observed_city_count": 42
   },
   "cities": {
     "纽约": {
@@ -12,7 +12,7 @@
       "state": "纽约",
       "lon": -74.006,
       "lat": 40.7128,
-      "total": 335
+      "total": 332
     },
     "洛杉矶": {
       "en": "Los Angeles, CA",
@@ -20,7 +20,7 @@
       "state": "洛杉矶",
       "lon": -118.2437,
       "lat": 34.0522,
-      "total": 31
+      "total": 34
     },
     "布鲁克林": {
       "en": "Brooklyn, New York",
@@ -36,7 +36,7 @@
       "state": "旧金山",
       "lon": -122.15,
       "lat": 37.6,
-      "total": 4
+      "total": 3
     },
     "休斯顿": {
       "en": "Houston, TX",
@@ -44,7 +44,7 @@
       "state": "休斯顿",
       "lon": -95.3698,
       "lat": 29.7604,
-      "total": 34
+      "total": 33
     },
     "芝加哥": {
       "en": "Chicago, IL",
@@ -52,7 +52,7 @@
       "state": "芝加哥",
       "lon": -87.6298,
       "lat": 41.8781,
-      "total": 20
+      "total": 22
     },
     "费城": {
       "en": "Philadelphia, PA",
@@ -60,7 +60,7 @@
       "state": "费城",
       "lon": -75.1652,
       "lat": 39.9526,
-      "total": 53
+      "total": 54
     },
     "拉斯维加斯": {
       "en": "Las Vegas, NV",
@@ -68,7 +68,7 @@
       "state": "拉斯维加斯",
       "lon": -115.1398,
       "lat": 36.1699,
-      "total": 1
+      "total": 3
     },
     "奥兰多-代托纳海滩-墨尔本": {
       "en": "Orlando-Daytona Beach-Melbourne, FL",
@@ -76,7 +76,7 @@
       "state": "奥兰多",
       "lon": -81.3792,
       "lat": 28.5383,
-      "total": 15
+      "total": 16
     },
     "西雅图-塔科马": {
       "en": "Seattle-Tacoma, WA",
@@ -132,7 +132,7 @@
       "state": "亚特兰大",
       "lon": -84.388,
       "lat": 33.749,
-      "total": 26
+      "total": 25
     },
     "圣安东尼奥": {
       "en": "San Antonio, TX",
@@ -156,7 +156,7 @@
       "state": "达拉斯",
       "lon": -96.797,
       "lat": 32.7767,
-      "total": 23
+      "total": 24
     },
     "杰克逊维尔": {
       "en": "Jacksonville, FL",
@@ -172,7 +172,7 @@
       "state": "夏洛特",
       "lon": -80.8431,
       "lat": 35.2271,
-      "total": 1
+      "total": 2
     },
     "萨克拉门托-斯托克顿-莫德斯托": {
       "en": "Sacramento-Stockton-Modesto, CA",
@@ -180,7 +180,7 @@
       "state": "加州",
       "lon": -121.4944,
       "lat": 38.5816,
-      "total": 1
+      "total": 2
     },
     "法拉盛": {
       "en": "Flushing, New York",
@@ -188,7 +188,7 @@
       "state": "法拉盛",
       "lon": -73.8331,
       "lat": 40.7675,
-      "total": 183
+      "total": 176
     },
     "圣何塞": {
       "en": "San Jose, CA",
@@ -196,7 +196,7 @@
       "state": "圣何塞",
       "lon": -121.8863,
       "lat": 37.3382,
-      "total": 1
+      "total": 0
     },
     "坦帕-圣彼得堡（萨拉索塔）": {
       "en": "Tampa-St. Petersburg (Sarasota), FL",
@@ -212,7 +212,7 @@
       "state": "华盛顿DC",
       "lon": -77.0369,
       "lat": 38.9072,
-      "total": 4
+      "total": 2
     },
     "印第安纳波利斯": {
       "en": "Indianapolis, IN",
@@ -252,7 +252,7 @@
       "state": "维吉尼亚",
       "lon": -75.978,
       "lat": 36.8529,
-      "total": 1
+      "total": 2
     },
     "奥克兰": {
       "en": "Oakland, CA",
@@ -316,7 +316,7 @@
       "state": "波士顿",
       "lon": -71.0589,
       "lat": 42.3601,
-      "total": 26
+      "total": 27
     },
     "斯塔滕岛": {
       "en": "Staten Island, New York",
@@ -348,7 +348,7 @@
       "state": "皇后区",
       "lon": -73.7949,
       "lat": 40.7282,
-      "total": 58
+      "total": 57
     },
     "长岛": {
       "en": "Long Island, New York",
@@ -356,7 +356,7 @@
       "state": "长岛",
       "lon": -73.4129,
       "lat": 40.7891,
-      "total": 55
+      "total": 60
     },
     "泽西市": {
       "en": "Jersey City, NJ",
@@ -412,7 +412,7 @@
       "state": "尔湾",
       "lon": -117.8265,
       "lat": 33.6846,
-      "total": 1
+      "total": 2
     },
     "圣盖博": {
       "en": "San Gabriel, CA",
@@ -508,7 +508,7 @@
       "state": "库柏蒂诺",
       "lon": -122.0322,
       "lat": 37.3229,
-      "total": 1
+      "total": 2
     },
     "森尼韦尔": {
       "en": "Sunnyvale, CA",
@@ -628,7 +628,7 @@
       "state": "德州",
       "lon": -96.6989,
       "lat": 33.0198,
-      "total": 8
+      "total": 7
     },
     "凯蒂": {
       "en": "Katy, TX",

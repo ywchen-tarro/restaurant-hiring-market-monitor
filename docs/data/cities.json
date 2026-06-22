@@ -1,9 +1,9 @@
 {
   "meta": {
     "schema_version": 1,
-    "last_updated": "2026-06-21T11:17:16-07:00",
+    "last_updated": "2026-06-22T12:01:00-07:00",
     "city_count": 92,
-    "observed_city_count": 43
+    "observed_city_count": 41
   },
   "cities": {
     "纽约": {
@@ -12,7 +12,7 @@
       "state": "纽约",
       "lon": -74.006,
       "lat": 40.7128,
-      "total": 300
+      "total": 337
     },
     "洛杉矶": {
       "en": "Los Angeles, CA",
@@ -20,7 +20,7 @@
       "state": "洛杉矶",
       "lon": -118.2437,
       "lat": 34.0522,
-      "total": 37
+      "total": 30
     },
     "布鲁克林": {
       "en": "Brooklyn, New York",
@@ -28,7 +28,7 @@
       "state": "布鲁克林",
       "lon": -73.9442,
       "lat": 40.6782,
-      "total": 75
+      "total": 73
     },
     "旧金山-奥克兰-圣何塞": {
       "en": "San Francisco-Oakland-San Jose, CA",
@@ -36,7 +36,7 @@
       "state": "旧金山",
       "lon": -122.15,
       "lat": 37.6,
-      "total": 3
+      "total": 0
     },
     "休斯顿": {
       "en": "Houston, TX",
@@ -60,7 +60,7 @@
       "state": "费城",
       "lon": -75.1652,
       "lat": 39.9526,
-      "total": 49
+      "total": 45
     },
     "拉斯维加斯": {
       "en": "Las Vegas, NV",
@@ -92,7 +92,7 @@
       "state": "迈阿密",
       "lon": -80.1918,
       "lat": 25.7617,
-      "total": 6
+      "total": 5
     },
     "波特兰": {
       "en": "Portland, OR",
@@ -108,7 +108,7 @@
       "state": "圣地亚哥",
       "lon": -117.1611,
       "lat": 32.7157,
-      "total": 0
+      "total": 1
     },
     "布朗克斯": {
       "en": "The Bronx, New York",
@@ -132,7 +132,7 @@
       "state": "亚特兰大",
       "lon": -84.388,
       "lat": 33.749,
-      "total": 22
+      "total": 27
     },
     "圣安东尼奥": {
       "en": "San Antonio, TX",
@@ -148,7 +148,7 @@
       "state": "凤凰城",
       "lon": -112.074,
       "lat": 33.4484,
-      "total": 5
+      "total": 6
     },
     "达拉斯-沃思堡": {
       "en": "Dallas-Ft. Worth, TX",
@@ -188,7 +188,7 @@
       "state": "法拉盛",
       "lon": -73.8331,
       "lat": 40.7675,
-      "total": 168
+      "total": 171
     },
     "圣何塞": {
       "en": "San Jose, CA",
@@ -204,7 +204,7 @@
       "state": "坦帕",
       "lon": -82.4572,
       "lat": 27.9506,
-      "total": 13
+      "total": 14
     },
     "华盛顿特区（黑格斯敦）": {
       "en": "Washington DC (Hagerstown MD)",
@@ -212,7 +212,7 @@
       "state": "华盛顿DC",
       "lon": -77.0369,
       "lat": 38.9072,
-      "total": 2
+      "total": 1
     },
     "印第安纳波利斯": {
       "en": "Indianapolis, IN",
@@ -236,7 +236,7 @@
       "state": "马里兰",
       "lon": -76.6122,
       "lat": 39.2904,
-      "total": 3
+      "total": 2
     },
     "圣路易斯": {
       "en": "St. Louis, MO",
@@ -316,7 +316,7 @@
       "state": "波士顿",
       "lon": -71.0589,
       "lat": 42.3601,
-      "total": 27
+      "total": 24
     },
     "斯塔滕岛": {
       "en": "Staten Island, New York",
@@ -340,7 +340,7 @@
       "state": "曼哈顿",
       "lon": -73.9712,
       "lat": 40.7831,
-      "total": 149
+      "total": 169
     },
     "皇后区": {
       "en": "Queens, New York",
@@ -356,7 +356,7 @@
       "state": "长岛",
       "lon": -73.4129,
       "lat": 40.7891,
-      "total": 61
+      "total": 64
     },
     "泽西市": {
       "en": "Jersey City, NJ",
@@ -380,7 +380,7 @@
       "state": "新泽西",
       "lon": -74.4121,
       "lat": 40.5187,
-      "total": 1
+      "total": 2
     },
     "昆西": {
       "en": "Quincy, MA",
@@ -404,7 +404,7 @@
       "state": "宾州",
       "lon": -79.9959,
       "lat": 40.4406,
-      "total": 2
+      "total": 1
     },
     "尔湾": {
       "en": "Irvine, CA",
@@ -476,7 +476,7 @@
       "state": "阿凯迪亚",
       "lon": -118.0353,
       "lat": 34.1397,
-      "total": 1
+      "total": 0
     },
     "罗斯密": {
       "en": "Rosemead, CA",
@@ -540,7 +540,7 @@
       "state": "加州",
       "lon": -121.8996,
       "lat": 37.4323,
-      "total": 1
+      "total": 0
     },
     "都柏林": {
       "en": "Dublin, CA",
@@ -628,7 +628,7 @@
       "state": "德州",
       "lon": -96.6989,
       "lat": 33.0198,
-      "total": 7
+      "total": 6
     },
     "凯蒂": {
       "en": "Katy, TX",
@@ -644,7 +644,7 @@
       "state": "德州",
       "lon": -95.6349,
       "lat": 29.6197,
-      "total": 1
+      "total": 0
     },
     "罗利": {
       "en": "Raleigh, NC",
@@ -676,7 +676,7 @@
       "state": "新奥尔良",
       "lon": -90.0715,
       "lat": 29.9511,
-      "total": 0
+      "total": 1
     },
     "底特律": {
       "en": "Detroit, MI",
@@ -700,7 +700,7 @@
       "state": "辛辛那提",
       "lon": -84.512,
       "lat": 39.1031,
-      "total": 1
+      "total": 2
     },
     "密尔沃基": {
       "en": "Milwaukee, WI",

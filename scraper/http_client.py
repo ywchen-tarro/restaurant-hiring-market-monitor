@@ -66,6 +66,7 @@ def polite_get(
     session: Optional[Any] = None,
     retries: Optional[int] = None,
     impersonate: Optional[str] = None,
+    timeout: Optional[int] = None,
 ):
     """Sleep, then GET; retry on transient failures.
 
@@ -76,13 +77,14 @@ def polite_get(
     Returns the response on 2xx, otherwise None after exhausting retries.
     """
     retries = retries if retries is not None else config.MAX_RETRIES
+    timeout = timeout if timeout is not None else config.REQUEST_TIMEOUT
 
     if impersonate:
         cf = _curl_cffi()
         get = lambda u: cf.get(  # noqa: E731
             u,
             headers=_headers(),
-            timeout=config.REQUEST_TIMEOUT,
+            timeout=timeout,
             impersonate=impersonate,
         )
     else:
@@ -90,7 +92,7 @@ def polite_get(
         get = lambda u: session.get(  # noqa: E731
             u,
             headers=_headers(),
-            timeout=config.REQUEST_TIMEOUT,
+            timeout=timeout,
         )
 
     for attempt in range(retries):

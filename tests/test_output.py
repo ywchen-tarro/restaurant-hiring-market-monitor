@@ -333,6 +333,40 @@ def test_merge_daily_drops_relative_platform_when_explicitly_replaced_by_zero():
     assert "2026-05-25" not in merged
 
 
+def test_merge_daily_preserves_relative_platform_when_run_unhealthy():
+    existing = {"days": {
+        "2026-06-25": {
+            "total": 220,
+            "by_platform": {"uscanyin": 137, "168worker": 83},
+            "by_region": {},
+        },
+    }}
+    new_days = {
+        "2026-06-25": {
+            "total": 76,
+            "by_platform": {"uscanyin": 56, "168worker": 20},
+            "by_region": {},
+        },
+        "2026-06-26": {
+            "total": 6,
+            "by_platform": {"uscanyin": 6},
+            "by_region": {},
+        },
+    }
+    merged = output._merge_daily(
+        existing,
+        new_days,
+        window_start="2026-06-20",
+        window_end="2026-06-26",
+        unhealthy_relative_platforms={"uscanyin"},
+    )
+    assert merged["2026-06-25"]["by_platform"] == {
+        "168worker": 20,
+        "uscanyin": 137,
+    }
+    assert "2026-06-26" not in merged
+
+
 def test_merge_daily_drops_days_after_window_end():
     existing = {"days": {
         "2026-06-03": {"total": 12, "by_platform": {"uscanyin": 12}, "by_region": {}},
@@ -445,6 +479,21 @@ def test_warning_on_page_cap_before_window_boundary():
     history = [{"run_date": "2026-05-25", "by_platform": {"us168": 200}}]
     warnings = output._compute_warnings(history, diagnostics=diagnostics)
     assert any("us168" in w and "page cap" in w for w in warnings)
+
+
+def test_warning_on_fetch_failures():
+    diagnostics = {
+        "uscanyin": {
+            "status": "ok",
+            "pages_fetched": 4,
+            "fetch_failures": 1,
+            "rows_parsed": 76,
+            "dropped_unparseable_date": 0,
+        }
+    }
+    history = [{"run_date": "2026-06-27", "by_platform": {"uscanyin": 7}}]
+    warnings = output._compute_warnings(history, diagnostics=diagnostics)
+    assert any("uscanyin" in w and "fetch failure" in w for w in warnings)
 
 
 # ─────────────────────────────────────────────────────────────

@@ -276,6 +276,22 @@ def test_fetch_failure_stops_pagination():
     assert len(result) == 1
 
 
+def test_configured_fetch_failure_tolerance_continues_pagination():
+    today = date(2026, 5, 25)
+    page1 = [_mk("a", "中日餐请炒锅", 0, today)]
+    page3 = [_mk("c", "中餐请师傅", 0, today)]
+    stop_page = [_mk("old", "中餐请师傅", -7, today)]
+    s = _StubScraper([page1, None, page3, stop_page])
+    s.max_consecutive_fetch_failures = 2
+    with mock.patch("scraper.platforms.base.date") as fake_date:
+        fake_date.today.return_value = today
+        fake_date.fromisoformat = date.fromisoformat
+        result = s.run(days_back=7)
+    assert s.last_diagnostics["fetch_failures"] == 1
+    assert s.last_diagnostics["pages_fetched"] == 3
+    assert [p.id for p in result] == ["stub_a", "stub_c"]
+
+
 def test_hit_page_cap_diagnostic():
     today = date(2026, 5, 25)
     page = [_mk("a", "中日餐请炒锅", 0, today)]

@@ -52,6 +52,8 @@ class BasePlatformScraper(ABC):
     # Subclass can override to pass impersonate="chrome120" etc.
     impersonate: Optional[str] = None
     request_retries: Optional[int] = None
+    request_timeout: Optional[int] = None
+    max_consecutive_fetch_failures: int = 1
 
     def fetch_page(self, page_num: int) -> Optional[str]:
         from ..http_client import polite_get
@@ -62,6 +64,7 @@ class BasePlatformScraper(ABC):
             session=self.session,
             retries=self.request_retries,
             impersonate=self.impersonate,
+            timeout=self.request_timeout,
         )
         if r is None:
             return None
@@ -101,6 +104,7 @@ class BasePlatformScraper(ABC):
         collected: List[Post] = []
         seen_ids = set()
         consecutive_empty = 0
+        consecutive_fetch_failures = 0
         # Diagnostics surfaced via meta.warnings
         diag = {
             "pages_fetched": 0,
@@ -118,8 +122,19 @@ class BasePlatformScraper(ABC):
             html = self.fetch_page(page_num)
             if html is None:
                 diag["fetch_failures"] += 1
-                log.warning("[%s] page %d returned nothing; stopping", self.id, page_num)
-                break
+                consecutive_fetch_failures += 1
+                if consecutive_fetch_failures >= self.max_consecutive_fetch_failures:
+                    log.warning(
+                        "[%s] page %d returned nothing; stopping after %d consecutive fetch failure(s)",
+                        self.id, page_num, consecutive_fetch_failures,
+                    )
+                    break
+                log.warning(
+                    "[%s] page %d returned nothing; continuing after %d consecutive fetch failure(s)",
+                    self.id, page_num, consecutive_fetch_failures,
+                )
+                continue
+            consecutive_fetch_failures = 0
             diag["pages_fetched"] += 1
 
             try:

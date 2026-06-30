@@ -346,6 +346,12 @@ def _compute_warnings(
                         f"{pid}: reached page cap ({pages} pages) before seeing older-than-window posts — "
                         f"increase max_pages or add source filters"
                     )
+                fetch_failures = diag.get("fetch_failures", 0)
+                if fetch_failures:
+                    warnings.append(
+                        f"{pid}: {fetch_failures} fetch failure(s) during pagination — "
+                        f"data may be incomplete"
+                    )
                 # Lowered from 10% to 5% — even a small fraction of
                 # unparseable dates usually indicates a real format change.
                 if rows >= 20 and unparsed / rows > 0.05:
@@ -405,12 +411,35 @@ def _compute_daily(posts: List[Post]) -> Dict[str, dict]:
     return days
 
 
+def _unhealthy_relative_platforms(diagnostics: Optional[Dict[str, dict]]) -> set:
+    """Relative-date platforms whose current run should not refresh daily buckets."""
+    unhealthy = set()
+    if not diagnostics:
+        return unhealthy
+
+    for pid in RELATIVE_DATE_PLATFORMS:
+        diag = diagnostics.get(pid) or {}
+        if diag.get("status") == "error":
+            unhealthy.add(pid)
+            continue
+        if diag.get("fetch_failures", 0) > 0:
+            unhealthy.add(pid)
+            continue
+        if (
+            diag.get("hit_page_cap")
+            and diag.get("dropped_out_of_window", 0) == 0
+        ):
+            unhealthy.add(pid)
+    return unhealthy
+
+
 def _merge_daily(
     existing: dict,
     new_days: Dict[str, dict],
     window_start: str,
     window_end: str,
     relative_platforms=RELATIVE_DATE_PLATFORMS,
+    unhealthy_relative_platforms=None,
 ) -> dict:
     """Refresh days inside the current window; preserve older frozen days.
 
@@ -436,6 +465,7 @@ def _merge_daily(
     """
     prior_days = (existing or {}).get("days", {})
     merged_days: Dict[str, dict] = {}
+    unhealthy_relative_platforms = set(unhealthy_relative_platforms or ())
 
     for d, info in prior_days.items():
         if d < window_start:
@@ -450,6 +480,11 @@ def _merge_daily(
         new_info = new_days.get(d)
         prior_info = prior_days.get(d, {})
         by_platform = dict((new_info or {}).get("by_platform", {}))
+
+        # If a relative-date platform had an unhealthy scrape, do not let
+        # partial low buckets overwrite prior data or introduce new bad days.
+        for pid in unhealthy_relative_platforms:
+            by_platform.pop(pid, None)
 
         # Preserve relative-date platforms from the prior snapshot when the
         # current scrape cannot reconstruct that day for that platform.
@@ -482,6 +517,7 @@ def write_daily_json(
     posts: List[Post],
     days_back: int,
     out_path: Optional[Path] = None,
+    diagnostics: Optional[Dict[str, dict]] = None,
 ) -> Path:
     """Write/refresh the per-day time series."""
     out_path = out_path or config.DAILY_JSON
@@ -491,7 +527,13 @@ def write_daily_json(
 
     existing = _load_existing(out_path) if out_path.exists() else {}
     new_days = _compute_daily(posts)
-    merged = _merge_daily(existing, new_days, window_start, window_end)
+    merged = _merge_daily(
+        existing,
+        new_days,
+        window_start,
+        window_end,
+        unhealthy_relative_platforms=_unhealthy_relative_platforms(diagnostics),
+    )
 
     output = {
         "meta": {
@@ -578,6 +620,6 @@ def write_posts_json(
 
     # Also update the per-day time series alongside posts.json. This is
     # the file that grows linearly over time — analytics-friendly.
-    write_daily_json(posts, days_back)
+    write_daily_json(posts, days_back, diagnostics=diagnostics)
     write_city_catalog_json(posts)
     return out_path

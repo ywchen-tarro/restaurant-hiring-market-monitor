@@ -82,6 +82,7 @@ class Scraper(BasePlatformScraper):
     # one bad page consume the entire scheduled run.
     request_timeout = 90
     request_retries = 3
+    impersonate = "chrome120"
     # A single slow/failed page should not hide the rest of the rolling week.
     max_consecutive_fetch_failures = 3
 

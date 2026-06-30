@@ -85,6 +85,40 @@ WARN_COUNT=$(python3 -c "import json; print(len(json.load(open('docs/data/posts.
 
 # Only commit if any generated dashboard data file changed.
 DATA_FILES="docs/data/posts.json docs/data/daily.json docs/data/cities.json"
+CRITICAL_WARNINGS=$(python3 - <<'PY'
+import json
+
+try:
+    meta = json.load(open("docs/data/posts.json", encoding="utf-8")).get("meta", {})
+except Exception:
+    print("could not read generated posts.json")
+    raise SystemExit
+
+critical_markers = (
+    "all platforms returned 0",
+    "dropped to 0",
+    "dropped >70%",
+    "fetch failure",
+    "reached page cap",
+    "scraper raised",
+    "unparseable dates",
+)
+
+for warning in meta.get("warnings", []):
+    text = str(warning)
+    if any(marker in text for marker in critical_markers):
+        print(text)
+PY
+)
+
+if [ -n "$CRITICAL_WARNINGS" ] && [ "${RHMM_ALLOW_WARNINGS:-0}" != "1" ]; then
+    echo "[FATAL] Critical scrape warning(s); refusing to commit or push generated data:" >&2
+    echo "$CRITICAL_WARNINGS" >&2
+    git restore -- $DATA_FILES 2>/dev/null || true
+    notify "Hiring Monitor: BLOCKED" "Critical scrape warning; kept previous dashboard data." "Basso"
+    exit 1
+fi
+
 if git diff --quiet -- $DATA_FILES 2>/dev/null; then
     echo "[$(date '+%Y-%m-%d %H:%M:%S')] data files unchanged; skipping commit."
     mark_success

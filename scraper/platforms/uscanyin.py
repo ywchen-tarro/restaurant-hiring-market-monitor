@@ -76,10 +76,14 @@ class Scraper(BasePlatformScraper):
     # High-volume days can push yesterday's posts well past page 15.
     # Keep the cap high enough for a 7-day window and let BasePlatformScraper
     # stop as soon as it sees posts older than the cutoff.
-    max_pages = 120
-    # This site intermittently rate-limits deeper pagination. A single failed
-    # page can hide older days in the rolling window, so be more patient here.
-    request_retries = 8
+    max_pages = 180
+    # Deep wpForo pagination has become heavy: pages beyond the front page
+    # regularly take ~20s. Use a longer per-request timeout, but avoid making
+    # one bad page consume the entire scheduled run.
+    request_timeout = 90
+    request_retries = 3
+    # A single slow/failed page should not hide the rest of the rolling week.
+    max_consecutive_fetch_failures = 3
 
     def page_url(self, page_num: int) -> str:
         if page_num == 1:

@@ -67,6 +67,8 @@ def polite_get(
     retries: Optional[int] = None,
     impersonate: Optional[str] = None,
     timeout: Optional[int] = None,
+    delay_min: Optional[float] = None,
+    delay_max: Optional[float] = None,
 ):
     """Sleep, then GET; retry on transient failures.
 
@@ -78,6 +80,8 @@ def polite_get(
     """
     retries = retries if retries is not None else config.MAX_RETRIES
     timeout = timeout if timeout is not None else config.REQUEST_TIMEOUT
+    delay_min = delay_min if delay_min is not None else config.DELAY_MIN
+    delay_max = delay_max if delay_max is not None else config.DELAY_MAX
 
     if impersonate:
         cf = _curl_cffi()
@@ -96,7 +100,7 @@ def polite_get(
         )
 
     for attempt in range(retries):
-        time.sleep(random.uniform(config.DELAY_MIN, config.DELAY_MAX))
+        time.sleep(random.uniform(delay_min, delay_max))
         try:
             r = get(url)
             if r.status_code == 200:

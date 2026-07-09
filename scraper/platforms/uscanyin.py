@@ -81,7 +81,11 @@ class Scraper(BasePlatformScraper):
     # regularly take ~20s. Use a longer per-request timeout, but avoid making
     # one bad page consume the entire scheduled run.
     request_timeout = 90
-    request_retries = 3
+    request_retries = 5
+    # USCANYIN has started rate-limiting deep pagination aggressively.
+    # Slow only this platform down so one 7-day run remains publishable.
+    request_delay_min = 12
+    request_delay_max = 24
     impersonate = "chrome120"
     # A single slow/failed page should not hide the rest of the rolling week.
     max_consecutive_fetch_failures = 3

@@ -53,6 +53,8 @@ class BasePlatformScraper(ABC):
     impersonate: Optional[str] = None
     request_retries: Optional[int] = None
     request_timeout: Optional[int] = None
+    request_delay_min: Optional[float] = None
+    request_delay_max: Optional[float] = None
     max_consecutive_fetch_failures: int = 1
 
     def fetch_page(self, page_num: int) -> Optional[str]:
@@ -65,6 +67,8 @@ class BasePlatformScraper(ABC):
             retries=self.request_retries,
             impersonate=self.impersonate,
             timeout=self.request_timeout,
+            delay_min=self.request_delay_min,
+            delay_max=self.request_delay_max,
         )
         if r is None:
             return None

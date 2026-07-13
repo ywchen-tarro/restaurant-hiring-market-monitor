@@ -229,7 +229,7 @@ def test_us168_parse_nuxt_payload():
     _assert_post_shape(p)
     assert p.platform == "us168"
     assert p.id == "us168_abc123"
-    assert p.date == "2026-05-25"
+    assert p.date == "2026-05-29"
     assert Scraper().pagination_date(p) == "2026-05-29"
     assert p.region == "东部"
     assert p.state == "法拉盛"

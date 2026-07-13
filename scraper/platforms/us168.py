@@ -5,9 +5,9 @@ The `/job` page is server-rendered by Nuxt and includes a devalue-style
 instead of relying on the private POST API.
 
 Important date note: us168 heavily refreshes / tops older jobs. The listing
-order follows its business refresh time, not the original publish time. We
-publish `publishTime` as the dashboard date, while retaining the refresh time
-only as the pagination stop signal.
+order follows its business refresh time, not the original publish time. The
+dashboard tracks visible market activity, so publish the active/refresh date
+as the post date and use the same value as the pagination stop signal.
 """
 
 from __future__ import annotations
@@ -59,8 +59,7 @@ class Scraper(BasePlatformScraper):
                 continue
 
             seen_ids.add(native_id)
-            date_iso = _published_date_from_record(rec)
-            pagination_date = _active_date_from_record(rec)
+            date_iso = _active_date_from_record(rec) or _published_date_from_record(rec)
             area = str(rec.get("areaName") or "").strip() or None
             region, state = regions.classify(area or "")
 
@@ -74,7 +73,7 @@ class Scraper(BasePlatformScraper):
                 keywords_matched=[],
                 url=f"{self.base_url}/job#{native_id}",
             )
-            post._pagination_date = pagination_date or date_iso
+            post._pagination_date = date_iso
             posts.append(post)
 
         return posts

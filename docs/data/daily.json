@@ -4,7 +4,15 @@
     "last_updated": "2026-07-13T14:01:10-07:00",
     "day_count": 79,
     "earliest": "2026-04-25",
-    "latest": "2026-07-12"
+    "latest": "2026-07-12",
+    "suppressed_trend_dates": [
+      "2026-07-04",
+      "2026-07-05",
+      "2026-07-10",
+      "2026-07-11",
+      "2026-07-12"
+    ],
+    "suppressed_trend_reason": "Known bad daily trend points: USCANYIN relative-date bucketing failed on 2026-07-04/05, and USCANYIN was missing while US168 changed active-date handling on 2026-07-10..12."
   },
   "days": {
     "2026-04-25": {

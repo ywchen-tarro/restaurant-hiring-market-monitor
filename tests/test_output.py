@@ -589,6 +589,28 @@ def test_write_posts_json_end_to_end(tmp_path: Path):
     assert cities["cities"]["法拉盛"]["lon"] is not None
 
 
+def test_write_daily_json_preserves_suppressed_trend_dates(tmp_path: Path):
+    daily_path = tmp_path / "daily.json"
+    daily_path.write_text(json.dumps({
+        "meta": {
+            "schema_version": 1,
+            "suppressed_trend_dates": ["2026-07-04"],
+            "suppressed_trend_reason": "known bad source buckets",
+        },
+        "days": {},
+    }), encoding="utf-8")
+
+    output.write_daily_json(
+        [_mk("a", "168worker", "请师傅", date_iso=date.today().isoformat())],
+        days_back=7,
+        out_path=daily_path,
+    )
+
+    daily = json.loads(daily_path.read_text(encoding="utf-8"))
+    assert daily["meta"]["suppressed_trend_dates"] == ["2026-07-04"]
+    assert daily["meta"]["suppressed_trend_reason"] == "known bad source buckets"
+
+
 def test_write_posts_json_empty_posts_still_produces_valid_file(tmp_path: Path):
     """All platforms returned 0 today: writer should still produce a
     valid posts.json (and daily.json) rather than crash."""

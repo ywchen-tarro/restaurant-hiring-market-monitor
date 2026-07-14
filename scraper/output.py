@@ -534,15 +534,24 @@ def write_daily_json(
         window_end,
         unhealthy_relative_platforms=_unhealthy_relative_platforms(diagnostics),
     )
+    existing_meta = existing.get("meta", {}) if isinstance(existing, dict) else {}
+    suppressed_trend_dates = sorted(set(existing_meta.get("suppressed_trend_dates", [])))
+    suppressed_trend_reason = existing_meta.get("suppressed_trend_reason")
+
+    meta = {
+        "schema_version": 1,
+        "last_updated": datetime.now().astimezone().isoformat(timespec="seconds"),
+        "day_count": len(merged),
+        "earliest": min(merged) if merged else None,
+        "latest": max(merged) if merged else None,
+    }
+    if suppressed_trend_dates:
+        meta["suppressed_trend_dates"] = suppressed_trend_dates
+    if suppressed_trend_reason:
+        meta["suppressed_trend_reason"] = suppressed_trend_reason
 
     output = {
-        "meta": {
-            "schema_version": 1,
-            "last_updated": datetime.now().astimezone().isoformat(timespec="seconds"),
-            "day_count": len(merged),
-            "earliest": min(merged) if merged else None,
-            "latest": max(merged) if merged else None,
-        },
+        "meta": meta,
         "days": dict(sorted(merged.items())),
     }
     _atomic_write(out_path, json.dumps(output, ensure_ascii=False, indent=2))

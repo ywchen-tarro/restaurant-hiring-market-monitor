@@ -697,16 +697,17 @@
 
     if (days && Object.keys(days).length > 0) {
       // The selector now expresses days directly (14, 30, -1 for all).
-      const dateKeys = Object.keys(days).sort();
-      let sliced;
-      if (rangeRaw > 0) sliced = dateKeys.slice(-rangeRaw);
-      else sliced = dateKeys;
-
-      labels = sliced;
       const suppressedTrendDates = new Set(
         ((state.daily.meta || {}).suppressed_trend_dates || [])
       );
       const isSuppressedTrendDate = (iso) => suppressedTrendDates.has(iso);
+      const dateKeys = Object.keys(days).sort();
+      let sliced;
+      if (rangeRaw > 0) sliced = dateKeys.slice(-rangeRaw);
+      else sliced = dateKeys;
+      sliced = sliced.filter(k => !isSuppressedTrendDate(k));
+
+      labels = sliced;
       // Update the window-hint subtitle so the user can see which
       // date range this chart actually covers (distinct from the top
       // schedule bar's current-7d window).
@@ -722,11 +723,7 @@
       }
       datasets = PLATFORMS.map(p => ({
         label: platformName(p.id),
-        data: sliced.map(k => (
-          isSuppressedTrendDate(k)
-            ? null
-            : (((days[k] || {}).by_platform || {})[p.id] || 0)
-        )),
+        data: sliced.map(k => (((days[k] || {}).by_platform || {})[p.id] || 0)),
         borderColor: p.color,
         backgroundColor: p.color + '33',
         tension: 0.25,
@@ -741,9 +738,7 @@
       // a spike day shows the platform's value visually exceeding the
       // 7-day MA, which looks like "platform > total" but is just the
       // MA dampening the spike.
-      const totals = sliced.map(k => (
-        isSuppressedTrendDate(k) ? null : ((days[k] || {}).total || 0)
-      ));
+      const totals = sliced.map(k => (days[k] || {}).total || 0);
       datasets.push({
         label: t('trendTotal'),
         data: totals,
@@ -759,11 +754,9 @@
       // 7-day moving average overlay on the per-day totals — keeps the
       // smoothed-trend signal alongside the raw totals.
       const ma7 = totals.map((_, i) => {
-        if (totals[i] == null) return null;
         const start = Math.max(0, i - 6);
         const window = totals.slice(start, i + 1);
-        const numeric = window.filter(n => Number.isFinite(n));
-        return numeric.length ? numeric.reduce((s, n) => s + n, 0) / numeric.length : null;
+        return window.reduce((s, n) => s + n, 0) / window.length;
       });
       datasets.push({
         label: t('trendOverlay'),

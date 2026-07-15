@@ -607,8 +607,24 @@ def test_write_daily_json_preserves_suppressed_trend_dates(tmp_path: Path):
     )
 
     daily = json.loads(daily_path.read_text(encoding="utf-8"))
-    assert daily["meta"]["suppressed_trend_dates"] == ["2026-07-04"]
+    assert "2026-07-04" in daily["meta"]["suppressed_trend_dates"]
+    assert sorted(daily["meta"]["suppressed_trend_dates"]) == daily["meta"]["suppressed_trend_dates"]
     assert daily["meta"]["suppressed_trend_reason"] == "known bad source buckets"
+
+
+def test_write_daily_json_adds_known_bad_trend_dates(tmp_path: Path):
+    daily_path = tmp_path / "daily.json"
+
+    output.write_daily_json(
+        [_mk("a", "168worker", "请师傅", date_iso=date.today().isoformat())],
+        days_back=7,
+        out_path=daily_path,
+    )
+
+    daily = json.loads(daily_path.read_text(encoding="utf-8"))
+    for bad_date in output.KNOWN_BAD_TREND_DATES:
+        assert bad_date in daily["meta"]["suppressed_trend_dates"]
+    assert daily["meta"]["suppressed_trend_reason"] == output.KNOWN_BAD_TREND_REASON
 
 
 def test_write_posts_json_empty_posts_still_produces_valid_file(tmp_path: Path):

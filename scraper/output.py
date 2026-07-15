@@ -42,6 +42,25 @@ MIRROR_GROUPS = [
 # that same day.
 RELATIVE_DATE_PLATFORMS = frozenset({"uscanyin"})
 
+# Dates where the per-day trend is known to be misleading because one or more
+# high-volume sources had unstable relative-date buckets or a source-date
+# definition change. Keep these out of the visual trend until the source can be
+# backfilled with stable absolute dates.
+KNOWN_BAD_TREND_DATES = frozenset({
+    "2026-06-27",
+    "2026-07-04",
+    "2026-07-05",
+    "2026-07-10",
+    "2026-07-11",
+    "2026-07-12",
+    "2026-07-13",
+})
+
+KNOWN_BAD_TREND_REASON = (
+    "Known bad daily trend points: USCANYIN relative-date bucketing and "
+    "US168 active-date transition made these per-day totals misleading."
+)
+
 # Self-dedup platforms: sites that repost the same job under new IDs
 # within a single window (meiguogongzuo observed ~10% repost rate).
 # Posts on these platforms with identical normalized titles collapse to
@@ -535,8 +554,13 @@ def write_daily_json(
         unhealthy_relative_platforms=_unhealthy_relative_platforms(diagnostics),
     )
     existing_meta = existing.get("meta", {}) if isinstance(existing, dict) else {}
-    suppressed_trend_dates = sorted(set(existing_meta.get("suppressed_trend_dates", [])))
-    suppressed_trend_reason = existing_meta.get("suppressed_trend_reason")
+    suppressed_trend_dates = sorted(
+        set(existing_meta.get("suppressed_trend_dates", [])) | KNOWN_BAD_TREND_DATES
+    )
+    suppressed_trend_reason = (
+        existing_meta.get("suppressed_trend_reason")
+        or KNOWN_BAD_TREND_REASON
+    )
 
     meta = {
         "schema_version": 1,

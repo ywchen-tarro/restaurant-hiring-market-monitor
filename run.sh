@@ -89,10 +89,17 @@ CRITICAL_WARNINGS=$(python3 - <<'PY'
 import json
 
 try:
-    meta = json.load(open("docs/data/posts.json", encoding="utf-8")).get("meta", {})
+    output = json.load(open("docs/data/posts.json", encoding="utf-8"))
+    meta = output.get("meta", {})
 except Exception:
     print("could not read generated posts.json")
     raise SystemExit
+
+current_by_platform = {}
+try:
+    current_by_platform = output.get("history", [])[-1].get("by_platform", {})
+except Exception:
+    pass
 
 critical_markers = (
     "all platforms returned 0",
@@ -106,6 +113,11 @@ critical_markers = (
 
 for warning in meta.get("warnings", []):
     text = str(warning)
+    if (
+        text.startswith("168worker:")
+        and current_by_platform.get("500work", 0) > 0
+    ):
+        continue
     if any(marker in text for marker in critical_markers):
         print(text)
 PY

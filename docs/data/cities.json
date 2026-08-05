@@ -1,7 +1,7 @@
 {
   "meta": {
     "schema_version": 1,
-    "last_updated": "2026-08-05T11:40:08-07:00",
+    "last_updated": "2026-08-05T11:50:34-07:00",
     "city_count": 92,
     "observed_city_count": 50
   },
@@ -12,7 +12,7 @@
       "state": "纽约",
       "lon": -74.006,
       "lat": 40.7128,
-      "total": 366
+      "total": 367
     },
     "洛杉矶": {
       "en": "Los Angeles, CA",
@@ -132,7 +132,7 @@
       "state": "亚特兰大",
       "lon": -84.388,
       "lat": 33.749,
-      "total": 63
+      "total": 62
     },
     "圣安东尼奥": {
       "en": "San Antonio, TX",
@@ -188,7 +188,7 @@
       "state": "法拉盛",
       "lon": -73.8331,
       "lat": 40.7675,
-      "total": 195
+      "total": 194
     },
     "圣何塞": {
       "en": "San Jose, CA",
@@ -204,7 +204,7 @@
       "state": "坦帕",
       "lon": -82.4572,
       "lat": 27.9506,
-      "total": 20
+      "total": 19
     },
     "华盛顿特区（黑格斯敦）": {
       "en": "Washington DC (Hagerstown MD)",
@@ -276,7 +276,7 @@
       "state": "哥伦布",
       "lon": -82.9988,
       "lat": 39.9612,
-      "total": 3
+      "total": 4
     },
     "路易斯维尔": {
       "en": "Louisville, KY",
@@ -340,7 +340,7 @@
       "state": "曼哈顿",
       "lon": -73.9712,
       "lat": 40.7831,
-      "total": 198
+      "total": 197
     },
     "皇后区": {
       "en": "Queens, New York",

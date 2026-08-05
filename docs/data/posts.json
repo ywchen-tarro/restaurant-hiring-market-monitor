@@ -1,14 +1,14 @@
 {
   "meta": {
-    "last_updated": "2026-08-05T11:40:08-07:00",
+    "last_updated": "2026-08-05T11:50:34-07:00",
     "scrape_days_back": 7,
     "date_from": "2026-07-29",
     "date_to": "2026-08-04",
     "scrape_end_lag_days": 1,
-    "total_posts": 4165,
-    "unique_posts": 4129,
+    "total_posts": 4164,
+    "unique_posts": 4128,
     "duplicate_count": 36,
-    "unclassified_region": 323,
+    "unclassified_region": 321,
     "warnings": [
       "168worker: dropped to 0 (prior: 48) — possible scrape failure or schema drift",
       "168worker: 1 fetch failure(s) during pagination — data may be incomplete"
@@ -55,10 +55,10 @@
         "pages_fetched": 90,
         "rows_parsed": 1765,
         "dropped_unparseable_date": 0,
-        "dropped_out_of_window": 20,
-        "dropped_future_date": 158,
-        "dropped_not_restaurant": 331,
-        "dropped_duplicate": 0,
+        "dropped_out_of_window": 19,
+        "dropped_future_date": 153,
+        "dropped_not_restaurant": 332,
+        "dropped_duplicate": 1,
         "fetch_failures": 0,
         "hit_page_cap": false
       },
@@ -67,10 +67,10 @@
         "pages_fetched": 386,
         "rows_parsed": 7720,
         "dropped_unparseable_date": 0,
-        "dropped_out_of_window": 11,
-        "dropped_future_date": 1400,
-        "dropped_not_restaurant": 3621,
-        "dropped_duplicate": 27,
+        "dropped_out_of_window": 7,
+        "dropped_future_date": 1441,
+        "dropped_not_restaurant": 3596,
+        "dropped_duplicate": 20,
         "fetch_failures": 0,
         "hit_page_cap": false
       },
@@ -102,12 +102,12 @@
       "daily_avg": 4.57
     },
     "uscanyin": {
-      "total": 1256,
-      "daily_avg": 179.43
+      "total": 1260,
+      "daily_avg": 180.0
     },
     "us168": {
-      "total": 2661,
-      "daily_avg": 380.14
+      "total": 2656,
+      "daily_avg": 379.43
     },
     "meiguogongzuo": {
       "total": 195,
@@ -116,18 +116,18 @@
   },
   "by_region": {
     "东部": {
-      "total": 2230,
+      "total": 2232,
       "top_states": {
-        "纽约": 379,
+        "纽约": 380,
         "新泽西": 301,
         "宾州": 237,
-        "法拉盛": 202,
-        "曼哈顿": 199
+        "法拉盛": 201,
+        "曼哈顿": 198
       },
       "top_cities": {
-        "纽约": 366,
-        "曼哈顿": 198,
-        "法拉盛": 195,
+        "纽约": 367,
+        "曼哈顿": 197,
+        "法拉盛": 194,
         "布鲁克林": 124,
         "皇后区": 98,
         "长岛": 95,
@@ -136,38 +136,38 @@
       }
     },
     "南部": {
-      "total": 972,
+      "total": 969,
       "top_states": {
         "佛州": 150,
         "马里兰": 126,
         "德州": 87,
-        "北卡": 83,
-        "亚特兰大": 64
+        "北卡": 81,
+        "亚特兰大": 63
       },
       "top_cities": {
-        "亚特兰大": 63,
+        "亚特兰大": 62,
         "奥兰多-代托纳海滩-墨尔本": 53,
         "达拉斯-沃思堡": 45,
         "休斯顿": 20,
-        "坦帕-圣彼得堡（萨拉索塔）": 20,
+        "坦帕-圣彼得堡（萨拉索塔）": 19,
         "迈阿密-劳德代尔堡": 14,
         "普莱诺": 6,
         "巴尔的摩": 5
       }
     },
     "中部": {
-      "total": 416,
+      "total": 418,
       "top_states": {
         "俄亥俄": 81,
         "芝加哥": 65,
-        "印第安纳": 46,
+        "印第安纳": 47,
         "密歇根": 43,
         "明尼苏达": 36
       },
       "top_cities": {
         "芝加哥": 65,
+        "哥伦布": 4,
         "圣路易斯": 3,
-        "哥伦布": 3,
         "克利夫兰": 1
       }
     },
@@ -194,7 +194,7 @@
   },
   "by_city": {
     "纽约": {
-      "total": 366,
+      "total": 367,
       "region": "东部",
       "state": "纽约",
       "en": "New York, NY",
@@ -202,7 +202,7 @@
       "lat": 40.7128
     },
     "曼哈顿": {
-      "total": 198,
+      "total": 197,
       "region": "东部",
       "state": "曼哈顿",
       "en": "Manhattan, New York",
@@ -210,7 +210,7 @@
       "lat": 40.7831
     },
     "法拉盛": {
-      "total": 195,
+      "total": 194,
       "region": "东部",
       "state": "法拉盛",
       "en": "Flushing, New York",
@@ -258,7 +258,7 @@
       "lat": 41.8781
     },
     "亚特兰大": {
-      "total": 63,
+      "total": 62,
       "region": "南部",
       "state": "亚特兰大",
       "en": "Atlanta, GA",
@@ -306,7 +306,7 @@
       "lat": 29.7604
     },
     "坦帕-圣彼得堡（萨拉索塔）": {
-      "total": 20,
+      "total": 19,
       "region": "南部",
       "state": "坦帕",
       "en": "Tampa-St. Petersburg (Sarasota), FL",
@@ -409,6 +409,14 @@
       "lon": -76.6122,
       "lat": 39.2904
     },
+    "哥伦布": {
+      "total": 4,
+      "region": "中部",
+      "state": "哥伦布",
+      "en": "Columbus, OH",
+      "lon": -82.9988,
+      "lat": 39.9612
+    },
     "旧金山-奥克兰-圣何塞": {
       "total": 4,
       "region": "西部",
@@ -440,14 +448,6 @@
       "en": "Pittsburgh, PA",
       "lon": -79.9959,
       "lat": 40.4406
-    },
-    "哥伦布": {
-      "total": 3,
-      "region": "中部",
-      "state": "哥伦布",
-      "en": "Columbus, OH",
-      "lon": -82.9988,
-      "lat": 39.9612
     },
     "杰克逊维尔": {
       "total": 3,
@@ -596,25 +596,25 @@
   },
   "by_keyword": {
     "餐": 1538,
-    "炒锅": 941,
+    "炒锅": 942,
     "企台": 731,
     "师傅": 726,
-    "外卖": 615,
-    "寿司": 587,
-    "日餐": 578,
+    "外卖": 616,
+    "寿司": 586,
+    "日餐": 579,
     "中餐": 502,
-    "打杂": 488,
-    "油锅": 236,
-    "招聘": 225,
-    "餐馆": 222,
-    "厨房": 197,
+    "打杂": 487,
+    "油锅": 237,
+    "招聘": 224,
+    "餐馆": 221,
+    "厨房": 196,
     "前台": 143,
     "洗碗": 140,
-    "后厨": 113,
+    "后厨": 112,
     "餐厅": 107,
     "抓码": 82,
-    "打包": 75,
-    "奶茶": 73
+    "打包": 77,
+    "奶茶": 72
   },
   "history": [
     {
@@ -2220,6 +2220,65 @@
       ],
       "url": "https://www.500work.com/page/457731",
       "city": "法拉盛"
+    },
+    {
+      "id": "uscanyin_235351",
+      "platform": "uscanyin",
+      "title": "熟手炒锅",
+      "date": "2026-08-04",
+      "region": "东部",
+      "state": "纽约",
+      "keywords_matched": [
+        "炒锅"
+      ],
+      "url": "https://uscanyin.com/en/community/jobs/235351-%e7%86%9f%e6%89%8b%e7%82%92%e9%94%85",
+      "city": "纽约"
+    },
+    {
+      "id": "uscanyin_235350",
+      "platform": "uscanyin",
+      "title": "诚招日餐寿司师傅",
+      "date": "2026-08-04",
+      "region": "南部",
+      "state": "阿拉巴马",
+      "keywords_matched": [
+        "餐",
+        "日餐",
+        "寿司",
+        "师傅"
+      ],
+      "url": "https://uscanyin.com/en/community/jobs/235350-%e8%af%9a%e6%8b%9b%e6%97%a5%e9%a4%90%e5%af%bf%e5%8f%b8%e5%b8%88%e5%82%85",
+      "city": null
+    },
+    {
+      "id": "uscanyin_235348",
+      "platform": "uscanyin",
+      "title": "诚招中餐外卖店炒锅",
+      "date": "2026-08-04",
+      "region": "东部",
+      "state": "康州",
+      "keywords_matched": [
+        "餐",
+        "中餐",
+        "外卖",
+        "炒锅"
+      ],
+      "url": "https://uscanyin.com/en/community/jobs/235348-%e8%af%9a%e6%8b%9b%e4%b8%ad%e9%a4%90%e5%a4%96%e5%8d%96%e5%ba%97%e7%82%92%e9%94%85",
+      "city": null
+    },
+    {
+      "id": "uscanyin_235347",
+      "platform": "uscanyin",
+      "title": "熊猫外卖【哥伦布】 外卖员招聘",
+      "date": "2026-08-04",
+      "region": "中部",
+      "state": "哥伦布",
+      "keywords_matched": [
+        "外卖",
+        "招聘"
+      ],
+      "url": "https://uscanyin.com/en/community/jobs/235347-%e7%86%8a%e7%8c%ab%e5%a4%96%e5%8d%96%e3%80%90%e5%93%a5%e4%bc%a6%e5%b8%83%e3%80%91%20%e5%a4%96%e5%8d%96%e5%91%98%e6%8b%9b%e8%81%98",
+      "city": "哥伦布"
     },
     {
       "id": "uscanyin_235345",
@@ -4879,7 +4938,7 @@
       "id": "uscanyin_235113",
       "platform": "uscanyin",
       "title": "请熟手炒锅师傅",
-      "date": "2026-08-04",
+      "date": "2026-08-03",
       "region": "中部",
       "state": "俄亥俄",
       "keywords_matched": [
@@ -4893,7 +4952,7 @@
       "id": "uscanyin_235112",
       "platform": "uscanyin",
       "title": "油锅兼打杂",
-      "date": "2026-08-04",
+      "date": "2026-08-03",
       "region": "东部",
       "state": "纽约",
       "keywords_matched": [
@@ -4907,7 +4966,7 @@
       "id": "uscanyin_235111",
       "platform": "uscanyin",
       "title": "找炒锅5300 前台4800 油锅5000",
-      "date": "2026-08-04",
+      "date": "2026-08-03",
       "region": "南部",
       "state": "德州",
       "keywords_matched": [
@@ -9484,7 +9543,7 @@
       "id": "uscanyin_234665",
       "platform": "uscanyin",
       "title": "请 宴会厨师",
-      "date": "2026-08-01",
+      "date": "2026-07-31",
       "region": "中部",
       "state": "伊州",
       "keywords_matched": [
@@ -11361,7 +11420,7 @@
       "id": "uscanyin_234487",
       "platform": "uscanyin",
       "title": "日料打杂3500一个月",
-      "date": "2026-07-31",
+      "date": "2026-07-30",
       "region": "东部",
       "state": "新泽西",
       "keywords_matched": [
@@ -13775,7 +13834,7 @@
       "id": "uscanyin_234274",
       "platform": "uscanyin",
       "title": "曼哈顿餐馆招每周四天兼职炒锅和蒸包、煎锅。简单菜。",
-      "date": "2026-07-30",
+      "date": "2026-07-29",
       "region": "东部",
       "state": "曼哈顿",
       "keywords_matched": [
@@ -13790,7 +13849,7 @@
       "id": "uscanyin_234273",
       "platform": "uscanyin",
       "title": "Springfield 中餐馆诚聘后厨帮工/帮厨（可培训）",
-      "date": "2026-07-30",
+      "date": "2026-07-29",
       "region": "南部",
       "state": "维吉尼亚",
       "keywords_matched": [
@@ -13807,7 +13866,7 @@
       "id": "uscanyin_234272",
       "platform": "uscanyin",
       "title": "代托纳高薪炒锅,帮炒,抓码",
-      "date": "2026-07-30",
+      "date": "2026-07-29",
       "region": "南部",
       "state": "奥兰多",
       "keywords_matched": [
@@ -22870,50 +22929,6 @@
       "city": null
     },
     {
-      "id": "us168_2050953872480862210",
-      "platform": "us168",
-      "title": "全日餐厨房铁板 有空调（不是梅花炉）",
-      "date": "2026-08-04",
-      "region": "中部",
-      "state": "俄亥俄",
-      "keywords_matched": [
-        "餐",
-        "日餐",
-        "厨房"
-      ],
-      "url": "https://us168.com/job#2050953872480862210",
-      "city": null
-    },
-    {
-      "id": "us168_1652499655290503170",
-      "platform": "us168",
-      "title": "诚请中餐炒锅",
-      "date": "2026-08-04",
-      "region": "东部",
-      "state": "皇后区",
-      "keywords_matched": [
-        "餐",
-        "中餐",
-        "炒锅"
-      ],
-      "url": "https://us168.com/job#1652499655290503170",
-      "city": "皇后区"
-    },
-    {
-      "id": "us168_2084700647506653186",
-      "platform": "us168",
-      "title": "长岛外卖炒锅",
-      "date": "2026-08-04",
-      "region": "东部",
-      "state": "长岛",
-      "keywords_matched": [
-        "外卖",
-        "炒锅"
-      ],
-      "url": "https://us168.com/job#2084700647506653186",
-      "city": "长岛"
-    },
-    {
       "id": "us168_2084528240363909122",
       "platform": "us168",
       "title": "Brooklyn 中餐外面店招聘熟手炒锅，熟手接电话",
@@ -24254,6 +24269,22 @@
       ],
       "url": "https://us168.com/job#1827102474613755906",
       "city": null
+    },
+    {
+      "id": "us168_2017311326614495233",
+      "platform": "us168",
+      "title": "南费城 中日餐外卖店请 part time 熟手 前台 接电话",
+      "date": "2026-08-04",
+      "region": "东部",
+      "state": "费城",
+      "keywords_matched": [
+        "餐",
+        "日餐",
+        "外卖",
+        "前台"
+      ],
+      "url": "https://us168.com/job#2017311326614495233",
+      "city": "费城"
     },
     {
       "id": "us168_2083968029962088450",
@@ -27228,6 +27259,21 @@
       "city": "费城"
     },
     {
+      "id": "us168_2050953872480862210",
+      "platform": "us168",
+      "title": "全日餐厨房铁板 有空调（不是梅花炉）",
+      "date": "2026-08-04",
+      "region": "中部",
+      "state": "俄亥俄",
+      "keywords_matched": [
+        "餐",
+        "日餐",
+        "厨房"
+      ],
+      "url": "https://us168.com/job#2050953872480862210",
+      "city": null
+    },
+    {
       "id": "us168_2030695137898508289",
       "platform": "us168",
       "title": "中餐 油锅",
@@ -27258,6 +27304,21 @@
       "city": null
     },
     {
+      "id": "us168_1652499655290503170",
+      "platform": "us168",
+      "title": "诚请中餐炒锅",
+      "date": "2026-08-04",
+      "region": "东部",
+      "state": "皇后区",
+      "keywords_matched": [
+        "餐",
+        "中餐",
+        "炒锅"
+      ],
+      "url": "https://us168.com/job#1652499655290503170",
+      "city": "皇后区"
+    },
+    {
       "id": "us168_2084700673171599361",
       "platform": "us168",
       "title": "日餐洗碗",
@@ -27271,6 +27332,20 @@
       ],
       "url": "https://us168.com/job#2084700673171599361",
       "city": null
+    },
+    {
+      "id": "us168_2084700647506653186",
+      "platform": "us168",
+      "title": "长岛外卖炒锅",
+      "date": "2026-08-04",
+      "region": "东部",
+      "state": "长岛",
+      "keywords_matched": [
+        "外卖",
+        "炒锅"
+      ],
+      "url": "https://us168.com/job#2084700647506653186",
+      "city": "长岛"
     },
     {
       "id": "us168_2084700508478058497",
@@ -27395,20 +27470,6 @@
         "寿司"
       ],
       "url": "https://us168.com/job#2084696047894474753",
-      "city": null
-    },
-    {
-      "id": "us168_2080801447877091329",
-      "platform": "us168",
-      "title": "北卡堂吃外卖诚请前台",
-      "date": "2026-08-04",
-      "region": "南部",
-      "state": "北卡",
-      "keywords_matched": [
-        "外卖",
-        "前台"
-      ],
-      "url": "https://us168.com/job#2080801447877091329",
       "city": null
     },
     {
@@ -27744,21 +27805,6 @@
         "师傅"
       ],
       "url": "https://us168.com/job#2019798887123558401",
-      "city": null
-    },
-    {
-      "id": "us168_2084688600634032130",
-      "platform": "us168",
-      "title": "中日餐诚请寿司夫妻工",
-      "date": "2026-08-04",
-      "region": "南部",
-      "state": "北卡",
-      "keywords_matched": [
-        "餐",
-        "日餐",
-        "寿司"
-      ],
-      "url": "https://us168.com/job#2084688600634032130",
       "city": null
     },
     {
@@ -28562,21 +28608,6 @@
         "企台"
       ],
       "url": "https://us168.com/job#2029971877011501057",
-      "city": null
-    },
-    {
-      "id": "us168_2060810078225248258",
-      "platform": "us168",
-      "title": "招聘面点学徒，水饺师傅/学徒",
-      "date": "2026-08-04",
-      "region": null,
-      "state": "南湾・帕洛阿尔托",
-      "keywords_matched": [
-        "面点",
-        "招聘",
-        "师傅"
-      ],
-      "url": "https://us168.com/job#2060810078225248258",
       "city": null
     },
     {
@@ -31915,19 +31946,6 @@
       "city": null
     },
     {
-      "id": "us168_2040280742609399809",
-      "platform": "us168",
-      "title": "韩国街奶茶店",
-      "date": "2026-08-03",
-      "region": "东部",
-      "state": "曼哈顿",
-      "keywords_matched": [
-        "奶茶"
-      ],
-      "url": "https://us168.com/job#2040280742609399809",
-      "city": "曼哈顿"
-    },
-    {
       "id": "us168_1980470793605394434",
       "platform": "us168",
       "title": "中餐外卖店请熟手兼职前台",
@@ -32398,22 +32416,6 @@
       ],
       "url": "https://us168.com/job#1873474129725431809",
       "city": "达拉斯-沃思堡"
-    },
-    {
-      "id": "us168_2072780809322442753",
-      "platform": "us168",
-      "title": "新泽西日餐请后厨打杂（近费城）",
-      "date": "2026-08-03",
-      "region": "东部",
-      "state": "费城",
-      "keywords_matched": [
-        "餐",
-        "日餐",
-        "后厨",
-        "打杂"
-      ],
-      "url": "https://us168.com/job#2072780809322442753",
-      "city": "费城"
     },
     {
       "id": "us168_2071998832941854722",
@@ -35442,21 +35444,6 @@
       ],
       "url": "https://us168.com/job#2084323426552066049",
       "city": null
-    },
-    {
-      "id": "us168_2084323421216911361",
-      "platform": "us168",
-      "title": "中餐外卖店",
-      "date": "2026-08-03",
-      "region": "南部",
-      "state": "坦帕",
-      "keywords_matched": [
-        "餐",
-        "中餐",
-        "外卖"
-      ],
-      "url": "https://us168.com/job#2084323421216911361",
-      "city": "坦帕-圣彼得堡（萨拉索塔）"
     },
     {
       "id": "us168_1810035019191996417",
@@ -43320,7 +43307,7 @@
     {
       "id": "us168_2083898801464619010",
       "platform": "us168",
-      "title": "请厨房铁板师傅，有意请电[电话]",
+      "title": "请厨房师傅，有意请电[电话]",
       "date": "2026-08-02",
       "region": "东部",
       "state": "宾州",
@@ -47346,22 +47333,6 @@
       "city": "布鲁克林"
     },
     {
-      "id": "us168_2083552353516384257",
-      "platform": "us168",
-      "title": "法拉盛新开张海鲜餐馆招聘企台",
-      "date": "2026-08-01",
-      "region": "东部",
-      "state": "法拉盛",
-      "keywords_matched": [
-        "餐馆",
-        "餐",
-        "企台",
-        "招聘"
-      ],
-      "url": "https://us168.com/job#2083552353516384257",
-      "city": "法拉盛"
-    },
-    {
       "id": "us168_2083551820275855361",
       "platform": "us168",
       "title": "布鲁克林外卖店诚聘熟手炒锅",
@@ -48655,6 +48626,20 @@
       "city": "皇后区"
     },
     {
+      "id": "us168_2025308077401960450",
+      "platform": "us168",
+      "title": "甜不辣油锅师傅",
+      "date": "2026-07-31",
+      "region": "东部",
+      "state": "宾州",
+      "keywords_matched": [
+        "油锅",
+        "师傅"
+      ],
+      "url": "https://us168.com/job#2025308077401960450",
+      "city": null
+    },
+    {
       "id": "us168_2073804022125023233",
       "platform": "us168",
       "title": "自助餐厅请一名熟手企台",
@@ -49340,6 +49325,21 @@
         "企台"
       ],
       "url": "https://us168.com/job#2083254565928484866",
+      "city": null
+    },
+    {
+      "id": "us168_1992257669776994305",
+      "platform": "us168",
+      "title": "康州头请日餐熟手打包 自架或入住",
+      "date": "2026-07-31",
+      "region": "东部",
+      "state": "康州",
+      "keywords_matched": [
+        "餐",
+        "日餐",
+        "打包"
+      ],
+      "url": "https://us168.com/job#1992257669776994305",
       "city": null
     },
     {
@@ -52760,20 +52760,6 @@
       "city": "奥兰多-代托纳海滩-墨尔本"
     },
     {
-      "id": "us168_2082880308128591873",
-      "platform": "us168",
-      "title": "寿司师傅",
-      "date": "2026-07-30",
-      "region": null,
-      "state": "康涅狄格州",
-      "keywords_matched": [
-        "寿司",
-        "师傅"
-      ],
-      "url": "https://us168.com/job#2082880308128591873",
-      "city": null
-    },
-    {
       "id": "us168_2082129651442249729",
       "platform": "us168",
       "title": "长岛全日餐请周末企台和周末打包",
@@ -52914,17 +52900,17 @@
       "city": "法拉盛"
     },
     {
-      "id": "us168_2082866651449602049",
+      "id": "us168_2082147646189203458",
       "platform": "us168",
-      "title": "请厨房夫妻工",
+      "title": "sushi企台",
       "date": "2026-07-30",
-      "region": "南部",
-      "state": "亚特兰大",
+      "region": "中部",
+      "state": "印第安纳",
       "keywords_matched": [
-        "厨房"
+        "企台"
       ],
-      "url": "https://us168.com/job#2082866651449602049",
-      "city": "亚特兰大"
+      "url": "https://us168.com/job#2082147646189203458",
+      "city": null
     },
     {
       "id": "us168_2082862224558309378",
@@ -53650,6 +53636,20 @@
         "打包"
       ],
       "url": "https://us168.com/job#1982212143664914433",
+      "city": null
+    },
+    {
+      "id": "us168_1981882968472477698",
+      "platform": "us168",
+      "title": "外卖店请熟手打包",
+      "date": "2026-07-30",
+      "region": "东部",
+      "state": "新罕布什尔",
+      "keywords_matched": [
+        "外卖",
+        "打包"
+      ],
+      "url": "https://us168.com/job#1981882968472477698",
       "city": null
     },
     {
@@ -56927,20 +56927,6 @@
       ],
       "url": "https://us168.com/job#2082473884518838274",
       "city": "纽约"
-    },
-    {
-      "id": "us168_2082479161816854530",
-      "platform": "us168",
-      "title": "外卖店炒锅",
-      "date": "2026-07-29",
-      "region": "东部",
-      "state": "宾州",
-      "keywords_matched": [
-        "外卖",
-        "炒锅"
-      ],
-      "url": "https://us168.com/job#2082479161816854530",
-      "city": null
     },
     {
       "id": "us168_2082478503654252546",

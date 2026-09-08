@@ -12,8 +12,8 @@ def test_old_pinned_job_does_not_stop_before_recent_jobs():
         from datetime import datetime
         return {'id': id, 'title': '中餐招聘炒锅', 'top': top,
                 'bizUpdateTime': int(datetime.combine(day, datetime.min.time()).timestamp()*1000)}
-    pages = [[record('pinned', old, 2)], [record('recent', recent, 0)],
-             [record('old', old, 0)]]
+    pages = [[record('pinned', old, 2)], [record('recent', recent, 1)],
+             [record('old', old, 3)]]
     scraper = Scraper()
     with patch.object(scraper, 'fetch_page', return_value='html'), patch(
         'scraper.platforms.us168._extract_records', side_effect=pages

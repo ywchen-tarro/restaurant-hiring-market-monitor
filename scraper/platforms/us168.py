@@ -43,6 +43,10 @@ class Scraper(BasePlatformScraper):
     # 2026-05-29, the 7-day cutoff was around page 360; keep headroom and
     # let BasePlatformScraper stop once it sees older-than-window posts.
     max_pages = 450
+    # Hundreds of pages are needed per week. Keep the existing two-second
+    # minimum pause with a steady cadence; HTTP retry backoff still applies.
+    request_delay_min = 2
+    request_delay_max = 3
 
     def page_url(self, page_num: int) -> str:
         return f"{self.base_url}/job?{urlencode({'page': page_num})}"

@@ -73,7 +73,9 @@ class Scraper(BasePlatformScraper):
                 keywords_matched=[],
                 url=f"{self.base_url}/job#{native_id}",
             )
-            post._pagination_date = date_iso
+            # Pinned listings precede the chronological feed; an old pinned
+            # record must not stop pagination before ordinary jobs are read.
+            post._pagination_date = date.today().isoformat() if rec.get("top") else date_iso
             posts.append(post)
 
         return posts

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import importlib
+from concurrent.futures import ThreadPoolExecutor
 import logging
 import sys
 from typing import List
@@ -45,6 +46,17 @@ def main() -> int:
         len(enabled), ", ".join(p["id"] for p in enabled),
     )
 
+    def collect(plat):
+        cls = _load_scraper(plat)
+        if not cls:
+            return None
+        scraper = cls()
+        posts = scraper.run(days_back=config.SCRAPE_DAYS_BACK)
+        return posts, getattr(scraper, "last_diagnostics", {})
+
+    # Independent hosts can progress while another source backs off.
+    executor = ThreadPoolExecutor(max_workers=len(enabled) or 1)
+    futures = {p["id"]: executor.submit(collect, p) for p in enabled}
     for plat in enabled:
         pid = plat["id"]
         ScraperCls = _load_scraper(plat)
@@ -54,18 +66,19 @@ def main() -> int:
             diagnostics[pid] = {"status": "not_implemented"}
             continue
         try:
-            scraper = ScraperCls()
-            posts = scraper.run(days_back=config.SCRAPE_DAYS_BACK)
+            posts, diag = futures[pid].result()
             all_posts.extend(posts)
             diagnostics[pid] = {
                 "status": "ok",
-                **getattr(scraper, "last_diagnostics", {}),
+                **diag,
             }
             summary_lines.append(f"  {pid:<16} {len(posts):>4} posts")
         except Exception as exc:  # noqa: BLE001 — keep one platform's failure isolated
             log.exception("Platform %s failed: %s", pid, exc)
             summary_lines.append(f"  {pid:<16} ERROR ({exc.__class__.__name__})")
             diagnostics[pid] = {"status": "error", "exception": exc.__class__.__name__}
+
+    executor.shutdown(wait=True)
 
     if not all_posts:
         log.warning("No posts collected from any platform.")

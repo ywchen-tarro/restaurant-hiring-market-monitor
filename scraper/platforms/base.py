@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import logging
+import hashlib
 from abc import ABC, abstractmethod
 from dataclasses import dataclass, asdict
 from datetime import date, timedelta
@@ -60,6 +61,11 @@ class BasePlatformScraper(ABC):
     def fetch_page(self, page_num: int) -> Optional[str]:
         from ..http_client import polite_get
         url = self.page_url(page_num)
+        cache_dir = config.LOG_DIR / "page_cache" / date.today().isoformat() / self.id
+        cache_path = cache_dir / (hashlib.sha256(url.encode()).hexdigest() + ".html")
+        if cache_path.exists():
+            log.info("[%s] cached page %d", self.id, page_num)
+            return cache_path.read_text(encoding="utf-8")
         log.info("[%s] GET page %d: %s", self.id, page_num, url)
         r = polite_get(
             url,
@@ -72,7 +78,19 @@ class BasePlatformScraper(ABC):
         )
         if r is None:
             return None
-        return r.text
+        html = r.text
+        # Only cache pages with parseable records, never error/challenge pages.
+        try:
+            cacheable = bool(html and self.parse_page(html, page_num))
+        except Exception:
+            # The run loop retains responsibility for parser diagnostics.
+            cacheable = False
+        if cacheable:
+            cache_dir.mkdir(parents=True, exist_ok=True)
+            temporary = cache_path.with_suffix(".tmp")
+            temporary.write_text(html, encoding="utf-8")
+            temporary.replace(cache_path)
+        return html
 
     # Subclass may override to cap pagination shorter than the default.
     max_pages: Optional[int] = None

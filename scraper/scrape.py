@@ -6,6 +6,8 @@ import importlib
 from concurrent.futures import ThreadPoolExecutor
 import logging
 import sys
+import shutil
+from datetime import date
 from typing import List
 
 from . import config
@@ -35,6 +37,18 @@ def main() -> int:
         level=logging.INFO,
         format="%(asctime)s %(levelname)s %(name)s %(message)s",
     )
+
+    # Cache is valid only on its fetch date, especially for relative dates.
+    # Remove our expired day directories so scheduled runs stay bounded on disk.
+    cache_root = config.LOG_DIR / "page_cache"
+    if cache_root.exists():
+        for directory in cache_root.iterdir():
+            try:
+                expired = date.fromisoformat(directory.name) < date.today()
+            except ValueError:
+                continue
+            if expired and directory.is_dir() and not directory.is_symlink():
+                shutil.rmtree(directory)
 
     all_posts: List[Post] = []
     diagnostics = {}   # platform_id -> diag dict
